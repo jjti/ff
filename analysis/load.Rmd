@@ -7,8 +7,6 @@ output: html_document
 
 ## Load and split up players by position
 
-Also only select the players that player for greater than a single year
-
 ```{r}
 library(plm)
 
