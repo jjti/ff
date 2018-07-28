@@ -1,0 +1,123 @@
+---
+title: "scrape"
+author: "jjtimmons"
+date: "7/21/2018"
+---
+
+# NFL Player Data Scrape
+
+This is a script for scraping NFL player data from [www.pro-football-reference.com](www.pro-football-reference.com).
+
+## Scrape
+
+Will proceed from 2010 through 2017, collecting NFL player data and fantasy points accumulated from each year. Example of the html for a single `tr` on the site is below:
+
+```{html}
+<tr data-row="113">
+  <th scope="row" class="right " data-stat="ranker" csk="111">1</th>
+  <td class="left " data-append-csv="AddaJo00" data-stat="player" csk="Addai,Joseph"><a href="/players/A/AddaJo00.htm">Joseph Addai</a></td>
+  <td class="left " data-stat="team"><a href="/teams/clt/2008.htm" title="Indianapolis Colts">IND</a></td>
+  <td class="right " data-stat="fantasy_pos" csk="20">RB</td>
+  <td class="right " data-stat="age">25</td>
+  <td class="right " data-stat="g">12</td>
+  <td class="right " data-stat="gs">12</td>
+  <td class="right " data-stat="pass_cmp">0</td>
+  <td class="right " data-stat="pass_att">0</td>
+  <td class="right " data-stat="pass_yds">0</td>
+  <td class="right " data-stat="pass_td">0</td>
+  <td class="right " data-stat="pass_int">0</td>
+  <td class="right " data-stat="rush_att">155</td>
+  <td class="right " data-stat="rush_yds">544</td>
+  <td class="right " data-stat="rush_yds_per_att">3.51</td>
+  <td class="right " data-stat="rush_td">5</td>
+  <td class="right " data-stat="targets">39</td>
+  <td class="right " data-stat="rec">25</td>
+  <td class="right " data-stat="rec_yds">206</td>
+  <td class="right non_qual" data-stat="rec_yds_per_rec">8.24</td>
+  <td class="right " data-stat="rec_td">2</td>
+  <td class="right " data-stat="fantasy_points">117</td>
+  <td class="right " data-stat="fantasy_points_ppr"></td>
+  <td class="right " data-stat="draftkings_points">147.5</td>
+  <td class="right " data-stat="fanduel_points">128.5</td>
+  <td class="right " data-stat="vbd"></td>
+  <td class="right " data-stat="fantasy_rank_pos">39</td>
+  <td class="right " data-stat="fantasy_rank_overall"></td>
+</tr>
+```
+
+I'm going to preserve/re-use the data headers to keep it simple. Everything that's a data-stat attribute will become a column header in the R columns. Create a vector of years, scrape each from pro-football-reference and save to a CSV.
+
+```{r}
+library(rvest)
+library(stringr)
+library(xts)
+
+setwd("~/Documents/GitHub/ff/data")
+
+FIRST_YEAR <- 1997
+LAST_YEAR <- 2017
+
+clean_name <- function(row) {
+  row[[2]] <- str_replace_all(row[[2]], "[*+]", "")
+  row
+}
+
+scrape_year <- function(year) {
+  url <- paste0("https://www.pro-football-reference.com/years/", year, "/fantasy.htm")
+  page <- read_html(url)
+  
+  player_table <- page %>%
+    html_nodes("#fantasy") %>%
+    html_table()
+  player_table <- player_table[[1]] # only one per page
+  
+  headers <- player_table[1,] # first row is headers
+  headers[2] <- "Name" # idk why but this is blank by default
+  colnames(player_table) <- headers # set headers
+  player_table <- player_table[nchar(player_table$Name) > 1, ] # remove title rows
+  
+  player_table <- apply(player_table, 1, clean_name) # get rid of extraneous symbols
+  player_table <- t(player_table)
+  player_table <- data.frame(player_table)
+  
+  player_table$Year <- rep(year, nrow(player_table)) # set year in the Year column
+  player_table
+}
+
+player.data <- lapply(seq(from=FIRST_YEAR, to=LAST_YEAR), scrape_year)
+player.data <- do.call(rbind, player.data) # https://www.r-bloggers.com/concatenating-a-list-of-data-frames/
+save(player.data, file = paste0("player_data.raw.Rda"))
+rm(list=ls())
+```
+
+## Clean
+
+Clean the data by converting the column types, moving Year to the second column (needed by plm). Add an "xp" field based on the number of years that the player has been in the NFL.
+
+```{r}
+load("~/Documents/GitHub/ff/data/player_data.raw.Rda")
+
+# convert all the columns to numeric that should be
+numerics <- c("Year", "FantPt", "Yds", "Yds.1", "Yds.2", "TD", "TD.1", "TD.2", "Int", "Rk", "G", "GS", "Cmp", "Att", "FantPt", "PosRank", "Rec", "Tgt", "Y.R",  "PPR", "DKPt", "Age", "FDPt")
+for (n in numerics)
+  player.data[,n] <- as.numeric(as.character(player.data[,n]))
+
+# sort by name then year
+player.data <- player.data[order(player.data$Name, player.data$Year),]
+
+# all lowercase
+names(player.data) <- tolower(names(player.data))
+
+# team as a factor
+player.data$tm <- as.factor(player.data$tm)
+
+# reorder the columns
+first.cols <- c("name", "year", "fantpos", "age")
+ordered.cols <- c(first.cols, setdiff(tolower(numerics), first.cols))
+player.data <- player.data[, ordered.cols]
+
+# save to file system
+save(player.data, file = paste0("player_data.Rda"))
+rm(list=ls())
+```
+
