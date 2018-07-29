@@ -1,0 +1,47 @@
+---
+title: "experts"
+author: "jjtimmons"
+date: "7/28/2018"
+output: html_document
+---
+
+# Regress outcome on expert point predictions
+
+```{r}
+
+setwd("/Users/jtimmons/Documents/GitHub/ff/data/historical")
+
+sources <- list(
+  list(
+    source = "CBS",
+    name = "name",
+    pts = "pts_cbs",
+    years = c(2012, 2013, 2014)
+  ),
+  list(
+    source = "FOX",
+    name = "name_fox",
+    pts = "pts_fox",
+    years = c(2014)
+  ),
+  list(
+    source = "ESPN",
+    name = "name_espn",
+    pts = "pts_espn",
+    years = c(2012, 2013, 2014)
+  ),
+  list(
+    source = "NFL",
+    name = "name_nfl",
+    pts = "pts_nfl",
+    years = c(2012, 2013, 2014)
+  ),
+  list(
+    source = "Yahoo",
+    name = "name_yahoo",
+    pts = "pts_yahoo",
+    years = c(2014)
+  )
+)
+
+```

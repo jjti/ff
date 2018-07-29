@@ -14,6 +14,7 @@ Testing a model for predicting player FF points per season using linear regressi
 
 ```{r}
 library(plm)
+library(pryr)
 
 setwd("~/Documents/GitHub/ff/analysis")
 
@@ -23,7 +24,7 @@ qb.model <- plm(qb.formula, data = qb.data, index = c("name","year"), model="poo
 summary(qb.model)
 
 # for each player in the data set
-coors = data.frame(x=numeric(0), y=numeric(0))
+qb.coors = data.frame(x=numeric(0), y=numeric(0))
 med.pts <- median(qb.data$fantpt, na.rm = TRUE)
 for (name in unique(qb.data$name)) {
   player <- qb.data[qb.data$name == name, ]
@@ -43,8 +44,8 @@ for (name in unique(qb.data$name)) {
     lag3 <- ifelse(i-3>0, player[i-3, "fantpt"], med.pts)
     lag4 <- ifelse(i-4>0, player[i-4, "fantpt"], med.pts)
     
-    coors <- rbind(
-       coors,
+    qb.coors <- rbind(
+       qb.coors,
        list(
           x = sum(c(1, lag1, lag2, lag3, player.now$age) * qb.model$coefficients, na.rm = TRUE),
           y = player[i+1,"fantpt"]
@@ -54,17 +55,11 @@ for (name in unique(qb.data$name)) {
 }
 
 # calculate R-squared: 0.3035777
-total <- with(coors, sum((y - mean(y))^2))
-var <- with(coors, sum((y - x)^2))
-print(1 - (var / total))
+total <- with(qb.coors, sum((y - mean(y))^2))
+var <- with(qb.coors, sum((y - x)^2))
+qb.rsqrd <- round(1 - (var / total), digits = 3)
+qb.rsqrd <- paste0("R^2 = ", qb.rsqrd)
 
-plot(coors$x, coors$y,
-     xlab = "estimated",
-     ylab = "actual",
-     main = "QB Fantasy Points Prediction",
-     xlim = c(0, 450),
-     ylim = c(0, 400))
-abline(0, 1, col = 'red', lty = 'dashed', lwd = 2)
 
 ```
 
@@ -72,6 +67,7 @@ abline(0, 1, col = 'red', lty = 'dashed', lwd = 2)
 
 ```{r}
 library(plm)
+library(pryr)
 
 setwd("~/Documents/GitHub/ff/analysis")
 
@@ -81,7 +77,7 @@ rb.model <- plm(rb.formula, data = rb.data, index = c("name","year"), model="poo
 summary(rb.model)
 
 # for each player in the data set
-coors = data.frame(x=numeric(0), y=numeric(0))
+rb.coors = data.frame(x=numeric(0), y=numeric(0))
 med.pts <- median(rb.data$fantpt, na.rm = TRUE)
 for (name in unique(rb.data$name)) {
   player <- rb.data[rb.data$name == name, ]
@@ -101,28 +97,21 @@ for (name in unique(rb.data$name)) {
     lag3 <- ifelse(i-3>0, player[i-3, "fantpt"], med.pts)
     lag4 <- ifelse(i-4>0, player[i-4, "fantpt"], med.pts)
     
-    coors <- rbind(
-       coors,
+    rb.coors <- rbind(
+       rb.coors,
        list(
-          x = sum(c(1, lag1, lag2, lag3, player.now$age) * full.model$coefficients, na.rm = TRUE),
+          x = sum(c(1, lag1, lag2, lag3, player.now$age) * rb.model$coefficients, na.rm = TRUE),
           y = player[i+1,"fantpt"]
        )
     )
   }
 }
 
-# calculate R-squared: 0.3035777
-total <- with(coors, sum((y - mean(y))^2))
-var <- with(coors, sum((y - x)^2))
-print(1 - (var / total))
-
-plot(coors$x, coors$y,
-     xlab = "estimated",
-     ylab = "actual",
-     main = "RB Fantasy Points Prediction",
-     xlim = c(15, 220),
-     ylim = c(0, 280))
-abline(0, 1, col = 'red', lty = 'dashed', lwd = 2)
+# calculate R-squared
+total <- with(rb.coors, sum((y - mean(y))^2))
+var <- with(rb.coors, sum((y - x)^2))
+rb.rsqrd <- round(1 - (var / total), digits = 3)
+rb.rsqrd <- paste0("R^2 = ", rb.rsqrd)
 
 ```
 
@@ -130,16 +119,17 @@ abline(0, 1, col = 'red', lty = 'dashed', lwd = 2)
 
 ```{r}
 library(plm)
+library(pryr)
 
 setwd("~/Documents/GitHub/ff/analysis")
 
 wr.data <- player.data[["WR"]]
-wr.formula <- formula(fantpt ~ lag(fantpt, 1:3) + lag(tgt) + age)
+wr.formula <- formula(fantpt ~ lag(fantpt, 1:2) + age)
 wr.model <- plm(wr.formula, data = wr.data, index = c("name","year"), model="pooling")
 summary(wr.model)
 
 # for each player in the data set
-coors = data.frame(x=numeric(0), y=numeric(0))
+wr.coors = data.frame(x=numeric(0), y=numeric(0))
 med.pts <- median(wr.data$fantpt, na.rm = TRUE)
 for (name in unique(wr.data$name)) {
   player <- wr.data[wr.data$name == name, ]
@@ -157,12 +147,11 @@ for (name in unique(wr.data$name)) {
     lag1 <- ifelse(i-1>0, player[i-1, "fantpt"], med.pts)
     lag2 <- ifelse(i-2>0, player[i-2, "fantpt"], med.pts)
     lag3 <- ifelse(i-3>0, player[i-3, "fantpt"], med.pts)
-    lag4 <- ifelse(i-4>0, player[i-4, "fantpt"], med.pts)
     
-    coors <- rbind(
-       coors,
+    wr.coors <- rbind(
+       wr.coors,
        list(
-          x = sum(c(1, lag1, lag2, lag3, player.now$age) * qb.model$coefficients, na.rm = TRUE),
+          x = sum(c(1, lag1, lag2, player.now$age) * wr.model$coefficients, na.rm = TRUE),
           y = player[i+1,"fantpt"]
        )
     )
@@ -170,16 +159,127 @@ for (name in unique(wr.data$name)) {
 }
 
 # calculate R-squared: 0.3035777
-total <- with(coors, sum((y - mean(y))^2))
-var <- with(coors, sum((y - x)^2))
+total <- with(wr.coors, sum((y - mean(y))^2))
+var <- with(wr.coors, sum((y - x)^2))
 print(1 - (var / total))
+wr.rsqrd <- round(1 - (var / total), digits = 3)
+wr.rsqrd <- paste0("R^2 = ", wr.rsqrd)
 
-plot(coors$x, coors$y,
-     xlab = "estimated",
-     ylab = "actual",
-     main = "WR Fantasy Points Prediction",
-     xlim = c(5, 240),
-     ylim = c(0, 250))
-abline(0, 1, col = 'red', lty = 'dashed', lwd = 2)
+
+```
+
+
+## TE
+
+```{r}
+library(plm)
+library(pryr)
+
+setwd("~/Documents/GitHub/ff/analysis")
+
+te.data <- player.data[["TE"]]
+te.formula <- formula(fantpt ~ lag(fantpt, 1:2))
+te.model <- plm(te.formula, data = te.data, index = c("name","year"), model="pooling")
+summary(te.model)
+
+# for each player in the data set
+te.coors = data.frame(x=numeric(0), y=numeric(0))
+med.pts <- median(te.data$fantpt, na.rm = TRUE)
+for (name in unique(te.data$name)) {
+  player <- te.data[te.data$name == name, ]
+  
+  for (i in 1:nrow(player)) {
+    # there's no last year data to compare model against
+    # if (!isTRUE(player[i-1, "fantpt"] > 0)) next
+    
+    # there's no next year data to compare model against
+    if (!isTRUE(player[i+1,"fantpt"] > 0)) next
+    
+    # if there's no data on player last year, average for players age
+    player.now <- player[i,]
+    
+    lag1 <- ifelse(i-1>0, player[i-1, "fantpt"], med.pts)
+    lag2 <- ifelse(i-2>0, player[i-2, "fantpt"], med.pts)
+    lag3 <- ifelse(i-3>0, player[i-3, "fantpt"], med.pts)
+    
+    te.coors <- rbind(
+       te.coors,
+       list(
+          x = sum(c(1, lag1, lag2) * te.model$coefficients, na.rm = TRUE),
+          y = player[i+1,"fantpt"]
+       )
+    )
+  }
+}
+
+# calculate R-squared
+total <- with(te.coors, sum((y - mean(y))^2))
+var <- with(te.coors, sum((y - x)^2))
+print(1 - (var / total))
+te.rsqrd <- round(1 - (var / total), digits = 3)
+te.rsqrd <- paste0("R^2 = ", te.rsqrd)
+
+te.plot
+
+```
+
+## Plots
+
+```{r}
+qb.plot %<a-% {
+  plot(qb.coors$x, qb.coors$y,
+     cex = 0.8,
+     xlim = c(0, 350),
+     ylim = c(0, 450),
+     ann=FALSE)
+  abline(0, 1, col = 'red', lty = 'dashed', lwd = 2)
+  text(55, 420, labels = qb.rsqrd)
+  title(main = "QB", line = 0.5)
+  title(xlab = "estimate", ylab = "actual", line = 2.25)
+}
+
+rb.plot %<a-% {
+  plot(rb.coors$x, rb.coors$y,
+     cex = 0.8,
+     xlim = c(0, 230),
+     ylim = c(0, 330),
+     ann=FALSE)
+  abline(0, 1, col = 'red', lty = 'dashed', lwd = 2)
+  text(40, 305, labels = rb.rsqrd)
+  title(main = "RB", line = 0.5)
+  title(xlab = "estimate", ylab = "actual", line = 2.25)
+}
+
+wr.plot %<a-% {
+  plot(wr.coors$x, wr.coors$y,
+     cex = 0.8,
+     xlim = c(0, 210),
+     ylim = c(0, 280),
+     ann=FALSE)
+  abline(0, 1, col = 'red', lty = 'dashed', lwd = 2)
+  text(35, 260, labels = wr.rsqrd)
+  title(main = "WR", line = 0.5)
+  title(xlab = "estimate", ylab = "actual", line = 2.25)
+}
+
+te.plot %<a-% {
+  plot(te.coors$x, te.coors$y,
+     cex = 0.8,
+     xlim = c(0, 150),
+     ylim = c(0, 200),
+     ann=FALSE)
+  abline(0, 1, col = 'red', lty = 'dashed', lwd = 2)
+  text(25, 185, labels = te.rsqrd)
+  title(main = "TE", line = 0.5)
+  title(xlab = "estimate", ylab = "actual", line = 2.25)
+}
+
+all.plot %<a-% {
+  par(mfrow=c(2,2), mar=c(3.5, 3.5, 2, 0.5))
+  qb.plot
+  rb.plot
+  wr.plot
+  te.plot
+}
 
 ```
