@@ -54,14 +54,6 @@ library(xts)
 
 setwd("~/Documents/GitHub/ff/data")
 
-FIRST_YEAR <- 1997
-LAST_YEAR <- 2017
-
-clean_name <- function(row) {
-  row[[2]] <- str_replace_all(row[[2]], "[*+]", "")
-  row
-}
-
 scrape_year <- function(year) {
   url <- paste0("https://www.pro-football-reference.com/years/", year, "/fantasy.htm")
   page <- read_html(url)
@@ -72,21 +64,26 @@ scrape_year <- function(year) {
   player_table <- player_table[[1]] # only one per page
   
   headers <- player_table[1,] # first row is headers
-  headers[2] <- "Name" # idk why but this is blank by default
+  headers[2] <- "Name" # blank by default
   colnames(player_table) <- headers # set headers
   player_table <- player_table[nchar(player_table$Name) > 1, ] # remove title rows
   
-  player_table <- apply(player_table, 1, clean_name) # get rid of extraneous symbols
-  player_table <- t(player_table)
+  player_table <- t(apply(player_table, 1, function(row) {
+    row[[2]] <- str_replace_all(row[[2]], "[*+]", "")
+    row
+  })) # get rid of extraneous symbols
   player_table <- data.frame(player_table)
   
   player_table$Year <- rep(year, nrow(player_table)) # set year in the Year column
   player_table
 }
 
+FIRST_YEAR <- 1997
+LAST_YEAR <- 2017
 player.data <- lapply(seq(from=FIRST_YEAR, to=LAST_YEAR), scrape_year)
 player.data <- do.call(rbind, player.data) # https://www.r-bloggers.com/concatenating-a-list-of-data-frames/
 save(player.data, file = paste0("player_data.raw.Rda"))
+
 rm(list=ls())
 ```
 

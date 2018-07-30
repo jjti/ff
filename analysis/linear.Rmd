@@ -19,7 +19,7 @@ library(pryr)
 setwd("~/Documents/GitHub/ff/analysis")
 
 qb.data <- player.data[["QB"]]
-qb.formula <- formula(fantpt ~ lag(fantpt, 1:3) + age)
+qb.formula <- formula(fantpt ~ lag(fantpt) + age)
 qb.model <- plm(qb.formula, data = qb.data, index = c("name","year"), model="pooling")
 summary(qb.model)
 
@@ -30,35 +30,31 @@ for (name in unique(qb.data$name)) {
   player <- qb.data[qb.data$name == name, ]
   
   for (i in 1:nrow(player)) {
-    # there's no last year data to compare model against
-    # if (!isTRUE(player[i-1, "fantpt"] > 0)) next
+    # if there's no data on player last year, skip
+    if (i-1 < 1) next
     
-    # there's no next year data to compare model against
-    if (!isTRUE(player[i+1,"fantpt"] > 0)) next
-    
-    # if there's no data on player last year, average for players age
     player.now <- player[i,]
-    
-    lag1 <- ifelse(i-1>0, player[i-1, "fantpt"], med.pts)
-    lag2 <- ifelse(i-2>0, player[i-2, "fantpt"], med.pts)
-    lag3 <- ifelse(i-3>0, player[i-3, "fantpt"], med.pts)
-    lag4 <- ifelse(i-4>0, player[i-4, "fantpt"], med.pts)
+    lag1 <- player[i-1, "fantpt"]
     
     qb.coors <- rbind(
        qb.coors,
        list(
-          x = sum(c(1, lag1, lag2, lag3, player.now$age) * qb.model$coefficients, na.rm = TRUE),
+          x = sum(c(1, lag1, player.now$age) * qb.model$coefficients, na.rm = TRUE),
           y = player[i+1,"fantpt"]
        )
     )
   }
 }
 
-# calculate R-squared: 0.3035777
+# only keep the cases where we know next season's score
+qb.coors <- qb.coors[complete.cases(qb.coors),]
+
+# calculate R-squared
 total <- with(qb.coors, sum((y - mean(y))^2))
 var <- with(qb.coors, sum((y - x)^2))
 qb.rsqrd <- round(1 - (var / total), digits = 3)
 qb.rsqrd <- paste0("R^2 = ", qb.rsqrd)
+qb.rsqrd
 
 
 ```
@@ -72,7 +68,7 @@ library(pryr)
 setwd("~/Documents/GitHub/ff/analysis")
 
 rb.data <- player.data[["RB"]]
-rb.formula <- formula(fantpt ~ lag(fantpt, 1:3) + age)
+rb.formula <- formula(fantpt ~ lag(fantpt, 1:2) + age)
 rb.model <- plm(rb.formula, data = rb.data, index = c("name","year"), model="pooling")
 summary(rb.model)
 
@@ -84,34 +80,33 @@ for (name in unique(rb.data$name)) {
   
   for (i in 1:nrow(player)) {
     # there's no last year data to compare model against
-    # if (!isTRUE(player[i-1, "fantpt"] > 0)) next
+    if (i-2 < 1) next
     
-    # there's no next year data to compare model against
-    if (!isTRUE(player[i+1,"fantpt"] > 0)) next
-    
-    # if there's no data on player last year, average for players age
-    player.now <- player[i,]
-    
-    lag1 <- ifelse(i-1>0, player[i-1, "fantpt"], med.pts)
-    lag2 <- ifelse(i-2>0, player[i-2, "fantpt"], med.pts)
-    lag3 <- ifelse(i-3>0, player[i-3, "fantpt"], med.pts)
-    lag4 <- ifelse(i-4>0, player[i-4, "fantpt"], med.pts)
+    lag1 <- player[i-1, "fantpt"]
+    lag2 <- player[i-2, "fantpt"]
+    lag1.yds <- player[i-1, "yds.1"]
     
     rb.coors <- rbind(
        rb.coors,
        list(
-          x = sum(c(1, lag1, lag2, lag3, player.now$age) * rb.model$coefficients, na.rm = TRUE),
+          x = sum(c(1, lag1, lag2, player.now$age) * rb.model$coefficients, na.rm = TRUE),
           y = player[i+1,"fantpt"]
        )
     )
   }
 }
 
+# only keep the cases where we know next season's score
+rb.coors <- rb.coors[complete.cases(rb.coors),]
+
 # calculate R-squared
 total <- with(rb.coors, sum((y - mean(y))^2))
 var <- with(rb.coors, sum((y - x)^2))
 rb.rsqrd <- round(1 - (var / total), digits = 3)
 rb.rsqrd <- paste0("R^2 = ", rb.rsqrd)
+rb.rsqrd
+
+rb.plot
 
 ```
 
@@ -124,7 +119,7 @@ library(pryr)
 setwd("~/Documents/GitHub/ff/analysis")
 
 wr.data <- player.data[["WR"]]
-wr.formula <- formula(fantpt ~ lag(fantpt, 1:2) + age)
+wr.formula <- formula(fantpt ~ lag(fantpt, 1) + age)
 wr.model <- plm(wr.formula, data = wr.data, index = c("name","year"), model="pooling")
 summary(wr.model)
 
@@ -136,35 +131,32 @@ for (name in unique(wr.data$name)) {
   
   for (i in 1:nrow(player)) {
     # there's no last year data to compare model against
-    # if (!isTRUE(player[i-1, "fantpt"] > 0)) next
+    if (i-1 < 1) next
     
-    # there's no next year data to compare model against
-    if (!isTRUE(player[i+1,"fantpt"] > 0)) next
-    
-    # if there's no data on player last year, average for players age
+    lag1 <- player[i-1, "fantpt"]
     player.now <- player[i,]
-    
-    lag1 <- ifelse(i-1>0, player[i-1, "fantpt"], med.pts)
-    lag2 <- ifelse(i-2>0, player[i-2, "fantpt"], med.pts)
-    lag3 <- ifelse(i-3>0, player[i-3, "fantpt"], med.pts)
     
     wr.coors <- rbind(
        wr.coors,
        list(
-          x = sum(c(1, lag1, lag2, player.now$age) * wr.model$coefficients, na.rm = TRUE),
+          x = sum(c(1, lag1, player.now$age) * wr.model$coefficients, na.rm = TRUE),
           y = player[i+1,"fantpt"]
        )
     )
   }
 }
 
+# only keep the cases where we know next season's score
+wr.coors <- wr.coors[complete.cases(wr.coors),]
+
 # calculate R-squared: 0.3035777
 total <- with(wr.coors, sum((y - mean(y))^2))
 var <- with(wr.coors, sum((y - x)^2))
-print(1 - (var / total))
 wr.rsqrd <- round(1 - (var / total), digits = 3)
 wr.rsqrd <- paste0("R^2 = ", wr.rsqrd)
+wr.rsqrd
 
+wr.plot
 
 ```
 
@@ -190,17 +182,12 @@ for (name in unique(te.data$name)) {
   
   for (i in 1:nrow(player)) {
     # there's no last year data to compare model against
-    # if (!isTRUE(player[i-1, "fantpt"] > 0)) next
+    if (i-2 < 1) next
     
-    # there's no next year data to compare model against
-    if (!isTRUE(player[i+1,"fantpt"] > 0)) next
-    
-    # if there's no data on player last year, average for players age
     player.now <- player[i,]
     
-    lag1 <- ifelse(i-1>0, player[i-1, "fantpt"], med.pts)
-    lag2 <- ifelse(i-2>0, player[i-2, "fantpt"], med.pts)
-    lag3 <- ifelse(i-3>0, player[i-3, "fantpt"], med.pts)
+    lag1 <- player[i-1, "fantpt"]
+    lag2 <- player[i-2, "fantpt"]
     
     te.coors <- rbind(
        te.coors,
@@ -212,14 +199,15 @@ for (name in unique(te.data$name)) {
   }
 }
 
+# only keep the cases where we know next season's score
+te.coors <- te.coors[complete.cases(te.coors),]
+
 # calculate R-squared
 total <- with(te.coors, sum((y - mean(y))^2))
 var <- with(te.coors, sum((y - x)^2))
-print(1 - (var / total))
 te.rsqrd <- round(1 - (var / total), digits = 3)
 te.rsqrd <- paste0("R^2 = ", te.rsqrd)
-
-te.plot
+te.rsqrd
 
 ```
 
@@ -233,7 +221,7 @@ qb.plot %<a-% {
      ylim = c(0, 450),
      ann=FALSE)
   abline(0, 1, col = 'red', lty = 'dashed', lwd = 2)
-  text(55, 420, labels = qb.rsqrd)
+  text(70, 420, labels = qb.rsqrd)
   title(main = "QB", line = 0.5)
   title(xlab = "estimate", ylab = "actual", line = 2.25)
 }
@@ -241,11 +229,11 @@ qb.plot %<a-% {
 rb.plot %<a-% {
   plot(rb.coors$x, rb.coors$y,
      cex = 0.8,
-     xlim = c(0, 230),
+     xlim = c(0, 280),
      ylim = c(0, 330),
      ann=FALSE)
   abline(0, 1, col = 'red', lty = 'dashed', lwd = 2)
-  text(40, 305, labels = rb.rsqrd)
+  text(45, 305, labels = rb.rsqrd)
   title(main = "RB", line = 0.5)
   title(xlab = "estimate", ylab = "actual", line = 2.25)
 }
@@ -253,7 +241,7 @@ rb.plot %<a-% {
 wr.plot %<a-% {
   plot(wr.coors$x, wr.coors$y,
      cex = 0.8,
-     xlim = c(0, 210),
+     xlim = c(0, 200),
      ylim = c(0, 280),
      ann=FALSE)
   abline(0, 1, col = 'red', lty = 'dashed', lwd = 2)
