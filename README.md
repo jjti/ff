@@ -1,5 +1,6 @@
 # ff
 
-Fantasy football forecasting (2018). Experimenting with R, plm, and models of little accuracy
+Fantasy football forecasting (2018). Experimenting with R, plm, and models of little predictive power
 
-![linear](https://user-images.githubusercontent.com/13923102/43375034-a6224422-9380-11e8-8468-96729f139268.png)
+![full](https://user-images.githubusercontent.com/13923102/43682303-f861f7e2-983e-11e8-98f5-07ec2a89e998.png)
+)
