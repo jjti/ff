@@ -29,7 +29,7 @@ qb.plot %<a-% {
 # 0.646 experts, overall, injury
 
 ## RB
-rb.formula <- formula(fantpt ~ experts + overall + injury + stamina + toughness + catching + acceleration + carrying + trucking + stamina + agility + elusiveness + speed + awareness + strength + age.x + years_pro)
+rb.formula <- formula(fantpt ~ experts + overall + injury + route_running + return + stamina + toughness + catching + acceleration + carrying + trucking + stamina + agility + elusiveness + speed + awareness + strength + age.x + years_pro)
 rb.model <- lm(rb.formula, data = rb.data)
 rb.fit <- stepAIC(rb.model, direction = "both")
 
@@ -50,7 +50,7 @@ rb.plot %<a-% {
 
 
 ## WR
-wr.formula <- formula(fantpt ~ experts + overall + injury + stamina + toughness + catching + acceleration + carrying + trucking + stamina + elusiveness + agility + speed + awareness + strength + age.x + years_pro)
+wr.formula <- formula(fantpt ~ experts + overall + injury + route_running + return + stamina + toughness + catching + acceleration + carrying + trucking + stamina + agility + elusiveness + speed + awareness + strength + age.x + years_pro)
 wr.model <- lm(wr.formula, data = wr.data)
 wr.fit <- stepAIC(wr.model, direction = "both")
 
@@ -76,7 +76,7 @@ wr.plot %<a-% {
 
 ## TE
 
-te.formula <- formula(fantpt ~ experts + overall + injury + stamina + toughness + catching + acceleration + carrying + trucking + stamina + elusiveness + agility + speed + awareness + strength + age.x + years_pro)
+te.formula <- formula(fantpt ~ experts + overall + injury + route_running + return + stamina + toughness + catching + acceleration + carrying + trucking + stamina + agility + elusiveness + speed + awareness + strength + age.x + years_pro)
 te.model <- lm(te.formula, data = te.data)
 te.fit <- stepAIC(te.model, direction = "both")
 

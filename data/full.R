@@ -144,7 +144,7 @@ for (i in 1:length(player.data)) {
   # replace NA values with the median for that column
   for (c in 1:ncol(position.data)){
     if (is.numeric(position.data[,c])) {
-      position.data[is.na(position.data[,c]), c] <- median(position.data[,c], na.rm = TRUE)
+      position.data[is.na(position.data[,c]), c] <- 0
     }
   }
 

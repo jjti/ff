@@ -90,15 +90,8 @@ for (src in sources) {
   }
 }
 
-# only 2014
+# only 2012-2014
 player.data <- player.data[player.data$year %in% c(2012, 2013, 2014),]
-
-player.data$experts <- apply(
-  player.data[, year.names],
-  1,
-  function(x) mean(x, na.rm = TRUE)
-)
-player.data <- pdata.frame(player.data, index=c("name","year"), drop.index=FALSE, row.names=TRUE)
-player.data <- split(player.data, player.data$fantpos)
+player.data$experts <- apply(player.data[, year.names], 1, function(x) mean(x, na.rm = TRUE))
 
 ```
