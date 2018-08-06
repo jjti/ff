@@ -25,12 +25,12 @@ library(readxl)
 dir <- "/Users/jtimmons/Documents/GitHub/ff/data/madden"
 
 all.madden.data <- data.frame()
-for (year in 2013:2014) {
+for (year in 2018:2018) {
   madden.path <- paste0(dir, "/madden_nfl_", year, ".xlsx")
   madden.data <- read_excel(madden.path, sheet = 1)
 
   colnames(madden.data) <- lapply(tolower(colnames(madden.data)), function(x) gsub(" ", "_", x))
-  madden.data$name <- with(madden.data, paste0(first_name, " ", last_name))
+  # madden.data$name <- with(madden.data, paste0(first_name, " ", last_name))
 
   madden.data$year <- as.integer(rep(year, nrow(madden.data)))
 
@@ -130,7 +130,8 @@ for (src in sources) {
 # set experts as the average of all sources for a given year
 player.data$experts <- apply(player.data[, year.names], 1, function(x) mean(x, na.rm = TRUE))
 
-#player.data <- player.data[player.data$experts > 0,]
+# must have a Madden score and an expert score in top three quartiles
+# player.data <- player.data[player.data$experts > 0 & player.data$overall > 40,]
 
 # split up by position
 player.data <- split(player.data, player.data$fantpos)
