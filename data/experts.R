@@ -1,16 +1,3 @@
----
-title: "historical"
-author: "jjtimmons"
-date: "8/1/2018"
-output: html_document
----
-
-## Load source data from historical folder
-
-Add "experts" column with average professional forecasts
-
-```{r}
-
 dir <- "/Users/jtimmons/Documents/GitHub/ff/data/historical"
 setwd(dir)
 
@@ -72,16 +59,16 @@ for (src in sources) {
     d <- load(hist.data.path)
     fr <- get(d)
     fr <- fr[!duplicated(fr[src$name]),]
-    
+
     # create the column
     col.name <- paste0(tolower(src$source), ".", year)
     year.names <- c(year.names, col.name)
     player.data[, col.name] <- NA
-    
+
     # get names and points out of the data frame
     source.data <- data.frame(name = fr[, src$name], year = rep(year, nrow(fr)))
     source.data[col.name] <- fr[, paste0("pts_", tolower(src$source))]
-    
+
     # add the point values in player.data
     player.data <- merge(player.data, source.data, by = c("name", "year"), all.x = TRUE)
     player.data[col.name] <- player.data[, paste0(col.name, ".y")]
@@ -93,5 +80,3 @@ for (src in sources) {
 # only 2012-2014
 player.data <- player.data[player.data$year %in% c(2012, 2013, 2014),]
 player.data$experts <- apply(player.data[, year.names], 1, function(x) mean(x, na.rm = TRUE))
-
-```

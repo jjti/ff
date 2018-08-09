@@ -1,13 +1,3 @@
----
-title: "load"
-author: "jjtimmons"
-date: "7/25/2018"
-output: html_document
----
-
-## Load and split up players by position
-
-```{r}
 library(plm)
 
 setwd("~/Documents/GitHub/ff/analysis")
@@ -17,5 +7,3 @@ player.data <- player.data[player.data$year == 2014,]
 player.data <- pdata.frame(player.data, index=c("name","year"), drop.index=FALSE, row.names=TRUE)
 
 # player.data <- split(player.data, player.data$fantpos)
-
-```

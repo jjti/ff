@@ -25,12 +25,14 @@ library(readxl)
 dir <- "/Users/jtimmons/Documents/GitHub/ff/data/madden"
 
 all.madden.data <- data.frame()
-for (year in 2018:2018) {
+for (year in 2013:2014) {
   madden.path <- paste0(dir, "/madden_nfl_", year, ".xlsx")
   madden.data <- read_excel(madden.path, sheet = 1)
 
   colnames(madden.data) <- lapply(tolower(colnames(madden.data)), function(x) gsub(" ", "_", x))
-  # madden.data$name <- with(madden.data, paste0(first_name, " ", last_name))
+  if (year < 2018) {
+    madden.data$name <- with(madden.data, paste0(first_name, " ", last_name))
+  }
 
   madden.data$year <- as.integer(rep(year, nrow(madden.data)))
 

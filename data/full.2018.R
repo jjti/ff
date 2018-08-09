@@ -17,12 +17,18 @@ player.data <- read_excel("/Users/jtimmons/Documents/GitHub/ff/data/madden/madde
 
 colnames(player.data) <- lapply(tolower(colnames(player.data)), function(x) gsub(" ", "_", x))
 player.data$pos <- player.data$position
-player.data$pos <- sapply(player.data$pos, function (x) gsub("HB|FB", "RB", x))
+player.data$pos <- sapply(player.data$pos, function (x) gsub("HB", "RB", x))
+player.data$pos <- sapply(player.data$pos, function (x) gsub("FB", "RB", x))
+player.data$route_running = rowMeans(player.data[,c("short_route_runing", "medium_route_running", "deep_route_running")])
+player.data$catching <- player.data$catch
 
 ###
 # Add Expert Information
 ###
-
+load("/Users/jtimmons/Documents/GitHub/ff/data/2018/cbs.Rda")
+load("/Users/jtimmons/Documents/GitHub/ff/data/2018/nfl.Rda")
+load("/Users/jtimmons/Documents/GitHub/ff/data/2018/espn.Rda")
+load("/Users/jtimmons/Documents/GitHub/ff/data/2018/fox.Rda")
 for (src in list(espn.data, cbs.data, nfl.data, fox.data)) {
   # add the point values in player.data
   src$name <- sapply(src$name, function (x) gsub("^\\s+|\\s+$", "", x))
@@ -47,9 +53,10 @@ for (c in 1:ncol(player.data)){
   }
 }
 
-player.data <- player.data[complete.cases(player.data),]
+# player.data <- player.data[complete.cases(player.data),]
+player.data <- player.data[player.data$experts > 3,]
 
-qb.data <- player.data[player.data$position == "QB",]
-rb.data <- player.data[player.data$position == "RB",]
-wr.data <- player.data[player.data$position == "WR",]
-tw.data <- player.data[player.data$position == "TE",]
+qb.data <- player.data[player.data$pos == "QB",]
+rb.data <- player.data[player.data$pos == "RB",]
+wr.data <- player.data[player.data$pos == "WR",]
+tw.data <- player.data[player.data$pos == "TE",]
