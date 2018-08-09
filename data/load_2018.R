@@ -1,8 +1,3 @@
-
-###
-# Add Basic player stats
-###
-
 library(plm)
 library(plyr)
 library(readxl)
