@@ -1,5 +1,7 @@
 library(plyr)
 
+source("~/Documents/GitHub/ff/data/load_2018.R")
+
 # qb.fit.gam, rb.fit.gam, wr.fit.gam, te.fit.gam, predict with each
 team.count <- 10
 
@@ -36,7 +38,7 @@ full.predictions$vor <-  full.predictions$pred - full.predictions$replace_value
 qb.plot.pred %<a-% {
   plot(qb.pred.sorted,
        cex = 0.6,
-       xlim = c(0, 58),
+       xlim = c(0, 30),
        ylim = c(0, 340),
        ann=FALSE)
   title(main = "QB", line = 0.5)
@@ -46,7 +48,7 @@ qb.plot.pred %<a-% {
 rb.plot.pred %<a-% {
   plot(rb.pred.sorted,
        cex = 0.6,
-       xlim = c(0, 130),
+       xlim = c(0, 100),
        ylim = c(0, 210),
        ann=FALSE)
   title(main = "RB", line = 0.5)
@@ -56,7 +58,7 @@ rb.plot.pred %<a-% {
 wr.plot.pred %<a-% {
   plot(wr.pred.sorted,
        cex = 0.6,
-       xlim = c(0, 190),
+       xlim = c(0, 150),
        ylim = c(0, 230),
        ann=FALSE)
   title(main = "WR", line = 0.5)

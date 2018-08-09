@@ -160,3 +160,9 @@ qb.data <- player.data[["QB"]]
 rb.data <- player.data[["RB"]]
 wr.data <- player.data[["WR"]]
 tw.data <- player.data[["TE"]]
+
+## Top 3 Quartiles only
+qb.data <- qb.data[qb.data$experts > 30 & qb.data$overall > 70,]
+rb.data <- rb.data[rb.data$experts > 20 & rb.data$overall > 67,]
+wr.data <- wr.data[wr.data$experts > 20 & wr.data$overall > 64,]
+te.data <- te.data[te.data$experts > 30 & te.data$overall > 70,]

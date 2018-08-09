@@ -7,16 +7,12 @@ library(robustgam)
 
 setwd("~/Documents/GitHub/ff/analysis")
 
+source("~/Documents/GitHub/ff/data/load_training.R")
+
 # Using GAMs with Madden stats and expert predictions to forecast FF points
 
-## Top 3 Quartiles only
-qb.data <- qb.data[qb.data$experts > 30 & qb.data$overall > 70,]
-rb.data <- rb.data[rb.data$experts > 20 & rb.data$overall > 67,]
-wr.data <- wr.data[wr.data$experts > 20 & wr.data$overall > 64,]
-te.data <- te.data[te.data$experts > 20 & te.data$overall > 68,]
-
 ## QB
-qb.formula <- formula(fantpt ~ s(experts) + s(overall))
+qb.formula <- formula(fantpt ~ experts + s(overall))
 qb.fit.gam <- gam(qb.formula, data = qb.data, select = TRUE)
 summary(qb.fit.gam)
 
@@ -33,7 +29,7 @@ qb.plot %<a-% {
 # Deviance explained = 69%
 
 ## RB
-rb.formula <- formula(fantpt ~ s(experts) + s(overall))
+rb.formula <- formula(fantpt ~ experts + s(overall))
 rb.fit.gam <- gam(rb.formula, data = rb.data, select = TRUE)
 summary(rb.fit.gam)
 
@@ -51,7 +47,7 @@ rb.plot %<a-% {
 
 
 ## WR
-wr.formula <- formula(fantpt ~ s(experts))
+wr.formula <- formula(fantpt ~ experts)
 wr.fit.gam <- gam(wr.formula, data = wr.data, select = TRUE)
 summary(wr.fit.gam)
 
@@ -69,7 +65,7 @@ wr.plot %<a-% {
 
 
 ## TE
-te.formula <- formula(fantpt ~ s(experts) + s(awareness) + s(speed))
+te.formula <- formula(fantpt ~ experts + s(overall))
 te.fit.gam <- gam(te.formula, data = te.data, select = TRUE)
 summary(te.fit.gam)
 
