@@ -1,6 +1,6 @@
 library(plyr)
 
-source("~/Documents/GitHub/ff/data/load_2018.R")
+source("/Users/jtimmons/Documents/GitHub/ff/data/load_2018.R")
 
 # qb.fit.gam, rb.fit.gam, wr.fit.gam, te.fit.gam, predict with each
 team.count <- 10
@@ -29,7 +29,7 @@ full.predictions <- rbind.fill(qb.data, rb.data)
 full.predictions <- rbind.fill(full.predictions, wr.data)
 full.predictions <- rbind.fill(full.predictions, te.data)
 full.predictions$vor <-  full.predictions$pred - full.predictions$replace_value
-full.predictions <- full.predictions[, c("name", "pos", "team", "vor", "adp", "pred", "replace_value", "experts", "overall")]
+full.predictions <- full.predictions[, c("name", "pos", "team", "vor", "adp", "pred", "replace_value", "experts", "overall", "img.url")]
 
 ###
 # Plot the predictions (sorted)

@@ -12,11 +12,20 @@ espn_pages <- as.character(seq(from = 0, to = 560, by = 40))
 espn_urls <- lapply(espn_pages, function(x) paste0(espn_base_url, "?startIndex=", x))
 
 #Scrape
+espn.page <- "http://games.espn.com/ffl/tools/projections?startIndex=0"
 espn.data <- data.frame()
 for (espn.page in espn_urls) {
-  espn.this.data <- read_html(espn.page) %>%
+  espn.page.data <- read_html(espn.page)
+  espn.this.data <- espn.page.data %>%
     html_node(".playerTableTable") %>%
     html_table()
+
+  espn.popups <- espn.page.data %>%
+    html_nodes("a.flexpop") %>%
+    html_attrs()
+  espn.popups <- data.frame(espn.popups)
+  espn.popups <- t(espn.popups)
+  espn.popups <- espn.popups[!duplicated(espn.popups[,"playerid"]),]
 
   espn.this.data <- espn.this.data[espn.this.data$PLAYERS != "RNK", ] # bs rows
   espn.this.data <- espn.this.data[,c(2, 13)]
@@ -25,6 +34,7 @@ for (espn.page in espn_urls) {
 
   espn.this.data$name <- NA
   espn.this.data$pos <- NA
+  espn.this.data$espn.id <- NA
   for (i in 1:nrow(espn.this.data)) {
     espn.row <- espn.this.data[i,]
 
@@ -36,14 +46,20 @@ for (espn.page in espn_urls) {
       pos.split <- strsplit(name.and.pos[[2]], "\\s+")[[1]]
 
       espn.this.data[i, "name"] <- paste0(name.split[1], " ", name.split[2])
-      espn.this.data[i, "pos"] <- pos.split[[2]]
+      espn.this.data[i, "pos"] <- pos.split[[3]]
+      espn.this.data[i, "playerid"] <- espn.popups[i, "playerid"]
     }
   }
 
   espn.data <- rbind.fill(espn.data, espn.this.data)
 }
 
-espn.data <- espn.data[, c("name", "pos", "espn.2018")]
+
+# getting image urls from player-ids
+# ex url: http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15825.png&w=200&h=145
+espn.data$img.url <- sapply(espn.data$playerid, function(x) paste0("http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/", x, ".png"))
+
+espn.data <- espn.data[, c("name", "pos", "espn.2018", "img.url")]
 espn.data <- espn.data[complete.cases(espn.data),]
 save(espn.data, file = paste0("espn.Rda"))
 
