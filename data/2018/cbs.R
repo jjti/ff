@@ -1,8 +1,11 @@
-#Load libraries
 library(plyr)
 library(rvest)
 
-# qb
+setwd("~/Documents/GitHub/ff/data/2018")
+
+###
+# Player stats
+###
 # https://www.cbssports.com/fantasy/football/stats/sortable/points/QB/standard/projections/2018/ytd
 
 base.url <- "https://www.cbssports.com/fantasy/football/stats/sortable/points/"
@@ -27,11 +30,9 @@ pages.by.pos <- list(
   )
 )
 
-
 cbs.page.data <- read_html("https://www.cbssports.com/fantasy/football/stats/sortable/points/TE/standard/projections/2018/ytd") %>%
   html_node(".data") %>%
   html_table(fill = TRUE)
-
 
 cbs.data <- data.frame()
 for (pos.data in pages.by.pos) {
@@ -61,6 +62,43 @@ for (pos.data in pages.by.pos) {
   }
 }
 
-cbs.data <- cbs.data[, c("name", "pos", "cbs.2018")]
+
+
+
+###
+# Average Draft Position
+###
+# https://www.cbssports.com/fantasy/football/draft/averages?&start_row=31
+
+adp.page <- "https://www.cbssports.com/fantasy/football/draft/averages?&start_row=31"
+adp.page.data <- read_html(adp.page) %>%
+  html_node(".data") %>%
+  html_table(fill = TRUE)
+
+page.count <- 8
+offsets <- seq(from = 1, to = 8 * 30, by = 30)
+adp.pages <- lapply(offsets, function(x) paste0("https://www.cbssports.com/fantasy/football/draft/averages?&start_row=", x))
+adp.data <- data.frame()
+for (adp.page in adp.pages) {
+  adp.page.data <- read_html(adp.page) %>%
+    html_node(".data") %>%
+    html_table(fill = TRUE)
+  adp.page.data <- adp.page.data[4:nrow(adp.page.data) - 1, c(1, 2)]
+  colnames(adp.page.data) <- c("adp", "name")
+
+  for (i in 1:nrow(adp.page.data)) {
+    adp.page.data[i, "name"] <- strsplit(adp.page.data[i,"name"], ",")[[1]][1]
+  }
+  adp.data <- rbind.fill(adp.data, adp.page.data[, c("name", "adp")])
+}
+cbs.data <- merge(cbs.data, adp.data, by = "name", all.x = TRUE)
+cbs.data$adp <- as.numeric(as.character(cbs.data$adp))
+
+
+###
+# Save to fs
+###
+
+cbs.data <- cbs.data[, c("name", "pos", "cbs.2018", "adp")]
 cbs.data <- cbs.data[complete.cases(cbs.data), ]
 save(cbs.data, file = paste0("cbs.Rda"))

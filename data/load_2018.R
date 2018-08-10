@@ -5,29 +5,21 @@ library(readxl)
 setwd("~/Documents/GitHub/ff/data")
 
 ###
-# Add Madden Information
-###
-
-player.data <- read_excel("/Users/jtimmons/Documents/GitHub/ff/data/madden/madden_nfl_2018.xlsx", sheet = 1)
-
-colnames(player.data) <- lapply(tolower(colnames(player.data)), function(x) gsub(" ", "_", x))
-player.data$pos <- player.data$position
-player.data$pos <- sapply(player.data$pos, function (x) gsub("HB", "RB", x))
-player.data$pos <- sapply(player.data$pos, function (x) gsub("FB", "RB", x))
-player.data$route_running = rowMeans(player.data[,c("short_route_runing", "medium_route_running", "deep_route_running")])
-player.data$catching <- player.data$catch
-
-###
 # Add Expert Information
 ###
 load("/Users/jtimmons/Documents/GitHub/ff/data/2018/cbs.Rda")
 load("/Users/jtimmons/Documents/GitHub/ff/data/2018/nfl.Rda")
 load("/Users/jtimmons/Documents/GitHub/ff/data/2018/espn.Rda")
 load("/Users/jtimmons/Documents/GitHub/ff/data/2018/fox.Rda")
+player.data <- NULL
 for (src in list(espn.data, cbs.data, nfl.data, fox.data)) {
   # add the point values in player.data
-  src$name <- sapply(src$name, function (x) gsub("^\\s+|\\s+$", "", x))
-  player.data <- merge(player.data, src, by = c("name", "pos"), all = TRUE)
+  src$name <- sapply(src$name, function(x) gsub("^\\s+|\\s+$", "", x))
+  if (!is.null(player.data)) {
+    player.data <- merge(player.data, src, by = c("name", "pos"), all = TRUE)
+  } else {
+    player.data <- src
+  }
 }
 
 # set experts as the average of all sources for a given year
@@ -37,6 +29,26 @@ for (s in src.names) {
   player.data[,s] <- sapply(player.data[,s], function(x) ifelse(x < 10, NA, x))
 }
 player.data$experts <- apply(player.data[, src.names], 1, mean, na.rm = TRUE) # took WAY too long to figure out
+
+
+
+###
+# Add Madden Information
+###
+madden.data <- read_excel("/Users/jtimmons/Documents/GitHub/ff/data/madden/madden_nfl_2018.xlsx", sheet = 1)
+
+colnames(madden.data) <- lapply(tolower(colnames(madden.data)), function(x) gsub(" ", "_", x))
+madden.data$pos <- madden.data$position
+madden.data$pos <- sapply(madden.data$pos, function(x) gsub("HB", "RB", x))
+madden.data$pos <- sapply(madden.data$pos, function(x) gsub("FB", "RB", x))
+madden.data$name <- sapply(madden.data$name, function(x) {
+  split.name <- strsplit(x, "\\s+")[[1]]
+  paste0(split.name[1], " ", split.name[2])
+})
+
+madden.data[madden.data$name == "Todd Gurley II",]
+
+player.data <- merge(player.data, madden.data, by = c("name", "pos"))
 
 # must have a Madden score and an expert score in top three quartiles
 player.data <- player.data[player.data$experts > 10 & player.data$overall > 40,]

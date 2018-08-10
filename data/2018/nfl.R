@@ -2,6 +2,8 @@
 library(plyr)
 library(rvest)
 
+setwd("~/Documents/GitHub/ff/data/2018")
+
 # qb
 # http://fantasy.nfl.com/research/projections?offset=1&position=1&sort=projectedPts&statCategory=projectedStats&statSeason=2018&statType=seasonProjectedStats&statWeek=1
 #

@@ -18,7 +18,7 @@ for (espn.page in espn_urls) {
     html_node(".playerTableTable") %>%
     html_table()
 
-  espn.this.data <- espn.this.data[espn.this.data$PLAYERS != "RNK", ]
+  espn.this.data <- espn.this.data[espn.this.data$PLAYERS != "RNK", ] # bs rows
   espn.this.data <- espn.this.data[,c(2, 13)]
   colnames(espn.this.data) <- tolower(colnames(espn.this.data))
   espn.this.data$espn.2018 <- espn.this.data$total
@@ -28,17 +28,22 @@ for (espn.page in espn_urls) {
   for (i in 1:nrow(espn.this.data)) {
     espn.row <- espn.this.data[i,]
 
-    name.and.pos <- gsub(",", "", espn.row$players)
-    name.and.pos <- strsplit(name.and.pos, "\\s+")
-    name.and.pos <- name.and.pos[[1]]
+    name.and.pos <- strsplit(espn.row$players, ",")[[1]]
+    name.split <- strsplit(name.and.pos[1], "\\s+")[[1]]
 
-    espn.this.data[i, "name"] <- paste(sep = " ", name.and.pos[1], name.and.pos[2])
-    espn.this.data[i, "pos"] <- name.and.pos[4]
+    if (length(name.and.pos) > 1) {
+      n <- name.and.pos[[2]]
+      pos.split <- strsplit(name.and.pos[[2]], "\\s+")[[1]]
+
+      espn.this.data[i, "name"] <- paste0(name.split[1], " ", name.split[2])
+      espn.this.data[i, "pos"] <- pos.split[[2]]
+    }
   }
 
   espn.data <- rbind.fill(espn.data, espn.this.data)
 }
 
 espn.data <- espn.data[, c("name", "pos", "espn.2018")]
+espn.data <- espn.data[complete.cases(espn.data),]
 save(espn.data, file = paste0("espn.Rda"))
 

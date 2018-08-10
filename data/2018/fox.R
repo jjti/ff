@@ -58,7 +58,7 @@ for (pos.data in pages.by.pos) {
 
     for (i in 1:nrow(fox.page.data)) {
       fox.name <- fox.page.data[i, "name"]
-      fox.name.split <- strsplit(fox.name, "\\(")
+      fox.name.split <- strsplit(fox.name, "\\\r")
       fox.page.data[i,"name"] <- fox.name.split[1]
     }
 
