@@ -1,5 +1,31 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: "Lato", sans-serif;
+  color: #4a4a4a;
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+h2 {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+p {
+  font-size: 14px;
 }
