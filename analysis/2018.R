@@ -1,4 +1,5 @@
 library(plyr)
+library(jsonlite)
 
 source("/Users/jtimmons/Documents/GitHub/ff/data/load_2018.R")
 
@@ -92,4 +93,5 @@ wr.plot.pred
 te.plot.pred
 
 write.csv(full.predictions, "forecasts.2018.csv")
+write_json(full.predictions, "/Users/jtimmons/Documents/GitHub/ff/app/public/forecast.json")
 
