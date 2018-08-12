@@ -33,7 +33,14 @@ full.predictions <- rbind.fill(full.predictions, wr.data)
 full.predictions <- rbind.fill(full.predictions, te.data)
 full.predictions$vor <-  full.predictions$pred - full.predictions$replace_value
 full.predictions$href <- full.predictions$img.url
-full.predictions <- full.predictions[, c("name", "pos", "team", "vor", "adp", "pred", "replace_value", "experts", "overall", "href")]
+full.predictions$madden <- full.predictions$overall
+full.predictions$vor <- trunc(full.predictions$vor)
+full.predictions$adp <- trunc(full.predictions$adp)
+full.predictions$pred <- trunc(full.predictions$pred)
+full.predictions$replace_value <- trunc(full.predictions$replace_value)
+full.predictions$experts <- trunc(full.predictions$experts)
+full.predictions <- full.predictions[, c("name", "pos", "team", "vor", "adp", "pred", "replace_value", "experts", "madden", "href")]
+full.predictions <- full.predictions[order(full.predictions$vor, decreasing = TRUE),]
 
 ###
 # Plot the predictions (sorted)

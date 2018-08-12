@@ -1,0 +1,19 @@
+.Team-Cards {
+  display: flex;
+}
+
+.Team-Arrow-Up {
+  position: relative;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+
+  border-bottom: 10px solid #c4c4c4;
+}
+
+.Team-Arrow-Label {
+  position: relative;
+  margin: 0;
+  top: -10px;
+}

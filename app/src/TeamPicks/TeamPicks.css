@@ -1,0 +1,20 @@
+.Pick-Columns {
+  display: flex;
+}
+
+.Pick-Column {
+  margin-right: 16px;
+}
+
+.Pick-Section {
+  margin-bottom: 40px;
+}
+
+.Pick-Row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Pick-Row:last-child {
+  margin-right: 30px;
+}

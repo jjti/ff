@@ -1,0 +1,7 @@
+#App-Header {
+  margin: 0 0 15px 0;
+}
+
+#App-Header > p {
+  margin: 8px;
+}

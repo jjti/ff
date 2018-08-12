@@ -1,0 +1,38 @@
+.Card {
+  border: 2px solid #c4c4c4;
+  margin: 6px;
+  position: relative;
+}
+
+.Card-Empty {
+  border: 2px dashed #c4c4c4;
+}
+
+.Card > h4 {
+  margin: 0;
+  position: absolute;
+  top: 5%;
+  left: 7%;
+}
+
+.Card > h5 {
+  margin: 0;
+  position: absolute;
+  top: 5%;
+  left: 7%;
+}
+
+.Card > p {
+  margin: 0;
+  position: absolute;
+  top: 45%;
+  left: 7%;
+}
+
+.Card > p.points {
+  margin: 0;
+  position: absolute;
+  bottom: 5%;
+  left: 7%;
+  top: unset;
+}

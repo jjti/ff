@@ -1,0 +1,57 @@
+.th-left {
+  text-align: left;
+}
+
+.th-right {
+  text-align: right;
+}
+
+.PlayerTable-Header {
+  display: flex;
+  position: relative;
+}
+
+.undo-button,
+.draft-button {
+  outline: none !important;
+  cursor: pointer;
+}
+
+.undo-button {
+  border: none;
+  position: absolute;
+  right: 2%;
+}
+
+.draft-button-td {
+  position: relative;
+}
+
+.draft-button {
+  background-color: #fff;
+  border: 1px solid #c4c4c4;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  right: 0;
+  position: absolute;
+  top: 0;
+}
+
+table {
+  margin-left: 8px;
+  margin-bottom: 50px;
+  width: 96%;
+  border-collapse: collapse;
+}
+
+th {
+  height: 30px;
+  border-bottom: 2px solid #c4c4c4;
+}
+
+tr {
+  height: 35px;
+}

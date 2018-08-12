@@ -1,0 +1,28 @@
+#App {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.App-Row-Top {
+  display: flex;
+  height: 20%;
+}
+
+.App-Row-Bottom {
+  display: flex;
+  height: 80%;
+}
+
+.App-Left-Column {
+  width: 24%;
+}
+
+.App-Right-Column {
+  width: 76%;
+}
+
+.App-Block {
+  padding: 15px;
+}
