@@ -19,8 +19,8 @@ summary(qb.fit.gam)
 qb.plot %<a-% {
   plot(predict.glm(qb.fit.gam), qb.data$fantpt,
        cex = 0.8,
-       xlim = c(0, 375),
-       ylim = c(0, 375),
+       xlim = c(0, 400),
+       ylim = c(0, 400),
        ann=FALSE)
   abline(0, 1, col = 'red', lty = 'dashed', lwd = 2)
   title(main = "QB", line = 0.5)
@@ -36,8 +36,8 @@ summary(rb.fit.gam)
 rb.plot %<a-% {
   plot(predict.glm(rb.fit.gam), rb.data$fantpt,
        cex = 0.8,
-       xlim = c(0, 250),
-       ylim = c(0, 250),
+       xlim = c(0, 260),
+       ylim = c(0, 260),
        ann=FALSE)
   abline(0, 1, col = 'red', lty = 'dashed', lwd = 2)
   title(main = "RB", line = 0.5)
@@ -54,8 +54,8 @@ summary(wr.fit.gam)
 wr.plot %<a-% {
   plot(predict.glm(wr.fit.gam), wr.data$fantpt,
        cex = 0.8,
-       xlim = c(0, 250),
-       ylim = c(0, 250),
+       xlim = c(0, 260),
+       ylim = c(0, 260),
        ann=FALSE)
   abline(0, 1, col = 'red', lty = 'dashed', lwd = 2)
   title(main = "WR", line = 0.5)

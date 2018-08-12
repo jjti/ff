@@ -12,7 +12,7 @@ load("~/Documents/GitHub/ff/data/player_data.Rda")
 player.data$year <- as.integer(player.data$year)
 
 # only years that I have all source of data for
-years <- as.integer(2013:2014)
+years <- as.integer(2012:2014)
 player.data <- player.data[player.data$year %in% years,]
 
 
@@ -23,18 +23,19 @@ player.data <- player.data[player.data$year %in% years,]
 library(readxl)
 
 dir <- "/Users/jtimmons/Documents/GitHub/ff/data/madden"
-
 all.madden.data <- data.frame()
-for (year in 2013:2014) {
+for (year in years) {
   madden.path <- paste0(dir, "/madden_nfl_", year, ".xlsx")
   madden.data <- read_excel(madden.path, sheet = 1)
 
   colnames(madden.data) <- lapply(tolower(colnames(madden.data)), function(x) gsub(" ", "_", x))
-  if (year < 2018) {
+  if (year %in% c(2013, 2014)) {
     madden.data$name <- with(madden.data, paste0(first_name, " ", last_name))
   }
-
   madden.data$year <- as.integer(rep(year, nrow(madden.data)))
+  madden.data$pos <- madden.data$position
+  madden.data$pos <- sapply(madden.data$pos, function(x) gsub("HB", "RB", x))
+  madden.data$pos <- sapply(madden.data$pos, function(x) gsub("FB", "RB", x))
 
   all.madden.data <- rbind.fill(all.madden.data, madden.data)
 }
@@ -132,11 +133,18 @@ for (src in sources) {
 # set experts as the average of all sources for a given year
 player.data$experts <- apply(player.data[, year.names], 1, function(x) mean(x, na.rm = TRUE))
 
-# must have a Madden score and an expert score in top three quartiles
-# player.data <- player.data[player.data$experts > 0 & player.data$overall > 40,]
+# must not be na
+player.data <- player.data[!is.na(player.data$name),]
+
+# limit to some of the columns
+colnames(player.data)
+player.data <- player.data[, c("name", "year", "team", "pos", "overall", "experts", "fantpt")]
+player.data$name <- as.character(player.data$name)
+player.data$pos <- as.factor(player.data$pos)
+player.data$overall <- as.integer(player.data$overall)
 
 # split up by position
-player.data <- split(player.data, player.data$fantpos)
+player.data <- split(player.data, player.data$pos)
 
 # general data cleaning
 for (i in 1:length(player.data)) {
@@ -159,10 +167,12 @@ for (i in 1:length(player.data)) {
 qb.data <- player.data[["QB"]]
 rb.data <- player.data[["RB"]]
 wr.data <- player.data[["WR"]]
-tw.data <- player.data[["TE"]]
+te.data <- player.data[["TE"]]
 
 ## Top 3 Quartiles only
-qb.data <- qb.data[qb.data$experts > 30 & qb.data$overall > 70,]
-rb.data <- rb.data[rb.data$experts > 20 & rb.data$overall > 67,]
-wr.data <- wr.data[wr.data$experts > 20 & wr.data$overall > 64,]
-te.data <- te.data[te.data$experts > 30 & te.data$overall > 70,]
+qb.data <- qb.data[qb.data$experts > 30 & qb.data$overall > 65,]
+rb.data <- rb.data[rb.data$experts > 10 & rb.data$overall > 55,]
+wr.data <- wr.data[wr.data$experts > 20 & wr.data$overall > 65,]
+te.data <- te.data[te.data$experts > 30 & te.data$overall > 65,]
+
+nrow(qb.data)

@@ -34,11 +34,12 @@ full.predictions <- rbind.fill(full.predictions, te.data)
 full.predictions$vor <-  full.predictions$pred - full.predictions$replace_value
 full.predictions$href <- full.predictions$img.url
 full.predictions$madden <- full.predictions$overall
-full.predictions$vor <- trunc(full.predictions$vor)
-full.predictions$adp <- trunc(full.predictions$adp)
-full.predictions$pred <- trunc(full.predictions$pred)
-full.predictions$replace_value <- trunc(full.predictions$replace_value)
-full.predictions$experts <- trunc(full.predictions$experts)
+full.predictions$vor <- round(full.predictions$vor)
+full.predictions$adp <- round(full.predictions$adp)
+full.predictions$pred <- round(full.predictions$pred)
+full.predictions$replace_value <- round(full.predictions$replace_value)
+full.predictions$experts <- round(full.predictions$experts)
+full.predictions <- full.predictions[!duplicated(full.predictions$name),]
 full.predictions <- full.predictions[, c("name", "pos", "team", "vor", "adp", "pred", "replace_value", "experts", "madden", "href")]
 full.predictions <- full.predictions[order(full.predictions$vor, decreasing = TRUE),]
 
@@ -62,7 +63,7 @@ rb.plot.pred %<a-% {
   plot(rb.pred.sorted,
        cex = 0.6,
        xlim = c(0, 2 * round(rb.starters * team.count)),
-       ylim = c(0, 200),
+       ylim = c(0, 220),
        ann=FALSE)
   title(main = "RB", line = 0.5)
   title(xlab = "rank", ylab = "predicted", line = 2.25)
@@ -74,7 +75,7 @@ wr.plot.pred %<a-% {
   plot(wr.pred.sorted,
        cex = 0.6,
        xlim = c(0, 2 * round(wr.starters * team.count)),
-       ylim = c(0, 200),
+       ylim = c(0, 225),
        ann=FALSE)
   title(main = "WR", line = 0.5)
   title(xlab = "rank", ylab = "predicted", line = 2.25)

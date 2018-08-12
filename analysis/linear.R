@@ -1,6 +1,7 @@
 library(plm)
 library(pryr)
 library(MASS)
+library(ggplot2)
 
 setwd("~/Documents/GitHub/ff/analysis")
 
@@ -99,4 +100,10 @@ te.plot %<a-% {
 # .54 experts + speed
 # .53 experts
 
-all.plot
+all.plot %<a-% {
+  par(mfrow=c(2,2))
+  qb.plot
+  rb.plot
+  wr.plot
+  te.plot
+}
