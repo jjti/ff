@@ -2,6 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import { IPlayer } from "../Player";
+import { undoPlayerPick } from "../store/actions/players";
 import { pickPlayer } from "../store/actions/teams";
 import { getPlayers } from "../store/reducers/players";
 import { StoreState } from "../store/store";
@@ -12,6 +13,7 @@ import "./PlayerTable.css";
 interface IProps {
   undraftedPlayers: any;
   pickPlayer: any;
+  undo: () => void;
 }
 
 class PlayerTable extends React.Component<IProps> {
@@ -20,7 +22,9 @@ class PlayerTable extends React.Component<IProps> {
       <div>
         <header className="PlayerTable-Header">
           <h3>PLAYERS</h3>
-          <button className="undo-button">Undo</button>
+          <button className="undo-button" onClick={this.props.undo}>
+            Undo
+          </button>
         </header>
 
         <table>
@@ -68,7 +72,8 @@ const mapStateToProps = (state: StoreState) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-  pickPlayer: (player: IPlayer) => dispatch(pickPlayer(player))
+  pickPlayer: (player: IPlayer) => dispatch(pickPlayer(player)),
+  undo: () => dispatch(undoPlayerPick())
 });
 
 export default connect(

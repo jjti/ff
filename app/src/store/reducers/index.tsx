@@ -1,6 +1,6 @@
 import { ITeam } from "../../Team";
 import { ACTION_TYPES } from "../actions";
-import { pickPlayer } from "./teams";
+import { pickPlayer, undoPlayerPick } from "./teams";
 
 const emptyTeam = (): ITeam => ({
   Bench: new Array(7).fill(null),
@@ -17,18 +17,27 @@ const emptyTeam = (): ITeam => ({
 export const initialState = {
   activeTeam: 0, // active team's index ([0-9])
   draftDirection: 1, // either 1 (forward) or -1 (reverse)
+  past: null,
   players: [],
   // doing 10 empty teams by default
-  teams: new Array(10).fill(null).map(() => emptyTeam())
+  teams: new Array(10).fill(0).map(() => emptyTeam()),
+  undraftedPlayers: []
 };
 
 export default (state = initialState, action: any) => {
   switch (action.type) {
     case ACTION_TYPES.SET_PLAYERS: {
-      return { ...state, players: action.players };
+      return {
+        ...state,
+        players: action.players,
+        undraftedPlayers: action.players
+      };
     }
     case ACTION_TYPES.PICK_PLAYER: {
       return pickPlayer(state, action.player);
+    }
+    case ACTION_TYPES.UNDO_PICK_PLAYER: {
+      return undoPlayerPick(state);
     }
     default:
       return state;

@@ -25,6 +25,7 @@
     "@types/node": "^10.5.8",
     "@types/react": "^16.4.9",
     "@types/react-dom": "^16.0.7",
+    "redux-devtools-extension": "^2.13.5",
     "typescript": "^3.0.1"
   }
 }
