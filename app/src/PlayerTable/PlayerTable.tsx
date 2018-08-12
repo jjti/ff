@@ -1,16 +1,20 @@
 import * as React from "react";
+import { connect } from "react-redux";
 
-// import { Column, Table } from "react-virtualized";
 import { IPlayer } from "../Player";
+import { pickPlayer } from "../store/actions/teams";
+import { getPlayers } from "../store/reducers/players";
+import { StoreState } from "../store/store";
 import "./PlayerTable.css";
 
 // const ROW_HEIGHT = 25;
 
 interface IProps {
-  playerData: IPlayer[];
+  undraftedPlayers: any;
+  pickPlayer: any;
 }
 
-export default class PlayerTable extends React.Component<IProps> {
+class PlayerTable extends React.Component<IProps> {
   public render() {
     return (
       <div>
@@ -20,20 +24,22 @@ export default class PlayerTable extends React.Component<IProps> {
         </header>
 
         <table>
-          <thead>
-            <th className="th-left">Name</th>
-            <th className="th-left">Position</th>
-            <th className="th-left">Team</th>
-            <th className="th-right">VOR</th>
-            <th className="th-right">ADP</th>
-            <th className="th-right">Prediction</th>
-            <th className="th-right">Experts</th>
-            <th className="th-right">Madden</th>
-            <th className="th-right">Draft</th>
+          <thead className="table-head">
+            <tr>
+              <th className="th-left">Name</th>
+              <th className="th-left">Position</th>
+              <th className="th-left">Team</th>
+              <th className="th-right">VOR</th>
+              <th className="th-right">ADP</th>
+              <th className="th-right">Prediction</th>
+              <th className="th-right">Experts</th>
+              <th className="th-right">Madden</th>
+              <th className="th-right">Draft</th>
+            </tr>
           </thead>
           <tbody>
-            {this.props.playerData.map(p => (
-              <tr>
+            {this.props.undraftedPlayers.map((p: IPlayer) => (
+              <tr key={p.name + p.pos + p.team}>
                 <td>{p.name}</td>
                 <td>{p.pos}</td>
                 <td>{p.team}</td>
@@ -43,7 +49,10 @@ export default class PlayerTable extends React.Component<IProps> {
                 <td className="th-right">{p.experts}</td>
                 <td className="th-right">{p.madden}</td>
                 <td className="draft-button-td">
-                  <button className="draft-button" />
+                  <button
+                    className="draft-button"
+                    onClick={() => this.props.pickPlayer(p)}
+                  />
                 </td>
               </tr>
             ))}
@@ -52,8 +61,17 @@ export default class PlayerTable extends React.Component<IProps> {
       </div>
     );
   }
-
-  // private rowGetter({ index }: { index: number }) {
-  //   return this.props.playerData[index];
-  // }
 }
+
+const mapStateToProps = (state: StoreState) => ({
+  undraftedPlayers: getPlayers(state)
+});
+
+const mapDispatchToProps = (dispatch: any) => ({
+  pickPlayer: (player: IPlayer) => dispatch(pickPlayer(player))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PlayerTable);

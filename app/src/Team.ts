@@ -1,6 +1,6 @@
 import { IPlayer } from "./Player";
 
-type TeamPlayer = IPlayer | null;
+export type TeamPlayer = IPlayer | null;
 
 export interface ITeam {
   QB: TeamPlayer;
@@ -11,4 +11,5 @@ export interface ITeam {
   DST: TeamPlayer;
   K: TeamPlayer;
   Bench: TeamPlayer[];
+  StarterValue?: number;
 }

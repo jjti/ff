@@ -1,56 +1,15 @@
 import * as React from "react";
+import { connect } from "react-redux";
+import { StoreState } from "../store/store";
 
 import "./TeamPicks.css";
 
 import { ITeam } from "../Team";
 import PlayerCard from "./PlayerCard";
 
-const mockTeam: ITeam = {
-  Bench: [null, null, null, null, null, null, null],
-  DST: null,
-  Flex: null,
-  K: null,
-  QB: {
-    adp: 22,
-    experts: 320.745,
-    madden: 99,
-    name: "Aaron Rodgers",
-    pos: "QB",
-    pred: 278.3571,
-    replace_value: 229.0808,
-    team: "Packers",
-    vor: 49.2762
-  },
-  RBs: [
-    {
-      adp: 118,
-      experts: 282.8875,
-      madden: 84,
-      name: "Alex Smith",
-      pos: "RB",
-      pred: 222.6565,
-      replace_value: 229.0808,
-      team: "Redskins",
-      vor: -6.4243
-    },
-    null
-  ],
-  TE: null,
-  WRs: [
-    {
-      adp: 89,
-      experts: 291.6575,
-      madden: 87,
-      name: "Andrew Luck",
-      pos: "WR",
-      pred: 238.0473,
-      replace_value: 229.0808,
-      team: "Colts",
-      vor: 8.9664
-    },
-    null
-  ]
-};
+interface IProps {
+  activeTeam: ITeam;
+}
 
 const initialState = {
   cardLength: 50
@@ -62,7 +21,7 @@ const getCardLength = (): number => {
   return Math.floor(thisWidth / 8) - 8; // 8 == 2px border, 6px margin
 };
 
-export default class Picks extends React.Component<{}, State> {
+class TeamPicks extends React.Component<IProps, State> {
   constructor(props: any) {
     super(props);
     this.state = { ...initialState, cardLength: getCardLength() };
@@ -72,21 +31,23 @@ export default class Picks extends React.Component<{}, State> {
   }
 
   public render() {
+    const { activeTeam } = this.props;
+
     return (
-      <div>
+      <div className="TeamPicks">
         <div className="Pick-Section">
           <h3>STARTERS</h3>
           <div className="Pick-Columns">
             <div className="Pick-Column">
               <div className="Pick-Row QB-Row">
                 <PlayerCard
-                  player={mockTeam.QB}
+                  player={activeTeam.QB}
                   pos="QB"
                   length={this.state.cardLength}
                 />
               </div>
               <div className="Pick-Row RB-Row">
-                {mockTeam.RBs.map((r, i) => (
+                {activeTeam.RBs.map((r, i) => (
                   <PlayerCard
                     key={r ? r.name : i}
                     player={r}
@@ -96,7 +57,7 @@ export default class Picks extends React.Component<{}, State> {
                 ))}
               </div>
               <div className="Pick-Row WR-Row">
-                {mockTeam.WRs.map((w, i) => (
+                {activeTeam.WRs.map((w, i) => (
                   <PlayerCard
                     key={w ? w.name : i}
                     player={w}
@@ -107,7 +68,7 @@ export default class Picks extends React.Component<{}, State> {
               </div>
               <div className="Pick-Row Flex-Row">
                 <PlayerCard
-                  player={mockTeam.Flex}
+                  player={activeTeam.Flex}
                   pos="FLEX"
                   length={this.state.cardLength}
                 />
@@ -117,21 +78,21 @@ export default class Picks extends React.Component<{}, State> {
               <div style={{ height: this.state.cardLength + 16 }} />
               <div className="Pick-Row">
                 <PlayerCard
-                  player={mockTeam.TE}
+                  player={activeTeam.TE}
                   pos="TE"
                   length={this.state.cardLength}
                 />
               </div>
               <div className="Pick-Row">
                 <PlayerCard
-                  player={mockTeam.DST}
+                  player={activeTeam.DST}
                   pos="DST"
                   length={this.state.cardLength}
                 />
               </div>
               <div className="Pick-Row">
                 <PlayerCard
-                  player={mockTeam.K}
+                  player={activeTeam.K}
                   pos="K"
                   length={this.state.cardLength}
                 />
@@ -142,8 +103,13 @@ export default class Picks extends React.Component<{}, State> {
         <div className="Pick-Section">
           <h3>BENCH</h3>
           <div className="Pick-Row QB-Row">
-            {mockTeam.Bench.map(p => (
-              <PlayerCard player={p} pos="?" length={this.state.cardLength} />
+            {activeTeam.Bench.map((p, i) => (
+              <PlayerCard
+                key={`bench_${i}`}
+                player={p}
+                pos="?"
+                length={this.state.cardLength}
+              />
             ))}
           </div>
         </div>
@@ -151,3 +117,9 @@ export default class Picks extends React.Component<{}, State> {
     );
   }
 }
+
+const mapStateToProps = (state: StoreState) => ({
+  activeTeam: state.teams[state.activeTeam]
+});
+
+export default connect(mapStateToProps)(TeamPicks);
