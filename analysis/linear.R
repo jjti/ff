@@ -101,9 +101,10 @@ te.plot %<a-% {
 # .53 experts
 
 all.plot %<a-% {
-  par(mfrow=c(2,2))
+  par(mfrow=c(2,2), mar=c(3.5, 3.5, 2.5, 2))
   qb.plot
   rb.plot
   wr.plot
   te.plot
 }
+all.plot

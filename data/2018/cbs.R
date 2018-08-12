@@ -14,23 +14,37 @@ base.url.suffix <- "/standard/projections/2018/ytd"
 pages.by.pos <- list(
   list(
     pos = "QB",
-    page_count = 2
+    page_count = 2,
+    header_row_index = 3
   ),
   list(
     pos = "RB",
-    page_count = 4
+    page_count = 4,
+    header_row_index = 3
   ),
   list(
     pos = "WR",
-    page_count = 5
+    page_count = 5,
+    header_row_index = 3
   ),
   list(
     pos = "TE",
-    page_count = 3
+    page_count = 3,
+    header_row_index = 3
+  ),
+  list(
+    pos = "K",
+    page_count = 1,
+    header_row_index = 2
+  ),
+  list(
+    pos = "DST",
+    page_count = 1,
+    header_row_index = 2
   )
 )
 
-cbs.page.data <- read_html("https://www.cbssports.com/fantasy/football/stats/sortable/points/TE/standard/projections/2018/ytd") %>%
+cbs.page.data <- read_html("https://www.cbssports.com/fantasy/football/stats/sortable/points/DST/standard/projections/2018/ytd") %>%
   html_node(".data") %>%
   html_table(fill = TRUE)
 
@@ -44,10 +58,12 @@ for (pos.data in pages.by.pos) {
       html_node(".data") %>%
       html_table(fill = TRUE)
 
-    colnames(cbs.page.data) <- tolower(colnames(cbs.page.data))
-    cbs.page.data <- cbs.page.data[4:nrow(cbs.page.data)-1,] # get rid of header row
-    cbs.page.data$name <- cbs.page.data[, "x1"]
-    cbs.page.data$cbs.2018 <- cbs.page.data[, "x18"]
+    if (nrow(cbs.page.data) < 5) next
+
+    colnames(cbs.page.data) <- tolower(as.character(cbs.page.data[pos.data$header_row_index,])) # header_row_index row is the header
+    cbs.page.data <- cbs.page.data[4:nrow(cbs.page.data) - 1,] # get rid of header row and footer
+    cbs.page.data$name <- cbs.page.data$player # player == name
+    cbs.page.data$cbs.2018 <- cbs.page.data$fpts
     cbs.page.data$pos <- pos.data$pos
     cbs.page.data <- cbs.page.data[cbs.page.data$name != "Player",]
 

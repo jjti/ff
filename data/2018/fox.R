@@ -33,10 +33,20 @@ pages.by.pos <- list(
     pos = "TE",
     position = 4,
     page_count = 10
+  ),
+  list(
+    pos = "K",
+    position = 64,
+    page_count = 2
+  ),
+  list(
+    pos = "DST",
+    position = 32768,
+    page_count = 2
   )
 )
 
-fox.page.data <- read_html("http://msn.foxsports.com/fantasy/football/commissioner/Research/Projections.aspx?page=1&position=8&split=3") %>%
+fox.page.data <- read_html("http://msn.foxsports.com/fantasy/football/commissioner/Research/Projections.aspx?page=1&position=32768&split=3") %>%
   html_node("#playerTable") %>%
   html_table(fill = TRUE)
 
@@ -44,7 +54,6 @@ fox.page.data <- read_html("http://msn.foxsports.com/fantasy/football/commission
 fox.data <- data.frame()
 for (pos.data in pages.by.pos) {
   for (page in seq(from = 1, to = pos.data$page_count)) {
-#  for (page in seq(from = 1, to = 2)) {
     page.url <- paste0(base.url, "?page=", page, "&position=", pos.data$position, "&split=3")
 
     fox.page.data <- read_html(page.url) %>%
@@ -65,6 +74,8 @@ for (pos.data in pages.by.pos) {
     fox.data <- rbind.fill(fox.data, fox.page.data)
   }
 }
+
+fox.data <- fox.data[fox.data$pts > 10,]
 
 fox.data$fox.2018 <- fox.data$pts
 fox.data <- fox.data[, c("name", "pos", "fox.2018")]

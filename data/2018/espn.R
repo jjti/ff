@@ -7,7 +7,6 @@ setwd("~/Documents/GitHub/ff/data/2018")
 
 #Download fantasy football projections from ESPN.com
 espn_base_url <- "http://games.espn.com/ffl/tools/projections"
-espn_pos <- list(QB=0, RB=2, WR=4, TE=6, K=17, DST=16)
 espn_pages <- as.character(seq(from = 0, to = 560, by = 40))
 espn_urls <- lapply(espn_pages, function(x) paste0(espn_base_url, "?startIndex=", x))
 
@@ -42,22 +41,26 @@ for (espn.page in espn_urls) {
     name.split <- strsplit(name.and.pos[1], "\\s+")[[1]]
 
     if (length(name.and.pos) > 1) {
+      # it's a player
       n <- name.and.pos[[2]]
       pos.split <- strsplit(name.and.pos[[2]], "\\s+")[[1]]
-
       espn.this.data[i, "name"] <- paste0(name.split[1], " ", name.split[2])
       espn.this.data[i, "pos"] <- pos.split[[3]]
-      espn.this.data[i, "playerid"] <- espn.popups[i, "playerid"]
+
+      # getting image urls from player-ids
+      # ex url: http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15825.png&w=200&h=145
+      espn.this.data[i, "img.url"] <- paste0("http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/", espn.popups[i, "playerid"], ".png")
+    } else {
+      # it's a DST
+      name.and.pos <- strsplit(name.and.pos[[1]], "\\s+")[[1]]
+      espn.this.data[i, "name"] <- name.and.pos[[1]]
+      espn.this.data[i, "pos"] <- "DST"
+      espn.this.data[i, "playerid"] <- "" # TODO: add support for team names, make a map from name to city abbreviation
     }
   }
 
   espn.data <- rbind.fill(espn.data, espn.this.data)
 }
-
-
-# getting image urls from player-ids
-# ex url: http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15825.png&w=200&h=145
-espn.data$img.url <- sapply(espn.data$playerid, function(x) paste0("http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/", x, ".png"))
 
 espn.data <- espn.data[, c("name", "pos", "espn.2018", "img.url")]
 espn.data <- espn.data[complete.cases(espn.data),]

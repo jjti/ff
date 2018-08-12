@@ -7,7 +7,6 @@ setwd("~/Documents/GitHub/ff/data/2018")
 # qb
 # http://fantasy.nfl.com/research/projections?offset=1&position=1&sort=projectedPts&statCategory=projectedStats&statSeason=2018&statType=seasonProjectedStats&statWeek=1
 #
-
 base.url <- "http://fantasy.nfl.com/research/projections?sort=projectedPts&statCategory=projectedStats&statSeason=2018&statType=seasonProjectedStats&statWeek=1"
 pages.by.pos <- list(
   list(
@@ -29,11 +28,21 @@ pages.by.pos <- list(
     pos = "TE",
     position = 4,
     page_count = 5
+  ),
+  list(
+    pos = "K",
+    position = 7,
+    page_count = 1
+  ),
+  list(
+    pos = "DST",
+    position = 8,
+    page_count = 1
   )
 )
 
 
-nfl.page.data <- read_html("http://fantasy.nfl.com/research/projections?offset=1&position=1&sort=projectedPts&statCategory=projectedStats&statSeason=2018&statType=seasonProjectedStats&statWeek=1") %>%
+nfl.page.data <- read_html("http://fantasy.nfl.com/research/projections?offset=1&position=7&sort=projectedPts&statCategory=projectedStats&statSeason=2018&statType=seasonProjectedStats&statWeek=1") %>%
   html_node(".tableType-player") %>%
   html_table(fill = TRUE)
 
@@ -48,11 +57,11 @@ for (pos.data in pages.by.pos) {
       html_node(".tableType-player") %>%
       html_table(fill = TRUE)
 
-    colnames(nfl.page.data) <- tolower(colnames(nfl.page.data))
+    colnames(nfl.page.data) <- tolower(as.character(nfl.page.data[1,])) # first row is header
     nfl.page.data <- nfl.page.data[2:nrow(nfl.page.data),] # get rid of header row
     nfl.page.data$name <- nfl.page.data[,1]
 
-    nfl.page.data$nfl.2018 <- as.numeric(as.character(nfl.page.data$fantasy))
+    nfl.page.data$nfl.2018 <- as.numeric(as.character(nfl.page.data$points))
     nfl.page.data$pos <- pos.data$pos
 
     for (i in 1:nrow(nfl.page.data)) {
@@ -62,6 +71,10 @@ for (pos.data in pages.by.pos) {
       nfl.name.split <- nfl.name.split[[1]]
 
       nfl.page.data[i,"name"] <- paste0(nfl.name.split[1], " ", nfl.name.split[2])
+
+      if (pos.data == "DST") {
+        nfl.page.data[i,"name"] <- nfl.name.split[2]
+      }
     }
 
     nfl.data <- rbind.fill(nfl.data, nfl.page.data[, c("name", "pos", "nfl.2018")])

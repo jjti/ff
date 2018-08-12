@@ -12,25 +12,35 @@ qb.starters <- 1
 rb.starters <- 2.5
 wr.starters <- 2.5
 te.starters <- 1
+k.starters <- 1
+dst.starters <- 1
 
 qb.data$pred <- predict(qb.fit.gam, newdata = qb.data)
 rb.data$pred <- predict(rb.fit.gam, newdata = rb.data)
 wr.data$pred <- predict(wr.fit.gam, newdata = wr.data)
 te.data$pred <- predict(te.fit.gam, newdata = te.data)
+k.data$pred <- k.data$experts # just the average of the experts
+dst.data$pred <- dst.data$experts # just the average of the experts
 
 qb.pred.sorted <- sort(qb.data$pred, decreasing = TRUE)
 rb.pred.sorted <- sort(rb.data$pred, decreasing = TRUE)
 wr.pred.sorted <- sort(wr.data$pred, decreasing = TRUE)
 te.pred.sorted <- sort(te.data$pred, decreasing = TRUE)
+k.pred.sorted <- sort(k.data$pred, decreasing = TRUE)
+dst.pred.sorted <- sort(dst.data$pred, decreasing = TRUE)
 
 qb.data$replace_value <- qb.pred.sorted[round(qb.starters * team.count)]
 rb.data$replace_value <- rb.pred.sorted[round(rb.starters * team.count)]
 wr.data$replace_value <- wr.pred.sorted[round(wr.starters * team.count)]
 te.data$replace_value <- te.pred.sorted[round(te.starters * team.count)]
+k.data$replace_value <- k.pred.sorted[round(k.starters * team.count)]
+dst.data$replace_value <- dst.pred.sorted[round(dst.starters * team.count)]
 
 full.predictions <- rbind.fill(qb.data, rb.data)
 full.predictions <- rbind.fill(full.predictions, wr.data)
 full.predictions <- rbind.fill(full.predictions, te.data)
+full.predictions <- rbind.fill(full.predictions, k.data)
+full.predictions <- rbind.fill(full.predictions, dst.data)
 full.predictions$vor <-  full.predictions$pred - full.predictions$replace_value
 full.predictions$href <- full.predictions$img.url
 full.predictions$madden <- full.predictions$overall
@@ -51,7 +61,7 @@ qb.plot.pred %<a-% {
   plot(qb.pred.sorted,
        cex = 0.6,
        xlim = c(0, 2 * round(qb.starters * team.count)),
-       ylim = c(0, 300),
+       ylim = c(100, 300),
        ann=FALSE)
   title(main = "QB", line = 0.5)
   title(xlab = "rank", ylab = "predicted", line = 2.25)
@@ -63,7 +73,7 @@ rb.plot.pred %<a-% {
   plot(rb.pred.sorted,
        cex = 0.6,
        xlim = c(0, 2 * round(rb.starters * team.count)),
-       ylim = c(0, 220),
+       ylim = c(50, 220),
        ann=FALSE)
   title(main = "RB", line = 0.5)
   title(xlab = "rank", ylab = "predicted", line = 2.25)
@@ -75,7 +85,7 @@ wr.plot.pred %<a-% {
   plot(wr.pred.sorted,
        cex = 0.6,
        xlim = c(0, 2 * round(wr.starters * team.count)),
-       ylim = c(0, 225),
+       ylim = c(50, 225),
        ann=FALSE)
   title(main = "WR", line = 0.5)
   title(xlab = "rank", ylab = "predicted", line = 2.25)
@@ -87,7 +97,7 @@ te.plot.pred %<a-% {
   plot(te.pred.sorted,
        cex = 0.6,
        xlim = c(0, 2 * round(te.starters * team.count)),
-       ylim = c(0, 150),
+       ylim = c(40, 150),
        ann=FALSE)
   title(main = "TE", line = 0.5)
   title(xlab = "rank", ylab = "predicted", line = 2.25)

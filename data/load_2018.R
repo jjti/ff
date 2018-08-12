@@ -23,14 +23,15 @@ for (src in list(espn.data, cbs.data, nfl.data, fox.data)) {
 }
 
 # set experts as the average of all sources for a given year
-src.names <- c("espn.2018", "cbs.2018", "nfl.2018", "fox.2018")
+src.names <- c("fox.2018", "espn.2018", "cbs.2018", "nfl.2018")
 for (s in src.names) {
   player.data[,s] <- as.numeric(as.character(player.data[,s]))
   player.data[,s] <- sapply(player.data[,s], function(x) ifelse(x < 10, NA, x))
 }
 player.data$experts <- apply(player.data[, src.names], 1, mean, na.rm = TRUE) # took WAY too long to figure out
 
-
+# need to be set before Madden wipes them out
+dst.data <- player.data[player.data$pos == "DST",]
 
 ###
 # Add Madden Information
@@ -45,8 +46,6 @@ madden.data$name <- sapply(madden.data$name, function(x) {
   split.name <- strsplit(x, "\\s+")[[1]]
   paste0(split.name[1], " ", split.name[2])
 })
-
-madden.data[madden.data$name == "Todd Gurley II",]
 
 player.data <- merge(player.data, madden.data, by = c("name", "pos"))
 
@@ -67,6 +66,7 @@ qb.data <- player.data[player.data$pos == "QB",]
 rb.data <- player.data[player.data$pos == "RB",]
 wr.data <- player.data[player.data$pos == "WR",]
 te.data <- player.data[player.data$pos == "TE",]
+k.data <- player.data[player.data$pos == "K",]
 
 ## Top 3 Quartiles only
 qb.data <- qb.data[qb.data$experts > 30 & qb.data$overall > 70,]
