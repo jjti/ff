@@ -23,11 +23,14 @@ export default class PlayerCard extends React.Component<IProps> {
       );
     }
 
-    // just first initial and last name
-    const playerName = player.name
-      .split(" ")
-      .map((n, i) => (i ? n : n.charAt(0)))
-      .join(". ");
+    // just first initial and last name, full team name for DST
+    const playerName =
+      pos === "DST"
+        ? player.name
+        : player.name
+            .split(" ")
+            .map((n, i) => (i ? n : n.charAt(0)))
+            .join(". ");
 
     return (
       <div className="Card" style={style}>

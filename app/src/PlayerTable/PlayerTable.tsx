@@ -43,7 +43,11 @@ class PlayerTable extends React.Component<IProps> {
           </thead>
           <tbody>
             {this.props.undraftedPlayers.map((p: IPlayer) => (
-              <tr key={p.name + p.pos + p.team}>
+              <tr
+                key={p.name + p.pos + p.team}
+                onDoubleClick={() => this.props.pickPlayer(p)}
+                className="PlayerTable-Row"
+              >
                 <td>{p.name}</td>
                 <td>{p.pos}</td>
                 <td>{p.team}</td>

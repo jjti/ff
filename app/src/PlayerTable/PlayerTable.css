@@ -40,6 +40,15 @@
   top: 0;
 }
 
+.draft-button:hover {
+  background-color: #c4c4c4;
+}
+
+.PlayerTable-Row:hover {
+  background-color: #f3f3f359;
+  cursor: pointer;
+}
+
 table {
   margin-left: 8px;
   margin-bottom: 50px;
@@ -48,8 +57,13 @@ table {
 }
 
 th {
-  height: 30px;
-  border-bottom: 2px solid #c4c4c4;
+  height: 40px;
+  position: sticky;
+  top: 0px;
+  background-color: white;
+  z-index: 10;
+  box-shadow: 0 2px 0px rgba(0, 0, 0, 0.16);
+  padding-top: 5px;
 }
 
 tr {

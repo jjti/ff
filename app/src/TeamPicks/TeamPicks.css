@@ -1,3 +1,8 @@
+.TeamPicks {
+  position: sticky;
+  top: 20px;
+}
+
 .Pick-Columns {
   display: flex;
 }

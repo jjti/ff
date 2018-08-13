@@ -29,12 +29,13 @@ te.pred.sorted <- sort(te.data$pred, decreasing = TRUE)
 k.pred.sorted <- sort(k.data$pred, decreasing = TRUE)
 dst.pred.sorted <- sort(dst.data$pred, decreasing = TRUE)
 
-qb.data$replace_value <- qb.pred.sorted[round(qb.starters * team.count)]
-rb.data$replace_value <- rb.pred.sorted[round(rb.starters * team.count)]
-wr.data$replace_value <- wr.pred.sorted[round(wr.starters * team.count)]
-te.data$replace_value <- te.pred.sorted[round(te.starters * team.count)]
-k.data$replace_value <- k.pred.sorted[round(k.starters * team.count)]
-dst.data$replace_value <- dst.pred.sorted[round(dst.starters * team.count)]
+# setting replace as 1+ the last bench player in that position
+qb.data$replace_value <- qb.pred.sorted[round(qb.starters * team.count) + 1]
+rb.data$replace_value <- rb.pred.sorted[round(rb.starters * team.count) + 1]
+wr.data$replace_value <- wr.pred.sorted[round(wr.starters * team.count) + 1]
+te.data$replace_value <- te.pred.sorted[round(te.starters * team.count) + 1]
+k.data$replace_value <- k.pred.sorted[round(k.starters * team.count) + 1]
+dst.data$replace_value <- dst.pred.sorted[round(dst.starters * team.count) + 1]
 
 full.predictions <- rbind.fill(qb.data, rb.data)
 full.predictions <- rbind.fill(full.predictions, wr.data)
@@ -105,10 +106,14 @@ te.plot.pred %<a-% {
   segments(round(te.starters * team.count), 0, round(te.starters * team.count), te.data$replace_value, col = "gray", lty = 2)
 }
 
-qb.plot.pred
-rb.plot.pred
-wr.plot.pred
-te.plot.pred
+all.plot %<a-% {
+  par(mfrow=c(2,2), mar=c(3.5, 3.5, 2.5, 2))
+  qb.plot.pred
+  rb.plot.pred
+  wr.plot.pred
+  te.plot.pred
+}
+all.plot
 
 write.csv(full.predictions, "forecasts.2018.csv")
 write_json(full.predictions, "/Users/jtimmons/Documents/GitHub/ff/app/public/forecast.json")

@@ -33,8 +33,6 @@ class TeamPicks extends React.Component<IProps, State> {
   public render() {
     const { activeTeam } = this.props;
 
-    console.log(this.props);
-
     return (
       <div className="TeamPicks">
         <div className="Pick-Section">

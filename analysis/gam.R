@@ -81,5 +81,11 @@ te.plot %<a-% {
 }
 # Deviance explained = 67.8%
 
+all.plot %<a-% {
+  par(mfrow=c(2,2), mar=c(3.5, 3.5, 2.5, 2))
+  qb.plot
+  rb.plot
+  wr.plot
+  te.plot
+}
 all.plot
-
