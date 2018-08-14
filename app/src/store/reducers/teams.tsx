@@ -165,3 +165,14 @@ export const undoPlayerPick = (state: StoreState) => {
   }
   return resetStore(state);
 };
+
+/**
+ * Update the tracked team on the left side of the app
+ *
+ * @param state Store State
+ * @param trackedTeam The index of the team, in the teams array, to be "tracked"
+ *  on the left side of the app
+ */
+export const setTrackedTeam = (state: StoreState, trackedTeam: number) => {
+  return { ...state, trackedTeam };
+};

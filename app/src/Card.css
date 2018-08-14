@@ -1,11 +1,16 @@
 .Card {
-  border: 2px solid #c4c4c4;
+  border: 1px solid #c4c4c4;
   margin: 6px;
   position: relative;
+  border-radius: 5px;
 }
 
 .Card-Empty {
-  border: 2px dashed #c4c4c4;
+  border: 1px dashed #c4c4c4;
+}
+
+.Card-Active {
+  box-shadow: 0 1px 2px #ededed;
 }
 
 .Card > h4 {

@@ -45,7 +45,7 @@ class OrderTracker extends React.Component<IProps, State> {
           {this.props.teams.map((t, i) => (
             <div
               className={`Card ${
-                i === this.props.activeTeam ? "" : "Card-Empty"
+                i === this.props.activeTeam ? "Card-Active" : "Card-Empty"
               }`}
               key={i}
               style={{ width: cardLength, height: cardLength }}

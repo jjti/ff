@@ -4,29 +4,27 @@ import { StoreState } from "../store/store";
 
 import "./TeamPicks.css";
 
+import { setTrackedTeam } from "../store/actions/teams";
 import { ITeam } from "../Team";
 import PlayerCard from "./PlayerCard";
 
 interface IProps {
   activeTeam: ITeam;
+  setTrackedTeam: (index: number) => void;
 }
 
 const initialState = {
   cardLength: 50
 };
-type State = Readonly<typeof initialState>;
 
-const getCardLength = (): number => {
-  const thisWidth = window.innerHeight * 0.7 - 20; // ~30px padding, 30% width of total window size
-  return Math.floor(thisWidth / 8) - 8; // 8 == 2px border, 6px margin
-};
+type State = Readonly<typeof initialState>;
 
 class TeamPicks extends React.Component<IProps, State> {
   constructor(props: any) {
     super(props);
-    this.state = { ...initialState, cardLength: getCardLength() };
+    this.state = { ...initialState, cardLength: this.getCardLength() };
     window.addEventListener("resize", () =>
-      this.setState({ cardLength: getCardLength() })
+      this.setState({ cardLength: this.getCardLength() })
     );
   }
 
@@ -116,10 +114,22 @@ class TeamPicks extends React.Component<IProps, State> {
       </div>
     );
   }
+
+  private getCardLength = (): number => {
+    const thisWidth = window.innerHeight * 0.7 - 20; // ~30px padding, 30% width of total window size
+    return Math.floor(thisWidth / 8) - 8; // 8 == 2px border, 6px margin
+  };
 }
 
 const mapStateToProps = (state: StoreState) => ({
   activeTeam: state.teams[state.activeTeam]
 });
 
-export default connect(mapStateToProps)(TeamPicks);
+const mapDispathToProps = (dispatch: any) => ({
+  setTrackedTeam: (index: number) => dispatch(setTrackedTeam(index))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispathToProps
+)(TeamPicks);

@@ -10,3 +10,8 @@ export const pickPlayer = (player: IPlayer) => ({
   player,
   type: ACTION_TYPES.PICK_PLAYER
 });
+
+export const setTrackedTeam = (teamIndex: number) => ({
+  teamIndex,
+  type: ACTION_TYPES.SET_TRACKED_TEAM
+});

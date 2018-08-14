@@ -62,7 +62,7 @@ th {
   top: 0px;
   background-color: white;
   z-index: 10;
-  box-shadow: 0 2px 0px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 1px 0px #c4c4c4;
   padding-top: 5px;
 }
 

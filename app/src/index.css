@@ -6,6 +6,7 @@ body {
   padding: 0;
   font-family: "Lato", sans-serif;
   color: #4a4a4a;
+  overflow-x: hidden;
 }
 
 h1 {
@@ -41,6 +42,7 @@ button {
   font-weight: 300;
   font-size: 14px;
   margin: 8px;
+  color: #4a4a4a;
 }
 
 p.small {
