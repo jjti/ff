@@ -38,7 +38,8 @@ h5 {
 p,
 th,
 td,
-button {
+button,
+label {
   font-weight: 300;
   font-size: 14px;
   margin: 8px;

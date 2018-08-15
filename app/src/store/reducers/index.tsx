@@ -1,6 +1,6 @@
 import { ITeam } from "../../Team";
 import { ACTION_TYPES } from "../actions";
-import { pickPlayer, undoPlayerPick } from "./teams";
+import { pickPlayer, setTrackedTeam, undoPlayerPick } from "./teams";
 
 const emptyTeam = (): ITeam => ({
   Bench: new Array(7).fill(null),
@@ -38,6 +38,9 @@ export default (state = initialState, action: any) => {
     }
     case ACTION_TYPES.UNDO_PICK_PLAYER: {
       return undoPlayerPick(state);
+    }
+    case ACTION_TYPES.SET_TRACKED_TEAM: {
+      return setTrackedTeam(state, action.trackedTeam);
     }
     default:
       return state;

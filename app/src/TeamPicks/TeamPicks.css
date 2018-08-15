@@ -15,6 +15,10 @@
   margin-bottom: 40px;
 }
 
+.Pick-Section-Header {
+  display: flex;
+}
+
 .Pick-Row {
   display: flex;
   flex-wrap: wrap;

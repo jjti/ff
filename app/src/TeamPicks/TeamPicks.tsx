@@ -4,12 +4,11 @@ import { StoreState } from "../store/store";
 
 import "./TeamPicks.css";
 
-import { setTrackedTeam } from "../store/actions/teams";
 import { ITeam } from "../Team";
 import PlayerCard from "./PlayerCard";
 
 interface IProps {
-  activeTeam: ITeam;
+  trackedTeam: ITeam;
   setTrackedTeam: (index: number) => void;
 }
 
@@ -29,7 +28,7 @@ class TeamPicks extends React.Component<IProps, State> {
   }
 
   public render() {
-    const { activeTeam } = this.props;
+    const { trackedTeam } = this.props;
 
     return (
       <div className="TeamPicks">
@@ -39,13 +38,13 @@ class TeamPicks extends React.Component<IProps, State> {
             <div className="Pick-Column">
               <div className="Pick-Row QB-Row">
                 <PlayerCard
-                  player={activeTeam.QB}
+                  player={trackedTeam.QB}
                   pos="QB"
                   length={this.state.cardLength}
                 />
               </div>
               <div className="Pick-Row RB-Row">
-                {activeTeam.RBs.map((r, i) => (
+                {trackedTeam.RBs.map((r, i) => (
                   <PlayerCard
                     key={r ? r.name : i}
                     player={r}
@@ -55,7 +54,7 @@ class TeamPicks extends React.Component<IProps, State> {
                 ))}
               </div>
               <div className="Pick-Row WR-Row">
-                {activeTeam.WRs.map((w, i) => (
+                {trackedTeam.WRs.map((w, i) => (
                   <PlayerCard
                     key={w ? w.name : i}
                     player={w}
@@ -66,7 +65,7 @@ class TeamPicks extends React.Component<IProps, State> {
               </div>
               <div className="Pick-Row Flex-Row">
                 <PlayerCard
-                  player={activeTeam.Flex}
+                  player={trackedTeam.Flex}
                   pos="FLEX"
                   length={this.state.cardLength}
                 />
@@ -76,21 +75,21 @@ class TeamPicks extends React.Component<IProps, State> {
               <div style={{ height: this.state.cardLength + 16 }} />
               <div className="Pick-Row">
                 <PlayerCard
-                  player={activeTeam.TE}
+                  player={trackedTeam.TE}
                   pos="TE"
                   length={this.state.cardLength}
                 />
               </div>
               <div className="Pick-Row">
                 <PlayerCard
-                  player={activeTeam.DST}
+                  player={trackedTeam.DST}
                   pos="DST"
                   length={this.state.cardLength}
                 />
               </div>
               <div className="Pick-Row">
                 <PlayerCard
-                  player={activeTeam.K}
+                  player={trackedTeam.K}
                   pos="K"
                   length={this.state.cardLength}
                 />
@@ -101,7 +100,7 @@ class TeamPicks extends React.Component<IProps, State> {
         <div className="Pick-Section">
           <h3>BENCH</h3>
           <div className="Pick-Row QB-Row">
-            {activeTeam.Bench.map((p, i) => (
+            {trackedTeam.Bench.map((p, i) => (
               <PlayerCard
                 key={`bench_${i}`}
                 player={p}
@@ -122,14 +121,7 @@ class TeamPicks extends React.Component<IProps, State> {
 }
 
 const mapStateToProps = (state: StoreState) => ({
-  activeTeam: state.teams[state.activeTeam]
+  trackedTeam: state.teams[state.trackedTeam]
 });
 
-const mapDispathToProps = (dispatch: any) => ({
-  setTrackedTeam: (index: number) => dispatch(setTrackedTeam(index))
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispathToProps
-)(TeamPicks);
+export default connect(mapStateToProps)(TeamPicks);

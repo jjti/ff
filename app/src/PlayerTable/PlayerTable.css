@@ -20,7 +20,10 @@
 .undo-button {
   border: none;
   position: absolute;
-  right: 2%;
+  right: -10px;
+  margin: 0;
+  padding: 10px;
+  bottom: 0;
 }
 
 .draft-button-td {
@@ -37,7 +40,7 @@
   -webkit-border-radius: 50%;
   right: 0;
   position: absolute;
-  top: 0;
+  top: 2px;
 }
 
 .draft-button:hover {
@@ -50,9 +53,8 @@
 }
 
 table {
-  margin-left: 8px;
   margin-bottom: 50px;
-  width: 96%;
+  width: 100%;
   border-collapse: collapse;
 }
 

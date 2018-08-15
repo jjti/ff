@@ -17,3 +17,21 @@
   margin: 0;
   top: -10px;
 }
+
+.OrderTracker {
+  position: relative;
+}
+
+.OrderTracker > aside {
+  right: 0;
+  position: absolute;
+}
+
+.Tracked-Team-Select {
+  margin-left: auto;
+  align-self: center;
+  border: 1px solid #c4c4c4;
+  background-color: transparent;
+  outline: none;
+  margin-left: 10px;
+}
