@@ -1,7 +1,7 @@
 import { initialState } from ".";
 import { IPlayer } from "../../Player";
 import { ITeam } from "../../Team";
-import { StoreState } from "../store";
+import { IStoreState } from "../store";
 
 /**
  * Sum of the VOR of everyone on a ITeam. Used to keep track of
@@ -27,7 +27,7 @@ const sumStarterValues = (team: ITeam): number => {
  *
  * @param state team state
  */
-export const pickPlayer = (state: StoreState, player: IPlayer) => {
+export const pickPlayer = (state: IStoreState, player: IPlayer) => {
   const { undraftedPlayers, activeTeam, draftDirection, teams } = state;
 
   // try and add the player to the team roster, respecting the limit at each position
@@ -147,7 +147,7 @@ export const pickPlayer = (state: StoreState, player: IPlayer) => {
  *
  * @param state the current state of the store
  */
-export const resetStore = (state: StoreState) => ({
+export const resetStore = (state: IStoreState) => ({
   ...initialState,
   players: state.players,
   undraftedPlayers: state.players
@@ -158,7 +158,7 @@ export const resetStore = (state: StoreState) => ({
  *
  * @param state of the current app
  */
-export const undoPlayerPick = (state: StoreState) => {
+export const undoPlayerPick = (state: IStoreState) => {
   const { past } = state; // we want the last state
   if (past) {
     return past;
@@ -173,6 +173,6 @@ export const undoPlayerPick = (state: StoreState) => {
  * @param trackedTeam The index of the team, in the teams array, to be "tracked"
  *  on the left side of the app
  */
-export const setTrackedTeam = (state: StoreState, trackedTeam: number) => {
+export const setTrackedTeam = (state: IStoreState, trackedTeam: number) => {
   return { ...state, trackedTeam };
 };

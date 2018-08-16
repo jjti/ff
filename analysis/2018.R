@@ -8,6 +8,21 @@ setwd("~/Documents/GitHub/ff/output")
 # qb.fit.gam, rb.fit.gam, wr.fit.gam, te.fit.gam, predict with each
 team.count <- 10
 
+# top 100 picks
+# pos   no_rows
+# <chr>   <int>
+# QB         12
+# RB         36
+# TE         10
+# WR         39
+
+# top 140 picks
+# K           2
+# QB         19
+# RB         47
+# TE         15
+# WR         49
+
 qb.starters <- 1
 rb.starters <- 2.5
 wr.starters <- 2.5
@@ -30,12 +45,19 @@ k.pred.sorted <- sort(k.data$pred, decreasing = TRUE)
 dst.pred.sorted <- sort(dst.data$pred, decreasing = TRUE)
 
 # setting replace as 1+ the last bench player in that position
-qb.data$replace_value <- qb.pred.sorted[round(qb.starters * team.count) + 1]
-rb.data$replace_value <- rb.pred.sorted[round(rb.starters * team.count) + 1]
-wr.data$replace_value <- wr.pred.sorted[round(wr.starters * team.count) + 1]
-te.data$replace_value <- te.pred.sorted[round(te.starters * team.count) + 1]
-k.data$replace_value <- k.pred.sorted[round(k.starters * team.count) + 1]
-dst.data$replace_value <- dst.pred.sorted[round(dst.starters * team.count) + 1]
+qb.replace.index <- round(qb.starters * team.count) + 1
+rb.replace.index <- round(rb.starters * team.count) + 1
+wr.replace.index <- round(wr.starters * team.count) + 1
+te.replace.index <- round(te.starters * team.count) + 1
+k.replace.index <- round(k.starters * team.count) + 1
+dst.replace.index <- round(dst.starters * team.count) + 1
+
+qb.data$replace_value <- qb.pred.sorted[19 + 1]
+rb.data$replace_value <- rb.pred.sorted[47 + 1]
+wr.data$replace_value <- wr.pred.sorted[49 + 1]
+te.data$replace_value <- te.pred.sorted[15 + 1]
+k.data$replace_value <- k.pred.sorted[2 + 1]
+dst.data$replace_value <- dst.pred.sorted[0 + 1]
 
 full.predictions <- rbind.fill(qb.data, rb.data)
 full.predictions <- rbind.fill(full.predictions, wr.data)

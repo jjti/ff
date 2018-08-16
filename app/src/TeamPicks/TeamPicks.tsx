@@ -1,6 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { StoreState } from "../store/store";
+import { IStoreState } from "../store/store";
 
 import "./TeamPicks.css";
 
@@ -120,7 +120,7 @@ class TeamPicks extends React.Component<IProps, State> {
   };
 }
 
-const mapStateToProps = (state: StoreState) => ({
+const mapStateToProps = (state: IStoreState) => ({
   trackedTeam: state.teams[state.trackedTeam]
 });
 

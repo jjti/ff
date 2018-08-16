@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import { setTrackedTeam } from "../store/actions/teams";
-import { StoreState } from "../store/store";
+import { IStoreState } from "../store/store";
 import { ITeam } from "../Team";
 
 import "./OrderTracker.css";
@@ -91,7 +91,7 @@ class OrderTracker extends React.Component<IProps, State> {
   };
 }
 
-const mapStateToProps = (state: StoreState) => ({
+const mapStateToProps = (state: IStoreState) => ({
   activeTeam: state.activeTeam,
   teams: state.teams
 });

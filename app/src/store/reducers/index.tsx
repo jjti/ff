@@ -1,5 +1,6 @@
 import { ITeam } from "../../Team";
 import { ACTION_TYPES } from "../actions";
+import { removePlayer } from "./players";
 import { pickPlayer, setTrackedTeam, undoPlayerPick } from "./teams";
 
 const emptyTeam = (): ITeam => ({
@@ -41,6 +42,9 @@ export default (state = initialState, action: any) => {
     }
     case ACTION_TYPES.SET_TRACKED_TEAM: {
       return setTrackedTeam(state, action.trackedTeam);
+    }
+    case ACTION_TYPES.REMOVE_PLAYER: {
+      return removePlayer(state, action.player);
     }
     default:
       return state;

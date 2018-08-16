@@ -11,6 +11,11 @@ export const setPlayers = (playerList: IPlayer[]) => ({
   type: ACTION_TYPES.SET_PLAYERS
 });
 
+export const removePlayer = (player: IPlayer) => ({
+  player,
+  type: ACTION_TYPES.REMOVE_PLAYER
+});
+
 /**
  * undoes the last player pick
  */

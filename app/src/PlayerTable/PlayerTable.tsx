@@ -5,15 +5,15 @@ import { IPlayer } from "../Player";
 import { undoPlayerPick } from "../store/actions/players";
 import { pickPlayer } from "../store/actions/teams";
 import { getPlayers } from "../store/reducers/players";
-import { StoreState } from "../store/store";
-import "./PlayerTable.css";
+import { IStoreState } from "../store/store";
 
-// const ROW_HEIGHT = 25;
+import "./PlayerTable.css";
 
 interface IProps {
   undraftedPlayers: any;
   pickPlayer: any;
   undo: () => void;
+  valuedPositions: any;
 }
 
 class PlayerTable extends React.Component<IProps> {
@@ -46,7 +46,11 @@ class PlayerTable extends React.Component<IProps> {
               <tr
                 key={p.name + p.pos + p.team}
                 onDoubleClick={() => this.props.pickPlayer(p)}
-                className="PlayerTable-Row"
+                className={
+                  this.props.valuedPositions[p.pos]
+                    ? "PlayerTable-Row PlayerTable-Row-Inactive"
+                    : "PlayerTable-Row"
+                }
               >
                 <td>{p.name}</td>
                 <td>{p.pos}</td>
@@ -71,9 +75,27 @@ class PlayerTable extends React.Component<IProps> {
   }
 }
 
-const mapStateToProps = (state: StoreState) => ({
-  undraftedPlayers: getPlayers(state)
-});
+const mapStateToProps = (state: IStoreState) => {
+  const trackedTeam = state.teams[state.trackedTeam];
+  const valuedPositions = {} as any;
+
+  console.log(trackedTeam);
+
+  if (!trackedTeam.QB) {
+    valuedPositions.QB = true;
+  } else if (!trackedTeam.TE) {
+    valuedPositions.TE = true;
+  } else if (!trackedTeam.RBs.every((r: IPlayer) => !!r)) {
+    valuedPositions.RB = true;
+  } else if (!trackedTeam.WRs.every((w: IPlayer) => !!w)) {
+    valuedPositions.WR = true;
+  }
+
+  return {
+    undraftedPlayers: getPlayers(state),
+    valuedPositions
+  };
+};
 
 const mapDispatchToProps = (dispatch: any) => ({
   pickPlayer: (player: IPlayer) => dispatch(pickPlayer(player)),

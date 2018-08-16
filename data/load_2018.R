@@ -1,6 +1,7 @@
 library(plm)
 library(plyr)
 library(readxl)
+library(dplyr)
 
 setwd("~/Documents/GitHub/ff/data")
 
@@ -73,3 +74,14 @@ qb.data <- qb.data[qb.data$experts > 30 & qb.data$overall > 70,]
 rb.data <- rb.data[rb.data$experts > 20 & rb.data$overall > 67,]
 wr.data <- wr.data[wr.data$experts > 20 & wr.data$overall > 64,]
 te.data <- te.data[te.data$experts > 20 & te.data$overall > 68,]
+
+## Get players ADP and position
+by.adp <- player.data[order(player.data$adp, decreasing = TRUE), ]
+by.adp <- by.adp[by.adp$adp > 0,]
+by.adp <- by.adp[, c("name", "pos", "adp")]
+by.adp <- by.adp[by.adp$adp <= 100,]
+by.adp %>%
+  group_by(pos) %>%
+  summarise(no_rows = length(pos))
+
+

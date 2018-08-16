@@ -7,23 +7,23 @@
 
 .App-Row-Top {
   display: flex;
-  height: 20%;
+  height: 24%;
+  width: 100%;
 }
 
 .App-Row-Bottom {
   display: flex;
-  position: absolute;
-  top: 20%;
-  height: fit-content;
+  height: 100%;
   width: 100%;
 }
 
 .App-Left-Column {
-  height: auto;
+  height: 100%;
   width: 24%;
 }
 
 .App-Right-Column {
+  height: 100%;
   width: 70%;
 }
 
