@@ -28,7 +28,7 @@ const sumStarterValues = (team: ITeam): number => {
  * @param state
  */
 export const incrementDraft = (state: IStoreState): IStoreState => {
-  const { activeTeam, draftDirection } = state;
+  const { activeTeam, currentPick, draftDirection } = state;
 
   // find what the next ActiveTeam is
   let newActiveTeam = activeTeam;
@@ -54,8 +54,9 @@ export const incrementDraft = (state: IStoreState): IStoreState => {
   return {
     ...state,
 
-    // update the activeTeam and draftDirection
+    // update the activeTeam, currentPick and draftDirection
     activeTeam: newActiveTeam,
+    currentPick: currentPick + 1,
     draftDirection: newDraftDirection
   };
 };

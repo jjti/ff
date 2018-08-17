@@ -26,3 +26,11 @@
   right: 0;
   position: absolute;
 }
+
+.Legend-Row {
+  display: flex;
+}
+
+.Legend-Row > p {
+  margin: 0 0 0 8px;
+}

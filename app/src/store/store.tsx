@@ -7,6 +7,7 @@ import reducers from "./reducers";
 
 export interface IStoreState {
   activeTeam: number;
+  currentPick: number; // index of current pick + 1
   draftDirection: number; // 1 or -1
   lastPickedPlayer: IPlayer | null;
   past: IStoreState | null;

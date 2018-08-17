@@ -39,6 +39,16 @@
   text-decoration: underline;
 }
 
+.PlayerTable-Row-Name {
+  position: relative;
+}
+
+.PlayerTable-Row-Name > div {
+  position: absolute;
+  left: -20px;
+  top: calc(50% - 4px);
+}
+
 .PlayerTable-Row:hover {
   background-color: #f3f3f359;
   cursor: pointer;

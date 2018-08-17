@@ -14,6 +14,7 @@ import { IStoreState } from "../store/store";
 import "./PlayerTable.css";
 
 interface IProps {
+  currentPick: number;
   undraftedPlayers: any[];
   pickPlayer: (player: IPlayer) => void;
   removePlayer: (player: IPlayer) => void;
@@ -68,7 +69,13 @@ class PlayerTable extends React.Component<IProps> {
                     : "PlayerTable-Row PlayerTable-Row-Inactive"
                 }
               >
-                <td>{p.name}</td>
+                <td className="PlayerTable-Row-Name">
+                  {p.name}{" "}
+                  {p.adp &&
+                    this.props.currentPick + 10 > p.adp && (
+                      <div className="green-dot" />
+                    )}
+                </td>
                 <td>{p.pos}</td>
                 <td>{p.team}</td>
                 <td className="th-right">{p.vor}</td>
@@ -115,6 +122,7 @@ const mapStateToProps = (state: IStoreState) => {
   }
 
   return {
+    currentPick: state.currentPick,
     undraftedPlayers: getPlayers(state),
     valuedPositions
   };

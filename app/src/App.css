@@ -43,3 +43,11 @@
   font-weight: 300;
   font-size: 15px;
 }
+
+.green-dot {
+  height: 6px;
+  width: 6px;
+  border-radius: 10px;
+  background-color: #00d000;
+  margin: auto;
+}
