@@ -1,16 +1,13 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { setTrackedTeam } from "../store/actions/teams";
 import { IStoreState } from "../store/store";
 import { ITeam } from "../Team";
-
 import "./OrderTracker.css";
 
 interface IProps {
   activeTeam: number;
   teams: ITeam[];
-  setTrackedTeam: (index: number) => void;
 }
 
 const initialState = {
@@ -39,21 +36,6 @@ class OrderTracker extends React.Component<IProps, State> {
     return (
       <div className="OrderTracker">
         <h3>TEAMS</h3>
-
-        <aside>
-          <label>
-            Focused Team
-            <select
-              className="Tracked-Team-Select"
-              onChange={this.updateTrackedTeam}
-            >
-              {new Array(10).fill(0).map((_, i) => (
-                <option key={`Pick-Selection-${i}`} value={i}>{`Team ${i +
-                  1}`}</option>
-              ))}
-            </select>
-          </label>
-        </aside>
 
         <div className="Team-Cards">
           {this.props.teams.map((t, i) => (
@@ -84,11 +66,6 @@ class OrderTracker extends React.Component<IProps, State> {
     const thisWidth = window.innerWidth * 0.65 - 200; // ~30px padding, 70% width of total window size
     return Math.floor(thisWidth / 10) - 8; // 8 == 2px border, 6px margin
   };
-
-  private updateTrackedTeam = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const { value } = event.target;
-    this.props.setTrackedTeam(+value);
-  };
 }
 
 const mapStateToProps = (state: IStoreState) => ({
@@ -96,11 +73,4 @@ const mapStateToProps = (state: IStoreState) => ({
   teams: state.teams
 });
 
-const mapDispathToProps = (dispatch: any) => ({
-  setTrackedTeam: (index: number) => dispatch(setTrackedTeam(index))
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispathToProps
-)(OrderTracker);
+export default connect(mapStateToProps)(OrderTracker);

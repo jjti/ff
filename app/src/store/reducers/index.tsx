@@ -23,6 +23,7 @@ const emptyTeam = (): ITeam => ({
 export const initialState = {
   activeTeam: 0, // active team's index ([0-9]) that's currently drafting
   draftDirection: 1, // either 1 (forward) or -1 (reverse)
+  lastPickedPlayer: null,
   past: null,
   players: [],
   teams: new Array(10).fill(0).map(() => emptyTeam()), // doing 10 empty teams by default

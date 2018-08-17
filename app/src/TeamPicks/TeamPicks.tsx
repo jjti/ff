@@ -1,11 +1,10 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import { setTrackedTeam } from "../store/actions/teams";
 import { IStoreState } from "../store/store";
-
-import "./TeamPicks.css";
-
 import { ITeam } from "../Team";
 import PlayerCard from "./PlayerCard";
+import "./TeamPicks.css";
 
 interface IProps {
   trackedTeam: ITeam;
@@ -33,7 +32,22 @@ class TeamPicks extends React.Component<IProps, State> {
     return (
       <div className="TeamPicks">
         <div className="Pick-Section">
-          <h3>STARTERS</h3>
+          <header>
+            <h3>STARTERS</h3>
+
+            <div className="Tracked-Team-Select-Container">
+              <select
+                className="Tracked-Team-Select"
+                onChange={this.updateTrackedTeam}
+              >
+                {new Array(10).fill(0).map((_, i) => (
+                  <option key={`Pick-Selection-${i}`} value={i}>{`Team ${i +
+                    1}`}</option>
+                ))}
+              </select>
+            </div>
+          </header>
+
           <div className="Pick-Columns">
             <div className="Pick-Column">
               <div className="Pick-Row QB-Row">
@@ -118,10 +132,22 @@ class TeamPicks extends React.Component<IProps, State> {
     const thisWidth = window.innerHeight * 0.7 - 20; // ~30px padding, 30% width of total window size
     return Math.floor(thisWidth / 8) - 8; // 8 == 2px border, 6px margin
   };
+
+  private updateTrackedTeam = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const { value } = event.target;
+    this.props.setTrackedTeam(+value);
+  };
 }
 
 const mapStateToProps = (state: IStoreState) => ({
   trackedTeam: state.teams[state.trackedTeam]
 });
 
-export default connect(mapStateToProps)(TeamPicks);
+const mapDispathToProps = (dispatch: any) => ({
+  setTrackedTeam: (index: number) => dispatch(setTrackedTeam(index))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispathToProps
+)(TeamPicks);

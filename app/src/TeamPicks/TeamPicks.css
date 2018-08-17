@@ -15,6 +15,10 @@
   margin-bottom: 40px;
 }
 
+.Pick-Section > header {
+  display: flex;
+}
+
 .Pick-Section-Header {
   display: flex;
 }
@@ -26,4 +30,15 @@
 
 .Pick-Row:last-child {
   margin-right: 30px;
+}
+
+.Tracked-Team-Select-Container {
+  margin: 5px 0px 10px 50px;
+  border-bottom: 1px solid #c4c4c4;
+}
+
+.Tracked-Team-Select {
+  border: none;
+  background-color: transparent;
+  outline: none;
 }

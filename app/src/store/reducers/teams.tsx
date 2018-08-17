@@ -160,7 +160,10 @@ export const pickPlayer = (
     ),
 
     // add this previous state to the past
-    past: state
+    past: state,
+
+    // save this player as the "lastPickedPlayer"
+    lastPickedPlayer: player
   };
 };
 
@@ -183,6 +186,12 @@ export const resetStore = (state: IStoreState): IStoreState => ({
  */
 export const undoPlayerPick = (state: IStoreState): IStoreState => {
   const { past } = state; // we want the last state
+
+  // create a toast
+  if (state.lastPickedPlayer) {
+    toast.info(`Undoing draft of ${state.lastPickedPlayer.name}`);
+  }
+
   return past || resetStore(state); // if it's null, reset and return
 };
 
