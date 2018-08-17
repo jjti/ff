@@ -11,6 +11,7 @@ export interface IStoreState {
   lastPickedPlayer: IPlayer | null;
   past: IStoreState | null;
   players: IPlayer[];
+  selectedPlayer: IPlayer | null;
   teams: ITeam[];
   trackedTeam: number;
   undraftedPlayers: IPlayer[];

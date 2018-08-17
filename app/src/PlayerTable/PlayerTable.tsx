@@ -2,7 +2,11 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import { IPlayer } from "../Player";
-import { removePlayer, undoPlayerPick } from "../store/actions/players";
+import {
+  removePlayer,
+  selectPlayer,
+  undoPlayerPick
+} from "../store/actions/players";
 import { incrementDraft, pickPlayer } from "../store/actions/teams";
 import { getPlayers } from "../store/reducers/players";
 import { IStoreState } from "../store/store";
@@ -10,12 +14,13 @@ import { IStoreState } from "../store/store";
 import "./PlayerTable.css";
 
 interface IProps {
-  undraftedPlayers: any;
-  pickPlayer: any;
+  undraftedPlayers: any[];
+  pickPlayer: (player: IPlayer) => void;
   removePlayer: (player: IPlayer) => void;
+  selectPlayer: (player: IPlayer) => void;
   skip: () => void;
   undo: () => void;
-  valuedPositions: any;
+  valuedPositions: object;
 }
 
 /**
@@ -90,8 +95,6 @@ const mapStateToProps = (state: IStoreState) => {
   const trackedTeam = state.teams[state.trackedTeam];
   const valuedPositions = {} as any;
 
-  console.log(trackedTeam);
-
   // add the positions to the object that the trackedTeam hasn't
   // filled their roster with (ie they have space for)
   if (!trackedTeam.QB) {
@@ -106,8 +109,10 @@ const mapStateToProps = (state: IStoreState) => {
   if (!trackedTeam.WRs.every((w: IPlayer) => !!w)) {
     valuedPositions.WR = true;
   }
-
-  console.log(valuedPositions);
+  if (!trackedTeam.Flex) {
+    valuedPositions.RB = true;
+    valuedPositions.WR = true;
+  }
 
   return {
     undraftedPlayers: getPlayers(state),
@@ -118,6 +123,7 @@ const mapStateToProps = (state: IStoreState) => {
 const mapDispatchToProps = (dispatch: any) => ({
   pickPlayer: (player: IPlayer) => dispatch(pickPlayer(player)),
   removePlayer: (player: IPlayer) => dispatch(removePlayer(player)),
+  selectPlayer: (player: IPlayer) => dispatch(selectPlayer(player)),
   skip: () => dispatch(incrementDraft()),
   undo: () => dispatch(undoPlayerPick())
 });

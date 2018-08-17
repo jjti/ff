@@ -8,6 +8,7 @@
 .App-Row-Top {
   display: flex;
   height: 24%;
+  min-height: 160px;
   width: 100%;
 }
 

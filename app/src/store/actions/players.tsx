@@ -22,3 +22,13 @@ export const removePlayer = (player: IPlayer) => ({
 export const undoPlayerPick = () => ({
   type: ACTION_TYPES.UNDO_PICK_PLAYER
 });
+
+/**
+ * Select a player, highlighting it in the table.
+ * Is done to check for schedule duplications
+ * @param player the player to "select" or highlight
+ */
+export const selectPlayer = (player: IPlayer) => ({
+  player,
+  type: ACTION_TYPES.SELECT_PLAYER
+});

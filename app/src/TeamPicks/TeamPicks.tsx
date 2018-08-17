@@ -129,7 +129,7 @@ class TeamPicks extends React.Component<IProps, State> {
   }
 
   private getCardLength = (): number => {
-    const thisWidth = window.innerHeight * 0.7 - 20; // ~30px padding, 30% width of total window size
+    const thisWidth = window.innerHeight * 0.75 - 20; // ~30px padding, 30% width of total window size
     return Math.floor(thisWidth / 8) - 8; // 8 == 2px border, 6px margin
   };
 

@@ -1,5 +1,6 @@
 import { ITeam } from "../../Team";
 import { ACTION_TYPES } from "../actions";
+import { IStoreState } from "../store";
 import { removePlayer } from "./players";
 import {
   incrementDraft,
@@ -26,12 +27,13 @@ export const initialState = {
   lastPickedPlayer: null,
   past: null,
   players: [],
+  selectedPlayer: null,
   teams: new Array(10).fill(0).map(() => emptyTeam()), // doing 10 empty teams by default
   trackedTeam: 0, // team to track in TeamPicks
   undraftedPlayers: []
 };
 
-export default (state = initialState, action: any) => {
+export default (state = initialState, action: any): IStoreState => {
   switch (action.type) {
     case ACTION_TYPES.SET_PLAYERS: {
       return {
@@ -54,6 +56,12 @@ export default (state = initialState, action: any) => {
     }
     case ACTION_TYPES.INCREMENT_DRAFT: {
       return incrementDraft(state);
+    }
+    case ACTION_TYPES.SELECT_PLAYER: {
+      return {
+        ...state,
+        selectedPlayer: action.player
+      };
     }
     default:
       return state;
