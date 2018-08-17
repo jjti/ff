@@ -1,5 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import { cssTransition, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import "./App.css";
 import "./Card.css";
@@ -51,6 +53,20 @@ class App extends React.Component<IProps> {
             <PlayerTable />
           </div>
         </div>
+
+        <ToastContainer
+          className="toast-container"
+          position="bottom-left"
+          autoClose={1750}
+          hideProgressBar={true}
+          pauseOnHover={false}
+          closeButton={false}
+          draggable={false}
+          transition={cssTransition({
+            enter: "zoom",
+            exit: "zoom"
+          })}
+        />
       </div>
     );
   }

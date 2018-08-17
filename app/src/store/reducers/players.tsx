@@ -9,7 +9,10 @@ export const getPlayers = (state: IStoreState) => state.undraftedPlayers;
  * @param state
  * @param player
  */
-export const removePlayer = (state: IStoreState, player: IPlayer) => ({
+export const removePlayer = (
+  state: IStoreState,
+  player: IPlayer
+): IStoreState => ({
   ...state,
   past: state,
   undraftedPlayers: state.undraftedPlayers.filter(

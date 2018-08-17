@@ -1,7 +1,12 @@
 import { ITeam } from "../../Team";
 import { ACTION_TYPES } from "../actions";
 import { removePlayer } from "./players";
-import { pickPlayer, setTrackedTeam, undoPlayerPick } from "./teams";
+import {
+  incrementDraft,
+  pickPlayer,
+  setTrackedTeam,
+  undoPlayerPick
+} from "./teams";
 
 const emptyTeam = (): ITeam => ({
   Bench: new Array(7).fill(null),
@@ -45,6 +50,9 @@ export default (state = initialState, action: any) => {
     }
     case ACTION_TYPES.REMOVE_PLAYER: {
       return removePlayer(state, action.player);
+    }
+    case ACTION_TYPES.INCREMENT_DRAFT: {
+      return incrementDraft(state);
     }
     default:
       return state;

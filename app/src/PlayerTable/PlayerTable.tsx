@@ -2,8 +2,8 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import { IPlayer } from "../Player";
-import { undoPlayerPick } from "../store/actions/players";
-import { pickPlayer } from "../store/actions/teams";
+import { removePlayer, undoPlayerPick } from "../store/actions/players";
+import { incrementDraft, pickPlayer } from "../store/actions/teams";
 import { getPlayers } from "../store/reducers/players";
 import { IStoreState } from "../store/store";
 
@@ -12,16 +12,27 @@ import "./PlayerTable.css";
 interface IProps {
   undraftedPlayers: any;
   pickPlayer: any;
+  removePlayer: (player: IPlayer) => void;
+  skip: () => void;
   undo: () => void;
   valuedPositions: any;
 }
 
+/**
+ * A table displaying all the undrafted players
+ *
+ * Includes buttons for skipping the current round, without a pick,
+ * and undoing the last round/pick (in the event of a mistake)
+ */
 class PlayerTable extends React.Component<IProps> {
   public render() {
     return (
       <div>
         <header className="PlayerTable-Header">
           <h3>PLAYERS</h3>
+          <button className="skip-button" onClick={this.props.skip}>
+            Skip
+          </button>
           <button className="undo-button" onClick={this.props.undo}>
             Undo
           </button>
@@ -38,7 +49,7 @@ class PlayerTable extends React.Component<IProps> {
               <th className="th-right">Prediction</th>
               <th className="th-right">Experts</th>
               <th className="th-right">Madden</th>
-              <th className="th-right">Draft</th>
+              <th className="th-right">Remove</th>
             </tr>
           </thead>
           <tbody>
@@ -48,8 +59,8 @@ class PlayerTable extends React.Component<IProps> {
                 onDoubleClick={() => this.props.pickPlayer(p)}
                 className={
                   this.props.valuedPositions[p.pos]
-                    ? "PlayerTable-Row PlayerTable-Row-Inactive"
-                    : "PlayerTable-Row"
+                    ? "PlayerTable-Row"
+                    : "PlayerTable-Row PlayerTable-Row-Inactive"
                 }
               >
                 <td>{p.name}</td>
@@ -60,10 +71,10 @@ class PlayerTable extends React.Component<IProps> {
                 <td className="th-right">{p.pred}</td>
                 <td className="th-right">{p.experts}</td>
                 <td className="th-right">{p.madden}</td>
-                <td className="draft-button-td">
+                <td className="remove-player-td">
                   <button
-                    className="draft-button"
-                    onClick={() => this.props.pickPlayer(p)}
+                    className="remove-player-x"
+                    onClick={() => this.props.removePlayer(p)}
                   />
                 </td>
               </tr>
@@ -81,15 +92,22 @@ const mapStateToProps = (state: IStoreState) => {
 
   console.log(trackedTeam);
 
+  // add the positions to the object that the trackedTeam hasn't
+  // filled their roster with (ie they have space for)
   if (!trackedTeam.QB) {
     valuedPositions.QB = true;
-  } else if (!trackedTeam.TE) {
+  }
+  if (!trackedTeam.TE) {
     valuedPositions.TE = true;
-  } else if (!trackedTeam.RBs.every((r: IPlayer) => !!r)) {
+  }
+  if (!trackedTeam.RBs.every((r: IPlayer) => !!r)) {
     valuedPositions.RB = true;
-  } else if (!trackedTeam.WRs.every((w: IPlayer) => !!w)) {
+  }
+  if (!trackedTeam.WRs.every((w: IPlayer) => !!w)) {
     valuedPositions.WR = true;
   }
+
+  console.log(valuedPositions);
 
   return {
     undraftedPlayers: getPlayers(state),
@@ -99,6 +117,8 @@ const mapStateToProps = (state: IStoreState) => {
 
 const mapDispatchToProps = (dispatch: any) => ({
   pickPlayer: (player: IPlayer) => dispatch(pickPlayer(player)),
+  removePlayer: (player: IPlayer) => dispatch(removePlayer(player)),
+  skip: () => dispatch(incrementDraft()),
   undo: () => dispatch(undoPlayerPick())
 });
 

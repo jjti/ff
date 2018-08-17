@@ -30,3 +30,15 @@
 .App-Block {
   padding: 15px;
 }
+
+.toast-container > .Toastify__toast {
+  background: white;
+  padding-left: 15px;
+  width: fit-content;
+  min-width: 275px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  color: #4a4a4a;
+  font-weight: 300;
+  font-size: 15px;
+}

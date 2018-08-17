@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 import { initialState } from ".";
 import { IPlayer } from "../../Player";
 import { ITeam } from "../../Team";
@@ -22,13 +24,53 @@ const sumStarterValues = (team: ITeam): number => {
 };
 
 /**
+ * Increment the draft to the next round
+ * @param state
+ */
+export const incrementDraft = (state: IStoreState): IStoreState => {
+  const { activeTeam, draftDirection } = state;
+
+  // find what the next ActiveTeam is
+  let newActiveTeam = activeTeam;
+  let newDraftDirection = draftDirection;
+  if (draftDirection === 1) {
+    // we're moving left-to-right
+    if (activeTeam === 9) {
+      // now we're going other direction, but not changing current team
+      newDraftDirection = -1;
+    } else {
+      newActiveTeam++; // move one more to the right
+    }
+  } else {
+    // we're moving right-to-left
+    if (activeTeam === 0) {
+      // no we're going other direction, but not changing current team yet
+      newDraftDirection = 1;
+    } else {
+      newActiveTeam--;
+    }
+  }
+
+  return {
+    ...state,
+
+    // update the activeTeam and draftDirection
+    activeTeam: newActiveTeam,
+    draftDirection: newDraftDirection
+  };
+};
+
+/**
  * Remove the player from the players.store, add it to the team,
  * and increment the activeTeam
  *
  * @param state team state
  */
-export const pickPlayer = (state: IStoreState, player: IPlayer) => {
-  const { undraftedPlayers, activeTeam, draftDirection, teams } = state;
+export const pickPlayer = (
+  state: IStoreState,
+  player: IPlayer
+): IStoreState => {
+  const { undraftedPlayers, activeTeam, teams } = state;
 
   // try and add the player to the team roster, respecting the limit at each position
   const newTeams = teams.map(t => ({ ...t }));
@@ -100,36 +142,17 @@ export const pickPlayer = (state: IStoreState, player: IPlayer) => {
   // update the team in the array
   newTeams[activeTeam] = roster;
 
-  // find what the next ActiveTeam is
-  let newActiveTeam = activeTeam;
-  let newDraftDirection = draftDirection;
-  if (draftDirection === 1) {
-    // we're moving left-to-right
-    if (activeTeam === 9) {
-      // now we're going other direction, but not changing current team
-      newDraftDirection = -1;
-    } else {
-      newActiveTeam++; // move one more to the right
-    }
-  } else {
-    // we're moving right-to-left
-    if (activeTeam === 0) {
-      // no we're going other direction, but not changing current team yet
-      newDraftDirection = 1;
-    } else {
-      newActiveTeam--;
-    }
-  }
+  // create a toast
+  toast.info(`Team ${activeTeam + 1} drafted ${player.name}`);
 
   return {
     ...state,
 
+    // increment the draft by one
+    ...incrementDraft(state),
+
     // update teams with the modified roster
     teams: newTeams,
-
-    // update the activeTeam and draftDirection
-    activeTeam: newActiveTeam,
-    draftDirection: newDraftDirection,
 
     // remove the picked player
     undraftedPlayers: undraftedPlayers.filter(
@@ -147,7 +170,7 @@ export const pickPlayer = (state: IStoreState, player: IPlayer) => {
  *
  * @param state the current state of the store
  */
-export const resetStore = (state: IStoreState) => ({
+export const resetStore = (state: IStoreState): IStoreState => ({
   ...initialState,
   players: state.players,
   undraftedPlayers: state.players
@@ -158,12 +181,9 @@ export const resetStore = (state: IStoreState) => ({
  *
  * @param state of the current app
  */
-export const undoPlayerPick = (state: IStoreState) => {
+export const undoPlayerPick = (state: IStoreState): IStoreState => {
   const { past } = state; // we want the last state
-  if (past) {
-    return past;
-  }
-  return resetStore(state);
+  return past || resetStore(state); // if it's null, reset and return
 };
 
 /**
@@ -173,6 +193,15 @@ export const undoPlayerPick = (state: IStoreState) => {
  * @param trackedTeam The index of the team, in the teams array, to be "tracked"
  *  on the left side of the app
  */
-export const setTrackedTeam = (state: IStoreState, trackedTeam: number) => {
-  return { ...state, trackedTeam };
+export const setTrackedTeam = (
+  state: IStoreState,
+  trackedTeam: number
+): IStoreState => {
+  // create a toast
+  toast.info(`Now tracking Team ${trackedTeam + 1}`);
+
+  return {
+    ...state,
+    trackedTeam
+  };
 };

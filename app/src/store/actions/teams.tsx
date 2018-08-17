@@ -11,7 +11,18 @@ export const pickPlayer = (player: IPlayer) => ({
   type: ACTION_TYPES.PICK_PLAYER
 });
 
+/**
+ * Update the team to focus on on the left hand side of the page
+ * @param trackedTeam the index of the team of focus on on the left
+ */
 export const setTrackedTeam = (trackedTeam: number) => ({
   trackedTeam,
   type: ACTION_TYPES.SET_TRACKED_TEAM
+});
+
+/**
+ * Skip this term, increment the draftIndex and, if necessary, direction
+ */
+export const incrementDraft = () => ({
+  type: ACTION_TYPES.INCREMENT_DRAFT
 });

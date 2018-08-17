@@ -12,39 +12,31 @@
 }
 
 .undo-button,
-.draft-button {
+.remove-player-x,
+.skip-button {
   outline: none !important;
   cursor: pointer;
+  border: none;
 }
 
-.undo-button {
-  border: none;
-  position: absolute;
-  right: -10px;
-  margin: 0;
+.skip-button {
+  margin: 0 0 0 auto;
   padding: 10px;
   bottom: 0;
 }
 
-.draft-button-td {
-  position: relative;
+.skip-button:hover {
+  text-decoration: underline;
 }
 
-.draft-button {
-  background-color: #fff;
-  border: 1px solid #c4c4c4;
-  height: 15px;
-  width: 15px;
-  border-radius: 50%;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
-  right: 0;
-  position: absolute;
-  top: 2px;
+.undo-button {
+  margin: 0 -10px 0 0;
+  padding: 10px;
+  bottom: 0;
 }
 
-.draft-button:hover {
-  background-color: #c4c4c4;
+.undo-button:hover {
+  text-decoration: underline;
 }
 
 .PlayerTable-Row:hover {
@@ -74,4 +66,42 @@ th {
 
 tr {
   height: 35px;
+}
+
+.remove-player-td {
+  position: relative;
+}
+
+.remove-player-x {
+  background-color: transparent;
+
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  opacity: 0.8;
+  right: 0;
+  top: -17px;
+}
+.remove-player-x:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+.remove-player-x:before,
+.remove-player-x:after {
+  position: absolute;
+  content: " ";
+  height: 20px;
+  width: 1px;
+  background-color: #c4c4c4;
+}
+.remove-player-x:before {
+  transform: rotate(45deg);
+}
+.remove-player-x:after {
+  transform: rotate(-45deg);
+}
+
+.remove-player-x:hover:before,
+.remove-player-x:hover:after {
+  background-color: #535353;
 }
