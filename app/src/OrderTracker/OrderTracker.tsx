@@ -25,9 +25,14 @@ class OrderTracker extends React.Component<IProps, State> {
   constructor(props: any) {
     super(props);
 
-    this.state = { ...initialState, cardLength: this.getCardLength() };
+    this.state = {
+      ...initialState,
+      cardLength: this.getCardLength(props.numberOfTeams)
+    };
     window.addEventListener("resize", () =>
-      this.setState({ cardLength: this.getCardLength() })
+      this.setState({
+        cardLength: this.getCardLength(this.props.numberOfTeams)
+      })
     );
   }
 
@@ -36,7 +41,7 @@ class OrderTracker extends React.Component<IProps, State> {
     const { cardLength } = this.state;
 
     // amount to shift the "current draft" arrow from the left
-    const currentPickLeft = activeTeam * (cardLength + 16) + 0.2 * cardLength;
+    const currentPickLeft = activeTeam * (cardLength + 14) + 0.2 * cardLength;
 
     // an array with the allowable number of teams: [6, 16]
     const allowableNumberOfTeams =
@@ -94,15 +99,17 @@ class OrderTracker extends React.Component<IProps, State> {
     );
   }
 
-  private getCardLength = (): number => {
-    const thisWidth = window.innerWidth * 0.65 - 200; // ~30px padding, 70% width of total window size
-    return Math.floor(thisWidth / this.props.numberOfTeams) - 8; // 8 == 2px border, 6px margin
+  private getCardLength = (numberOfTeams: number): number => {
+    const thisWidth = window.innerWidth * 0.65; // ~30px padding, 70% width of total window size
+    const cardLength = Math.floor(thisWidth / numberOfTeams) - 7; // 8 == 2px border, 6px margin
+    return Math.min(cardLength, 80);
   };
 
   private setNumberOfTeams = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
-    const numberOfTeams = value.split(" ")[0];
-    this.props.setNumberOfTeams(+numberOfTeams);
+    const numberOfTeams = +value.split(" ")[0];
+    this.setState({ cardLength: this.getCardLength(numberOfTeams) });
+    this.props.setNumberOfTeams(numberOfTeams);
   };
 }
 

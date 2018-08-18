@@ -189,7 +189,7 @@ export const undoPlayerPick = (state: IStoreState): IStoreState => {
 
   // create a toast
   if (state.lastPickedPlayer) {
-    toast.info(`Undid draft of ${state.lastPickedPlayer.name}`);
+    toast.info(`Undrafted ${state.lastPickedPlayer.name}`);
   }
 
   return past || resetStore(state); // if it's null, reset and return

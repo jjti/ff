@@ -165,8 +165,6 @@ const mapStateToProps = (state: IStoreState) => {
     valuedPositions.DST = true;
   }
 
-  console.log(valuedPositions);
-
   // find the bye weeks already taken by the core players (QB, RB, WR, FLEX)
   const byeWeeks = [QB, ...RBs, ...WRs, Flex]
     .map(p => p && p.bye)
