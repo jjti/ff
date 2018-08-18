@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
+  height: fit-content;
 }
 
 .App-Row-Top {
@@ -19,7 +19,7 @@
 }
 
 .App-Left-Column {
-  height: 100%;
+  height: auto;
   width: 24%;
 }
 
@@ -30,6 +30,10 @@
 
 .App-Block {
   padding: 15px;
+}
+
+.App-Left-Column .App-Block {
+  height: auto;
 }
 
 .toast-container > .Toastify__toast {
