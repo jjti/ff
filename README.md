@@ -6,7 +6,7 @@ Fantasy football forecasting (2018). Experimenting with R
 
 ## App
 
-The app was built to help draft the best team possible.
+A built an app for drafting the best team possible.
 
 ### Value over replacement
 
@@ -20,7 +20,7 @@ Since the expected number of drafted players at each position is dependent on th
 
 #### Tracking teams' VOR
 
-![Tracking teams' VOR](https://giphy.com/embed/69xm8U9q8prWx6fYtg)
+<iframe src="https://giphy.com/embed/69xm8U9q8prWx6fYtg" width="480" height="200" frameBorder="0" class="giphy-embed"></iframe>
 
 Teams are tracked during the draft, and a tally is kept of the VOR of team's starters. It's a real-time index for how well everyone is doing.
 
