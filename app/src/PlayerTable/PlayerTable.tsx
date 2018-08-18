@@ -62,11 +62,30 @@ class PlayerTable extends React.Component<IProps> {
               <th className="th-left">Name</th>
               <th className="th-left">Position</th>
               <th className="th-left">Team</th>
-              <th className="th-right">VOR</th>
-              <th className="th-right">ADP</th>
-              <th className="th-right">Prediction</th>
-              <th className="th-right">Experts</th>
-              <th className="th-right">Madden</th>
+              <th className="th-right" data-tip="value over replacement">
+                VOR
+              </th>
+              <th className="th-right" data-tip="average draft position (ESPN)">
+                ADP
+              </th>
+              <th
+                className="th-right"
+                data-tip="predicted number of regular season points"
+              >
+                Prediction
+              </th>
+              <th
+                className="th-right"
+                data-tip="average of expert predictions (ESPN, FOX, CBS, NFL)"
+              >
+                Experts
+              </th>
+              <th
+                className="th-right"
+                data-tip="Madden 2019 Overall player stat"
+              >
+                Madden
+              </th>
               <th className="th-right">Remove</th>
             </tr>
           </thead>
