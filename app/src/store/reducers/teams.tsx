@@ -1,9 +1,8 @@
 import { toast } from "react-toastify";
 
-import { initialState } from ".";
-import { IPlayer } from "../../Player";
+import { IPlayer, Position } from "../../Player";
 import { ITeam } from "../../Team";
-import { IStoreState } from "../store";
+import { createTeam, initialState, IStoreState } from "../store";
 
 /**
  * Sum of the VOR of everyone on a ITeam. Used to keep track of
@@ -28,14 +27,14 @@ const sumStarterValues = (team: ITeam): number => {
  * @param state
  */
 export const incrementDraft = (state: IStoreState): IStoreState => {
-  const { activeTeam, currentPick, draftDirection } = state;
+  const { activeTeam, currentPick, draftDirection, numberOfTeams } = state;
 
   // find what the next ActiveTeam is
   let newActiveTeam = activeTeam;
   let newDraftDirection = draftDirection;
   if (draftDirection === 1) {
     // we're moving left-to-right
-    if (activeTeam === 9) {
+    if (activeTeam === numberOfTeams - 1) {
       // now we're going other direction, but not changing current team
       newDraftDirection = -1;
     } else {
@@ -213,5 +212,119 @@ export const setTrackedTeam = (
   return {
     ...state,
     trackedTeam
+  };
+};
+
+/**
+ * recalculate VOR for the players.
+ *
+ * #1: find the number of players, at each position, drafted by the 10th round
+ *    in leagues with this many players. Can estimate with ADP from ESPN
+ * #2: find the replacementValue for each position, by using the index from #1 + 1
+ * #3: update each player's VOR using their predicted number of points minus their replacementValue
+ * #4: sort the players by their VOR
+ * @param players
+ * @param numberOfTeams
+ */
+const updateVOR = (players: IPlayer[], numberOfTeams: number): IPlayer[] => {
+  const positions: Position[] = ["QB", "RB", "WR", "TE", "DST", "K"];
+
+  // #1, find replacement player index for each position
+  // map each position to the number of players drafted before the lastPick
+  const positionToCountMap = positions.reduce(
+    (acc, pos) => ({
+      ...acc,
+      [pos]: players.filter(
+        p => p.pos === pos && p.adp && p.adp < numberOfTeams * 10
+      ).length
+    }),
+    {}
+  );
+
+  // #2, find replacement values at each position by finding the predicted points
+  //     at 1+the number of expected players in that position drafted within 10 rounds
+  // filter by position, sort descending by pred points, and get the number of points by the replacement player
+  // map positions to their replacement values
+  const positionToReplaceValueMap = positions.reduce(
+    (acc, pos) => ({
+      ...acc,
+      [pos]: players.filter(p => p.pos === pos).sort((a, b) => b.pred - a.pred)[
+        positionToCountMap[pos]
+      ].pred
+    }),
+    {}
+  );
+
+  // #3, update players' VORs
+  const newPlayers = players.map(p => ({
+    ...p,
+    vor: p.pred - positionToReplaceValueMap[p.pos]
+  }));
+
+  // #4, sort by their VOR
+  return newPlayers.sort((a, b) => b.vor - a.vor);
+};
+
+/**
+ * If we're not done with the first round yet, update the number of teams
+ * and recalculate VOR for the players. Find the number of expected players drafted
+ * at each position within 10 rounds, use that to estimate replacementValue,
+ * and update player VOR accordingly (then sort)
+ *
+ * If we are done with the first round, error out. This shouldn't be called
+ *
+ * @param state current Store State
+ * @param numberOfTeams the new number of teams
+ */
+export const setNumberOfTeams = (
+  state: IStoreState,
+  numberOfTeams: number
+): IStoreState => {
+  const {
+    currentPick,
+    numberOfTeams: currNumberOfTeams,
+    players,
+    teams
+  } = state;
+
+  // don't change anything if we're already done with a round
+  if (currentPick > currNumberOfTeams) {
+    throw new Error(
+      "Cannot change the number of teams after a round has already completed"
+    );
+  }
+
+  // don't change anything if the new number of teams will be less than
+  // the number of teams that have already picked
+  if (currentPick > numberOfTeams) {
+    throw new Error(
+      "Cannot change number of teams to less than the number that have already drafted players"
+    );
+  }
+
+  // don't change anything if the number of teams isn't going to change
+  if (currNumberOfTeams === numberOfTeams) {
+    return state; // change nothing
+  }
+
+  // update the number of teams
+  let newTeams = teams;
+  if (numberOfTeams > currNumberOfTeams) {
+    // add new teams so we have enough empty teams
+    newTeams = newTeams.concat(
+      new Array(numberOfTeams - currNumberOfTeams)
+        .fill(null)
+        .map(() => createTeam())
+    );
+  } else {
+    // cleave off the extra teams that are no longer needed
+    newTeams = newTeams.slice(0, numberOfTeams);
+  }
+
+  return {
+    ...state,
+    numberOfTeams,
+    teams: newTeams,
+    undraftedPlayers: updateVOR(players, numberOfTeams)
   };
 };

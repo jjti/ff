@@ -35,7 +35,7 @@ class TeamPicks extends React.PureComponent<IProps, State> {
           <header>
             <h3>STARTERS</h3>
 
-            <div className="Tracked-Team-Select-Container">
+            <div className="Select-Container">
               <select
                 className="Tracked-Team-Select"
                 onChange={this.updateTrackedTeam}
@@ -139,8 +139,8 @@ class TeamPicks extends React.PureComponent<IProps, State> {
   };
 }
 
-const mapStateToProps = (state: IStoreState) => ({
-  trackedTeam: state.teams[state.trackedTeam]
+const mapStateToProps = ({ teams, trackedTeam }: IStoreState) => ({
+  trackedTeam: teams[trackedTeam]
 });
 
 const mapDispathToProps = (dispatch: any) => ({

@@ -63,3 +63,8 @@
 .orange-dot {
   background-color: #eca80a;
 }
+
+.Select-Container {
+  margin: 0px 0px 10px 35px;
+  border-bottom: 1px solid #c4c4c4;
+}

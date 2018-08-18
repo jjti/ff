@@ -1,38 +1,13 @@
-import { ITeam } from "../../Team";
 import { ACTION_TYPES } from "../actions";
-import { IStoreState } from "../store";
+import { initialState, IStoreState } from "../store";
 import { removePlayer } from "./players";
 import {
   incrementDraft,
   pickPlayer,
+  setNumberOfTeams,
   setTrackedTeam,
   undoPlayerPick
 } from "./teams";
-
-const emptyTeam = (): ITeam => ({
-  Bench: new Array(7).fill(null),
-  DST: null,
-  Flex: null,
-  K: null,
-  QB: null,
-  RBs: [null, null],
-  StarterValue: 0,
-  TE: null,
-  WRs: [null, null]
-});
-
-export const initialState = {
-  activeTeam: 0, // active team's index ([0-9]) that's currently drafting
-  currentPick: 1, // 1-based
-  draftDirection: 1, // either 1 (forward) or -1 (reverse)
-  lastPickedPlayer: null,
-  past: null,
-  players: [],
-  selectedPlayer: null,
-  teams: new Array(10).fill(0).map(() => emptyTeam()), // doing 10 empty teams by default
-  trackedTeam: 0, // team to track in TeamPicks
-  undraftedPlayers: []
-};
 
 export default (state = initialState, action: any): IStoreState => {
   switch (action.type) {
@@ -63,6 +38,9 @@ export default (state = initialState, action: any): IStoreState => {
         ...state,
         selectedPlayer: action.player
       };
+    }
+    case ACTION_TYPES.SET_NUMBER_OF_TEAMS: {
+      return setNumberOfTeams(state, action.numberOfTeams);
     }
     default:
       return state;

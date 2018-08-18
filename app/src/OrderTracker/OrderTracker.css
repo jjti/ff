@@ -22,11 +22,6 @@
   position: relative;
 }
 
-.OrderTracker > aside {
-  right: 0;
-  position: absolute;
-}
-
 .Legend-Row {
   display: flex;
 }

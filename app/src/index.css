@@ -54,3 +54,15 @@ p.small {
   height: 100%;
   width: 100%;
 }
+
+select {
+  border: none;
+  background-color: transparent;
+  outline: none;
+  margin-bottom: 5px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+}

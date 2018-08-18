@@ -6,7 +6,7 @@ export default class Header extends React.Component {
   public render() {
     return (
       <div className="Header">
-        <h1 id="App-Header">FF DRAFT</h1>
+        <h1 id="App-Header">2018 FF DRAFT</h1>
         <p>A fantasy football draft tool</p>
         <p>
           Pick players based on their value over replacement, expert

@@ -26,3 +26,11 @@ export const setTrackedTeam = (trackedTeam: number) => ({
 export const incrementDraft = () => ({
   type: ACTION_TYPES.INCREMENT_DRAFT
 });
+
+/**
+ * Set the new number of teams in the store
+ */
+export const setNumberOfTeams = (numberOfTeams: number) => ({
+  numberOfTeams,
+  type: ACTION_TYPES.SET_NUMBER_OF_TEAMS
+});

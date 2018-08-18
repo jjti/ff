@@ -26,5 +26,8 @@
     "webpack",
     "jest",
     "src/setupTests.ts"
-  ]
+  ],
+  "rules": {
+    "no-submodule-imports": false
+  }
 }
