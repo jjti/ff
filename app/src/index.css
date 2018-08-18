@@ -36,6 +36,7 @@ h5 {
 }
 
 p,
+a,
 th,
 tr,
 button,
@@ -44,6 +45,10 @@ label {
   font-size: 14px;
   margin: 8px;
   color: #4a4a4a;
+}
+
+a {
+  margin: 0;
 }
 
 p.small {
