@@ -57,7 +57,7 @@ class OrderTracker extends React.Component<IProps, State> {
 
           <div className="Select-Container">
             <select
-              defaultValue="10 Teams"
+              value={`${numberOfTeams} Teams`}
               disabled={currentPick > numberOfTeams}
               onChange={this.setNumberOfTeams}
             >

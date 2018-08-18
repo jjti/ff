@@ -20,10 +20,24 @@ Since the expected number of drafted players at each position is dependent on th
 
 #### Tracking teams' VOR
 
-<iframe src="https://giphy.com/embed/69xm8U9q8prWx6fYtg" width="480" height="200" frameBorder="0" class="giphy-embed"></iframe>
+![screen shot 2018-08-18 at 5 58 15 pm](https://user-images.githubusercontent.com/13923102/44303512-5115fd80-a310-11e8-8005-811895620d92.png)
 
 Teams are tracked during the draft, and a tally is kept of the VOR of team's starters. It's a real-time index for how well everyone is doing.
 
 ### Building out a Roster
 
-The user can track their (or anyone else's) team during the draft. Since the starting roster is, at the end of the day, all that contributes to points-per-week, positions that are already filled are grayed out.
+![screen shot 2018-08-18 at 5 55 19 pm](https://user-images.githubusercontent.com/13923102/44303477-e9f84900-a30f-11e8-9119-286d37dc159b.png)
+
+The user can track their (or anyone else's) team during the draft. Since the starting roster is all that contributes to points-per-week, positions that are already filled are grayed out (QB in the example above).
+
+### Tips on picks
+
+![screen shot 2018-08-18 at 6 00 19 pm](https://user-images.githubusercontent.com/13923102/44303524-9c301080-a310-11e8-9ead-829609af1142.png)
+
+Small tags are also shown next to the player names indicating if they're likely to be drafted soon (given ADP) and whether there's a schedule conflict between the player and another key player (QB, RB, WR, or TE).
+
+### Controls
+
+![screen shot 2018-08-18 at 6 01 05 pm](https://user-images.githubusercontent.com/13923102/44303527-b4a02b00-a310-11e8-9b0d-edc25883a8c6.png)
+
+Double clicking on a player drafts the player to the team of the active team. Users can also skip the current turn (not drafting a player), undo the last round's pick (if they make a mistake), and remove a player (if the player was drafted already but they missed it).
