@@ -54,8 +54,8 @@ dst.replace.index <- round(dst.starters * team.count) + 1
 
 qb.data$replace_value <- qb.pred.sorted[12 + 1]
 rb.data$replace_value <- rb.pred.sorted[36 + 1]
-wr.data$replace_value <- wr.pred.sorted[10 + 1]
-te.data$replace_value <- te.pred.sorted[39 + 1]
+wr.data$replace_value <- wr.pred.sorted[39 + 1]
+te.data$replace_value <- te.pred.sorted[10 + 1]
 k.data$replace_value <- k.pred.sorted[0 + 1]
 dst.data$replace_value <- dst.pred.sorted[0 + 1]
 
