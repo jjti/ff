@@ -38,7 +38,7 @@ class TeamPicks extends React.PureComponent<IProps, State> {
 
             <div className="Select-Container">
               <select
-                className="Tracked-Team-Select"
+                className="Tracked-Team-Select Grayed"
                 onChange={this.updateTrackedTeam}
               >
                 {new Array(numberOfTeams).fill(0).map((_, i) => (

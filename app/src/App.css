@@ -66,5 +66,13 @@
 
 .Select-Container {
   margin: 0px 0px 10px 35px;
-  border-bottom: 1px solid #c4c4c4;
+  border-bottom: 1px solid lightgray;
+}
+
+.Grayed {
+  color: lightgray;
+}
+
+.Grayed:hover {
+  color: #4a4a4a;
 }

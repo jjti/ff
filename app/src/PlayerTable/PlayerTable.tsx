@@ -41,10 +41,10 @@ class PlayerTable extends React.Component<IProps> {
       <div>
         <header className="PlayerTable-Header">
           <h3>PLAYERS</h3>
-          <button className="skip-button" onClick={this.props.skip}>
+          <button className="Grayed skip-button" onClick={this.props.skip}>
             Skip
           </button>
-          <button className="undo-button" onClick={this.props.undo}>
+          <button className="Grayed undo-button" onClick={this.props.undo}>
             Undo
           </button>
         </header>

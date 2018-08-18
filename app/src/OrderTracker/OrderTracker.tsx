@@ -57,6 +57,7 @@ class OrderTracker extends React.Component<IProps, State> {
 
           <div className="Select-Container">
             <select
+              className="Grayed"
               value={`${numberOfTeams} Teams`}
               disabled={currentPick > numberOfTeams}
               onChange={this.setNumberOfTeams}
