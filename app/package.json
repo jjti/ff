@@ -1,7 +1,6 @@
 {
   "name": "app",
   "version": "0.1.0",
-  "private": true,
   "dependencies": {
     "@types/react-measure": "^2.0.4",
     "@types/react-redux": "^6.0.6",
@@ -24,7 +23,9 @@
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
-    "deploy": "npm run build && aws s3 sync ./build s3://www.ffdraft2018.com --acl public-read --sse --delete --cache-control max-age=604800,public --profile personal"
+    "deploy:s3": "aws s3 sync ./build s3://www.ffdraft2018.com --acl public-read --sse --delete --cache-control max-age=604800,public --profile personal",
+    "deploy:cloudfront": "aws cloudfront create-invalidation --distribution-id E11H3LNIYXKD1A --paths \"/*\" --profile personal",
+    "deploy": "npm run build && npm run deploy:s3 && npm run deploy:cloudfront"
   },
   "devDependencies": {
     "@types/jest": "^23.3.1",
