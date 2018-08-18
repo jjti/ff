@@ -42,6 +42,9 @@ export default (state = initialState, action: any): IStoreState => {
     case ACTION_TYPES.SET_NUMBER_OF_TEAMS: {
       return setNumberOfTeams(state, action.numberOfTeams);
     }
+    case ACTION_TYPES.SET_ACTIVE_TEAM: {
+      return { ...state, activeTeam: action.activeTeam };
+    }
     default:
       return state;
   }

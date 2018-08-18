@@ -2,6 +2,10 @@
   display: flex;
 }
 
+.Team-Cards > .Card {
+  cursor: pointer;
+}
+
 .Team-Arrow-Up {
   position: relative;
   width: 0;

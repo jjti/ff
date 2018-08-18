@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { setNumberOfTeams } from "../store/actions/teams";
+import { setActiveTeam, setNumberOfTeams } from "../store/actions/teams";
 import { IStoreState } from "../store/store";
 import { ITeam } from "../Team";
 import "./OrderTracker.css";
@@ -10,6 +10,7 @@ interface IProps {
   activeTeam: number;
   currentPick: number;
   numberOfTeams: number;
+  setActiveTeam: (activeTeam: number) => void;
   setNumberOfTeams: (numberOfTeams: number) => void;
   teams: ITeam[];
 }
@@ -82,6 +83,7 @@ class OrderTracker extends React.Component<IProps, State> {
               }`}
               key={i}
               style={{ width: cardLength, height: cardLength }}
+              onClick={() => this.props.setActiveTeam(i)}
             >
               <h4>{i + 1}</h4>
               <p className="points">{t.StarterValue}</p>
@@ -126,6 +128,7 @@ const mapStateToProps = ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
+  setActiveTeam: (activeTeam: number) => dispatch(setActiveTeam(activeTeam)),
   setNumberOfTeams: (numberOfTeams: number) =>
     dispatch(setNumberOfTeams(numberOfTeams))
 });

@@ -34,3 +34,12 @@ export const setNumberOfTeams = (numberOfTeams: number) => ({
   numberOfTeams,
   type: ACTION_TYPES.SET_NUMBER_OF_TEAMS
 });
+
+/**
+ * Update the current team in the draft
+ * @param activeTeam new current team index
+ */
+export const setActiveTeam = (activeTeam: number) => ({
+  activeTeam,
+  type: ACTION_TYPES.SET_ACTIVE_TEAM
+});
