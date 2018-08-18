@@ -7,6 +7,7 @@ import PlayerCard from "./PlayerCard";
 import "./TeamPicks.css";
 
 interface IProps {
+  numberOfTeams: number;
   trackedTeam: ITeam;
   setTrackedTeam: (index: number) => void;
 }
@@ -27,7 +28,7 @@ class TeamPicks extends React.PureComponent<IProps, State> {
   }
 
   public render() {
-    const { trackedTeam } = this.props;
+    const { numberOfTeams, trackedTeam } = this.props;
 
     return (
       <div className="TeamPicks">
@@ -40,7 +41,7 @@ class TeamPicks extends React.PureComponent<IProps, State> {
                 className="Tracked-Team-Select"
                 onChange={this.updateTrackedTeam}
               >
-                {new Array(10).fill(0).map((_, i) => (
+                {new Array(numberOfTeams).fill(0).map((_, i) => (
                   <option key={`Pick-Selection-${i}`} value={i}>{`Team ${i +
                     1}`}</option>
                 ))}
@@ -139,7 +140,12 @@ class TeamPicks extends React.PureComponent<IProps, State> {
   };
 }
 
-const mapStateToProps = ({ teams, trackedTeam }: IStoreState) => ({
+const mapStateToProps = ({
+  numberOfTeams,
+  teams,
+  trackedTeam
+}: IStoreState) => ({
+  numberOfTeams,
   trackedTeam: teams[trackedTeam]
 });
 

@@ -60,6 +60,7 @@ select {
   background-color: transparent;
   outline: none;
   margin-bottom: 5px;
+  cursor: pointer;
 }
 
 header {
