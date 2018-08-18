@@ -20,7 +20,7 @@ Since the expected number of drafted players at each position is dependent on th
 
 #### Tracking teams' VOR
 
-![Tracking teams' VOR](http://www.giphy.com/gifs/69xm8U9q8prWx6fYtg)
+![Tracking teams' VOR](https://giphy.com/embed/69xm8U9q8prWx6fYtg)
 
 Teams are tracked during the draft, and a tally is kept of the VOR of team's starters. It's a real-time index for how well everyone is doing.
 
