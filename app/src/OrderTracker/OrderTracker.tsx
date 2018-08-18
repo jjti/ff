@@ -37,13 +37,6 @@ class OrderTracker extends React.Component<IProps, State> {
       <div className="OrderTracker">
         <h3>TEAMS</h3>
 
-        <aside>
-          <div className="Legend-Row">
-            <i className="green-dot" />
-            <p className="small">Will be drafted soon</p>
-          </div>
-        </aside>
-
         <div className="Team-Cards">
           {this.props.teams.map((t, i) => (
             <div

@@ -17,7 +17,7 @@ const initialState = {
 
 type State = Readonly<typeof initialState>;
 
-class TeamPicks extends React.Component<IProps, State> {
+class TeamPicks extends React.PureComponent<IProps, State> {
   constructor(props: any) {
     super(props);
     this.state = { ...initialState, cardLength: this.getCardLength() };

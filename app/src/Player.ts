@@ -1,6 +1,7 @@
 export type Position = "QB" | "RB" | "WR" | "FLEX" | "TE" | "DST" | "K" | "?";
 
 export interface IPlayer {
+  bye: number;
   name: string;
   pos: Position;
   team: string;

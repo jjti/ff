@@ -14,6 +14,7 @@ import { IStoreState } from "../store/store";
 import "./PlayerTable.css";
 
 interface IProps {
+  byeWeeks: { [key: number]: boolean };
   currentPick: number;
   undraftedPlayers: any[];
   pickPlayer: (player: IPlayer) => void;
@@ -21,7 +22,7 @@ interface IProps {
   selectPlayer: (player: IPlayer) => void;
   skip: () => void;
   undo: () => void;
-  valuedPositions: object;
+  valuedPositions: { [key: string]: boolean };
 }
 
 /**
@@ -32,6 +33,10 @@ interface IProps {
  */
 class PlayerTable extends React.Component<IProps> {
   public render() {
+    const draftSoon = this.props.undraftedPlayers.map(
+      p => p.adp && this.props.currentPick + 10 > p.adp
+    );
+
     return (
       <div>
         <header className="PlayerTable-Header">
@@ -43,6 +48,13 @@ class PlayerTable extends React.Component<IProps> {
             Undo
           </button>
         </header>
+
+        <div className="Legend-Row">
+          <div className="green-dot" />
+          <p className="small">Will be drafted soon</p>
+          <div className="orange-dot" />
+          <p className="small">BYE week conflict with starter</p>
+        </div>
 
         <table>
           <thead className="table-head">
@@ -59,7 +71,7 @@ class PlayerTable extends React.Component<IProps> {
             </tr>
           </thead>
           <tbody>
-            {this.props.undraftedPlayers.map((p: IPlayer) => (
+            {this.props.undraftedPlayers.map((p: IPlayer, i) => (
               <tr
                 key={p.name + p.pos + p.team}
                 onDoubleClick={() => this.props.pickPlayer(p)}
@@ -70,11 +82,11 @@ class PlayerTable extends React.Component<IProps> {
                 }
               >
                 <td className="PlayerTable-Row-Name">
-                  {p.name}{" "}
-                  {p.adp &&
-                    this.props.currentPick + 10 > p.adp && (
-                      <div className="green-dot" />
-                    )}
+                  <p>{p.name} </p>
+                  {draftSoon[i] ? <div className="dot green-dot" /> : null}{" "}
+                  {this.props.byeWeeks[p.bye] ? (
+                    <div className="dot orange-dot" />
+                  ) : null}
                 </td>
                 <td>{p.pos}</td>
                 <td>{p.team}</td>
@@ -99,29 +111,48 @@ class PlayerTable extends React.Component<IProps> {
 }
 
 const mapStateToProps = (state: IStoreState) => {
-  const trackedTeam = state.teams[state.trackedTeam];
-  const valuedPositions = {} as any;
+  const { QB, RBs, WRs, TE, Flex, DST, K } = state.teams[state.trackedTeam];
 
   // add the positions to the object that the trackedTeam hasn't
   // filled their roster with (ie they have space for)
-  if (!trackedTeam.QB) {
+  const valuedPositions = {} as any;
+  if (!QB) {
     valuedPositions.QB = true;
   }
-  if (!trackedTeam.TE) {
+  if (!RBs.every((r: IPlayer) => !!r)) {
+    valuedPositions.RB = true;
+  }
+  if (!WRs.every((w: IPlayer) => !!w)) {
+    valuedPositions.WR = true;
+  }
+  if (!Flex) {
+    valuedPositions.RB = true;
+    valuedPositions.WR = true;
+  }
+  if (!TE) {
     valuedPositions.TE = true;
   }
-  if (!trackedTeam.RBs.every((r: IPlayer) => !!r)) {
-    valuedPositions.RB = true;
-  }
-  if (!trackedTeam.WRs.every((w: IPlayer) => !!w)) {
-    valuedPositions.WR = true;
-  }
-  if (!trackedTeam.Flex) {
-    valuedPositions.RB = true;
-    valuedPositions.WR = true;
+
+  // after one of each main starter has been drafted, everything is valued
+  if (!valuedPositions.length) {
+    ["QB", "RB", "WR", "TE"].forEach(p => (valuedPositions[p] = true));
   }
 
+  // only want one of each K and DST, none on bench
+  if (!K) {
+    valuedPositions.K = true;
+  }
+  if (!DST) {
+    valuedPositions.DST = true;
+  }
+
+  // find the bye weeks already taken by the core players (QB, RB, WR, FLEX)
+  const byeWeeks = [QB, ...RBs, ...WRs, Flex]
+    .map(p => p && p.bye)
+    .reduce((acc, bye) => (bye ? { ...acc, [bye]: true } : acc), {});
+
   return {
+    byeWeeks,
     currentPick: state.currentPick,
     undraftedPlayers: getPlayers(state),
     valuedPositions

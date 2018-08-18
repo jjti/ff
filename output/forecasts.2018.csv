@@ -1,483 +1,472 @@
-"","name","pos","team","vor","adp","pred","replace_value","experts","madden","href"
-"109","Le'Veon Bell","RB","Steelers",126,2,205,79,275,96,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15825.png"
-"141","Todd Gurley","RB","Rams",125,1,204,79,279,92,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17683.png"
-"68","David Johnson","RB","Cardinals",120,4,199,79,269,93,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17442.png"
-"158","Antonio Brown","WR","Steelers",114,6,209,95,236,99,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/13934.png"
-"78","Ezekiel Elliott","RB","Cowboys",105,3,184,79,246,92,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17797.png"
-"1","Aaron Rodgers","QB","Packers",97,18,277,180,321,99,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/8439.png"
-"43","Alvin Kamara","RB","Saints",95,5,174,79,237,88,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18187.png"
-"232","Julio Jones","WR","Falcons",94,12,189,95,215,98,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/13982.png"
-"236","Keenan Allen","WR","Chargers",89,20,184,95,209,92,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15818.png"
-"102","Kareem Hunt","RB","Chiefs",88,8,167,79,223,89,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18225.png"
-"32","Russell Wilson","QB","Seahawks",86,43,265,180,316,92,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14881.png"
-"111","Leonard Fournette","RB","Jaguars",83,9,162,79,219,87,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18218.png"
-"130","Saquon Barkley","RB","Giants",81,7,160,79,224,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18567.png"
-"37","Tom Brady","QB","Patriots",80,26,260,180,302,99,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/2330.png"
-"118","Melvin Gordon","RB","Chargers",80,10,159,79,211,89,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17586.png"
-"64","Dalvin Cook","RB","Vikings",79,13,158,79,216,85,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18260.png"
-"194","DeAndre Hopkins","WR","Texans",78,11,173,95,197,94,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15795.png"
-"72","Devonta Freeman","RB","Falcons",76,15,155,79,201,91,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16944.png"
-"266","Odell Beckham","WR","Giants",76,14,171,95,195,95,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16733.png"
-"112","LeSean McCoy","RB","Bills",75,24,154,79,201,90,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/12514.png"
-"14","Deshaun Watson","QB","Texans",71,32,251,180,320,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18246.png"
-"9","Cam Newton","QB","Panthers",69,61,249,180,305,88,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/13994.png"
-"15","Drew Brees","QB","Saints",68,46,248,180,297,91,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/2580.png"
-"59","Christian McCaffrey","RB","Panthers",68,16,147,79,194,87,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18279.png"
-"260","Michael Thomas","WR","Saints",65,19,160,95,183,91,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17834.png"
-"366","Rob Gronkowski","TE","Patriots",63,22,133,71,157,99,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/13229.png"
-"93","Jerick McKinnon","RB","49ers",62,17,141,79,188,85,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16782.png"
-"147","A.J. Green","WR","Bengals",58,23,153,95,176,93,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/13983.png"
-"3","Andrew Luck","QB","Colts",56,82,235,180,292,87,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14874.png"
-"6","Ben Roethlisberger","QB","Steelers",53,71,233,180,287,88,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/5536.png"
-"98","Jordan Howard","RB","Bears",53,27,132,79,174,85,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17919.png"
-"261","Mike Evans","WR","Buccaneers",51,28,146,95,168,89,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16737.png"
-"370","Travis Kelce","TE","Chiefs",51,25,122,71,151,95,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15847.png"
-"107","Lamar Miller","RB","Texans",49,42,128,79,167,85,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14886.png"
-"203","Doug Baldwin","WR","Seahawks",48,35,143,95,164,90,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14221.png"
-"31","Philip Rivers","QB","Chargers",47,108,226,180,282,87,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/5529.png"
-"289","T.Y. Hilton","WR","Colts",47,29,142,95,163,89,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14924.png"
-"155","Amari Cooper","WR","Raiders",46,34,141,95,162,86,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17677.png"
-"27","Matt Ryan","QB","Falcons",44,103,223,180,274,89,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/11237.png"
-"2","Alex Smith","QB","Redskins",43,111,223,180,284,84,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/8416.png"
-"246","Larry Fitzgerald","WR","Cardinals",43,54,138,95,159,89,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/5528.png"
-"286","Stefon Diggs","WR","Vikings",43,30,138,95,159,90,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17676.png"
-"90","Jay Ajayi","RB","Eagles",41,39,120,79,153,86,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17556.png"
-"28","Matthew Stafford","QB","Lions",40,100,219,180,278,85,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/12483.png"
-"94","Joe Mixon","RB","Bengals",40,31,119,79,159,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18193.png"
-"197","Demaryius Thomas","WR","Broncos",40,44,135,95,156,88,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/13216.png"
-"217","Jarvis Landry","WR","Browns",40,50,135,95,155,87,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16790.png"
-"230","JuJu Smith-Schuster","WR","Steelers",40,45,135,95,155,80,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18306.png"
-"193","Davante Adams","WR","Packers",39,21,134,95,154,88,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16800.png"
-"256","Marvin Jones","WR","Lions",39,64,134,95,155,87,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15072.png"
-"320","Delanie Walker","TE","Titans",39,69,109,71,129,93,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/9761.png"
-"10","Carson Wentz","QB","Eagles",38,53,218,180,274,86,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17795.png"
-"330","Greg Olsen","TE","Panthers",38,62,109,71,134,92,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/10475.png"
-"113","Mark Ingram","RB","Saints",37,57,116,79,147,86,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/13981.png"
-"346","Jordan Reed","TE","Redskins",36,93,107,71,113,94,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15860.png"
-"24","Kirk Cousins","QB","Vikings",35,72,214,180,278,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14880.png"
-"71","Derrius Guice","RB","Redskins",35,0,114,79,155,78,NA
-"379","Zach Ertz","TE","Eagles",35,36,106,71,132,91,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15835.png"
-"70","Derrick Henry","RB","Titans",32,40,111,79,139,86,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17832.png"
-"301","Tyreek Hill","WR","Chiefs",32,33,127,95,147,87,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17929.png"
-"209","Golden Tate","WR","Lions",31,51,127,95,146,89,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/13217.png"
-"138","Tevin Coleman","RB","Falcons",29,49,108,79,133,86,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17689.png"
-"152","Allen Robinson","WR","Bears",29,58,124,95,143,87,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16799.png"
-"160","Brandin Cooks","WR","Rams",29,63,124,95,144,87,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16731.png"
-"127","Ronald Jones","RB","Buccaneers",27,66,106,79,144,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18597.png"
-"149","Adam Thielen","WR","Vikings",27,37,122,95,142,88,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17178.png"
-"41","Alex Collins","RB","Ravens",25,41,104,79,136,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17933.png"
-"115","Marlon Mack","RB","Colts",25,91,104,79,141,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18211.png"
-"116","Marshawn Lynch","RB","Raiders",25,77,104,79,128,85,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/10456.png"
-"258","Michael Crabtree","WR","Ravens",25,65,120,95,139,84,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/12563.png"
-"123","Rashaad Penny","RB","Seahawks",24,56,103,79,140,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18585.png"
-"104","Kenyan Drake","RB","Dolphins",23,38,102,79,130,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17856.png"
-"182","Cooper Kupp","WR","Rams",23,90,119,95,138,80,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18415.png"
-"128","Royce Freeman","RB","Broncos",22,55,101,79,141,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18630.png"
-"131","Sony Michel","RB","Patriots",22,68,101,79,136,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18589.png"
-"7","Blake Bortles","QB","Jaguars",20,160,199,180,264,80,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16724.png"
-"30","Patrick Mahomes","QB","Chiefs",20,109,199,180,268,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18210.png"
-"60","Christine Michael","RB","Colts",20,0,99,79,139,71,NA
-"326","Evan Engram","TE","Giants",20,59,91,71,130,85,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18382.png"
-"12","Dak Prescott","QB","Cowboys",19,121,198,180,259,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17907.png"
-"76","Duke Johnson","RB","Browns",19,113,98,79,122,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17658.png"
-"185","Corey Davis","WR","Titans",19,85,114,95,133,80,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18320.png"
-"206","Emmanuel Sanders","WR","Broncos",19,89,114,95,132,88,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/13295.png"
-"82","Isaiah Crowell","RB","Jets",18,99,97,79,128,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17133.png"
-"224","Jordy Nelson","WR","Raiders",18,92,113,95,132,86,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/11270.png"
-"227","Josh Gordon","WR","Browns",18,52,114,95,132,82,NA
-"58","Chris Thompson","RB","Redskins",17,76,96,79,118,84,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15966.png"
-"73","Devontae Booker","RB","Broncos",17,110,96,79,129,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17908.png"
-"342","Jimmy Graham","TE","Packers",17,48,87,71,113,86,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/13232.png"
-"26","Marcus Mariota","QB","Titans",16,138,195,180,261,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17610.png"
-"269","Pierre Garcon","WR","49ers",16,81,111,95,130,86,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/11439.png"
-"231","Julian Edelman","WR","Patriots",15,83,110,95,129,88,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/12649.png"
-"272","Randall Cobb","WR","Packers",15,80,110,95,128,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14053.png"
-"348","Kyle Rudolph","TE","Vikings",14,74,84,71,104,86,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14054.png"
-"372","Tyler Eifert","TE","Bengals",14,135,84,71,82,89,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15788.png"
-"52","Carlos Hyde","RB","Browns",13,102,92,79,115,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16777.png"
-"74","Dion Lewis","RB","Titans",13,73,92,79,106,87,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14198.png"
-"13","Derek Carr","QB","Raiders",12,141,191,180,250,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16757.png"
-"135","Tarik Cohen","RB","Bears",12,84,91,79,111,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18171.png"
-"105","Kerryon Johnson","RB","Lions",11,88,90,79,123,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18602.png"
-"334","Jack Doyle","TE","Colts",11,122,81,71,102,85,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16504.png"
-"277","Robert Woods","WR","Rams",10,86,106,95,123,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15880.png"
-"287","Sterling Shepard","WR","Giants",10,129,105,95,123,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17827.png"
-"332","Hunter Henry","TE","Chargers",10,0,80,71,78,88,NA
-"110","LeGarrette Blount","RB","Lions",9,189,88,79,99,87,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/13213.png"
-"153","Alshon Jeffery","WR","Eagles",9,60,104,95,122,90,NA
-"417","Stephen Gostkowski","K","Patriots",9,107,143,134,143,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/9704.png"
-"140","Thomas Rawls","RB","Jets",8,0,87,79,118,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17739.png"
-"200","DeVante Parker","WR","Dolphins",8,131,103,95,121,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17593.png"
-"221","John Ross","WR","Bengals",8,0,103,95,121,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18395.png"
-"242","Kenny Golladay","WR","Lions",8,118,103,95,121,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18345.png"
-"108","Latavius Murray","RB","Vikings",7,182,86,79,105,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15920.png"
-"143","Ty Montgomery","RB","Packers",7,126,86,79,107,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17611.png"
-"303","Will Fuller","WR","Texans",7,95,102,95,120,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17809.png"
-"325","Eric Ebron","TE","Colts",7,167,77,71,97,84,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16732.png"
-"81","Giovani Bernard","RB","Bengals",6,159,85,79,100,84,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15826.png"
-"134","T.J. Yeldon","RB","Jaguars",6,0,85,79,109,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17678.png"
-"139","Theo Riddick","RB","Lions",6,173,85,79,99,84,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15994.png"
-"214","Jamison Crowder","WR","Redskins",6,119,101,95,119,84,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17600.png"
-"201","Devin Funchess","WR","Panthers",5,98,100,95,118,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17682.png"
-"254","Marquise Goodwin","WR","49ers",5,94,100,95,118,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15839.png"
-"177","Chris Hogan","WR","Patriots",4,79,99,95,117,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14402.png"
-"243","Kenny Stills","WR","Dolphins",4,144,99,95,117,84,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16016.png"
-"338","Jared Cook","TE","Raiders",4,139,74,71,82,85,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/12537.png"
-"315","Charles Clay","TE","Bills",3,174,74,71,87,84,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14145.png"
-"46","Bilal Powell","RB","Jets",2,169,81,79,102,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14129.png"
-"199","DeSean Jackson","WR","Buccaneers",2,198,97,95,114,85,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/11283.png"
-"226","Josh Doctson","WR","Redskins",2,171,97,95,114,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17810.png"
-"238","Kelvin Benjamin","WR","Bills",2,132,97,95,115,84,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16730.png"
-"284","Sammy Watkins","WR","Chiefs",2,75,97,95,114,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16725.png"
-"302","Tyrell Williams","WR","Chargers",1,168,97,95,114,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17762.png"
-"16","Eli Manning","QB","Giants",0,155,180,180,246,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/5526.png"
-"80","Frank Gore","RB","Dolphins",0,205,79,79,102,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/8479.png"
-"264","Mohamed Sanu","WR","Falcons",0,170,95,95,112,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14922.png"
-"371","Trey Burton","TE","Bears",0,96,71,71,78,84,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17195.png"
-"387","Chris Boswell","K","Steelers",0,190,134,134,134,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17175.png"
-"395","Greg Zuerlein","K","Rams",0,125,134,134,134,80,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14993.png"
-"460","Jaguars","DST",NA,0,67,161,161,161,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60030.png"
-"49","C.J. Anderson","RB","Panthers",-1,112,78,79,93,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16040.png"
-"88","James White","RB","Patriots",-1,105,78,79,91,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16913.png"
-"293","Ted Ginn","WR","Saints",-1,172,95,95,111,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/10453.png"
-"314","Cameron Brate","TE","Buccaneers",-1,186,69,71,88,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17784.png"
-"34","Ryan Tannehill","QB","Dolphins",-2,0,177,180,241,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14876.png"
-"86","Jamaal Williams","RB","Packers",-2,87,77,79,101,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18362.png"
-"92","Jeremy Hill","RB","Patriots",-2,0,77,79,99,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16803.png"
-"124","Rex Burkhead","RB","Patriots",-2,70,77,79,96,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15971.png"
-"396","Harrison Butker","K","Chiefs",-2,154,131,134,131,80,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18409.png"
-"397","Jake Elliott","K","Eagles",-2,178,132,134,132,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18178.png"
-"407","Matt Bryant","K","Falcons",-2,196,132,134,132,85,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/4333.png"
-"4","Andy Dalton","QB","Bengals",-3,0,176,180,241,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14012.png"
-"297","Travis Benjamin","WR","Chargers",-3,0,92,95,108,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15062.png"
-"97","Jonathan Stewart","RB","Giants",-4,0,75,79,85,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/11247.png"
-"117","Matt Breida","RB","49ers",-4,115,75,79,95,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18424.png"
-"132","Spencer Ware","RB","Chiefs",-4,0,75,79,91,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16020.png"
-"213","James Washington","WR","Steelers",-4,0,91,95,107,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18619.png"
-"319","David Njoku","TE","Browns",-4,136,67,71,88,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18303.png"
-"402","Justin Tucker","K","Ravens",-4,153,130,134,130,86,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15683.png"
-"17","Jameis Winston","QB","Buccaneers",-5,148,174,180,235,80,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17399.png"
-"119","Mike Gillislee","RB","Patriots",-6,0,73,79,91,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15952.png"
-"251","Marqise Lee","WR","Jaguars",-6,146,89,95,105,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16787.png"
-"265","Nelson Agholor","WR","Eagles",-6,124,89,95,106,84,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17668.png"
-"276","Robby Anderson","WR","Jets",-6,106,89,95,105,84,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18097.png"
-"311","Benjamin Watson","TE","Saints",-6,184,65,71,88,80,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/5557.png"
-"390","Daniel Carlson","K","Vikings",-6,0,127,134,127,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18726.png"
-"270","Quincy Enunwa","WR","Jets",-7,217,88,95,105,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17758.png"
-"419","Wil Lutz","K","Saints",-7,193,126,134,126,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18104.png"
-"18","Jared Goff","QB","Rams",-8,104,171,180,227,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17794.png"
-"376","Vernon Davis","TE","Redskins",-8,0,63,71,62,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/9592.png"
-"480","Rams","DST",NA,-8,97,153,161,153,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60014.png"
-"44","Austin Ekeler","RB","Chargers",-9,161,70,79,80,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18458.png"
-"151","Allen Hurns","WR","Cowboys",-9,134,86,95,103,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17163.png"
-"189","Danny Amendola","WR","Dolphins",-9,216,86,95,102,85,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/11674.png"
-"262","Mike Wallace","WR","Eagles",-9,207,86,95,103,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/12601.png"
-"439","Chargers","DST",NA,-9,120,152,161,152,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60024.png"
-"19","Jimmy Garoppolo","QB","49ers",-10,78,169,180,225,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16760.png"
-"29","Mitchell Trubisky","QB","Bears",-10,145,169,180,235,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18168.png"
-"66","Darren Sproles","RB","Eagles",-10,211,69,79,76,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/8544.png"
-"75","Doug Martin","RB","Raiders",-10,162,69,79,87,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14885.png"
-"163","Brandon Marshall","WR","Seahawks",-10,0,85,95,102,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/9705.png"
-"169","Calvin Ridley","WR","Falcons",-10,117,85,95,101,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18584.png"
-"309","Austin Seferian-Jenkins","TE","Jaguars",-10,201,60,71,68,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16795.png"
-"328","George Kittle","TE","49ers",-10,128,60,71,96,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18292.png"
-"61","Corey Clement","RB","Eagles",-11,137,68,79,82,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18425.png"
-"176","Chris Godwin","WR","Buccaneers",-11,0,84,95,100,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18272.png"
-"255","Martavis Bryant","WR","Raiders",-11,175,84,95,100,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16886.png"
-"361","O.J. Howard","TE","Buccaneers",-11,152,59,71,80,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18322.png"
-"408","Matt Prater","K","Lions",-11,213,123,134,123,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/11122.png"
-"129","Samaje Perine","RB","Redskins",-12,195,67,79,83,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18194.png"
-"220","John Brown","WR","Ravens",-12,0,83,95,99,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16804.png"
-"222","Jordan Matthews","WR","Patriots",-12,0,83,95,99,77,NA
-"308","Austin Hooper","TE","Falcons",-12,0,59,71,71,80,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17861.png"
-"375","Vance McDonald","TE","Steelers",-12,220,59,71,78,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15853.png"
-"381","Adam Vinatieri","K","Colts",-12,208,121,134,121,84,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/1097.png"
-"393","Graham Gano","K","Panthers",-12,219,122,134,122,80,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/12460.png"
-"386","Chandler Catanzaro","K","Buccaneers",-13,0,120,134,120,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17169.png"
-"406","Mason Crosby","K","Packers",-13,200,120,134,120,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/10636.png"
-"137","Terrance West","RB","Saints",-14,0,65,79,81,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16783.png"
-"121","Nyheim Hines","RB","Colts",-15,151,64,79,81,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18663.png"
-"219","Jermaine Kearse","WR","Jets",-15,0,80,95,96,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15428.png"
-"389","Dan Bailey","K","Cowboys",-15,199,119,134,119,80,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14322.png"
-"391","Dustin Hopkins","K","Redskins",-15,0,118,134,118,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15965.png"
-"412","Robbie Gould","K","49ers",-15,158,118,134,118,85,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/9354.png"
-"415","Sam Ficken","K","Rams",-15,0,119,134,119,72,NA
-"493","Vikings","DST",NA,-15,101,146,161,146,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60016.png"
-"162","Brandon LaFell","WR","Bengals",-16,0,79,95,94,79,NA
-"340","Jermaine Gresham","TE","Cardinals",-16,0,55,71,45,82,NA
-"364","Ricky Seals-Jones","TE","Cardinals",-16,157,55,71,92,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18431.png"
-"380","Zach Miller","TE","Bears",-16,0,55,71,52,81,NA
-"11","Case Keenum","QB","Broncos",-17,165,162,180,220,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15168.png"
-"39","Tyrod Taylor","QB","Browns",-17,0,163,180,221,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14163.png"
-"56","Chris Carson","RB","Seahawks",-17,123,62,79,76,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18341.png"
-"57","Chris Ivory","RB","Bills",-17,206,62,79,68,80,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/13587.png"
-"120","Nick Chubb","RB","Browns",-17,116,62,79,75,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18592.png"
-"275","Rishard Matthews","WR","Titans",-17,130,78,95,94,82,NA
-"294","Terrance Williams","WR","Cowboys",-17,0,78,95,93,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15878.png"
-"356","Mike Gesicki","TE","Dolphins",-17,177,54,71,76,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18601.png"
-"63","D'Onta Foreman","RB","Texans",-18,149,61,79,74,75,NA
-"181","Cole Beasley","WR","Cowboys",-18,0,78,95,93,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15349.png"
-"400","Josh Lambo","K","Jaguars",-18,218,116,134,116,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17746.png"
-"416","Sebastian Janikowski","K","Seahawks",-18,0,116,134,116,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/2148.png"
-"476","Patriots","DST",NA,-18,176,143,161,143,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60017.png"
-"492","Titans","DST",NA,-18,142,143,161,143,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60010.png"
-"40","Aaron Jones","RB","Packers",-19,133,60,79,72,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18314.png"
-"89","Javorius Allen","RB","Ravens",-19,0,60,79,74,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17616.png"
-"103","Kenneth Dixon","RB","Ravens",-19,197,60,79,73,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17906.png"
-"170","Cameron Meredith","WR","Saints",-19,191,76,95,92,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17750.png"
-"300","Tyler Lockett","WR","Seahawks",-19,181,76,95,92,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17619.png"
-"331","Hayden Hurst","TE","Ravens",-19,179,51,71,62,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18583.png"
-"414","Ryan Succop","K","Titans",-19,0,115,134,115,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/12731.png"
-"304","Willie Snead","WR","Ravens",-20,0,75,95,91,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17184.png"
-"383","Brandon McManus","K","Broncos",-20,0,113,134,113,80,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17171.png"
-"38","Trevor Siemian","QB","Vikings",-21,0,158,180,222,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17455.png"
-"106","Kyle Juszczyk","RB","49ers",-21,0,58,79,57,84,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16002.png"
-"378","Will Tye","TE","Patriots",-21,0,50,71,65,77,NA
-"399","Jason Sanders","K","Dolphins",-21,0,112,134,112,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18787.png"
-"420","Zane Gonzalez","K","Browns",-21,0,112,134,112,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18327.png"
-"323","Dwayne Allen","TE","Patriots",-22,0,49,71,34,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14901.png"
-"382","Aldrick Rosas","K","Giants",-22,0,112,134,112,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18165.png"
-"392","Giorgio Tavecchio","K","Raiders",-22,0,112,134,112,76,NA
-"413","Roberto Aguayo","K","Chargers",-22,0,112,134,112,73,NA
-"329","Gerald Everett","TE","Rams",-23,0,48,71,59,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18374.png"
-"347","Josh Hill","TE","Saints",-23,0,47,71,29,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16143.png"
-"352","Marcedes Lewis","TE","Packers",-23,0,47,71,23,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/9614.png"
-"367","Ryan Griffin","TE","Texans",-23,0,48,71,72,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15887.png"
-"384","Cairo Santos","K","Jets",-23,0,111,134,111,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17172.png"
-"385","Caleb Sturgis","K","Chargers",-23,0,111,134,111,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15918.png"
-"481","Ravens","DST",NA,-23,127,138,161,138,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60033.png"
-"20","Joe Flacco","QB","Ravens",-24,0,155,180,215,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/11252.png"
-"202","Donte Moncrief","WR","Jaguars",-24,0,71,95,86,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16791.png"
-"403","Ka'imi Fairbairn","K","Texans",-24,0,110,134,110,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18454.png"
-"410","Phil Dawson","K","Cardinals",-24,0,110,134,110,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/1440.png"
-"418","Stephen Hauschka","K","Bills",-24,0,110,134,110,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/11923.png"
-"451","Eagles","DST",NA,-24,114,137,161,137,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60021.png"
-"186","Courtland Sutton","WR","Broncos",-25,0,70,95,85,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18599.png"
-"349","Lance Kendricks","TE","Packers",-26,0,45,71,43,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14007.png"
-"433","Broncos","DST",NA,-26,147,135,161,135,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60007.png"
-"307","Adam Shaheen","TE","Bears",-27,0,44,71,53,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18276.png"
-"351","Luke Willson","TE","Lions",-27,0,44,71,47,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16121.png"
-"374","Tyler Kroft","TE","Bengals",-27,0,44,71,34,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17650.png"
-"377","Virgil Green","TE","Chargers",-27,0,43,71,52,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14085.png"
-"53","Charcandrick West","RB","Chiefs",-28,0,51,79,52,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17384.png"
-"54","Charles Sims","RB","Buccaneers",-28,0,51,79,56,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16749.png"
-"179","Christian Kirk","WR","Cardinals",-28,0,67,95,82,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18606.png"
-"267","Paul Richardson","WR","Redskins",-28,0,67,95,82,84,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16781.png"
-"285","Seth Roberts","WR","Raiders",-28,0,68,95,82,77,NA
-"317","Dallas Goedert","TE","Eagles",-28,0,43,71,44,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18608.png"
-"336","Jake Butt","TE","Broncos",-28,0,43,71,64,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18242.png"
-"341","Jesse James","TE","Steelers",-28,0,43,71,44,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17690.png"
-"8","Brock Osweiler","QB","Dolphins",-29,0,150,180,213,72,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14879.png"
-"77","Elijah McGuire","RB","Jets",-29,0,50,79,60,72,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18313.png"
-"373","Tyler Higbee","TE","Rams",-29,0,41,71,39,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17886.png"
-"122","Peyton Barber","RB","Buccaneers",-30,180,49,79,58,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18106.png"
-"148","Adam Humphries","WR","Buccaneers",-30,0,65,95,79,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17756.png"
-"388","Cody Parkey","K","Bears",-30,0,103,134,103,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17173.png"
-"404","Kai Forbath","K","Vikings",-30,215,104,134,104,78,NA
-"218","Jeremy Kerley","WR","Bills",-31,0,64,95,78,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14151.png"
-"488","Steelers","DST",NA,-31,150,130,161,130,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60023.png"
-"184","Corey Coleman","WR","Browns",-32,0,63,95,78,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17805.png"
-"299","Tyler Boyd","WR","Bengals",-32,0,63,95,77,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17840.png"
-"327","Garrett Celek","TE","49ers",-32,0,38,71,44,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15204.png"
-"355","Michael Roberts","TE","Lions",-32,0,39,71,59,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18227.png"
-"363","Richard Rodgers","TE","Eagles",-32,0,39,71,38,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16786.png"
-"42","Alfred Blue","RB","Texans",-33,0,46,79,54,68,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17134.png"
-"136","Tavon Austin","RB","Cowboys",-33,0,46,79,44,80,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15786.png"
-"157","Anthony Miller","WR","Bears",-33,163,62,95,76,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18610.png"
-"235","Keelan Cole","WR","Jaguars",-33,0,62,95,76,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18466.png"
-"306","A.J. Derby","TE","Dolphins",-33,0,37,71,27,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17711.png"
-"324","Ed Dickson","TE","Seahawks",-33,0,37,71,28,77,NA
-"353","Mark Andrews","TE","Ravens",-33,0,37,71,40,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18645.png"
-"362","Rhett Ellison","TE","Giants",-33,0,38,71,28,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15003.png"
-"398","Jason Myers","K","Seahawks",-33,0,100,134,100,76,NA
-"437","Cardinals","DST",NA,-33,183,128,161,128,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60022.png"
-"144","Wayne Gallman","RB","Giants",-34,0,45,79,50,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18233.png"
-"318","Darren Fells","TE","Browns",-34,0,37,71,25,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17187.png"
-"322","Dion Sims","TE","Bears",-34,0,37,71,27,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15974.png"
-"345","Jordan Leggett","TE","Jets",-35,0,36,71,62,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18232.png"
-"368","Seth DeValve","TE","Browns",-35,0,35,71,21,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17910.png"
-"99","Jordan Wilkins","RB","Colts",-36,187,43,79,49,70,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18728.png"
-"126","Rod Smith","RB","Cowboys",-36,0,43,79,49,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17781.png"
-"298","Trent Taylor","WR","49ers",-36,0,59,95,73,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18296.png"
-"357","Nick Boyle","TE","Ravens",-37,0,33,71,29,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17567.png"
-"446","Cowboys","DST",NA,-37,210,124,161,124,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60006.png"
-"55","Chase Edmonds","RB","Cardinals",-38,0,41,79,45,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18693.png"
-"96","John Kelly","RB","Rams",-38,0,41,79,46,70,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18735.png"
-"312","Blake Jarwin","TE","Cowboys",-38,0,33,71,60,70,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18818.png"
-"316","Clive Walford","TE","Jets",-38,0,33,71,41,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17475.png"
-"339","Jeff Heuerman","TE","Broncos",-38,0,33,71,33,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17583.png"
-"343","Jonnu Smith","TE","Titans",-38,0,33,71,33,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18183.png"
-"474","Packers","DST",NA,-38,194,123,161,123,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60009.png"
-"62","Corey Grant","RB","Jaguars",-39,0,40,79,39,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17752.png"
-"142","Travaris Cadet","RB","Bills",-39,0,40,79,42,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15457.png"
-"210","J.J. Nelson","WR","Cardinals",-39,0,56,95,70,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17514.png"
-"69","DeAndre Washington","RB","Raiders",-40,0,39,79,40,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17915.png"
-"150","Albert Wilson","WR","Dolphins",-40,0,56,95,69,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17182.png"
-"208","Geronimo Allison","WR","Packers",-40,0,56,95,69,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18110.png"
-"263","Mike Williams","WR","Chargers",-40,156,55,95,69,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18235.png"
-"281","Ryan Grant","WR","Colts",-40,0,55,95,69,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17179.png"
-"453","Falcons","DST",NA,-40,209,121,161,121,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60001.png"
-"475","Panthers","DST",NA,-40,185,121,161,121,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60029.png"
-"491","Texans","DST",NA,-40,143,121,161,121,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60034.png"
-"196","Dede Westbrook","WR","Jaguars",-41,0,55,95,68,80,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18302.png"
-"321","Demetrius Harris","TE","Chiefs",-41,0,29,71,31,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17189.png"
-"359","Nick Vannett","TE","Seahawks",-41,0,30,71,45,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17873.png"
-"65","Damien Williams","RB","Chiefs",-42,0,37,79,30,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17138.png"
-"79","Fozzy Whittaker","RB","Panthers",-42,0,37,79,39,70,NA
-"146","Zach Zenner","RB","Lions",-42,0,37,79,40,70,NA
-"313","C.J. Uzomah","TE","Bengals",-42,0,29,71,23,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17564.png"
-"448","Denver","DST",NA,-42,NA,119,161,119,NA,NA
-"483","Saints","DST",NA,-42,188,119,161,119,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60018.png"
-"50","C.J. Prosise","RB","Seahawks",-43,0,36,79,37,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17869.png"
-"159","Antonio Callaway","WR","Browns",-43,0,52,95,65,70,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18664.png"
-"237","Keke Coutee","WR","Texans",-43,0,53,95,66,72,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18662.png"
-"259","Michael Gallup","WR","Cowboys",-43,164,52,95,65,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18640.png"
-"296","Torrey Smith","WR","Panthers",-43,0,52,95,66,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14032.png"
-"358","Nick O'Leary","TE","Bills",-43,0,28,71,25,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17604.png"
-"485","Seahawks","DST",NA,-43,214,118,161,118,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60026.png"
-"310","Ben Koyack","TE","Jaguars",-44,0,26,71,22,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17645.png"
-"360","Niles Paul","TE","Jaguars",-44,0,26,71,21,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14156.png"
-"365","Rico Gathers","TE","Cowboys",-44,0,26,71,47,69,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17973.png"
-"51","Cameron Artis-Payne","RB","Panthers",-45,0,34,79,35,69,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17704.png"
-"85","Jalen Richard","RB","Raiders",-45,0,34,79,30,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18079.png"
-"241","Kenny Britt","WR","Patriots",-45,0,51,95,64,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/12556.png"
-"291","Taylor Gabriel","WR","Bears",-45,0,50,95,63,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17177.png"
-"295","Terrelle Pryor","WR","Jets",-45,0,50,95,63,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14851.png"
-"429","Bears","DST",NA,-45,212,116,161,116,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60003.png"
-"45","Benny Cunningham","RB","Bears",-46,0,33,79,34,70,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16055.png"
-"87","James Conner","RB","Steelers",-46,204,33,79,32,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18236.png"
-"125","Robert Turbin","RB","Colts",-46,0,33,79,32,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14894.png"
-"133","T.J. Logan","RB","Cardinals",-46,0,33,79,31,72,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18286.png"
-"337","James O'Shaughnessy","TE","Jaguars",-46,0,24,71,22,72,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17441.png"
-"350","Lee Smith","TE","Raiders",-46,0,25,71,30,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14215.png"
-"369","Stephen Anderson","TE","Texans",-46,0,24,71,28,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18027.png"
-"335","Jacob Hollister","TE","Patriots",-47,0,24,71,21,72,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18464.png"
-"411","Randy Bullock","K","Bengals",-47,0,87,134,87,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15091.png"
-"441","Chiefs","DST",NA,-47,202,114,161,114,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60012.png"
-"84","Jacquizz Rodgers","RB","Buccaneers",-48,0,31,79,29,72,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14193.png"
-"95","Joe Williams","RB","49ers",-48,0,31,79,29,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18354.png"
-"47","Bo Scarbrough","RB","Cowboys",-49,0,30,79,28,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18794.png"
-"48","Boston Scott","RB","Saints",-49,0,30,79,28,72,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18759.png"
-"101","Kalen Ballage","RB","Dolphins",-49,0,30,79,28,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18690.png"
-"114","Mark Walton","RB","Bengals",-49,0,30,79,27,72,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18671.png"
-"292","Taywan Taylor","WR","Titans",-49,0,46,95,59,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18224.png"
-"100","Justin Jackson","RB","Chargers",-50,0,29,79,27,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18809.png"
-"344","Jordan Akins","TE","Texans",-50,0,20,71,22,70,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18657.png"
-"354","MarQueis Gray","TE","Dolphins",-50,0,20,71,30,69,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16323.png"
-"145","Wendell Smallwood","RB","Eagles",-51,0,28,79,26,68,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17921.png"
-"239","Kendall Wright","WR","Vikings",-51,0,44,95,57,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14909.png"
-"282","Ryan Switzer","WR","Raiders",-51,0,44,95,57,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18287.png"
-"333","Ian Thomas","TE","Panthers",-51,0,20,71,22,70,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18660.png"
-"154","Amara Darboh","WR","Seahawks",-52,0,43,95,55,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18201.png"
-"452","England","DST",NA,-52,NA,109,161,109,NA,NA
-"83","Ito Smith","RB","Falcons",-53,0,26,79,21,72,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18685.png"
-"268","Phillip Dorsett","WR","Patriots",-53,0,42,95,55,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17643.png"
-"290","Tajae Sharpe","WR","Titans",-53,0,42,95,54,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17912.png"
-"305","Zay Jones","WR","Bills",-53,0,42,95,54,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18223.png"
-"468","New England","DST",NA,-53,NA,108,161,108,NA,NA
-"91","Jaylen Samuels","RB","Steelers",-54,0,25,79,21,68,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18724.png"
-"173","Charles Johnson","WR","Jets",-54,0,41,95,53,71,NA
-"174","Chester Rogers","WR","Colts",-54,0,41,95,54,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18089.png"
-"427","Bay","DST",NA,-54,NA,107,161,107,NA,NA
-"187","Curtis Samuel","WR","Panthers",-55,0,40,95,53,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18284.png"
-"422","Angeles","DST",NA,-55,NA,106,161,106,NA,NA
-"462","Kansas City","DST",NA,-56,NA,105,161,105,NA,NA
-"467","Minnesota","DST",NA,-56,NA,104,161,104,NA,NA
-"472","Oakland","DST",NA,-56,NA,105,161,105,NA,NA
-"175","Chris Conley","WR","Chiefs",-57,0,38,95,50,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17638.png"
-"495","York","DST",NA,-57,NA,104,161,104,NA,NA
-"165","Breshad Perriman","WR","Ravens",-58,0,37,95,49,74,NA
-"167","Brice Butler","WR","Cardinals",-59,0,36,95,48,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15896.png"
-"166","Brian Quick","WR","Redskins",-61,0,34,95,46,73,NA
-"477","Philadelphia","DST",NA,-61,NA,100,161,100,NA,NA
-"283","Sammie Coates","WR","Texans",-62,0,33,95,45,67,NA
-"288","T.J. Jones","WR","Lions",-62,0,33,95,44,76,NA
-"426","Baltimore","DST",NA,-62,NA,98,161,98,NA,NA
-"473","Orleans","DST",NA,-62,NA,99,161,99,NA,NA
-"274","Ricardo Louis","WR","Browns",-63,0,32,95,44,71,NA
-"450","Dolphins","DST",NA,-63,NA,98,161,98,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60015.png"
-"454","Francisco","DST",NA,-63,NA,98,161,98,NA,NA
-"180","Cody Latimer","WR","Giants",-64,0,31,95,42,72,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16793.png"
-"191","Dante Pettis","WR","49ers",-64,0,31,95,43,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18603.png"
-"432","Bills","DST",NA,-64,NA,97,161,97,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60002.png"
-"438","Carolina","DST",NA,-64,NA,97,161,97,NA,NA
-"443","City","DST",NA,-64,NA,97,161,97,NA,NA
-"463","Lions","DST",NA,-64,NA,97,161,97,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60008.png"
-"456","Green Bay","DST",NA,-65,NA,96,161,96,NA,NA
-"457","Houston","DST",NA,-65,NA,96,161,96,NA,NA
-"35","Sam Bradford","QB","Cardinals",-66,0,114,180,168,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/13197.png"
-"183","Cordarrelle Patterson","WR","Patriots",-66,0,29,95,40,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15807.png"
-"482","Redskins","DST",NA,-66,NA,95,161,95,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60028.png"
-"161","Brandon Coleman","WR","Saints",-67,0,29,95,40,77,NA
-"245","Laquon Treadwell","WR","Vikings",-67,0,28,95,39,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17811.png"
-"168","Bruce Ellington","WR","Texans",-68,0,27,95,39,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16946.png"
-"278","Rod Streater","WR","Bills",-68,0,27,95,38,70,NA
-"431","Bengals","DST",NA,-68,NA,93,161,93,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60004.png"
-"249","Malcolm Mitchell","WR","Patriots",-69,0,26,95,37,75,NA
-"479","Raiders","DST",NA,-70,NA,91,161,91,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60013.png"
-"207","Equanimeous St.","WR","Packers",-71,0,24,95,35,67,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18765.png"
-"212","Jakeem Grant","WR","Dolphins",-71,0,24,95,35,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17947.png"
-"215","Jarius Wright","WR","Panthers",-71,0,24,95,35,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14918.png"
-"442","Cincinnati","DST",NA,-71,NA,90,161,90,NA,NA
-"447","Dallas","DST",NA,-71,NA,90,161,90,NA,NA
-"487","Seattle","DST",NA,-71,NA,90,161,90,NA,NA
-"490","Tennessee","DST",NA,-71,NA,90,161,90,NA,NA
-"494","Washington","DST",NA,-71,NA,90,161,90,NA,NA
-"172","Chad Williams","WR","Cardinals",-72,0,23,95,34,69,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18169.png"
-"178","Chris Moore","WR","Ravens",-72,0,23,95,33,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17883.png"
-"216","Jaron Brown","WR","Seahawks",-72,0,23,95,33,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16172.png"
-"279","Roger Lewis","WR","Giants",-72,0,24,95,34,72,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18047.png"
-"434","Browns","DST",NA,-72,NA,89,161,89,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60005.png"
-"164","Braxton Miller","WR","Texans",-73,0,22,95,33,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17864.png"
-"192","Darrius Heyward-Bey","WR","Steelers",-73,0,22,95,32,69,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/12570.png"
-"211","J'Mon Moore","WR","Packers",-73,0,23,95,33,69,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18692.png"
-"424","Arizona","DST",NA,-73,NA,88,161,88,NA,NA
-"478","Pittsburgh","DST",NA,-73,NA,88,161,88,NA,NA
-"188","D.J. Chark","WR","Jaguars",-74,0,21,95,32,72,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18620.png"
-"244","Kevin White","WR","Bears",-74,0,21,95,31,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17703.png"
-"250","Markus Wheaton","WR","Eagles",-74,0,21,95,31,70,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15873.png"
-"280","Russell Shepard","WR","Giants",-74,0,21,95,31,72,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16227.png"
-"425","Atlanta","DST",NA,-74,NA,87,161,87,NA,NA
-"449","Detroit","DST",NA,-74,NA,87,161,87,NA,NA
-"195","DeAngelo Yancey","WR","Packers",-75,0,20,95,31,66,NA
-"198","Deon Cain","WR","Colts",-75,0,20,95,30,68,NA
-"228","Josh Malone","WR","Bengals",-75,0,20,95,30,70,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18216.png"
-"436","Buffalo","DST",NA,-75,NA,86,161,86,NA,NA
-"247","Leonte Carroo","WR","Dolphins",-76,0,19,95,29,70,NA
-"445","Colts","DST",NA,-76,NA,85,161,85,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60011.png"
-"466","Miami","DST",NA,-76,NA,85,161,85,NA,NA
-"489","Tampa Bay","DST",NA,-76,NA,85,161,85,NA,NA
-"225","Josh Bellamy","WR","Bears",-77,0,18,95,29,73,NA
-"240","Kendrick Bourne","WR","49ers",-77,0,18,95,28,70,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18467.png"
-"257","Michael Campanaro","WR","Titans",-77,0,18,95,29,67,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17148.png"
-"435","Buccaneers","DST",NA,-77,NA,84,161,84,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60027.png"
-"229","Josh Reynolds","WR","Rams",-78,0,17,95,27,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18214.png"
-"252","Marquess Wilson","WR","Eagles",-78,0,17,95,27,73,NA
-"253","Marquez Valdes-Scantling","WR","Packers",-78,0,17,95,27,70,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18733.png"
-"273","Rashard Higgins","WR","Browns",-78,0,17,95,27,70,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17934.png"
-"234","Justin Hunter","WR","Steelers",-79,0,16,95,26,72,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15845.png"
-"36","Sam Darnold","QB","Jets",-80,0,99,180,154,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18566.png"
-"171","Chad Hansen","WR","Jets",-80,0,15,95,25,69,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18170.png"
-"204","Dwayne Harris","WR","Raiders",-80,0,15,95,26,69,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14100.png"
-"205","Dylan Cantrell","WR","Chargers",-80,0,15,95,25,69,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18750.png"
-"223","Jordan Taylor","WR","Broncos",-80,0,15,95,25,70,NA
-"233","Justin Hardy","WR","Falcons",-80,0,15,95,25,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17542.png"
-"458","Indianapolis","DST",NA,-81,NA,80,161,80,NA,NA
-"470","New York","DST",NA,-82,NA,79,161,79,NA,NA
-"156","Andre Holmes","WR","Bills",-84,0,11,95,21,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14403.png"
-"248","Mack Hollins","WR","Eagles",-84,0,11,95,21,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18350.png"
-"440","Chicago","DST",NA,-86,NA,75,161,75,NA,NA
-"464","Los Angeles","DST",NA,-86,NA,75,161,75,NA,NA
-"455","Giants","DST",NA,-88,NA,72,161,72,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60019.png"
-"459","Jacksonville","DST",NA,-92,NA,69,161,69,NA,NA
-"461","Jets","DST",NA,-92,NA,69,161,69,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60020.png"
-"421","49ers","DST",NA,-93,NA,68,161,68,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60025.png"
-"469","New Orleans","DST",NA,-98,NA,63,161,63,NA,NA
-"444","Cleveland","DST",NA,-104,NA,57,161,57,NA,NA
-"484","San Francisco","DST",NA,-104,NA,57,161,57,NA,NA
-"33","Ryan Fitzpatrick","QB","Buccaneers",-123,0,56,180,105,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/8664.png"
-"22","Josh McCown","QB","Jets",-130,0,50,180,96,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/3609.png"
-"23","Josh Rosen","QB","Cardinals",-130,0,49,180,95,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18572.png"
-"5","Baker Mayfield","QB","Browns",-148,166,31,180,70,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18565.png"
-"21","Josh Allen","QB","Bills",-151,0,28,180,74,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18570.png"
-"25","Lamar Jackson","QB","Ravens",-176,0,3,180,42,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18590.png"
+"","name","pos","team","vor","adp","pred","replace_value","experts","madden","href","bye"
+"121","Todd Gurley","RB","Rams",115,1,204,90,279,92,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17683.png",12
+"133","Le'Veon Bell","RB","Steelers",115,2,205,90,275,96,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15825.png",7
+"63","David Johnson","RB","Cardinals",109,4,199,90,269,93,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17442.png",9
+"77","Ezekiel Elliott","RB","Cowboys",94,3,184,90,246,92,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17797.png",8
+"351","Rob Gronkowski","TE","Patriots",90,22,133,43,157,99,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/13229.png",11
+"126","Alvin Kamara","RB","Saints",84,5,174,90,237,88,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18187.png",6
+"320","Travis Kelce","TE","Chiefs",79,25,122,43,151,95,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15847.png",12
+"69","Kareem Hunt","RB","Chiefs",77,8,167,90,223,89,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18225.png",12
+"94","Leonard Fournette","RB","Jaguars",72,9,162,90,219,87,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18218.png",9
+"91","Saquon Barkley","RB","Giants",70,7,160,90,224,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18567.png",9
+"65","Melvin Gordon","RB","Chargers",69,10,159,90,211,89,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17586.png",8
+"141","Dalvin Cook","RB","Vikings",69,13,158,90,216,85,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18260.png",10
+"280","Antonio Brown","WR","Steelers",68,6,209,141,236,99,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/13934.png",7
+"368","Delanie Walker","TE","Titans",67,69,109,43,129,93,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/9761.png",8
+"347","Greg Olsen","TE","Panthers",66,62,109,43,134,92,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/10475.png",4
+"88","Devonta Freeman","RB","Falcons",65,15,155,90,201,91,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16944.png",8
+"51","LeSean McCoy","RB","Bills",64,24,154,90,201,90,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/12514.png",11
+"330","Zach Ertz","TE","Eagles",63,36,106,43,132,91,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15835.png",9
+"25","Aaron Rodgers","QB","Packers",62,18,277,214,321,99,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/8439.png",7
+"108","Christian McCaffrey","RB","Panthers",57,16,147,90,194,87,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18279.png",4
+"33","Russell Wilson","QB","Seahawks",51,43,265,214,316,92,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14881.png",7
+"39","Jerick McKinnon","RB","49ers",51,17,141,90,188,85,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16782.png",11
+"211","Julio Jones","WR","Falcons",49,12,189,141,215,98,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/13982.png",8
+"333","Evan Engram","TE","Giants",48,59,91,43,130,85,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18382.png",9
+"27","Tom Brady","QB","Patriots",45,26,260,214,302,99,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/2330.png",11
+"343","Jimmy Graham","TE","Packers",44,48,87,43,113,86,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/13232.png",7
+"45","Jordan Howard","RB","Bears",43,27,132,90,174,85,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17919.png",5
+"182","Keenan Allen","WR","Chargers",43,20,184,141,209,92,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15818.png",8
+"306","Tyler Eifert","TE","Bengals",41,135,84,43,82,89,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15788.png",9
+"370","Kyle Rudolph","TE","Vikings",41,74,84,43,104,86,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14054.png",10
+"136","Lamar Miller","RB","Texans",38,42,128,90,167,85,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14886.png",10
+"323","Jack Doyle","TE","Colts",38,122,81,43,102,85,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16504.png",9
+"318","Hunter Henry","TE","Chargers",37,0,80,43,78,88,NA,8
+"35","Deshaun Watson","QB","Texans",36,32,251,214,320,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18246.png",10
+"26","Cam Newton","QB","Panthers",34,61,249,214,305,88,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/13994.png",4
+"322","Eric Ebron","TE","Colts",34,167,77,43,97,84,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16732.png",9
+"32","Drew Brees","QB","Saints",33,46,248,214,297,91,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/2580.png",6
+"283","DeAndre Hopkins","WR","Texans",33,11,173,141,197,94,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15795.png",10
+"353","Jared Cook","TE","Raiders",32,139,74,43,82,85,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/12537.png",7
+"308","Charles Clay","TE","Bills",31,174,74,43,87,84,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14145.png",11
+"87","Jay Ajayi","RB","Eagles",30,39,120,90,153,86,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17556.png",9
+"216","Odell Beckham","WR","Giants",30,14,171,141,195,95,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16733.png",9
+"47","Joe Mixon","RB","Bengals",29,31,119,90,159,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18193.png",9
+"301","Trey Burton","TE","Bears",28,96,71,43,78,84,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17195.png",5
+"129","Mark Ingram","RB","Saints",27,57,116,90,147,86,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/13981.png",6
+"315","Cameron Brate","TE","Buccaneers",26,186,69,43,88,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17784.png",5
+"312","David Njoku","TE","Browns",24,136,67,43,88,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18303.png",11
+"360","Benjamin Watson","TE","Saints",22,184,65,43,88,80,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/5557.png",6
+"14","Andrew Luck","QB","Colts",21,82,235,214,292,87,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14874.png",9
+"140","Derrick Henry","RB","Titans",21,40,111,90,139,86,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17832.png",8
+"272","Michael Thomas","WR","Saints",19,19,160,141,183,91,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17834.png",6
+"34","Ben Roethlisberger","QB","Steelers",18,71,233,214,287,88,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/5536.png",7
+"90","Tevin Coleman","RB","Falcons",18,49,108,90,133,86,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17689.png",8
+"299","George Kittle","TE","49ers",17,128,60,43,96,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18292.png",11
+"314","O.J. Howard","TE","Buccaneers",17,152,59,43,80,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18322.png",5
+"338","Austin Seferian-Jenkins","TE","Jaguars",17,201,60,43,68,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16795.png",9
+"58","Ronald Jones","RB","Buccaneers",16,66,106,90,144,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18597.png",5
+"332","Austin Hooper","TE","Falcons",16,0,59,43,71,80,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17861.png",8
+"363","Vance McDonald","TE","Steelers",16,220,59,43,78,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15853.png",7
+"74","Marlon Mack","RB","Colts",14,91,104,90,141,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18211.png",9
+"119","Marshawn Lynch","RB","Raiders",14,77,104,90,128,85,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/10456.png",7
+"124","Alex Collins","RB","Ravens",14,41,104,90,136,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17933.png",10
+"130","Rashaad Penny","RB","Seahawks",13,56,103,90,140,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18585.png",7
+"156","A.J. Green","WR","Bengals",13,23,153,141,176,93,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/13983.png",9
+"12","Philip Rivers","QB","Chargers",12,108,226,214,282,87,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/5529.png",8
+"81","Kenyan Drake","RB","Dolphins",12,38,102,90,130,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17856.png",11
+"303","Zach Miller","TE","Bears",12,0,55,43,52,81,NA,5
+"316","Jermaine Gresham","TE","Cardinals",12,0,55,43,45,82,NA,9
+"317","Ricky Seals-Jones","TE","Cardinals",12,157,55,43,92,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18431.png",9
+"53","Royce Freeman","RB","Broncos",11,55,101,90,141,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18630.png",10
+"112","Sony Michel","RB","Patriots",11,68,101,90,136,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18589.png",11
+"328","Mike Gesicki","TE","Dolphins",11,177,54,43,76,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18601.png",11
+"19","Matt Ryan","QB","Falcons",9,103,223,214,274,89,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/11237.png",8
+"73","Christine Michael","RB","Colts",9,0,99,90,139,71,NA,9
+"56","Duke Johnson","RB","Browns",8,113,98,90,122,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17658.png",11
+"99","Isaiah Crowell","RB","Jets",8,99,97,90,128,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17133.png",11
+"356","Hayden Hurst","TE","Ravens",8,179,51,43,62,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18583.png",10
+"349","Will Tye","TE","Patriots",7,0,50,43,65,77,NA,11
+"52","Devontae Booker","RB","Broncos",6,110,96,90,129,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17908.png",10
+"350","Dwayne Allen","TE","Patriots",6,0,49,43,34,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14901.png",11
+"24","Matthew Stafford","QB","Lions",5,100,219,214,278,85,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/12483.png",6
+"173","Mike Evans","WR","Buccaneers",5,28,146,141,168,89,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16737.png",5
+"355","Gerald Everett","TE","Rams",5,0,48,43,59,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18374.png",12
+"367","Ryan Griffin","TE","Texans",5,0,48,43,72,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15887.png",10
+"345","Marcedes Lewis","TE","Packers",4,0,47,43,23,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/9614.png",7
+"359","Josh Hill","TE","Saints",4,0,47,43,29,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16143.png",6
+"18","Carson Wentz","QB","Eagles",3,53,218,214,274,86,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17795.png",9
+"55","Carlos Hyde","RB","Browns",2,102,92,90,115,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16777.png",11
+"139","Dion Lewis","RB","Titans",2,73,92,90,106,87,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14198.png",8
+"190","T.Y. Hilton","WR","Colts",2,29,142,141,163,89,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14924.png",9
+"273","Doug Baldwin","WR","Seahawks",2,35,143,141,164,90,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14221.png",7
+"344","Lance Kendricks","TE","Packers",2,0,45,43,43,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14007.png",7
+"43","Tarik Cohen","RB","Bears",1,84,91,90,111,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18171.png",5
+"302","Adam Shaheen","TE","Bears",1,0,44,43,53,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18276.png",5
+"305","Tyler Kroft","TE","Bengals",1,0,44,43,34,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17650.png",9
+"341","Luke Willson","TE","Lions",1,0,44,43,47,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16121.png",6
+"38","Kirk Cousins","QB","Vikings",0,72,214,214,278,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14880.png",10
+"104","Kerryon Johnson","RB","Lions",0,88,90,90,123,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18602.png",6
+"254","Amari Cooper","WR","Raiders",0,34,141,141,162,86,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17677.png",7
+"310","Jake Butt","TE","Broncos",0,0,43,43,64,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18242.png",10
+"319","Virgil Green","TE","Chargers",0,0,43,43,52,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14085.png",8
+"331","Dallas Goedert","TE","Eagles",0,0,43,43,44,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18608.png",9
+"364","Jesse James","TE","Steelers",0,0,43,43,44,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17690.png",7
+"396","Stephen Gostkowski","K","Patriots",0,107,143,143,143,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/9704.png",11
+"449","Jaguars","DST",NA,0,67,161,161,161,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60030.png",NA
+"103","LeGarrette Blount","RB","Lions",-2,189,88,90,99,87,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/13213.png",6
+"294","Stefon Diggs","WR","Vikings",-2,30,138,141,159,90,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17676.png",10
+"354","Tyler Higbee","TE","Rams",-2,0,41,43,39,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17886.png",12
+"100","Thomas Rawls","RB","Jets",-3,0,87,90,118,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17739.png",11
+"106","Ty Montgomery","RB","Packers",-3,126,86,90,107,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17611.png",7
+"179","Larry Fitzgerald","WR","Cardinals",-3,54,138,141,159,89,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/5528.png",9
+"142","Latavius Murray","RB","Vikings",-4,182,86,90,105,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15920.png",10
+"298","Garrett Celek","TE","49ers",-4,0,38,43,44,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15204.png",11
+"329","Richard Rodgers","TE","Eagles",-4,0,39,43,38,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16786.png",9
+"342","Michael Roberts","TE","Lions",-4,0,39,43,59,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18227.png",6
+"46","Giovani Bernard","RB","Bengals",-5,159,85,90,100,84,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15826.png",9
+"96","T.J. Yeldon","RB","Jaguars",-5,0,85,90,109,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17678.png",9
+"102","Theo Riddick","RB","Lions",-5,173,85,90,99,84,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15994.png",6
+"164","Demaryius Thomas","WR","Broncos",-5,44,135,141,156,88,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/13216.png",10
+"334","Rhett Ellison","TE","Giants",-5,0,38,43,28,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15003.png",9
+"169","Jarvis Landry","WR","Browns",-6,50,135,141,155,87,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16790.png",11
+"235","Marvin Jones","WR","Lions",-6,64,134,141,155,87,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15072.png",6
+"278","JuJu Smith-Schuster","WR","Steelers",-6,45,135,141,155,80,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18306.png",7
+"300","Dion Sims","TE","Bears",-6,0,37,43,27,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15974.png",5
+"313","Darren Fells","TE","Browns",-6,0,37,43,25,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17187.png",11
+"326","A.J. Derby","TE","Dolphins",-6,0,37,43,27,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17711.png",11
+"357","Mark Andrews","TE","Ravens",-6,0,37,43,40,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18645.png",10
+"362","Ed Dickson","TE","Seahawks",-6,0,37,43,28,77,NA,7
+"242","Davante Adams","WR","Packers",-7,21,134,141,154,88,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16800.png",7
+"340","Jordan Leggett","TE","Jets",-7,0,36,43,62,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18232.png",11
+"311","Seth DeValve","TE","Browns",-8,0,35,43,21,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17910.png",11
+"469","Rams","DST",NA,-8,97,153,161,153,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60014.png",NA
+"97","Bilal Powell","RB","Jets",-9,169,81,90,102,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14129.png",11
+"399","Greg Zuerlein","K","Rams",-9,125,134,143,134,80,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14993.png",12
+"404","Chris Boswell","K","Steelers",-9,190,134,143,134,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17175.png",7
+"428","Chargers","DST",NA,-9,120,152,161,152,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60024.png",NA
+"309","Jeff Heuerman","TE","Broncos",-10,0,33,43,33,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17583.png",10
+"325","Blake Jarwin","TE","Cowboys",-10,0,33,43,60,70,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18818.png",8
+"339","Clive Walford","TE","Jets",-10,0,33,43,41,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17475.png",11
+"358","Nick Boyle","TE","Ravens",-10,0,33,43,29,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17567.png",10
+"369","Jonnu Smith","TE","Titans",-10,0,33,43,33,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18183.png",8
+"385","Jake Elliott","K","Eagles",-10,178,132,143,132,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18178.png",9
+"80","Frank Gore","RB","Dolphins",-11,205,79,90,102,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/8479.png",11
+"115","James White","RB","Patriots",-11,105,78,90,91,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16913.png",11
+"381","Harrison Butker","K","Chiefs",-11,154,131,143,131,80,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18409.png",12
+"386","Matt Bryant","K","Falcons",-11,196,132,143,132,85,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/4333.png",8
+"105","Jamaal Williams","RB","Packers",-12,87,77,90,101,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18362.png",7
+"109","C.J. Anderson","RB","Panthers",-12,112,78,90,93,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16040.png",4
+"400","Justin Tucker","K","Ravens",-12,153,130,143,130,86,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15683.png",10
+"113","Jeremy Hill","RB","Patriots",-13,0,77,90,99,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16803.png",11
+"114","Rex Burkhead","RB","Patriots",-13,70,77,90,96,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15971.png",11
+"321","Demetrius Harris","TE","Chiefs",-13,0,29,43,31,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17189.png",12
+"361","Nick Vannett","TE","Seahawks",-13,0,30,43,45,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17873.png",7
+"188","Tyreek Hill","WR","Chiefs",-14,33,127,141,147,87,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17929.png",12
+"234","Golden Tate","WR","Lions",-14,51,127,141,146,89,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/13217.png",6
+"304","C.J. Uzomah","TE","Bengals",-14,0,29,43,23,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17564.png",9
+"13","Patrick Mahomes","QB","Chiefs",-15,109,199,214,268,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18210.png",12
+"21","Blake Bortles","QB","Jaguars",-15,160,199,214,264,80,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16724.png",9
+"41","Matt Breida","RB","49ers",-15,115,75,90,95,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18424.png",11
+"70","Spencer Ware","RB","Chiefs",-15,0,75,90,91,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16020.png",12
+"93","Jonathan Stewart","RB","Giants",-15,0,75,90,85,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/11247.png",9
+"307","Nick O'Leary","TE","Bills",-15,0,28,43,25,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17604.png",11
+"408","Daniel Carlson","K","Vikings",-15,0,127,143,127,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18726.png",10
+"482","Vikings","DST",NA,-15,101,146,161,146,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60016.png",NA
+"15","Dak Prescott","QB","Cowboys",-16,121,198,214,259,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17907.png",8
+"262","Brandin Cooks","WR","Rams",-16,63,124,141,144,87,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16731.png",12
+"335","Ben Koyack","TE","Jaguars",-16,0,26,43,22,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17645.png",9
+"401","Wil Lutz","K","Saints",-16,193,126,143,126,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18104.png",6
+"116","Mike Gillislee","RB","Patriots",-17,0,73,90,91,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15952.png",11
+"150","Allen Robinson","WR","Bears",-17,58,124,141,143,87,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16799.png",5
+"324","Rico Gathers","TE","Cowboys",-17,0,26,43,47,69,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17973.png",8
+"337","Niles Paul","TE","Jaguars",-17,0,26,43,21,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14156.png",9
+"297","Adam Thielen","WR","Vikings",-18,37,122,141,142,88,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17178.png",10
+"352","Lee Smith","TE","Raiders",-18,0,25,43,30,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14215.png",7
+"465","Patriots","DST",NA,-18,176,143,161,143,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60017.png",NA
+"481","Titans","DST",NA,-18,142,143,161,143,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60010.png",NA
+"36","Marcus Mariota","QB","Titans",-19,138,195,214,261,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17610.png",8
+"336","James O'Shaughnessy","TE","Jaguars",-19,0,24,43,22,72,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17441.png",9
+"348","Jacob Hollister","TE","Patriots",-19,0,24,43,21,72,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18464.png",11
+"365","Stephen Anderson","TE","Texans",-19,0,24,43,28,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18027.png",10
+"391","Matt Prater","K","Lions",-19,213,123,143,123,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/11122.png",6
+"66","Austin Ekeler","RB","Chargers",-20,161,70,90,80,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18458.png",8
+"85","Darren Sproles","RB","Eagles",-20,211,69,90,76,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/8544.png",9
+"118","Doug Martin","RB","Raiders",-20,162,69,90,87,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14885.png",7
+"266","Michael Crabtree","WR","Ravens",-21,65,120,141,139,84,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/12563.png",10
+"382","Adam Vinatieri","K","Colts",-21,208,121,143,121,84,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/1097.png",9
+"394","Graham Gano","K","Panthers",-21,219,122,143,122,80,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/12460.png",4
+"83","Corey Clement","RB","Eagles",-22,137,68,90,82,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18425.png",9
+"260","Cooper Kupp","WR","Rams",-22,90,119,141,138,80,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18415.png",12
+"327","MarQueis Gray","TE","Dolphins",-22,0,20,43,30,69,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16323.png",11
+"377","Chandler Catanzaro","K","Buccaneers",-22,0,120,143,120,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17169.png",5
+"393","Mason Crosby","K","Packers",-22,200,120,143,120,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/10636.png",7
+"28","Derek Carr","QB","Raiders",-23,141,191,214,250,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16757.png",7
+"346","Ian Thomas","TE","Panthers",-23,0,20,43,22,70,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18660.png",4
+"366","Jordan Akins","TE","Texans",-23,0,20,43,22,70,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18657.png",10
+"383","Dan Bailey","K","Cowboys",-23,199,119,143,119,80,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14322.png",8
+"470","Ravens","DST",NA,-23,127,138,161,138,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60033.png",NA
+"371","Robbie Gould","K","49ers",-24,158,118,143,118,85,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/9354.png",11
+"398","Sam Ficken","K","Rams",-24,0,119,143,119,72,NA,12
+"440","Eagles","DST",NA,-24,114,137,161,137,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60021.png",NA
+"128","Terrance West","RB","Saints",-25,0,65,90,81,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16783.png",6
+"72","Nyheim Hines","RB","Colts",-26,151,64,90,81,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18663.png",9
+"422","Broncos","DST",NA,-26,147,135,161,135,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60007.png",NA
+"165","Emmanuel Sanders","WR","Broncos",-27,89,114,141,132,88,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/13295.png",10
+"171","Josh Gordon","WR","Browns",-27,52,114,141,132,82,NA,11
+"290","Corey Davis","WR","Titans",-27,85,114,141,133,80,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18320.png",8
+"388","Josh Lambo","K","Jaguars",-27,218,116,143,116,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17746.png",9
+"403","Sebastian Janikowski","K","Seahawks",-27,0,116,143,116,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/2148.png",7
+"50","Chris Ivory","RB","Bills",-28,206,62,90,68,80,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/13587.png",11
+"54","Nick Chubb","RB","Browns",-28,116,62,90,75,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18592.png",11
+"132","Chris Carson","RB","Seahawks",-28,123,62,90,76,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18341.png",7
+"258","Jordy Nelson","WR","Raiders",-28,92,113,141,132,86,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/11270.png",7
+"406","Ryan Succop","K","Titans",-28,0,115,143,115,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/12731.png",8
+"138","D'Onta Foreman","RB","Texans",-29,149,61,90,74,75,NA,10
+"375","Brandon McManus","K","Broncos",-29,0,113,143,113,80,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17171.png",10
+"107","Aaron Jones","RB","Packers",-30,133,60,90,72,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18314.png",7
+"123","Javorius Allen","RB","Ravens",-30,0,60,90,74,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17616.png",10
+"125","Kenneth Dixon","RB","Ravens",-30,197,60,90,73,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17906.png",10
+"143","Pierre Garcon","WR","49ers",-30,81,111,141,130,86,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/11439.png",11
+"247","Julian Edelman","WR","Patriots",-30,83,110,141,129,88,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/12649.png",11
+"376","Zane Gonzalez","K","Browns",-30,0,112,143,112,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18327.png",11
+"384","Jason Sanders","K","Dolphins",-30,0,112,143,112,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18787.png",11
+"40","Kyle Juszczyk","RB","49ers",-31,0,58,90,57,84,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16002.png",11
+"241","Randall Cobb","WR","Packers",-31,80,110,141,128,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14053.png",7
+"380","Roberto Aguayo","K","Chargers",-31,0,112,143,112,73,NA,8
+"387","Aldrick Rosas","K","Giants",-31,0,112,143,112,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18165.png",9
+"397","Giorgio Tavecchio","K","Raiders",-31,0,112,143,112,76,NA,7
+"477","Steelers","DST",NA,-31,150,130,161,130,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60023.png",NA
+"378","Phil Dawson","K","Cardinals",-32,0,110,143,110,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/1440.png",9
+"379","Caleb Sturgis","K","Chargers",-32,0,111,143,111,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15918.png",8
+"390","Cairo Santos","K","Jets",-32,0,111,143,111,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17172.png",11
+"374","Stephen Hauschka","K","Bills",-33,0,110,143,110,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/11923.png",11
+"405","Ka'imi Fairbairn","K","Texans",-33,0,110,143,110,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18454.png",10
+"426","Cardinals","DST",NA,-33,183,128,161,128,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60022.png",NA
+"20","Eli Manning","QB","Giants",-35,155,180,214,246,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/5526.png",9
+"263","Robert Woods","WR","Rams",-35,86,106,141,123,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15880.png",12
+"205","Alshon Jeffery","WR","Eagles",-36,60,104,141,122,90,NA,9
+"219","Sterling Shepard","WR","Giants",-36,129,105,141,123,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17827.png",9
+"17","Ryan Tannehill","QB","Dolphins",-37,0,177,214,241,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14876.png",11
+"435","Cowboys","DST",NA,-37,210,124,161,124,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60006.png",NA
+"3","Andy Dalton","QB","Bengals",-38,0,176,214,241,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14012.png",9
+"154","John Ross","WR","Bengals",-38,0,103,141,121,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18395.png",9
+"204","DeVante Parker","WR","Dolphins",-38,131,103,141,121,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17593.png",11
+"232","Kenny Golladay","WR","Lions",-38,118,103,141,121,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18345.png",6
+"463","Packers","DST",NA,-38,194,123,161,123,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60009.png",NA
+"60","Charles Sims","RB","Buccaneers",-39,0,51,90,56,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16749.png",5
+"68","Charcandrick West","RB","Chiefs",-39,0,51,90,52,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17384.png",12
+"284","Will Fuller","WR","Texans",-39,95,102,141,120,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17809.png",10
+"372","Cody Parkey","K","Bears",-39,0,103,143,103,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17173.png",5
+"407","Kai Forbath","K","Vikings",-39,215,104,143,104,78,NA,10
+"9","Jameis Winston","QB","Buccaneers",-40,148,174,214,235,80,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17399.png",5
+"98","Elijah McGuire","RB","Jets",-40,0,50,90,60,72,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18313.png",11
+"147","Marquise Goodwin","WR","49ers",-40,94,100,141,118,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15839.png",11
+"244","Devin Funchess","WR","Panthers",-40,98,100,141,118,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17682.png",4
+"442","Falcons","DST",NA,-40,209,121,161,121,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60001.png",NA
+"464","Panthers","DST",NA,-40,185,121,161,121,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60029.png",NA
+"480","Texans","DST",NA,-40,143,121,161,121,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60034.png",NA
+"57","Peyton Barber","RB","Buccaneers",-41,180,49,90,58,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18106.png",5
+"200","Kenny Stills","WR","Dolphins",-41,144,99,141,117,84,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16016.png",11
+"248","Chris Hogan","WR","Patriots",-41,79,99,141,117,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14402.png",11
+"402","Jason Myers","K","Seahawks",-42,0,100,143,100,76,NA,7
+"437","Denver","DST",NA,-42,NA,119,161,119,NA,NA,NA
+"472","Saints","DST",NA,-42,188,119,161,119,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60018.png",NA
+"29","Jared Goff","QB","Rams",-43,104,171,214,227,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17794.png",12
+"161","Kelvin Benjamin","WR","Bills",-43,132,97,141,115,84,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16730.png",11
+"474","Seahawks","DST",NA,-43,214,118,161,118,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60026.png",NA
+"79","Tavon Austin","RB","Cowboys",-44,0,46,90,44,80,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15786.png",8
+"92","Wayne Gallman","RB","Giants",-44,0,45,90,50,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18233.png",9
+"137","Alfred Blue","RB","Texans",-44,0,46,90,54,68,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17134.png",10
+"174","DeSean Jackson","WR","Buccaneers",-44,198,97,141,114,85,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/11283.png",5
+"185","Tyrell Williams","WR","Chargers",-44,168,97,141,114,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17762.png",8
+"187","Sammy Watkins","WR","Chiefs",-44,75,97,141,114,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16725.png",12
+"1","Jimmy Garoppolo","QB","49ers",-45,78,169,214,225,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16760.png",11
+"2","Mitchell Trubisky","QB","Bears",-45,145,169,214,235,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18168.png",5
+"418","Bears","DST",NA,-45,212,116,161,116,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60003.png",NA
+"212","Mohamed Sanu","WR","Falcons",-46,170,95,141,112,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14922.png",8
+"271","Ted Ginn","WR","Saints",-46,172,95,141,111,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/10453.png",6
+"75","Jordan Wilkins","RB","Colts",-47,187,43,90,49,70,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18728.png",9
+"76","Rod Smith","RB","Cowboys",-47,0,43,90,49,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17781.png",8
+"430","Chiefs","DST",NA,-47,202,114,161,114,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60012.png",NA
+"49","Travaris Cadet","RB","Bills",-49,0,40,90,42,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15457.png",11
+"61","Chase Edmonds","RB","Cardinals",-49,0,41,90,45,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18693.png",9
+"122","John Kelly","RB","Rams",-49,0,41,90,46,70,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18735.png",12
+"184","Travis Benjamin","WR","Chargers",-49,0,92,141,108,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15062.png",8
+"95","Corey Grant","RB","Jaguars",-50,0,40,90,39,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17752.png",9
+"282","James Washington","WR","Steelers",-50,0,91,141,107,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18619.png",7
+"7","Tyrod Taylor","QB","Browns",-51,0,163,214,221,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14163.png",11
+"120","DeAndre Washington","RB","Raiders",-51,0,39,90,40,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17915.png",7
+"209","Nelson Agholor","WR","Eagles",-51,124,89,141,106,84,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17668.png",9
+"5","Case Keenum","QB","Broncos",-52,165,162,214,220,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15168.png",10
+"101","Zach Zenner","RB","Lions",-52,0,37,90,40,70,NA,6
+"222","Marqise Lee","WR","Jaguars",-52,146,89,141,105,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16787.png",9
+"226","Robby Anderson","WR","Jets",-52,106,89,141,105,84,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18097.png",11
+"229","Quincy Enunwa","WR","Jets",-52,217,88,141,105,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17758.png",11
+"441","England","DST",NA,-52,NA,109,161,109,NA,NA,NA
+"67","Damien Williams","RB","Chiefs",-53,0,37,90,30,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17138.png",12
+"110","Fozzy Whittaker","RB","Panthers",-53,0,37,90,39,70,NA,4
+"457","New England","DST",NA,-53,NA,108,161,108,NA,NA,NA
+"131","C.J. Prosise","RB","Seahawks",-54,0,36,90,37,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17869.png",7
+"194","Allen Hurns","WR","Cowboys",-54,134,86,141,103,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17163.png",8
+"207","Mike Wallace","WR","Eagles",-54,207,86,141,103,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/12601.png",9
+"416","Bay","DST",NA,-54,NA,107,161,107,NA,NA,NA
+"117","Jalen Richard","RB","Raiders",-55,0,34,90,30,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18079.png",7
+"202","Danny Amendola","WR","Dolphins",-55,216,86,141,102,85,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/11674.png",11
+"275","Brandon Marshall","WR","Seahawks",-55,0,85,141,102,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/9705.png",7
+"411","Angeles","DST",NA,-55,NA,106,161,106,NA,NA,NA
+"37","Trevor Siemian","QB","Vikings",-56,0,158,214,222,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17455.png",10
+"44","Benny Cunningham","RB","Bears",-56,0,33,90,34,70,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16055.png",5
+"111","Cameron Artis-Payne","RB","Panthers",-56,0,34,90,35,69,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17704.png",4
+"213","Calvin Ridley","WR","Falcons",-56,117,85,141,101,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18584.png",8
+"373","Randy Bullock","K","Bengals",-56,0,87,143,87,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15091.png",9
+"451","Kansas City","DST",NA,-56,NA,105,161,105,NA,NA,NA
+"456","Minnesota","DST",NA,-56,NA,104,161,104,NA,NA,NA
+"461","Oakland","DST",NA,-56,NA,105,161,105,NA,NA,NA
+"62","T.J. Logan","RB","Cardinals",-57,0,33,90,31,72,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18286.png",9
+"71","Robert Turbin","RB","Colts",-57,0,33,90,32,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14894.png",9
+"135","James Conner","RB","Steelers",-57,204,33,90,32,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18236.png",7
+"175","Chris Godwin","WR","Buccaneers",-57,0,84,141,100,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18272.png",5
+"255","Martavis Bryant","WR","Raiders",-57,175,84,141,100,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16886.png",7
+"484","York","DST",NA,-57,NA,104,161,104,NA,NA,NA
+"253","Jordan Matthews","WR","Patriots",-58,0,83,141,99,77,NA,11
+"268","John Brown","WR","Ravens",-58,0,83,141,99,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16804.png",10
+"30","Joe Flacco","QB","Ravens",-59,0,155,214,215,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/11252.png",10
+"42","Joe Williams","RB","49ers",-59,0,31,90,29,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18354.png",11
+"59","Jacquizz Rodgers","RB","Buccaneers",-59,0,31,90,29,72,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14193.png",5
+"82","Kalen Ballage","RB","Dolphins",-59,0,30,90,28,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18690.png",11
+"48","Mark Walton","RB","Bengals",-60,0,30,90,27,72,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18671.png",9
+"78","Bo Scarbrough","RB","Cowboys",-60,0,30,90,28,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18794.png",8
+"127","Boston Scott","RB","Saints",-60,0,30,90,28,72,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18759.png",6
+"64","Justin Jackson","RB","Chargers",-61,0,29,90,27,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18809.png",8
+"84","Wendell Smallwood","RB","Eagles",-61,0,28,90,26,68,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17921.png",9
+"228","Jermaine Kearse","WR","Jets",-61,0,80,141,96,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15428.png",11
+"466","Philadelphia","DST",NA,-61,NA,100,161,100,NA,NA,NA
+"155","Brandon LaFell","WR","Bengals",-62,0,79,141,94,79,NA,9
+"415","Baltimore","DST",NA,-62,NA,98,161,98,NA,NA,NA
+"462","Orleans","DST",NA,-62,NA,99,161,99,NA,NA,NA
+"196","Terrance Williams","WR","Cowboys",-63,0,78,141,93,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15878.png",8
+"197","Cole Beasley","WR","Cowboys",-63,0,78,141,93,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15349.png",8
+"293","Rishard Matthews","WR","Titans",-63,130,78,141,94,82,NA,8
+"439","Dolphins","DST",NA,-63,NA,98,161,98,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60015.png",NA
+"443","Francisco","DST",NA,-63,NA,98,161,98,NA,NA,NA
+"16","Brock Osweiler","QB","Dolphins",-64,0,150,214,213,72,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14879.png",11
+"89","Ito Smith","RB","Falcons",-64,0,26,90,21,72,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18685.png",8
+"269","Cameron Meredith","WR","Saints",-64,191,76,141,92,83,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17750.png",6
+"277","Tyler Lockett","WR","Seahawks",-64,181,76,141,92,82,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17619.png",7
+"421","Bills","DST",NA,-64,NA,97,161,97,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60002.png",NA
+"427","Carolina","DST",NA,-64,NA,97,161,97,NA,NA,NA
+"432","City","DST",NA,-64,NA,97,161,97,NA,NA,NA
+"452","Lions","DST",NA,-64,NA,97,161,97,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60008.png",NA
+"134","Jaylen Samuels","RB","Steelers",-65,0,25,90,21,68,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18724.png",7
+"264","Willie Snead","WR","Ravens",-65,0,75,141,91,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17184.png",10
+"445","Green Bay","DST",NA,-65,NA,96,161,96,NA,NA,NA
+"446","Houston","DST",NA,-65,NA,96,161,96,NA,NA,NA
+"471","Redskins","DST",NA,-66,NA,95,161,95,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60028.png",NA
+"420","Bengals","DST",NA,-68,NA,93,161,93,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60004.png",NA
+"224","Donte Moncrief","WR","Jaguars",-70,0,71,141,86,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16791.png",9
+"468","Raiders","DST",NA,-70,NA,91,161,91,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60013.png",NA
+"166","Courtland Sutton","WR","Broncos",-71,0,70,141,85,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18599.png",10
+"431","Cincinnati","DST",NA,-71,NA,90,161,90,NA,NA,NA
+"436","Dallas","DST",NA,-71,NA,90,161,90,NA,NA,NA
+"476","Seattle","DST",NA,-71,NA,90,161,90,NA,NA,NA
+"479","Tennessee","DST",NA,-71,NA,90,161,90,NA,NA,NA
+"483","Washington","DST",NA,-71,NA,90,161,90,NA,NA,NA
+"423","Browns","DST",NA,-72,NA,89,161,89,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60005.png",NA
+"257","Seth Roberts","WR","Raiders",-73,0,68,141,82,77,NA,7
+"413","Arizona","DST",NA,-73,NA,88,161,88,NA,NA,NA
+"467","Pittsburgh","DST",NA,-73,NA,88,161,88,NA,NA,NA
+"180","Christian Kirk","WR","Cardinals",-74,0,67,141,82,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18606.png",9
+"414","Atlanta","DST",NA,-74,NA,87,161,87,NA,NA,NA
+"438","Detroit","DST",NA,-74,NA,87,161,87,NA,NA,NA
+"425","Buffalo","DST",NA,-75,NA,86,161,86,NA,NA,NA
+"176","Adam Humphries","WR","Buccaneers",-76,0,65,141,79,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17756.png",5
+"434","Colts","DST",NA,-76,NA,85,161,85,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60011.png",NA
+"455","Miami","DST",NA,-76,NA,85,161,85,NA,NA,NA
+"478","Tampa Bay","DST",NA,-76,NA,85,161,85,NA,NA,NA
+"162","Jeremy Kerley","WR","Bills",-77,0,64,141,78,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14151.png",11
+"168","Corey Coleman","WR","Browns",-77,0,63,141,78,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17805.png",11
+"424","Buccaneers","DST",NA,-77,NA,84,161,84,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60027.png",NA
+"153","Tyler Boyd","WR","Bengals",-78,0,63,141,77,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17840.png",9
+"152","Anthony Miller","WR","Bears",-79,163,62,141,76,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18610.png",5
+"220","Keelan Cole","WR","Jaguars",-79,0,62,141,76,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18466.png",9
+"447","Indianapolis","DST",NA,-81,NA,80,161,80,NA,NA,NA
+"146","Trent Taylor","WR","49ers",-82,0,59,141,73,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18296.png",11
+"459","New York","DST",NA,-82,NA,79,161,79,NA,NA,NA
+"181","J.J. Nelson","WR","Cardinals",-84,0,56,141,70,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17514.png",9
+"186","Mike Williams","WR","Chargers",-85,156,55,141,69,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18235.png",8
+"191","Ryan Grant","WR","Colts",-85,0,55,141,69,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17179.png",9
+"201","Albert Wilson","WR","Dolphins",-85,0,56,141,69,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17182.png",11
+"236","Geronimo Allison","WR","Packers",-85,0,56,141,69,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18110.png",7
+"221","Dede Westbrook","WR","Jaguars",-86,0,55,141,68,80,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18302.png",9
+"429","Chicago","DST",NA,-86,NA,75,161,75,NA,NA,NA
+"453","Los Angeles","DST",NA,-86,NA,75,161,75,NA,NA,NA
+"246","Torrey Smith","WR","Panthers",-88,0,52,141,66,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14032.png",4
+"285","Keke Coutee","WR","Texans",-88,0,53,141,66,72,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18662.png",10
+"444","Giants","DST",NA,-88,NA,72,161,72,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60019.png",NA
+"167","Antonio Callaway","WR","Browns",-89,0,52,141,65,70,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18664.png",11
+"195","Michael Gallup","WR","Cowboys",-89,164,52,141,65,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18640.png",8
+"148","Taylor Gabriel","WR","Bears",-90,0,50,141,63,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17177.png",5
+"225","Terrelle Pryor","WR","Jets",-90,0,50,141,63,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14851.png",11
+"250","Kenny Britt","WR","Patriots",-90,0,51,141,64,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/12556.png",11
+"448","Jacksonville","DST",NA,-92,NA,69,161,69,NA,NA,NA
+"450","Jets","DST",NA,-92,NA,69,161,69,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60020.png",NA
+"410","49ers","DST",NA,-93,NA,68,161,68,NA,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/60025.png",NA
+"292","Taywan Taylor","WR","Titans",-94,0,46,141,59,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18224.png",8
+"259","Ryan Switzer","WR","Raiders",-96,0,44,141,57,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18287.png",7
+"295","Kendall Wright","WR","Vikings",-97,0,44,141,57,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14909.png",10
+"274","Amara Darboh","WR","Seahawks",-98,0,43,141,55,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18201.png",7
+"458","New Orleans","DST",NA,-98,NA,63,161,63,NA,NA,NA
+"158","Zay Jones","WR","Bills",-99,0,42,141,54,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18223.png",11
+"192","Chester Rogers","WR","Colts",-99,0,41,141,54,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18089.png",9
+"251","Phillip Dorsett","WR","Patriots",-99,0,42,141,55,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17643.png",11
+"289","Tajae Sharpe","WR","Titans",-99,0,42,141,54,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17912.png",8
+"10","Sam Bradford","QB","Cardinals",-100,0,114,214,168,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/13197.png",9
+"231","Charles Johnson","WR","Jets",-100,0,41,141,53,71,NA,11
+"245","Curtis Samuel","WR","Panthers",-100,0,40,141,53,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18284.png",4
+"189","Chris Conley","WR","Chiefs",-103,0,38,141,50,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17638.png",12
+"177","Brice Butler","WR","Cardinals",-104,0,36,141,48,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15896.png",9
+"267","Breshad Perriman","WR","Ravens",-104,0,37,141,49,74,NA,10
+"433","Cleveland","DST",NA,-104,NA,57,161,57,NA,NA,NA
+"473","San Francisco","DST",NA,-104,NA,57,161,57,NA,NA,NA
+"172","Ricardo Louis","WR","Browns",-108,0,32,141,44,71,NA,11
+"233","T.J. Jones","WR","Lions",-108,0,33,141,44,76,NA,6
+"287","Sammie Coates","WR","Texans",-108,0,33,141,45,67,NA,10
+"144","Dante Pettis","WR","49ers",-110,0,31,141,43,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18603.png",11
+"218","Cody Latimer","WR","Giants",-110,0,31,141,42,72,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16793.png",9
+"252","Cordarrelle Patterson","WR","Patriots",-112,0,29,141,40,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15807.png",11
+"270","Brandon Coleman","WR","Saints",-112,0,29,141,40,77,NA,6
+"286","Bruce Ellington","WR","Texans",-113,0,27,141,39,77,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16946.png",10
+"296","Laquon Treadwell","WR","Vikings",-113,0,28,141,39,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17811.png",10
+"159","Rod Streater","WR","Bills",-114,0,27,141,38,70,NA,11
+"249","Malcolm Mitchell","WR","Patriots",-114,0,26,141,37,75,NA,11
+"22","Sam Darnold","QB","Jets",-115,0,99,214,154,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18566.png",11
+"199","Jakeem Grant","WR","Dolphins",-117,0,24,141,35,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17947.png",11
+"217","Roger Lewis","WR","Giants",-117,0,24,141,34,72,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18047.png",9
+"237","Equanimeous St.","WR","Packers",-117,0,24,141,35,67,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18765.png",7
+"243","Jarius Wright","WR","Panthers",-117,0,24,141,35,76,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14918.png",4
+"178","Chad Williams","WR","Cardinals",-118,0,23,141,34,69,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18169.png",9
+"238","J'Mon Moore","WR","Packers",-118,0,23,141,33,69,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18692.png",7
+"265","Chris Moore","WR","Ravens",-118,0,23,141,33,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17883.png",10
+"276","Jaron Brown","WR","Seahawks",-118,0,23,141,33,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16172.png",7
+"288","Braxton Miller","WR","Texans",-118,0,22,141,33,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17864.png",10
+"223","D.J. Chark","WR","Jaguars",-119,0,21,141,32,72,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18620.png",9
+"279","Darrius Heyward-Bey","WR","Steelers",-119,0,22,141,32,69,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/12570.png",7
+"149","Kevin White","WR","Bears",-120,0,21,141,31,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17703.png",5
+"208","Markus Wheaton","WR","Eagles",-120,0,21,141,31,70,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15873.png",9
+"215","Russell Shepard","WR","Giants",-120,0,21,141,31,72,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16227.png",9
+"239","DeAngelo Yancey","WR","Packers",-120,0,20,141,31,66,NA,7
+"157","Josh Malone","WR","Bengals",-121,0,20,141,30,70,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18216.png",9
+"193","Deon Cain","WR","Colts",-121,0,20,141,30,68,NA,9
+"151","Josh Bellamy","WR","Bears",-122,0,18,141,29,73,NA,5
+"198","Leonte Carroo","WR","Dolphins",-122,0,19,141,29,70,NA,11
+"291","Michael Campanaro","WR","Titans",-122,0,18,141,29,67,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17148.png",8
+"145","Kendrick Bourne","WR","49ers",-123,0,18,141,28,70,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18467.png",11
+"170","Rashard Higgins","WR","Browns",-124,0,17,141,27,70,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17934.png",11
+"206","Marquess Wilson","WR","Eagles",-124,0,17,141,27,73,NA,9
+"240","Marquez Valdes-Scantling","WR","Packers",-124,0,17,141,27,70,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18733.png",7
+"261","Josh Reynolds","WR","Rams",-124,0,17,141,27,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18214.png",12
+"256","Dwayne Harris","WR","Raiders",-125,0,15,141,26,69,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14100.png",7
+"281","Justin Hunter","WR","Steelers",-125,0,16,141,26,72,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15845.png",7
+"163","Jordan Taylor","WR","Broncos",-126,0,15,141,25,70,NA,10
+"183","Dylan Cantrell","WR","Chargers",-126,0,15,141,25,69,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18750.png",8
+"214","Justin Hardy","WR","Falcons",-126,0,15,141,25,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/17542.png",8
+"227","Chad Hansen","WR","Jets",-126,0,15,141,25,69,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18170.png",11
+"160","Andre Holmes","WR","Bills",-130,0,11,141,21,75,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14403.png",11
+"210","Mack Hollins","WR","Eagles",-130,0,11,141,21,71,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18350.png",9
+"8","Ryan Fitzpatrick","QB","Buccaneers",-158,0,56,214,105,73,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/8664.png",5
+"11","Josh Rosen","QB","Cardinals",-165,0,49,214,95,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18572.png",9
+"23","Josh McCown","QB","Jets",-165,0,50,214,96,78,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/3609.png",11
+"6","Baker Mayfield","QB","Browns",-183,166,31,214,70,81,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18565.png",11
+"4","Josh Allen","QB","Bills",-186,0,28,214,74,74,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18570.png",11
+"31","Lamar Jackson","QB","Ravens",-211,0,3,214,42,79,"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/18590.png",10

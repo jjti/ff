@@ -190,7 +190,7 @@ export const undoPlayerPick = (state: IStoreState): IStoreState => {
 
   // create a toast
   if (state.lastPickedPlayer) {
-    toast.info(`Undoing draft of ${state.lastPickedPlayer.name}`);
+    toast.info(`Undid draft of ${state.lastPickedPlayer.name}`);
   }
 
   return past || resetStore(state); // if it's null, reset and return
@@ -208,7 +208,7 @@ export const setTrackedTeam = (
   trackedTeam: number
 ): IStoreState => {
   // create a toast
-  toast.info(`Now tracking Team ${trackedTeam + 1}`);
+  toast.info(`Tracking Team ${trackedTeam + 1}`);
 
   return {
     ...state,

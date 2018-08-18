@@ -44,10 +44,18 @@
   font-size: 15px;
 }
 
-.green-dot {
+.green-dot,
+.orange-dot {
   height: 6px;
   width: 6px;
   border-radius: 10px;
+  margin: auto 5px;
+}
+
+.green-dot {
   background-color: #00d000;
-  margin: auto;
+}
+
+.orange-dot {
+  background-color: #eca80a;
 }

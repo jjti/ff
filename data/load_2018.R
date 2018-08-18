@@ -5,6 +5,7 @@ library(dplyr)
 
 setwd("~/Documents/GitHub/ff/data")
 
+
 ###
 # Add Expert Information
 ###
@@ -34,6 +35,7 @@ player.data$experts <- apply(player.data[, src.names], 1, mean, na.rm = TRUE) # 
 # need to be set before Madden wipes them out
 dst.data <- player.data[player.data$pos == "DST",]
 
+
 ###
 # Add Madden Information
 ###
@@ -47,9 +49,19 @@ madden.data$name <- sapply(madden.data$name, function(x) {
   split.name <- strsplit(x, "\\s+")[[1]]
   paste0(split.name[1], " ", split.name[2])
 })
-
 player.data <- merge(player.data, madden.data, by = c("name", "pos"))
 
+
+###
+# Add BYE Week Information
+###
+source("2018/bye_weeks.R")
+player.data <- merge(player.data, bye.data, by = c("team"))
+
+
+###
+# Post-processing
+###
 # must have a Madden score and an expert score in top three quartiles
 player.data <- player.data[player.data$experts > 10 & player.data$overall > 40,]
 
@@ -79,7 +91,7 @@ te.data <- te.data[te.data$experts > 20 & te.data$overall > 68,]
 by.adp <- player.data[order(player.data$adp, decreasing = TRUE), ]
 by.adp <- by.adp[by.adp$adp > 0,]
 by.adp <- by.adp[, c("name", "pos", "adp")]
-by.adp <- by.adp[by.adp$adp <= 100,]
+by.adp <- by.adp[by.adp$adp <= 10 * 14,]
 by.adp %>%
   group_by(pos) %>%
   summarise(no_rows = length(pos))

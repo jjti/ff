@@ -52,11 +52,11 @@ te.replace.index <- round(te.starters * team.count) + 1
 k.replace.index <- round(k.starters * team.count) + 1
 dst.replace.index <- round(dst.starters * team.count) + 1
 
-qb.data$replace_value <- qb.pred.sorted[19 + 1]
-rb.data$replace_value <- rb.pred.sorted[47 + 1]
-wr.data$replace_value <- wr.pred.sorted[49 + 1]
-te.data$replace_value <- te.pred.sorted[15 + 1]
-k.data$replace_value <- k.pred.sorted[2 + 1]
+qb.data$replace_value <- qb.pred.sorted[12 + 1]
+rb.data$replace_value <- rb.pred.sorted[36 + 1]
+wr.data$replace_value <- wr.pred.sorted[10 + 1]
+te.data$replace_value <- te.pred.sorted[39 + 1]
+k.data$replace_value <- k.pred.sorted[0 + 1]
 dst.data$replace_value <- dst.pred.sorted[0 + 1]
 
 full.predictions <- rbind.fill(qb.data, rb.data)
@@ -73,7 +73,7 @@ full.predictions$pred <- round(full.predictions$pred)
 full.predictions$replace_value <- round(full.predictions$replace_value)
 full.predictions$experts <- round(full.predictions$experts)
 full.predictions <- full.predictions[!duplicated(full.predictions$name),]
-full.predictions <- full.predictions[, c("name", "pos", "team", "vor", "adp", "pred", "replace_value", "experts", "madden", "href")]
+full.predictions <- full.predictions[, c("name", "pos", "team", "vor", "adp", "pred", "replace_value", "experts", "madden", "href", "bye")]
 full.predictions <- full.predictions[order(full.predictions$vor, decreasing = TRUE),]
 
 ###

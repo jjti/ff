@@ -8,7 +8,7 @@ interface IProps {
   length: number;
 }
 
-export default class PlayerCard extends React.Component<IProps> {
+export default class PlayerCard extends React.PureComponent<IProps> {
   public render() {
     const { player, pos, length } = this.props;
 

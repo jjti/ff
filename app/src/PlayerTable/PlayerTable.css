@@ -21,32 +21,26 @@
 
 .skip-button {
   margin: 0 0 0 auto;
-  padding: 10px;
-  bottom: 0;
-}
-
-.skip-button:hover {
-  text-decoration: underline;
 }
 
 .undo-button {
   margin: 0 -10px 0 0;
+}
+
+.skip-button,
+.undo-button {
   padding: 10px;
   bottom: 0;
 }
 
+.skip-button:hover,
 .undo-button:hover {
   text-decoration: underline;
 }
 
 .PlayerTable-Row-Name {
-  position: relative;
-}
-
-.PlayerTable-Row-Name > div {
-  position: absolute;
-  left: -20px;
-  top: calc(50% - 4px);
+  display: flex;
+  align-items: center;
 }
 
 .PlayerTable-Row:hover {
@@ -56,6 +50,10 @@
 
 .PlayerTable-Row-Inactive {
   color: #c4c4c4 !important;
+}
+
+.Legend-Row > p {
+  margin-right: 40px;
 }
 
 table {
