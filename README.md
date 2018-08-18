@@ -4,7 +4,7 @@ I built an app for drafting the best fantasy football team possible.
 
 ## Predictions
 
-Predictions for each player were created using a mix of expert ratings and Madden. The models' R-squared's were better than any source on its own.
+I forecasted every players' points for the season using a mix of expert ratings (ESPN, FOX, CBS, and NFL) and stats from Madden 2019. Against historical data, the models' R-squared's were better than any source on its own.
 
 ![full](https://user-images.githubusercontent.com/13923102/43682303-f861f7e2-983e-11e8-98f5-07ec2a89e998.png)
 
