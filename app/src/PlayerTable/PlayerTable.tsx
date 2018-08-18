@@ -153,7 +153,7 @@ const mapStateToProps = (state: IStoreState) => {
   }
 
   // after one of each main starter has been drafted, everything is valued
-  if (!valuedPositions.length) {
+  if (!Object.keys(valuedPositions).length) {
     ["QB", "RB", "WR", "TE"].forEach(p => (valuedPositions[p] = true));
   }
 
@@ -164,6 +164,8 @@ const mapStateToProps = (state: IStoreState) => {
   if (!DST) {
     valuedPositions.DST = true;
   }
+
+  console.log(valuedPositions);
 
   // find the bye weeks already taken by the core players (QB, RB, WR, FLEX)
   const byeWeeks = [QB, ...RBs, ...WRs, Flex]

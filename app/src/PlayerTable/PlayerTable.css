@@ -43,6 +43,10 @@
   align-items: center;
 }
 
+.PlayerTable-Row-Inactive > td > p {
+  color: #c4c4c4 !important;
+}
+
 .PlayerTable-Row:hover {
   background-color: #f3f3f359;
   cursor: pointer;
