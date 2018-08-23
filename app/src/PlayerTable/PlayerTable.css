@@ -131,8 +131,8 @@ tr {
     margin-bottom: 15px;
   }
 
-  .PlayerTable-Row {
-    margin: 12px 8px;
+  .PlayerTable-Row-Name {
+    height: 48px;
   }
 
   .PlayerTable-Row:hover {

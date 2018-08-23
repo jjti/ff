@@ -38,6 +38,6 @@ Small tags are also shown next to the player names indicating if they're likely 
 
 ## Controls
 
-Double clicking on a player drafts the player to the active team (currently drafting). Users can also skip the current turn (not drafting a player), undo the last round's pick (if they make a mistake), or remove a player (if the player was drafted already but they missed it).
+Clicking on a player drafts the player to the active team (currently drafting). Users can also skip the current turn (not drafting a player), undo the last round's pick (if they make a mistake), or remove a player (if the player was drafted already but they missed it).
 
 ![screen shot 2018-08-18 at 6 01 05 pm](https://user-images.githubusercontent.com/13923102/44303527-b4a02b00-a310-11e8-9b0d-edc25883a8c6.png)
