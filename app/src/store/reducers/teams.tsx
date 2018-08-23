@@ -1,8 +1,10 @@
+import * as React from "react";
 import { toast } from "react-toastify";
 
 import { IPlayer, Position } from "../../Player";
 import { ITeam } from "../../Team";
-import { createTeam, initialState, IStoreState } from "../store";
+import { undoPlayerPick } from "../actions/players";
+import { createTeam, initialState, IStoreState, store } from "../store";
 
 /**
  * Sum of the VOR of everyone on a ITeam. Used to keep track of
@@ -142,10 +144,8 @@ export const pickPlayer = (
   // update the team in the array
   newTeams[activeTeam] = roster;
 
-  // create a toast
-  toast.info(`Team ${activeTeam + 1} drafted ${player.name}`);
-
-  return {
+  // create the new state
+  const newState = {
     ...state,
 
     // increment the draft by one
@@ -165,35 +165,28 @@ export const pickPlayer = (
     // save this player as the "lastPickedPlayer"
     lastPickedPlayer: player
   };
+
+  // create a toast
+  toast.info(
+    <>
+      Team {activeTeam + 1} drafted {player.name}
+      <button
+        className="Toast-Undo-Button"
+        onClick={() => store.dispatch(undoPlayerPick())}
+      >
+        Undo
+      </button>
+    </>
+  );
+
+  return newState;
 };
 
-/**
- * Reset the store to its initial state, but keep the players
- * that were gathered from the backend
- *
- * @param state the current state of the store
- */
 export const resetStore = (state: IStoreState): IStoreState => ({
   ...initialState,
   players: state.players,
   undraftedPlayers: state.players
 });
-
-/**
- * Return the state of the app back in time
- *
- * @param state of the current app
- */
-export const undoPlayerPick = (state: IStoreState): IStoreState => {
-  const { past } = state; // we want the last state
-
-  // create a toast
-  if (state.lastPickedPlayer) {
-    toast.info(`Undrafted ${state.lastPickedPlayer.name}`);
-  }
-
-  return past || resetStore(state); // if it's null, reset and return
-};
 
 /**
  * Update the tracked team on the left side of the app

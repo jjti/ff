@@ -18,7 +18,11 @@ interface IProps {
   setPlayers: (players: IPlayer[]) => void;
 }
 
-class App extends React.Component<IProps> {
+interface IState {
+  mobile: boolean;
+}
+
+class App extends React.PureComponent<IProps, IState> {
   constructor(props: any) {
     super(props);
 
@@ -32,11 +36,43 @@ class App extends React.Component<IProps> {
       }
     };
 
+    this.state = {
+      mobile: window.innerWidth < 700
+    };
+
+    addEventListener("resize", () => {
+      this.setState({ mobile: window.innerWidth < 700 });
+    });
+
     xhttp.open("GET", `${process.env.PUBLIC_URL}/forecast.json`, true);
     xhttp.send();
   }
 
   public render() {
+    // if it's on mobile, render only the team picker, and PlayerTable
+    if (this.state.mobile) {
+      return (
+        <div id="App">
+          <TeamPicks mobile={true} />
+          <PlayerTable mobile={true} />
+
+          <ToastContainer
+            className="toast-container toast-container-mobile"
+            position="bottom-left"
+            autoClose={1750}
+            hideProgressBar={true}
+            pauseOnHover={false}
+            closeButton={false}
+            draggable={false}
+            transition={cssTransition({
+              enter: "zoom",
+              exit: "zoom"
+            })}
+          />
+        </div>
+      );
+    }
+
     return (
       <div id="App">
         <div className="App-Row-Top">

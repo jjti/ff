@@ -72,3 +72,14 @@ header {
   display: flex;
   align-items: center;
 }
+
+button {
+  outline: none;
+  background-image: none;
+  background-color: transparent;
+  border: none;
+}
+
+button:hover {
+  cursor: pointer;
+}

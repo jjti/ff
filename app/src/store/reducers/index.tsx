@@ -1,12 +1,11 @@
 import { ACTION_TYPES } from "../actions";
 import { initialState, IStoreState } from "../store";
-import { removePlayer } from "./players";
+import { removePlayer, undoPlayerPick } from "./players";
 import {
   incrementDraft,
   pickPlayer,
   setNumberOfTeams,
-  setTrackedTeam,
-  undoPlayerPick
+  setTrackedTeam
 } from "./teams";
 
 export default (state = initialState, action: any): IStoreState => {

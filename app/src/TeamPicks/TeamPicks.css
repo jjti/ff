@@ -8,7 +8,6 @@
 }
 
 .Pick-Column {
-  margin-right: 16px;
 }
 
 .Pick-Section {
@@ -24,6 +23,51 @@
   flex-wrap: wrap;
 }
 
-.Pick-Row:last-child {
-  margin-right: 30px;
+@media screen and (max-width: 700px) {
+  .TeamPicks {
+    top: 0px;
+    height: fit-content;
+    padding: 10px;
+    position: unset;
+  }
+
+  .TeamPicks > header {
+    padding: 0 5px;
+    justify-content: space-between;
+  }
+
+  .TeamPicks > header > h3 {
+    margin: 0;
+  }
+
+  .TeamPicks-Toggle-Bench {
+    display: flex;
+  }
+
+  .TeamPicks-Toggle-Bench > button {
+    color: gray;
+  }
+
+  .TeamPicks-Toggle-Bench > .TeamPicks-Active {
+    color: black;
+    text-decoration: underline;
+    font-weight: 400;
+  }
+
+  .TeamPicks-Toggle-Bench > select {
+    margin-left: auto;
+    font-weight: 200;
+    color: gray;
+    font-size: 14px;
+  }
+
+  .PlayerTable-Row-Name > p {
+    margin-left: 0;
+  }
+
+  th,
+  td {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }

@@ -1,5 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import { Position } from "../Player";
 import { setTrackedTeam } from "../store/actions/teams";
 import { IStoreState } from "../store/store";
 import { ITeam } from "../Team";
@@ -10,15 +11,33 @@ interface IProps {
   numberOfTeams: number;
   trackedTeam: ITeam;
   setTrackedTeam: (index: number) => void;
+  mobile?: boolean;
 }
 
 const initialState = {
-  cardLength: 50
+  cardLength: 50,
+  showStarters: true
 };
 
 type State = Readonly<typeof initialState>;
 
 class TeamPicks extends React.PureComponent<IProps, State> {
+  public static defaultProps = {
+    mobile: false
+  };
+
+  public starterPositions: Position[] = [
+    "QB",
+    "RB",
+    "RB",
+    "WR",
+    "WR",
+    "FLEX",
+    "TE",
+    "DST",
+    "K"
+  ];
+
   constructor(props: any) {
     super(props);
     this.state = { ...initialState, cardLength: this.getCardLength() };
@@ -28,7 +47,70 @@ class TeamPicks extends React.PureComponent<IProps, State> {
   }
 
   public render() {
-    const { numberOfTeams, trackedTeam } = this.props;
+    const { mobile, numberOfTeams, trackedTeam } = this.props;
+
+    // if it's mobile, return just the small header and separate Starter and Mobile
+    // team members into separate tabs
+    if (mobile) {
+      return (
+        <div className="TeamPicks">
+          <header>
+            <h3>FF DRAFT</h3>
+          </header>
+
+          <div className="TeamPicks-Toggle-Bench">
+            <button
+              className={this.state.showStarters ? "TeamPicks-Active" : ""}
+              onClick={() => this.setState({ showStarters: true })}
+            >
+              STARTERS
+            </button>
+            <button
+              className={!this.state.showStarters ? "TeamPicks-Active" : ""}
+              onClick={() => this.setState({ showStarters: false })}
+            >
+              BENCH
+            </button>
+            <select
+              className="Tracked-Team-Select Grayed"
+              onChange={this.updateTrackedTeam}
+              defaultValue="CHANGE TEAM"
+            >
+              {new Array(numberOfTeams).fill(0).map((_, i) => (
+                <option key={`Pick-Selection-${i}`} value={i}>
+                  {`Team ${i + 1}`}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="Pick-Row">
+            {this.state.showStarters
+              ? [
+                  trackedTeam.QB,
+                  ...trackedTeam.RBs,
+                  ...trackedTeam.WRs,
+                  trackedTeam.TE,
+                  trackedTeam.DST,
+                  trackedTeam.K
+                ].map((p, i) => (
+                  <PlayerCard
+                    player={p}
+                    pos={this.starterPositions[i]}
+                    length={this.state.cardLength}
+                  />
+                ))
+              : trackedTeam.Bench.map(p => (
+                  <PlayerCard
+                    player={p}
+                    pos={(p && p.pos) || "?"}
+                    length={this.state.cardLength}
+                  />
+                ))}
+          </div>
+        </div>
+      );
+    }
 
     return (
       <div className="TeamPicks">
@@ -130,8 +212,13 @@ class TeamPicks extends React.PureComponent<IProps, State> {
   }
 
   private getCardLength = (): number => {
-    const thisWidth = window.innerHeight * 0.75 - 20; // ~30px padding, 30% width of total window size
-    return Math.floor(thisWidth / 8) - 8; // 8 == 2px border, 6px margin
+    if (this.props.mobile) {
+      const mobileWidth = window.innerWidth * 0.85;
+      return Math.floor(mobileWidth / 4) - 4; // 4px margin
+    }
+
+    const thisWidth = window.innerWidth * 0.22; // 24% width of total window size
+    return Math.min(85, Math.floor(thisWidth / 3) - 8); // 8 == 2px border, 6px margin
   };
 
   private updateTrackedTeam = (event: React.ChangeEvent<HTMLSelectElement>) => {

@@ -43,9 +43,15 @@
 
   padding-left: 15px;
   width: fit-content;
-  min-width: 275px;
+  min-width: 340px;
   border-radius: 5px;
   font-size: 15px;
+}
+
+.Toast-Undo-Button {
+  color: #fff;
+  font-size: 15px;
+  text-decoration: underline;
 }
 
 .green-dot,
@@ -75,4 +81,19 @@
 
 .Grayed:hover {
   color: #4a4a4a;
+}
+
+@media screen and (max-width: 700px) {
+  .toast-container-mobile {
+    width: calc(100% - 40px);
+    margin: 20px;
+  }
+
+  .toast-container-mobile > .Toastify__toast {
+    width: 100%;
+  }
+
+  .Card {
+    margin: 2px !important;
+  }
 }

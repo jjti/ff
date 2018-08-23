@@ -16,6 +16,7 @@ import "./PlayerTable.css";
 interface IProps {
   byeWeeks: { [key: number]: boolean };
   currentPick: number;
+  mobile?: boolean;
   undraftedPlayers: any[];
   pickPlayer: (player: IPlayer) => void;
   removePlayer: (player: IPlayer) => void;
@@ -32,22 +33,30 @@ interface IProps {
  * and undoing the last round/pick (in the event of a mistake)
  */
 class PlayerTable extends React.Component<IProps> {
+  public static defaultProps = {
+    mobile: false
+  };
+
   public render() {
     const draftSoon = this.props.undraftedPlayers.map(
       p => p.adp && this.props.currentPick + 10 > p.adp
     );
 
     return (
-      <div>
-        <header className="PlayerTable-Header">
-          <h3>PLAYERS</h3>
-          <button className="Grayed skip-button" onClick={this.props.skip}>
-            Skip
-          </button>
-          <button className="Grayed undo-button" onClick={this.props.undo}>
-            Undo
-          </button>
-        </header>
+      <div id="PlayerTable">
+        {!this.props.mobile && (
+          <>
+            <header className="PlayerTable-Header">
+              <h3>PLAYERS</h3>
+              <button className="Grayed skip-button" onClick={this.props.skip}>
+                Skip
+              </button>
+              <button className="Grayed undo-button" onClick={this.props.undo}>
+                Undo
+              </button>
+            </header>
+          </>
+        )}
 
         <div className="Legend-Row">
           <div className="green-dot" />
@@ -65,35 +74,42 @@ class PlayerTable extends React.Component<IProps> {
               <th className="th-right" data-tip="Value over replacement">
                 VOR
               </th>
-              <th className="th-right" data-tip="Average draft position (ESPN)">
-                ADP
-              </th>
-              <th
-                className="th-right"
-                data-tip="Predicted number of regular season points"
-              >
-                Prediction
-              </th>
-              <th
-                className="th-right"
-                data-tip="Average of expert predictions (ESPN, FOX, CBS, NFL)"
-              >
-                Experts
-              </th>
-              <th
-                className="th-right"
-                data-tip="Madden 2019 Overall player stat"
-              >
-                Madden
-              </th>
-              <th className="th-right">Remove</th>
+              {!this.props.mobile && (
+                <>
+                  <th
+                    className="th-right"
+                    data-tip="Average draft position (ESPN)"
+                  >
+                    ADP
+                  </th>
+                  <th
+                    className="th-right"
+                    data-tip="Predicted number of regular season points"
+                  >
+                    Prediction
+                  </th>
+                  <th
+                    className="th-right"
+                    data-tip="Average of expert predictions (ESPN, FOX, CBS, NFL)"
+                  >
+                    Experts
+                  </th>
+                  <th
+                    className="th-right"
+                    data-tip="Madden 2019 Overall player stat"
+                  >
+                    Madden
+                  </th>
+                  <th className="th-right">Remove</th>
+                </>
+              )}
             </tr>
           </thead>
           <tbody>
             {this.props.undraftedPlayers.map((p: IPlayer, i) => (
               <tr
                 key={p.name + p.pos + p.team}
-                onDoubleClick={() => this.props.pickPlayer(p)}
+                onClick={() => this.props.pickPlayer(p)}
                 className={
                   this.props.valuedPositions[p.pos]
                     ? "PlayerTable-Row"
@@ -110,16 +126,20 @@ class PlayerTable extends React.Component<IProps> {
                 <td>{p.pos}</td>
                 <td>{p.team}</td>
                 <td className="th-right">{p.vor}</td>
-                <td className="th-right">{p.adp}</td>
-                <td className="th-right">{p.pred}</td>
-                <td className="th-right">{p.experts}</td>
-                <td className="th-right">{p.madden}</td>
-                <td className="remove-player-td">
-                  <button
-                    className="remove-player-x"
-                    onClick={() => this.props.removePlayer(p)}
-                  />
-                </td>
+                {!this.props.mobile && (
+                  <>
+                    <td className="th-right">{p.adp}</td>
+                    <td className="th-right">{p.pred}</td>
+                    <td className="th-right">{p.experts}</td>
+                    <td className="th-right">{p.madden}</td>
+                    <td className="remove-player-td">
+                      <button
+                        className="remove-player-x"
+                        onClick={() => this.props.removePlayer(p)}
+                      />
+                    </td>
+                  </>
+                )}
               </tr>
             ))}
           </tbody>
