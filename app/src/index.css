@@ -83,3 +83,13 @@ button {
 button:hover {
   cursor: pointer;
 }
+
+@media screen and (max-width: 700px) {
+  p {
+    font-weight: 400;
+  }
+
+  th {
+    font-weight: 500;
+  }
+}

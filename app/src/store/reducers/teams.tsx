@@ -169,7 +169,9 @@ export const pickPlayer = (
   // create a toast
   toast.info(
     <>
-      Team {activeTeam + 1} drafted {player.name}
+      <div>
+        Team {activeTeam + 1} drafted {player.name}
+      </div>
       <button
         className="Toast-Undo-Button"
         onClick={() => store.dispatch(undoPlayerPick())}

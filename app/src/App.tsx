@@ -59,7 +59,7 @@ class App extends React.PureComponent<IProps, IState> {
           <ToastContainer
             className="toast-container toast-container-mobile"
             position="bottom-left"
-            autoClose={1750}
+            autoClose={1500}
             hideProgressBar={true}
             pauseOnHover={false}
             closeButton={false}

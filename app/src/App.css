@@ -43,15 +43,24 @@
 
   padding-left: 15px;
   width: fit-content;
-  min-width: 360px;
   border-radius: 5px;
   font-size: 15px;
+}
+
+.Toastify__toast-body {
+  display: flex;
+  align-items: center;
+}
+
+.Toastify__toast {
+  margin-bottom: 5px;
 }
 
 .Toast-Undo-Button {
   color: #fff;
   font-size: 15px;
   text-decoration: underline;
+  margin-left: auto;
 }
 
 .green-dot,
