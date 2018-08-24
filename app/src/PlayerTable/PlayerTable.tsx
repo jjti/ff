@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { IPlayer } from "../Player";
+import { IPlayer, Position } from "../Player";
 import {
   removePlayer,
   selectPlayer,
@@ -26,21 +26,50 @@ interface IProps {
   valuedPositions: { [key: string]: boolean };
 }
 
+interface IState {
+  positionsToShow: Position[];
+}
+
 /**
  * A table displaying all the undrafted players
  *
  * Includes buttons for skipping the current round, without a pick,
  * and undoing the last round/pick (in the event of a mistake)
  */
-class PlayerTable extends React.Component<IProps> {
+class PlayerTable extends React.Component<IProps, IState> {
   public static defaultProps = {
     mobile: false
   };
 
+  public state: IState = {
+    positionsToShow: ["?"] // ? is a hackish flag for "ALL"
+  };
+
+  /** All possible positions. ? Means any position, don't filter */
+  private possiblePositions: Position[] = [
+    "?",
+    "QB",
+    "RB",
+    "WR",
+    "TE",
+    "DST",
+    "K"
+  ];
+
   public render() {
-    const draftSoon = this.props.undraftedPlayers.map(
-      p => p.adp && this.props.currentPick + 10 > p.adp
+    const { currentPick, undraftedPlayers } = this.props;
+    const { positionsToShow } = this.state;
+
+    const draftSoon = undraftedPlayers.map(
+      p => p.adp && currentPick + 10 > p.adp
     );
+
+    console.log(positionsToShow);
+
+    const playersToRender =
+      positionsToShow.length === 1 && positionsToShow[0] === "?"
+        ? undraftedPlayers
+        : undraftedPlayers.filter(p => positionsToShow.indexOf(p.pos) > -1);
 
     return (
       <div id="PlayerTable">
@@ -48,6 +77,21 @@ class PlayerTable extends React.Component<IProps> {
           <>
             <header className="PlayerTable-Header">
               <h3>PLAYERS</h3>
+
+              {/* Buttons for filtering on position */}
+              <div className="PlayerTable-Position-Buttons">
+                {this.possiblePositions.map(p => (
+                  <button
+                    key={p}
+                    className={positionsToShow.indexOf(p) > -1 ? "Active" : ""}
+                    onClick={() => this.setPositionFilter(p)}
+                  >
+                    {p === "?" ? "All" : p}
+                  </button>
+                ))}
+              </div>
+
+              {/* Buttons for skipping and undoing actions */}
               <button className="Grayed skip-button" onClick={this.props.skip}>
                 Skip
               </button>
@@ -58,6 +102,7 @@ class PlayerTable extends React.Component<IProps> {
           </>
         )}
 
+        {/* Legend for dots on the row */}
         <div className="Legend-Row">
           <div className="green-dot" />
           <p className="small">Will be drafted soon</p>
@@ -74,6 +119,7 @@ class PlayerTable extends React.Component<IProps> {
               <th className="th-right" data-tip="Value over replacement">
                 VOR
               </th>
+              {/* Table headers not rendered on mobile */}
               {!this.props.mobile && (
                 <>
                   <th
@@ -106,7 +152,7 @@ class PlayerTable extends React.Component<IProps> {
             </tr>
           </thead>
           <tbody>
-            {this.props.undraftedPlayers.map((p: IPlayer, i) => (
+            {playersToRender.map((p: IPlayer, i) => (
               <tr
                 key={p.name + p.pos + p.team}
                 onClick={() => this.props.pickPlayer(p)}
@@ -118,6 +164,7 @@ class PlayerTable extends React.Component<IProps> {
               >
                 <td className="PlayerTable-Row-Name">
                   <p>{p.name} </p>
+                  {/* Add dots for information on bye week */}
                   {draftSoon[i] ? <div className="dot green-dot" /> : null}{" "}
                   {this.props.byeWeeks[p.bye] ? (
                     <div className="dot orange-dot" />
@@ -126,6 +173,7 @@ class PlayerTable extends React.Component<IProps> {
                 <td>{p.pos}</td>
                 <td>{p.team}</td>
                 <td className="th-right">{p.vor}</td>
+                {/* Table data not rendered on mobile */}
                 {!this.props.mobile && (
                   <>
                     <td className="th-right">{p.adp}</td>
@@ -147,6 +195,28 @@ class PlayerTable extends React.Component<IProps> {
       </div>
     );
   }
+
+  /**
+   * update the allowable positions in state, used to filter out players by position
+   */
+  private setPositionFilter = (position: Position) => {
+    let { positionsToShow } = this.state;
+
+    // if it's ?, clear anything else
+    if (position === "?") {
+      this.setState({ positionsToShow: ["?"] });
+    } else if (positionsToShow.indexOf(position) > -1) {
+      positionsToShow = positionsToShow.filter(p => p !== position);
+      this.setState({
+        positionsToShow: positionsToShow.length ? positionsToShow : ["?"]
+      });
+    } else {
+      positionsToShow = positionsToShow.filter(p => p !== "?");
+      this.setState({
+        positionsToShow: positionsToShow.concat([position])
+      });
+    }
+  };
 }
 
 const mapStateToProps = (state: IStoreState) => {

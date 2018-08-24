@@ -11,6 +11,25 @@
   position: relative;
 }
 
+.PlayerTable-Position-Buttons {
+  margin: auto;
+}
+
+.PlayerTable-Position-Buttons > button {
+  opacity: 0.5;
+  padding: 4px 8px;
+  margin: 3px;
+}
+
+.PlayerTable-Position-Buttons > button.Active {
+  opacity: 1;
+  background-color: #dadada59;
+}
+
+.PlayerTable-Position-Buttons > button:hover {
+  text-decoration: underline;
+}
+
 .undo-button,
 .remove-player-x,
 .skip-button {
@@ -20,7 +39,7 @@
 }
 
 .skip-button {
-  margin: 0 0 0 auto;
+  margin: 0;
 }
 
 .undo-button {
@@ -48,12 +67,8 @@
   align-items: center;
 }
 
-.PlayerTable-Row-Inactive > td > p {
-  color: #c4c4c4 !important;
-}
-
 .PlayerTable-Row-Inactive {
-  color: #c4c4c4 !important;
+  opacity: 0.45;
 }
 
 .Legend-Row > p {
@@ -116,6 +131,16 @@ tr {
 .remove-player-x:hover:before,
 .remove-player-x:hover:after {
   background-color: #535353;
+}
+
+@media screen and (max-width: 800px) {
+  .skip-button {
+    margin-left: auto;
+  }
+
+  .PlayerTable-Position-Buttons {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 700px) {

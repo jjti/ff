@@ -41,7 +41,7 @@
   background-color: #222;
   opacity: 0.9;
 
-  padding-left: 15px;
+  padding: 15px;
   width: fit-content;
   border-radius: 5px;
   font-size: 15px;
@@ -60,7 +60,7 @@
   color: #fff;
   font-size: 15px;
   text-decoration: underline;
-  margin-left: auto;
+  margin: auto 0 auto auto;
 }
 
 .green-dot,
