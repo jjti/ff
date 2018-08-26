@@ -70,7 +70,7 @@ class PlayerTable extends React.Component<IProps, IState> {
     );
 
     return (
-      <div id="PlayerTable">
+      <div className="PlayerTable Section">
         <div id="table-top-header">
           <header>
             {!mobile && <h3>PLAYERS</h3>}
@@ -127,7 +127,7 @@ class PlayerTable extends React.Component<IProps, IState> {
             </p>
             <p
               className="col col-adp"
-              data-tip="Average draft position (from Fantasy Football Calculator)"
+              data-tip="Average draft position (Fantasy Football Calculator)"
             >
               ADP
             </p>

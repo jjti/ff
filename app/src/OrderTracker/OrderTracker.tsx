@@ -57,7 +57,7 @@ class OrderTracker extends React.Component<IProps, State> {
             .filter(n => n > currentPick);
 
     return (
-      <div className="OrderTracker">
+      <div className="OrderTracker Section">
         <header>
           <h3>TEAMS</h3>
 
@@ -95,7 +95,7 @@ class OrderTracker extends React.Component<IProps, State> {
           className="Team-Arrow-Label small"
           style={{ left: currentPickLeft + 21 }}
         >
-          Current
+          Drafting
         </p>
       </div>
     );

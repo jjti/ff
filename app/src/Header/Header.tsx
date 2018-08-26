@@ -5,17 +5,18 @@ import "./Header.css";
 export default class Header extends React.Component {
   public render() {
     return (
-      <div className="Header">
-        <h1 id="App-Header">2018 FF DRAFT</h1>
+      <div className="Header Section">
+        <h1 id="App-Header">ffdraft.app</h1>
         <p>A fantasy football draft tool</p>
         <p>
-          Pick players based on their{" "}
+          Pick players using their{" "}
           <a
             href="https://en.wikipedia.org/wiki/Value_over_replacement_player"
             target="_blank"
           >
-            value over replacement,{" "}
-          </a>
+            value over replacement
+          </a>{" "}
+          from{" "}
           <a href="http://games.espn.com/ffl/tools/projections" target="_blank">
             expert
           </a>{" "}
@@ -24,8 +25,8 @@ export default class Header extends React.Component {
             target="_blank"
           >
             predictions
-          </a>
-          , and{" "}
+          </a>{" "}
+          and{" "}
           <a
             href="https://www.easports.com/madden-nfl/player-ratings"
             target="_blank"

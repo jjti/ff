@@ -71,12 +71,15 @@
   flex: 1;
 }
 
-/* Name is 3x 1 flex */
+/* Name is 3.5x 1 flex */
 .col-name {
-  /* width: calc(2 * 100% / 10); */
   display: flex;
   align-items: center;
   flex: 3.5;
+}
+
+.col-name > p {
+  font-weight: 400;
 }
 
 /* Team name is 2x */
@@ -159,7 +162,7 @@
 }
 
 @media screen and (max-width: 700px) {
-  #PlayerTable {
+  .PlayerTable {
     position: unset;
   }
 

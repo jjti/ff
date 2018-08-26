@@ -1,39 +1,22 @@
 #App {
   display: flex;
-  flex-direction: column;
   width: 100%;
   height: fit-content;
 }
 
-.App-Row-Top {
-  display: flex;
-  height: 24%;
-  min-height: 160px;
-  width: 100%;
-}
-
-.App-Row-Bottom {
-  display: flex;
-  height: 100%;
-  width: 100%;
-}
-
 .App-Left-Column {
   height: auto;
-  width: 24%;
+  width: 25%;
+  min-width: 225px;
 }
 
 .App-Right-Column {
   height: 100%;
-  width: 70%;
+  width: 75%;
 }
 
-.App-Block {
+.Section {
   padding: 15px;
-}
-
-.App-Left-Column .App-Block {
-  height: auto;
 }
 
 .toast-container > .Toastify__toast {
@@ -109,5 +92,13 @@
   .Grayed {
     color: #4a4a4a;
     text-decoration: underline;
+  }
+
+  #App {
+    flex-direction: column;
+  }
+
+  .Section {
+    padding: unset;
   }
 }

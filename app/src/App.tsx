@@ -11,6 +11,7 @@ import Header from "./Header/Header";
 import OrderTracker from "./OrderTracker/OrderTracker";
 import { IPlayer } from "./Player";
 import PlayerTable from "./PlayerTable/PlayerTable";
+// import Settings from "./Settings/Settings";
 import { setPlayers } from "./store/actions/players";
 import TeamPicks from "./TeamPicks/TeamPicks";
 
@@ -75,21 +76,14 @@ class App extends React.PureComponent<IProps, IState> {
 
     return (
       <div id="App">
-        <div className="App-Row-Top">
-          <div className="App-Left-Column App-Block">
-            <Header />
-          </div>
-          <div className="App-Right-Column App-Block">
-            <OrderTracker />
-          </div>
+        <div className="App-Left-Column">
+          <Header />
+          {/* <Settings /> */}
+          <TeamPicks />
         </div>
-        <div className="App-Row-Bottom">
-          <div className="App-Left-Column App-Block">
-            <TeamPicks />
-          </div>
-          <div className="App-Right-Column App-Block">
-            <PlayerTable />
-          </div>
+        <div className="App-Right-Column">
+          <OrderTracker />
+          <PlayerTable />
         </div>
 
         <ToastContainer

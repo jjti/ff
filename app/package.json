@@ -19,10 +19,10 @@
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
+    "deploy:cloudfront": "aws cloudfront create-invalidation --distribution-id E2UNBWCKDABKA6 --paths \"/*\" --profile personal",
     "deploy:s3": "aws s3 sync ./build s3://www.ffdraft.app --acl public-read --sse --delete --cache-control max-age=604800,public --profile personal",
-    "deploy:s3:orig": "aws s3 sync ./build s3://www.ffdraft2018.com --acl public-read --sse --delete --cache-control max-age=604800,public --profile personal",
     "deploy:s3:personal": "aws s3 sync ./build s3://www.fantasydraft.joshuatimmons.com --acl public-read --sse --delete --cache-control max-age=604800,public --profile personal",
-    "deploy": "npm run build && npm run deploy:s3 && npm run deploy:s3:orig && npm run deploy:s3:personal"
+    "deploy": "npm run build && npm run deploy:s3 && npm run deploy:s3:personal && npm run deploy:cloudfront"
   },
   "devDependencies": {
     "@types/jest": "^23.3.1",

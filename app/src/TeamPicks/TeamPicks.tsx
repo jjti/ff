@@ -62,7 +62,7 @@ class TeamPicks extends React.PureComponent<IProps, State> {
     }
 
     return (
-      <div className="TeamPicks">
+      <div className="TeamPicks Section">
         <div className="Pick-Section">
           <header>
             <h3>STARTERS</h3>
@@ -166,8 +166,8 @@ class TeamPicks extends React.PureComponent<IProps, State> {
       return Math.floor(mobileWidth / 4) - 4; // 4px margin
     }
 
-    const thisWidth = window.innerWidth * 0.22; // 24% width of total window size
-    return Math.min(85, Math.floor(thisWidth / 3) - 8); // 8 == 2px border, 6px margin
+    const thisWidth = window.innerWidth * 0.25 - 50; // 25% width of total window size, 15px padding on both sides
+    return Math.min(75, Math.floor(thisWidth / 3) - 8); // 8 == 2px border, 6px margin
   };
 
   private updateTrackedTeam = (event: React.ChangeEvent<HTMLSelectElement>) => {
