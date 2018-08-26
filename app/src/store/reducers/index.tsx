@@ -14,6 +14,7 @@ export default (state = initialState, action: any): IStoreState => {
     case ACTION_TYPES.SET_PLAYERS: {
       return updatePlayerVORs({
         ...state,
+        past: null,
         players: action.players,
         undraftedPlayers: action.players
       });

@@ -106,6 +106,7 @@
 }
 
 #table-head {
+  margin-top: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -155,10 +156,6 @@
   .skip-button {
     margin-left: auto;
   }
-
-  .PlayerTable-Position-Buttons {
-    display: none;
-  }
 }
 
 @media screen and (max-width: 700px) {
@@ -166,12 +163,36 @@
     position: unset;
   }
 
+  #table-top-header {
+    padding-top: 0;
+    top: 50px;
+  }
+
+  #table-top-header > header {
+    flex-wrap: wrap;
+  }
+
+  .PlayerTable-Position-Buttons {
+    width: 100%;
+    margin-left: 15px;
+  }
+
+  .Player-Table-Control-Buttons {
+    position: absolute;
+    top: -45px;
+    right: 10px;
+  }
+
   .Legend-Row {
-    margin: 0 10px;
+    margin: 10px 15px;
+  }
+
+  .col {
+    font-size: 12px;
   }
 
   .col-name {
-    flex: 4;
+    flex: 30%;
   }
 
   .col-name > p {
@@ -179,11 +200,11 @@
   }
 
   .col-team {
-    flex: 1.5;
+    flex: 1;
   }
 
-  .row-name {
-    height: 48px;
+  .row {
+    height: 45px;
   }
 
   .row:hover {

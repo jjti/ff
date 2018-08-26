@@ -57,7 +57,7 @@ class PlayerTable extends React.Component<IProps, IState> {
   ];
 
   public render() {
-    const { currentPick, undraftedPlayers } = this.props;
+    const { currentPick, mobile, undraftedPlayers } = this.props;
     const { positionsToShow } = this.state;
 
     const playersToRender =
@@ -72,51 +72,50 @@ class PlayerTable extends React.Component<IProps, IState> {
     return (
       <div id="PlayerTable">
         <div id="table-top-header">
-          {!this.props.mobile && (
-            <>
-              <header>
-                <h3>PLAYERS</h3>
+          <header>
+            {!mobile && <h3>PLAYERS</h3>}
 
-                {/* Buttons for filtering on position */}
-                <div className="PlayerTable-Position-Buttons">
-                  {this.possiblePositions.map(p => (
-                    <button
-                      key={p}
-                      className={
-                        positionsToShow.indexOf(p) > -1 ? "Active" : ""
-                      }
-                      onClick={() => this.setPositionFilter(p)}
-                    >
-                      {p === "?" ? "All" : p}
-                    </button>
-                  ))}
-                </div>
+            {/* Buttons for filtering on position */}
+            <div className="PlayerTable-Position-Buttons">
+              {this.possiblePositions.map(p => (
+                <button
+                  key={p}
+                  className={positionsToShow.indexOf(p) > -1 ? "Active" : ""}
+                  onClick={() => this.setPositionFilter(p)}
+                >
+                  {p === "?" ? "All" : p}
+                </button>
+              ))}
+            </div>
 
-                {/* Buttons for skipping and undoing actions */}
+            {/* Buttons for skipping and undoing actions */}
+            <div className="Player-Table-Control-Buttons">
+              {!mobile && (
                 <button
                   className="Grayed skip-button"
                   onClick={this.props.skip}
                 >
                   Skip
                 </button>
-                <button
-                  className="Grayed undo-button"
-                  onClick={this.props.undo}
-                >
-                  Undo
-                </button>
-              </header>
-            </>
-          )}
+              )}
+
+              <button className="Grayed undo-button" onClick={this.props.undo}>
+                Undo
+              </button>
+            </div>
+          </header>
 
           {/* Legend for dots on the row */}
           <div className="Legend-Row">
             <div className="green-dot" />
             <p className="small">Will be drafted soon</p>
-            <div className="orange-dot" />
-            <p className="small">BYE week conflict with starter</p>
+            {!mobile && (
+              <>
+                <div className="orange-dot" />
+                <p className="small">BYE week conflict with starter</p>
+              </>
+            )}
           </div>
-
           <div id="table-head">
             <div className="col col-name">
               <p>Name</p>
@@ -126,15 +125,16 @@ class PlayerTable extends React.Component<IProps, IState> {
             <p className="col col-vor" data-tip="Value over replacement">
               VOR
             </p>
+            <p
+              className="col col-adp"
+              data-tip="Average draft position (from Fantasy Football Calculator)"
+            >
+              ADP
+            </p>
+
             {/* Table headers not rendered on mobile */}
-            {!this.props.mobile && (
+            {!mobile && (
               <>
-                <p
-                  className="col col-adp"
-                  data-tip="Average draft position (from Fantasy Football Calculator)"
-                >
-                  ADP
-                </p>
                 <p
                   className="col col-prediction"
                   data-tip="Average of expert predictions (ESPN, FOX, CBS, NFL)"
@@ -160,24 +160,27 @@ class PlayerTable extends React.Component<IProps, IState> {
                 key={p.name + p.pos + p.team}
                 onClick={() => this.props.pickPlayer(p)}
                 className={
-                  this.props.valuedPositions[p.pos] ? "row" : "row row-inactive"
+                  this.props.valuedPositions[p.pos] || mobile
+                    ? "row"
+                    : "row row-inactive"
                 }
               >
                 <div className="col col-name">
                   <p>{p.name} </p>
                   {/* Add dots for information on bye week */}
                   {draftSoon[i] ? <div className="dot green-dot" /> : null}{" "}
-                  {this.props.byeWeeks[p.bye] ? (
+                  {this.props.byeWeeks[p.bye] && !mobile ? (
                     <div className="dot orange-dot" />
                   ) : null}
                 </div>
                 <p className="col col-pos">{p.pos}</p>
                 <p className="col col-team">{p.team}</p>
                 <p className="col col-vor">{p.vor}</p>
+                <p className="col col-adp">{p.adp}</p>
+
                 {/* Table data not rendered on mobile */}
-                {!this.props.mobile && (
+                {!mobile && (
                   <>
-                    <p className="col col-adp">{p.adp}</p>
                     <p className="col col-prediction">{p.prediction}</p>
                     <p className="col col-madden">{p.madden}</p>
                     <button

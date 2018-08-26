@@ -55,59 +55,8 @@ class TeamPicks extends React.PureComponent<IProps, State> {
       return (
         <div className="TeamPicks">
           <header>
-            <h3>FF DRAFT</h3>
+            <h3>ffdraft.app</h3>
           </header>
-
-          <div className="TeamPicks-Toggle-Bench">
-            <button
-              className={this.state.showStarters ? "TeamPicks-Active" : ""}
-              onClick={() => this.setState({ showStarters: true })}
-            >
-              STARTERS
-            </button>
-            <button
-              className={!this.state.showStarters ? "TeamPicks-Active" : ""}
-              onClick={() => this.setState({ showStarters: false })}
-            >
-              BENCH
-            </button>
-            <select
-              className="Tracked-Team-Select Grayed"
-              onChange={this.updateTrackedTeam}
-              defaultValue="CHANGE TEAM"
-            >
-              {new Array(numberOfTeams).fill(0).map((_, i) => (
-                <option key={`Pick-Selection-${i}`} value={i}>
-                  {`Team ${i + 1}`}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="Pick-Row">
-            {this.state.showStarters
-              ? [
-                  trackedTeam.QB,
-                  ...trackedTeam.RBs,
-                  ...trackedTeam.WRs,
-                  trackedTeam.TE,
-                  trackedTeam.DST,
-                  trackedTeam.K
-                ].map((p, i) => (
-                  <PlayerCard
-                    player={p}
-                    pos={this.starterPositions[i]}
-                    length={this.state.cardLength}
-                  />
-                ))
-              : trackedTeam.Bench.map(p => (
-                  <PlayerCard
-                    player={p}
-                    pos={(p && p.pos) || "?"}
-                    length={this.state.cardLength}
-                  />
-                ))}
-          </div>
         </div>
       );
     }

@@ -169,9 +169,7 @@ export const pickPlayer = (
   // create a toast
   toast.info(
     <>
-      <div>
-        Team {activeTeam + 1} drafted {player.name}
-      </div>
+      <div>Drafted {player.name}</div>
       <button
         className="Toast-Undo-Button"
         onClick={() => store.dispatch(undoPlayerPick())}
@@ -187,7 +185,7 @@ export const pickPlayer = (
 export const resetStore = (state: IStoreState): IStoreState => ({
   ...initialState,
   players: state.players,
-  undraftedPlayers: state.players
+  undraftedPlayers: updateVOR(state.players, state.numberOfTeams)
 });
 
 /**
