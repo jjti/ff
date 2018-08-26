@@ -60,129 +60,140 @@ class PlayerTable extends React.Component<IProps, IState> {
     const { currentPick, undraftedPlayers } = this.props;
     const { positionsToShow } = this.state;
 
-    const draftSoon = undraftedPlayers.map(
-      p => p.adp && currentPick + 10 > p.adp
-    );
-
     const playersToRender =
       positionsToShow.length === 1 && positionsToShow[0] === "?"
         ? undraftedPlayers
         : undraftedPlayers.filter(p => positionsToShow.indexOf(p.pos) > -1);
 
+    const draftSoon = playersToRender.map(
+      p => p.adp && currentPick + 10 > p.adp
+    );
+
     return (
       <div id="PlayerTable">
-        {!this.props.mobile && (
-          <>
-            <header className="PlayerTable-Header">
-              <h3>PLAYERS</h3>
+        <div id="table-top-header">
+          {!this.props.mobile && (
+            <>
+              <header>
+                <h3>PLAYERS</h3>
 
-              {/* Buttons for filtering on position */}
-              <div className="PlayerTable-Position-Buttons">
-                {this.possiblePositions.map(p => (
-                  <button
-                    key={p}
-                    className={positionsToShow.indexOf(p) > -1 ? "Active" : ""}
-                    onClick={() => this.setPositionFilter(p)}
-                  >
-                    {p === "?" ? "All" : p}
-                  </button>
-                ))}
-              </div>
+                {/* Buttons for filtering on position */}
+                <div className="PlayerTable-Position-Buttons">
+                  {this.possiblePositions.map(p => (
+                    <button
+                      key={p}
+                      className={
+                        positionsToShow.indexOf(p) > -1 ? "Active" : ""
+                      }
+                      onClick={() => this.setPositionFilter(p)}
+                    >
+                      {p === "?" ? "All" : p}
+                    </button>
+                  ))}
+                </div>
 
-              {/* Buttons for skipping and undoing actions */}
-              <button className="Grayed skip-button" onClick={this.props.skip}>
-                Skip
-              </button>
-              <button className="Grayed undo-button" onClick={this.props.undo}>
-                Undo
-              </button>
-            </header>
-          </>
-        )}
+                {/* Buttons for skipping and undoing actions */}
+                <button
+                  className="Grayed skip-button"
+                  onClick={this.props.skip}
+                >
+                  Skip
+                </button>
+                <button
+                  className="Grayed undo-button"
+                  onClick={this.props.undo}
+                >
+                  Undo
+                </button>
+              </header>
+            </>
+          )}
 
-        {/* Legend for dots on the row */}
-        <div className="Legend-Row">
-          <div className="green-dot" />
-          <p className="small">Will be drafted soon</p>
-          <div className="orange-dot" />
-          <p className="small">BYE week conflict with starter</p>
+          {/* Legend for dots on the row */}
+          <div className="Legend-Row">
+            <div className="green-dot" />
+            <p className="small">Will be drafted soon</p>
+            <div className="orange-dot" />
+            <p className="small">BYE week conflict with starter</p>
+          </div>
+
+          <div id="table-head">
+            <div className="col col-name">
+              <p>Name</p>
+            </div>
+            <p className="col col-pos">Position</p>
+            <p className="col col-team">Team</p>
+            <p className="col col-vor" data-tip="Value over replacement">
+              VOR
+            </p>
+            {/* Table headers not rendered on mobile */}
+            {!this.props.mobile && (
+              <>
+                <p
+                  className="col col-adp"
+                  data-tip="Average draft position (from Fantasy Football Calculator)"
+                >
+                  ADP
+                </p>
+                <p
+                  className="col col-prediction"
+                  data-tip="Average of expert predictions (ESPN, FOX, CBS, NFL)"
+                >
+                  Prediction
+                </p>
+                <p
+                  className="col col-madden"
+                  data-tip="Madden 2019 Overall player stat"
+                >
+                  Madden
+                </p>
+                <p className="col col-remove">Remove</p>
+              </>
+            )}
+          </div>
         </div>
 
-        <table>
-          <thead className="table-head">
-            <tr>
-              <th className="th-left">Name</th>
-              <th className="th-left">Position</th>
-              <th className="th-left">Team</th>
-              <th className="th-right" data-tip="Value over replacement">
-                VOR
-              </th>
-              {/* Table headers not rendered on mobile */}
-              {!this.props.mobile && (
-                <>
-                  <th
-                    className="th-right"
-                    data-tip="Average draft position (ESPN)"
-                  >
-                    ADP
-                  </th>
-                  <th
-                    className="th-right"
-                    data-tip="Average of expert predictions (ESPN, FOX, CBS, NFL)"
-                  >
-                    Prediction
-                  </th>
-                  <th
-                    className="th-right"
-                    data-tip="Madden 2019 Overall player stat"
-                  >
-                    Madden
-                  </th>
-                  <th className="th-right">Remove</th>
-                </>
-              )}
-            </tr>
-          </thead>
-          <tbody>
+        <div id="table">
+          <div id="table-body">
             {playersToRender.map((p: IPlayer, i) => (
-              <tr
+              <div
                 key={p.name + p.pos + p.team}
                 onClick={() => this.props.pickPlayer(p)}
                 className={
-                  this.props.valuedPositions[p.pos]
-                    ? "PlayerTable-Row"
-                    : "PlayerTable-Row PlayerTable-Row-Inactive"
+                  this.props.valuedPositions[p.pos] ? "row" : "row row-inactive"
                 }
               >
-                <td className="PlayerTable-Row-Name">
+                <div className="col col-name">
                   <p>{p.name} </p>
                   {/* Add dots for information on bye week */}
                   {draftSoon[i] ? <div className="dot green-dot" /> : null}{" "}
                   {this.props.byeWeeks[p.bye] ? (
                     <div className="dot orange-dot" />
                   ) : null}
-                </td>
-                <td>{p.pos}</td>
-                <td>{p.team}</td>
-                <td className="th-right">{p.vor}</td>
+                </div>
+                <p className="col col-pos">{p.pos}</p>
+                <p className="col col-team">{p.team}</p>
+                <p className="col col-vor">{p.vor}</p>
                 {/* Table data not rendered on mobile */}
                 {!this.props.mobile && (
                   <>
-                    <td className="th-right">{p.adp}</td>
-                    <td className="th-right">{p.prediction}</td>
-                    <td className="th-right">{p.madden}</td>
-                    <td className="remove-player-td">
-                      <button
-                        className="remove-player-x"
-                        onClick={() => this.props.removePlayer(p)}
-                      />
-                    </td>
+                    <p className="col col-adp">{p.adp}</p>
+                    <p className="col col-prediction">{p.prediction}</p>
+                    <p className="col col-madden">{p.madden}</p>
+                    <button
+                      className="remove-player-x col col-remove"
+                      onClick={e => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.props.removePlayer(p);
+                      }}
+                    />
                   </>
                 )}
-              </tr>
+              </div>
             ))}
-          </tbody>
-        </table>
+          </div>
+        </div>
       </div>
     );
   }

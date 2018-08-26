@@ -236,7 +236,7 @@ const updateVOR = (players: IPlayer[], numberOfTeams: number): IPlayer[] => {
   }
 
   // update player adp to whatever it is in an equivelant draft
-  players = players.map(p => ({ ...p, adp: p[adp] }));
+  players = players.map(p => ({ ...p, adp: p[adp] })).filter(p => p.prediction);
 
   // #1, find replacement player index for each position
   // map each position to the number of players drafted before the lastPick

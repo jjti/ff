@@ -6,9 +6,13 @@
   text-align: right;
 }
 
-.PlayerTable-Header {
-  display: flex;
-  position: relative;
+#table-top-header {
+  position: sticky;
+  top: 0;
+  border-bottom: 1px solid lightgray;
+  background-color: white;
+  z-index: 2;
+  padding-top: 10px;
 }
 
 .PlayerTable-Position-Buttons {
@@ -43,7 +47,7 @@
 }
 
 .undo-button {
-  margin: 0 -10px 0 0;
+  margin: 0;
 }
 
 .skip-button,
@@ -57,17 +61,43 @@
   text-decoration: underline;
 }
 
-.PlayerTable-Row:hover {
+.row:hover {
   background-color: #dadada59;
   cursor: pointer;
 }
 
-.PlayerTable-Row-Name {
-  display: flex;
-  align-items: center;
+/* Flex one wide by default */
+.col {
+  flex: 1;
 }
 
-.PlayerTable-Row-Inactive {
+/* Name is 3x 1 flex */
+.col-name {
+  /* width: calc(2 * 100% / 10); */
+  display: flex;
+  align-items: center;
+  flex: 3.5;
+}
+
+/* Team name is 2x */
+.col-team {
+  flex: 1.5;
+}
+
+.col-vor,
+.col-adp,
+.col-prediction,
+.col-madden {
+  text-align: right;
+}
+
+.col-remove {
+  flex: 14px;
+  text-align: right;
+  right: 2px;
+}
+
+.row-inactive {
   opacity: 0.45;
 }
 
@@ -75,39 +105,27 @@
   margin-right: 40px;
 }
 
-table {
-  margin-bottom: 50px;
-  width: 100%;
-  border-collapse: collapse;
+#table-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-th {
-  height: 40px;
-  position: sticky;
-  top: 0px;
-  background-color: white;
-  z-index: 10;
-  box-shadow: 0 1px 0px #c4c4c4;
-  padding-top: 5px;
-}
-
-tr {
+.row {
   height: 35px;
-}
-
-.remove-player-td {
-  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .remove-player-x {
   background-color: transparent;
-
-  position: absolute;
   width: 2px;
   height: 100%;
   opacity: 0.8;
   right: 0;
-  top: -17px;
+  position: relative;
+  top: -10px;
 }
 .remove-player-x:hover {
   opacity: 1;
@@ -152,15 +170,23 @@ tr {
     margin: 0 10px;
   }
 
-  table {
-    margin-bottom: 15px;
+  .col-name {
+    flex: 4;
   }
 
-  .PlayerTable-Row-Name {
+  .col-name > p {
+    font-weight: 500;
+  }
+
+  .col-team {
+    flex: 1.5;
+  }
+
+  .row-name {
     height: 48px;
   }
 
-  .PlayerTable-Row:hover {
+  .row:hover {
     background-color: unset;
     cursor: unset;
   }

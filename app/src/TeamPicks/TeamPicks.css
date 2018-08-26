@@ -1,6 +1,7 @@
 .TeamPicks {
   position: sticky;
-  top: 18px;
+  top: 0;
+  padding-top: 10px;
 }
 
 .Pick-Columns {
