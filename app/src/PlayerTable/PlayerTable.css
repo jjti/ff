@@ -1,18 +1,16 @@
-.th-left {
-  text-align: left;
-}
-
-.th-right {
-  text-align: right;
+.PlayerTable.Section {
+  padding: 0;
 }
 
 #table-top-header {
-  position: sticky;
-  top: 0;
-  border-bottom: 1px solid lightgray;
-  background-color: white;
+  border-bottom: 1px solid var(--border-color);
   z-index: 2;
-  padding-top: 10px;
+  background-color: white;
+  padding: 8px;
+}
+
+#table {
+  padding: 8px;
 }
 
 .PlayerTable-Position-Buttons {
@@ -23,11 +21,12 @@
   opacity: 0.5;
   padding: 4px 8px;
   margin: 3px;
+  border-radius: 4px;
 }
 
 .PlayerTable-Position-Buttons > button.Active {
   opacity: 1;
-  background-color: #dadada59;
+  background-color: var(--highlight-gray);
 }
 
 .PlayerTable-Position-Buttons > button:hover {
@@ -62,7 +61,7 @@
 }
 
 .row:hover {
-  background-color: #dadada59;
+  background-color: var(--highlight-gray);
   cursor: pointer;
 }
 
@@ -80,11 +79,6 @@
 
 .col-name > p {
   font-weight: 400;
-}
-
-/* Team name is 2x */
-.col-team {
-  flex: 1.5;
 }
 
 .col-vor,
@@ -167,8 +161,7 @@
   }
 
   #table-top-header {
-    padding-top: 0;
-    top: 50px;
+    top: 52px;
   }
 
   #table-top-header > header {

@@ -24,7 +24,7 @@ h2 {
 h3 {
   font-size: 22px;
   font-weight: 600;
-  margin: 0 0 12px 0;
+  margin: 10px 5px;
 }
 
 h4 {
@@ -73,6 +73,7 @@ select {
 header {
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 button {
@@ -84,4 +85,9 @@ button {
 
 button:hover {
   cursor: pointer;
+}
+
+label {
+  display: flex;
+  align-items: center;
 }

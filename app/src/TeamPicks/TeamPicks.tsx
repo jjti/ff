@@ -1,16 +1,13 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { Position } from "../Player";
-import { setTrackedTeam } from "../store/actions/teams";
 import { IStoreState } from "../store/store";
 import { ITeam } from "../Team";
 import PlayerCard from "./PlayerCard";
 import "./TeamPicks.css";
 
 interface IProps {
-  numberOfTeams: number;
   trackedTeam: ITeam;
-  setTrackedTeam: (index: number) => void;
   mobile?: boolean;
 }
 
@@ -47,7 +44,7 @@ class TeamPicks extends React.PureComponent<IProps, State> {
   }
 
   public render() {
-    const { mobile, numberOfTeams, trackedTeam } = this.props;
+    const { mobile, trackedTeam } = this.props;
 
     // if it's mobile, return just the small header and separate Starter and Mobile
     // team members into separate tabs
@@ -62,22 +59,10 @@ class TeamPicks extends React.PureComponent<IProps, State> {
     }
 
     return (
-      <div className="TeamPicks Section">
+      <div className="TeamPicks Section Stick-Section">
         <div className="Pick-Section">
           <header>
-            <h3>STARTERS</h3>
-
-            <div className="Select-Container">
-              <select
-                className="Tracked-Team-Select Grayed"
-                onChange={this.updateTrackedTeam}
-              >
-                {new Array(numberOfTeams).fill(0).map((_, i) => (
-                  <option key={`Pick-Selection-${i}`} value={i}>{`Team ${i +
-                    1}`}</option>
-                ))}
-              </select>
-            </div>
+            <h3>Starters</h3>
           </header>
 
           <div className="Pick-Columns">
@@ -144,7 +129,7 @@ class TeamPicks extends React.PureComponent<IProps, State> {
           </div>
         </div>
         <div className="Pick-Section">
-          <h3>BENCH</h3>
+          <h3>Bench</h3>
           <div className="Pick-Row QB-Row">
             {trackedTeam.Bench.map((p, i) => (
               <PlayerCard
@@ -169,27 +154,10 @@ class TeamPicks extends React.PureComponent<IProps, State> {
     const thisWidth = window.innerWidth * 0.25 - 50; // 25% width of total window size, 15px padding on both sides
     return Math.min(75, Math.floor(thisWidth / 3) - 8); // 8 == 2px border, 6px margin
   };
-
-  private updateTrackedTeam = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const { value } = event.target;
-    this.props.setTrackedTeam(+value);
-  };
 }
 
-const mapStateToProps = ({
-  numberOfTeams,
-  teams,
-  trackedTeam
-}: IStoreState) => ({
-  numberOfTeams,
+const mapStateToProps = ({ teams, trackedTeam }: IStoreState) => ({
   trackedTeam: teams[trackedTeam]
 });
 
-const mapDispathToProps = (dispatch: any) => ({
-  setTrackedTeam: (index: number) => dispatch(setTrackedTeam(index))
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispathToProps
-)(TeamPicks);
+export default connect(mapStateToProps)(TeamPicks);

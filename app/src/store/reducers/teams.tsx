@@ -344,6 +344,9 @@ export const setNumberOfTeams = (
     newTeams = newTeams.slice(0, numberOfTeams);
   }
 
+  // create a toast
+  toast.info(`Updated VORs for ${numberOfTeams} teams`);
+
   return {
     ...state,
     numberOfTeams,

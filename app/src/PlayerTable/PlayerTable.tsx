@@ -71,9 +71,9 @@ class PlayerTable extends React.Component<IProps, IState> {
 
     return (
       <div className="PlayerTable Section">
-        <div id="table-top-header">
+        <div id="table-top-header" className="Stick-Section">
           <header>
-            {!mobile && <h3>PLAYERS</h3>}
+            {!mobile && <h3>Players</h3>}
 
             {/* Buttons for filtering on position */}
             <div className="PlayerTable-Position-Buttons">

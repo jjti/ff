@@ -1,3 +1,8 @@
+:root {
+  --border-color: #d3d3d38c;
+  --highlight-gray: #dadada59;
+}
+
 #App {
   display: flex;
   width: 100%;
@@ -16,7 +21,16 @@
 }
 
 .Section {
-  padding: 15px;
+  margin: 12px 6px;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: white;
+  border: 1px solid var(--border-color);
+}
+
+.Stick-Section {
+  position: sticky;
+  top: -10px;
 }
 
 .toast-container > .Toastify__toast {
@@ -44,6 +58,7 @@
   font-size: 15px;
   text-decoration: underline;
   margin: auto 0 auto auto;
+  padding-right: 0;
 }
 
 .green-dot,
@@ -62,17 +77,40 @@
   background-color: #eca80a;
 }
 
+i {
+  border: solid lightgray;
+  border-width: 0 1px 1px 0;
+  display: inline-block;
+  padding: 7px;
+}
+
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+  margin: 10px 10px 0 auto;
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  margin: -10px 10px 0 auto;
+}
+
 .Select-Container {
-  margin: 0px 0px 10px 35px;
-  border-bottom: 1px solid lightgray;
+  margin: 0 0 0 auto;
+  background-color: var(--highlight-gray);
+  border-radius: 4px;
+  padding: 3px;
 }
 
 .Grayed {
-  color: lightgray;
+  cursor: pointer;
+  color: #4a4a4a;
 }
 
 .Grayed:hover {
-  color: #4a4a4a;
+  color: black;
+  border-color: black;
 }
 
 @media screen and (max-width: 700px) {
@@ -99,6 +137,8 @@
   }
 
   .Section {
+    margin: unset;
     padding: unset;
+    border: unset;
   }
 }

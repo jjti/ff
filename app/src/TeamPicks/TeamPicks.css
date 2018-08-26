@@ -1,8 +1,4 @@
 .TeamPicks {
-  position: sticky;
-  top: 0;
-  padding-top: 10px;
-  background-color: white;
 }
 
 .Pick-Columns {
@@ -13,7 +9,6 @@
 }
 
 .Pick-Section {
-  margin-bottom: 40px;
 }
 
 .Pick-Section-Header {
@@ -29,7 +24,9 @@
   .TeamPicks {
     top: 0px;
     height: 30px;
-    padding: 10px;
+    padding: 11px;
+    position: sticky;
+    background-color: white;
   }
 
   .TeamPicks > header {
