@@ -1,5 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
+
 import { Position } from "../Player";
 import { IStoreState } from "../store/store";
 import { ITeam } from "../Team";
@@ -151,7 +152,7 @@ class TeamPicks extends React.PureComponent<IProps, State> {
       return Math.floor(mobileWidth / 4) - 4; // 4px margin
     }
 
-    const thisWidth = window.innerWidth * 0.25 - 50; // 25% width of total window size, 15px padding on both sides
+    const thisWidth = window.innerWidth * 0.25 - 60; // 25% width of total window size, 15px padding on both sides
     return Math.min(75, Math.floor(thisWidth / 3) - 8); // 8 == 2px border, 6px margin
   };
 }

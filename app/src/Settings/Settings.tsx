@@ -33,7 +33,7 @@ class Settings extends React.Component<IProps, IState> {
 
   public render() {
     const { open } = this.state;
-    const { currentPick, numberOfTeams } = this.props;
+    const { currentPick, numberOfTeams, trackedTeam } = this.props;
 
     // an array with the allowable number of teams: [6, 16]
     const allowableNumberOfTeams =
@@ -65,6 +65,7 @@ class Settings extends React.Component<IProps, IState> {
                 <select
                   className="Tracked-Team-Select Grayed"
                   onChange={this.updateTrackedTeam}
+                  value={trackedTeam}
                 >
                   {new Array(numberOfTeams).fill(0).map((_, i) => (
                     <option key={`Pick-Selection-${i}`} value={i}>{`Team ${i +

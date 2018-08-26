@@ -307,7 +307,8 @@ export const setNumberOfTeams = (
     currentPick,
     numberOfTeams: currNumberOfTeams,
     players,
-    teams
+    teams,
+    trackedTeam
   } = state;
 
   // don't change anything if we're already done with a round
@@ -344,6 +345,13 @@ export const setNumberOfTeams = (
     newTeams = newTeams.slice(0, numberOfTeams);
   }
 
+  // if number of tracked teams is less than index of currently tracked team,
+  // set new tracked team to max team index
+  let newTrackedTeam = trackedTeam;
+  if (trackedTeam > numberOfTeams - 1) {
+    newTrackedTeam = numberOfTeams - 1;
+  }
+
   // create a toast
   toast.info(`VOR updated for ${numberOfTeams} teams`);
 
@@ -351,6 +359,7 @@ export const setNumberOfTeams = (
     ...state,
     numberOfTeams,
     teams: newTeams,
+    trackedTeam: newTrackedTeam,
     undraftedPlayers: updateVOR(players, numberOfTeams)
   };
 };

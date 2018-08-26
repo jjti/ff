@@ -59,7 +59,8 @@ p.small {
 
 #root {
   height: 100%;
-  width: 100%;
+  width: calc(100% - 12px);
+  margin: 0 6px;
 }
 
 select {
@@ -90,4 +91,11 @@ button:hover {
 label {
   display: flex;
   align-items: center;
+}
+
+@media screen and (max-width: 700px) {
+  #root {
+    width: 100%;
+    margin: 0;
+  }
 }

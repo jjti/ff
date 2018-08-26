@@ -1,5 +1,5 @@
 .Card {
-  border: 1px solid #c4c4c4;
+  border: 1px solid var(--border-color);
   margin: 6px;
   position: relative;
   border-radius: 5px;
