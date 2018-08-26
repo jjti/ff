@@ -15,7 +15,8 @@ interface IProps {
 }
 
 const initialState = {
-  cardLength: 50
+  cardLength: 50,
+  open: true
 };
 type State = Readonly<typeof initialState>;
 
@@ -42,9 +43,13 @@ class OrderTracker extends React.Component<IProps, State> {
     });
   };
 
+  public toggleOpen = () => {
+    this.setState({ open: !this.state.open });
+  };
+
   public render() {
     const { activeTeam, teams } = this.props;
-    const { cardLength } = this.state;
+    const { cardLength, open } = this.state;
 
     // amount to shift the "current draft" arrow from the left
     const currentPickLeft = activeTeam * (cardLength + 14) + 0.2 * cardLength;
@@ -53,30 +58,39 @@ class OrderTracker extends React.Component<IProps, State> {
       <div className="OrderTracker Section">
         <header>
           <h3>Teams</h3>
+          {open ? (
+            <i className="up Grayed" onClick={this.toggleOpen} />
+          ) : (
+            <i className="down Grayed" onClick={this.toggleOpen} />
+          )}
         </header>
 
-        <div className="Team-Cards">
-          {teams.map((t, i) => (
-            <div
-              className={`Card ${
-                i === activeTeam ? "Card-Active" : "Card-Empty"
-              }`}
-              key={i}
-              style={{ width: cardLength, height: cardLength }}
-              onClick={() => this.props.setActiveTeam(i)}
-            >
-              <h4>{i + 1}</h4>
-              <p className="points">{t.StarterValue}</p>
+        {open && (
+          <>
+            <div className="Team-Cards">
+              {teams.map((t, i) => (
+                <div
+                  className={`Card ${
+                    i === activeTeam ? "Card-Active" : "Card-Empty"
+                  }`}
+                  key={i}
+                  style={{ width: cardLength, height: cardLength }}
+                  onClick={() => this.props.setActiveTeam(i)}
+                >
+                  <h4>{i + 1}</h4>
+                  <p className="points">{t.StarterValue}</p>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-        <div className="Team-Arrow-Up" style={{ left: currentPickLeft }} />
-        <p
-          className="Team-Arrow-Label small"
-          style={{ left: currentPickLeft + 21 }}
-        >
-          Drafting
-        </p>
+            <div className="Team-Arrow-Up" style={{ left: currentPickLeft }} />
+            <p
+              className="Team-Arrow-Label small"
+              style={{ left: currentPickLeft + 21 }}
+            >
+              Drafting
+            </p>
+          </>
+        )}
       </div>
     );
   }
