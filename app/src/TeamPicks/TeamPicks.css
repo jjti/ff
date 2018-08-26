@@ -1,23 +1,13 @@
 .TeamPicks {
 }
 
-.Pick-Columns {
-  display: flex;
-}
-
 .Pick-Column {
-}
-
-.Pick-Section {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .Pick-Section-Header {
   display: flex;
-}
-
-.Pick-Row {
-  display: flex;
-  flex-wrap: wrap;
 }
 
 @media screen and (max-width: 700px) {

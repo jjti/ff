@@ -12,16 +12,11 @@ import { createTeam, initialState, IStoreState, store } from "../store";
  *
  * @param team the team whose VOR we're trying to sum
  */
-const sumStarterValues = (team: ITeam): number => {
-  return [
-    team.QB,
-    ...team.RBs,
-    ...team.WRs,
-    team.TE,
-    team.Flex,
-    team.DST,
-    team.K
-  ].reduce((acc, p) => (p && p.vor ? acc + p.vor : acc), 0);
+const sumStarterValues = ({ QB, RB, WR, TE, FLEX, DST, K }: ITeam): number => {
+  return [...QB, ...RB, ...WR, ...TE, ...FLEX, ...DST, ...K].reduce(
+    (acc, p) => (p && p.vor ? acc + p.vor : acc),
+    0
+  );
 };
 
 /**
@@ -77,66 +72,28 @@ export const pickPlayer = (
   // try and add the player to the team roster, respecting the limit at each position
   const newTeams = teams.map(t => ({ ...t }));
   const roster: ITeam = { ...newTeams[activeTeam] };
+
+  const emptySpot = roster[player.pos].findIndex((p: IPlayer) => p === null);
+  const emptyFLEXSpot = roster.FLEX.findIndex(p => p === null);
   const emptyBenchSpot = roster.Bench.findIndex(b => b === null);
-  const addToBench = () => {
+  if (emptySpot > -1) {
+    // there's an empty spot in this position
+    roster[player.pos] = roster[player.pos].map(
+      (p: IPlayer, i: number) => (i === emptySpot ? player : p)
+    );
+  } else if (
+    ["RB", "WR", "TE"].indexOf(player.pos) > -1 &&
+    emptyFLEXSpot > -1
+  ) {
+    // it's a FLEX position, check if there are any flex positions left
+    roster.FLEX = roster.FLEX.map((p, i) => (i === emptyFLEXSpot ? player : p));
+  } else {
     if (emptyBenchSpot > -1) {
       roster.Bench = roster.Bench.map(
         (b, i) => (i === emptyBenchSpot ? player : b)
       );
     } else {
       roster.Bench = roster.Bench.concat([player]);
-    }
-  };
-  switch (player.pos) {
-    case "QB":
-    case "DST":
-    case "K": {
-      // positions with just one player in the position
-      if (!roster[player.pos]) {
-        roster[player.pos] = player;
-      } else {
-        roster.Bench[emptyBenchSpot] = player;
-      }
-      break;
-    }
-    case "RB": {
-      const emptyRBSpot = roster.RBs.findIndex(rb => rb === null);
-      if (emptyRBSpot > -1) {
-        // there's an empty RB spot on the roster, insert
-        roster.RBs = roster.RBs.map((r, i) => (i === emptyRBSpot ? player : r));
-      } else if (!roster.Flex) {
-        // flex is still empty
-        roster.Flex = player;
-      } else {
-        addToBench();
-      }
-      break;
-    }
-    case "WR": {
-      const emptyWRSpot = roster.WRs.findIndex(wr => wr === null);
-      if (emptyWRSpot > -1) {
-        // there's an empty WR spot on the roster, insert
-        roster.WRs = roster.WRs.map((w, i) => (i === emptyWRSpot ? player : w));
-      } else if (!roster.Flex) {
-        // flex is still empty
-        roster.Flex = player;
-      } else {
-        addToBench();
-      }
-      break;
-    }
-    case "TE": {
-      if (!roster.TE) {
-        roster.TE = player;
-      } else if (!roster.Flex) {
-        roster.Flex = player;
-      } else {
-        addToBench();
-      }
-      break;
-    }
-    default: {
-      throw new Error("Unrecognized position!");
     }
   }
   roster.StarterValue = sumStarterValues(roster);
@@ -182,6 +139,10 @@ export const pickPlayer = (
   return newState;
 };
 
+/**
+ * "reset" the store, resettting the undraftedPlayers
+ * @param state state to be reset
+ */
 export const resetStore = (state: IStoreState): IStoreState => ({
   ...initialState,
   players: state.players,
@@ -307,6 +268,7 @@ export const setNumberOfTeams = (
     currentPick,
     numberOfTeams: currNumberOfTeams,
     players,
+    rosterFormat,
     teams,
     trackedTeam
   } = state;
@@ -338,7 +300,7 @@ export const setNumberOfTeams = (
     newTeams = newTeams.concat(
       new Array(numberOfTeams - currNumberOfTeams)
         .fill(null)
-        .map(() => createTeam())
+        .map(() => createTeam(rosterFormat))
     );
   } else {
     // cleave off the extra teams that are no longer needed

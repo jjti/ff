@@ -66,72 +66,68 @@ class TeamPicks extends React.PureComponent<IProps, State> {
             <h3>Starters</h3>
           </header>
 
-          <div className="Pick-Columns">
-            <div className="Pick-Column">
-              <div className="Pick-Row QB-Row">
-                <PlayerCard
-                  player={trackedTeam.QB}
-                  pos="QB"
-                  length={this.state.cardLength}
-                />
-              </div>
-              <div className="Pick-Row RB-Row">
-                {trackedTeam.RBs.map((r, i) => (
-                  <PlayerCard
-                    key={r ? r.name : i}
-                    player={r}
-                    pos="RB"
-                    length={this.state.cardLength}
-                  />
-                ))}
-              </div>
-              <div className="Pick-Row WR-Row">
-                {trackedTeam.WRs.map((w, i) => (
-                  <PlayerCard
-                    key={w ? w.name : i}
-                    player={w}
-                    pos="WR"
-                    length={this.state.cardLength}
-                  />
-                ))}
-              </div>
-              <div className="Pick-Row Flex-Row">
-                <PlayerCard
-                  player={trackedTeam.Flex}
-                  pos="FLEX"
-                  length={this.state.cardLength}
-                />
-              </div>
-            </div>
-            <div className="Pick-Column">
-              <div style={{ height: this.state.cardLength + 16 }} />
-              <div className="Pick-Row">
-                <PlayerCard
-                  player={trackedTeam.TE}
-                  pos="TE"
-                  length={this.state.cardLength}
-                />
-              </div>
-              <div className="Pick-Row">
-                <PlayerCard
-                  player={trackedTeam.DST}
-                  pos="DST"
-                  length={this.state.cardLength}
-                />
-              </div>
-              <div className="Pick-Row">
-                <PlayerCard
-                  player={trackedTeam.K}
-                  pos="K"
-                  length={this.state.cardLength}
-                />
-              </div>
-            </div>
+          <div className="Pick-Column">
+            {trackedTeam.QB.map((r, i) => (
+              <PlayerCard
+                key={r ? r.name : i}
+                player={r}
+                pos="QB"
+                length={this.state.cardLength}
+              />
+            ))}
+            {trackedTeam.RB.map((r, i) => (
+              <PlayerCard
+                key={r ? r.name : i}
+                player={r}
+                pos="RB"
+                length={this.state.cardLength}
+              />
+            ))}
+            {trackedTeam.WR.map((w, i) => (
+              <PlayerCard
+                key={w ? w.name : i}
+                player={w}
+                pos="WR"
+                length={this.state.cardLength}
+              />
+            ))}
+            {trackedTeam.FLEX.map((r, i) => (
+              <PlayerCard
+                key={r ? r.name : i}
+                player={r}
+                pos="FLEX"
+                length={this.state.cardLength}
+              />
+            ))}
+            {trackedTeam.TE.map((r, i) => (
+              <PlayerCard
+                key={r ? r.name : i}
+                player={r}
+                pos="TE"
+                length={this.state.cardLength}
+              />
+            ))}
+            {trackedTeam.DST.map((r, i) => (
+              <PlayerCard
+                key={r ? r.name : i}
+                player={r}
+                pos="DST"
+                length={this.state.cardLength}
+              />
+            ))}
+            {trackedTeam.K.map((r, i) => (
+              <PlayerCard
+                key={r ? r.name : i}
+                player={r}
+                pos="K"
+                length={this.state.cardLength}
+              />
+            ))}
           </div>
         </div>
         <div className="Pick-Section">
           <h3>Bench</h3>
-          <div className="Pick-Row QB-Row">
+          <div className="Pick-Column">
             {trackedTeam.Bench.map((p, i) => (
               <PlayerCard
                 key={`bench_${i}`}

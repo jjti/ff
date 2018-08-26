@@ -225,25 +225,25 @@ class PlayerTable extends React.Component<IProps, IState> {
 }
 
 const mapStateToProps = (state: IStoreState) => {
-  const { QB, RBs, WRs, TE, Flex, DST, K } = state.teams[state.trackedTeam];
+  const { QB, RB, WR, TE, FLEX, DST, K } = state.teams[state.trackedTeam];
 
   // add the positions to the object that the trackedTeam hasn't
   // filled their roster with (ie they have space for)
   const valuedPositions = {} as any;
-  if (!QB) {
+  if (!QB.every((r: IPlayer) => !!r)) {
     valuedPositions.QB = true;
   }
-  if (!RBs.every((r: IPlayer) => !!r)) {
+  if (!RB.every((r: IPlayer) => !!r)) {
     valuedPositions.RB = true;
   }
-  if (!WRs.every((w: IPlayer) => !!w)) {
+  if (!WR.every((w: IPlayer) => !!w)) {
     valuedPositions.WR = true;
   }
-  if (!Flex) {
+  if (!FLEX.every((w: IPlayer) => !!w)) {
     valuedPositions.RB = true;
     valuedPositions.WR = true;
   }
-  if (!TE) {
+  if (!TE.every((w: IPlayer) => !!w)) {
     valuedPositions.TE = true;
   }
 
@@ -261,7 +261,7 @@ const mapStateToProps = (state: IStoreState) => {
   }
 
   // find the bye weeks already taken by the core players (QB, RB, WR, FLEX)
-  const byeWeeks = [QB, ...RBs, ...WRs, Flex]
+  const byeWeeks = [...QB, ...RB, ...WR, ...FLEX]
     .map(p => p && p.bye)
     .reduce((acc, bye) => (bye ? { ...acc, [bye]: true } : acc), {});
 

@@ -2,7 +2,7 @@ import { applyMiddleware, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import { IPlayer } from "../Player";
-import { ITeam } from "../Team";
+import { IRoster, ITeam } from "../Team";
 import reducers from "./reducers";
 
 export interface IStoreState {
@@ -48,6 +48,12 @@ export interface IStoreState {
   players: IPlayer[];
 
   /**
+   * The roster of the teams being drafted for.
+   * The default is 1QB, 2RB, 2WR, 1TE, 1FLEX, 1K, 1DST, and 7Bench, but this can be changed
+   */
+  rosterFormat: IRoster;
+
+  /**
    * Currently selected player (one click)
    */
   selectedPlayer: IPlayer | null;
@@ -74,17 +80,28 @@ export interface IStoreState {
 /**
  * Create an emptyTeam without any drafted players
  */
-export const createTeam = (): ITeam => ({
-  Bench: new Array(7).fill(null),
-  DST: null,
-  Flex: null,
-  K: null,
-  QB: null,
-  RBs: [null, null],
+export const createTeam = (rosterFormat: IRoster): ITeam => ({
+  Bench: new Array(rosterFormat.Bench).fill(null),
+  DST: new Array(rosterFormat.DST).fill(null),
+  FLEX: new Array(rosterFormat.FLEX).fill(null),
+  K: new Array(rosterFormat.K).fill(null),
+  QB: new Array(rosterFormat.QB).fill(null),
+  RB: new Array(rosterFormat.RB).fill(null),
   StarterValue: 0,
-  TE: null,
-  WRs: [null, null]
+  TE: new Array(rosterFormat.TE).fill(null),
+  WR: new Array(rosterFormat.WR).fill(null)
 });
+
+const initialRoster: IRoster = {
+  Bench: 7,
+  DST: 1,
+  FLEX: 1,
+  K: 1,
+  QB: 1,
+  RB: 2,
+  TE: 1,
+  WR: 2
+};
 
 export const initialState = {
   activeTeam: 0, // active team's index ([0-9]) that's currently drafting
@@ -94,8 +111,9 @@ export const initialState = {
   numberOfTeams: 10,
   past: null,
   players: [],
+  rosterFormat: initialRoster,
   selectedPlayer: null,
-  teams: new Array(10).fill(0).map(() => createTeam()), // doing 10 empty teams by default
+  teams: new Array(10).fill(0).map(() => createTeam(initialRoster)), // doing 10 empty teams by default
   trackedTeam: 0, // team to track in TeamPicks
   undraftedPlayers: []
 };

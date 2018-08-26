@@ -9,6 +9,7 @@ export const getPlayers = (state: IStoreState) => state.undraftedPlayers;
 /**
  * Remove the player from the store and the players array
  * Update the past history
+ *
  * @param state
  * @param player
  */
@@ -28,6 +29,12 @@ export const removePlayer = (
   };
 };
 
+/**
+ * Undo the last player selection by setting state to its past state object
+ * TODO: make this a diff, kind of memory intense
+ *
+ * @param state state from current turn, about to be undone
+ */
 export const undoPlayerPick = (state: IStoreState): IStoreState => {
   const { past } = state;
 
@@ -36,4 +43,14 @@ export const undoPlayerPick = (state: IStoreState): IStoreState => {
   }
 
   return past || resetStore(state); // if it's null, reset and return
+};
+
+/**
+ * Change the default roster format, changing number of QBs, RBs, etc
+ * Will involve recalculating VORs
+ *
+ * @param state state before roster format update
+ */
+export const setRosterFormat = (state: IStoreState): IStoreState => {
+  return state;
 };

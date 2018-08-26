@@ -96,11 +96,16 @@ i {
   margin: -10px 10px 0 auto;
 }
 
-.Select-Container {
+.Options-Container {
   margin: 0 0 0 auto;
   background-color: var(--highlight-gray);
   border-radius: 4px;
   padding: 3px;
+}
+
+.Options-Container > p {
+  margin: 4px;
+  font-size: 12px;
 }
 
 .Grayed {

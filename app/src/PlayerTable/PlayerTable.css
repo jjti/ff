@@ -68,7 +68,7 @@
   cursor: pointer;
 }
 
-/* Flex one wide by default */
+/* FLEX one wide by default */
 .col {
   flex: 1;
 }

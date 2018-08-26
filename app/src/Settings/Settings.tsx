@@ -1,6 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
+import { resetDraft } from "../store/actions/players";
 import { setNumberOfTeams, setTrackedTeam } from "../store/actions/teams";
 import { IStoreState } from "../store/store";
 
@@ -9,6 +10,7 @@ import "./Settings.css";
 interface IProps {
   currentPick: number;
   numberOfTeams: number;
+  resetDraft: () => void;
   setNumberOfTeams: (count: number) => void;
   setTrackedTeam: (index: number) => void;
   trackedTeam: number;
@@ -61,7 +63,7 @@ class Settings extends React.Component<IProps, IState> {
           <aside>
             <label>
               Your team
-              <div className="Select-Container">
+              <div className="Options-Container">
                 <select
                   className="Tracked-Team-Select Grayed"
                   onChange={this.updateTrackedTeam}
@@ -77,7 +79,7 @@ class Settings extends React.Component<IProps, IState> {
 
             <label>
               Number of teams
-              <div className="Select-Container">
+              <div className="Options-Container">
                 <select
                   className="Grayed"
                   value={`${numberOfTeams} Teams`}
@@ -89,6 +91,16 @@ class Settings extends React.Component<IProps, IState> {
                   ))}
                 </select>
               </div>
+            </label>
+
+            <label>
+              Start over
+              <button
+                className="Options-Container"
+                onClick={() => this.props.resetDraft()}
+              >
+                <p>Reset Draft</p>
+              </button>
             </label>
           </aside>
         )}
@@ -119,6 +131,7 @@ const mapStateToProps = ({
 });
 
 const mapDispathToProps = (dispatch: any) => ({
+  resetDraft: () => dispatch(resetDraft()),
   setNumberOfTeams: (count: number) => dispatch(setNumberOfTeams(count)),
   setTrackedTeam: (index: number) => dispatch(setTrackedTeam(index))
 });

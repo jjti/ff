@@ -1,9 +1,10 @@
 import { ACTION_TYPES } from "../actions";
 import { initialState, IStoreState } from "../store";
-import { removePlayer, undoPlayerPick } from "./players";
+import { removePlayer, setRosterFormat, undoPlayerPick } from "./players";
 import {
   incrementDraft,
   pickPlayer,
+  resetStore,
   setNumberOfTeams,
   setTrackedTeam,
   updatePlayerVORs
@@ -31,6 +32,9 @@ export default (state = initialState, action: any): IStoreState => {
     case ACTION_TYPES.REMOVE_PLAYER: {
       return removePlayer(state, action.player);
     }
+    case ACTION_TYPES.RESET_DRAFT: {
+      return resetStore(state);
+    }
     case ACTION_TYPES.INCREMENT_DRAFT: {
       return incrementDraft(state);
     }
@@ -45,6 +49,9 @@ export default (state = initialState, action: any): IStoreState => {
     }
     case ACTION_TYPES.SET_ACTIVE_TEAM: {
       return { ...state, activeTeam: action.activeTeam };
+    }
+    case ACTION_TYPES.SET_ROSTER_FORMAT: {
+      return setRosterFormat(state);
     }
     default:
       return state;
