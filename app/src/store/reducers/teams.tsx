@@ -21,7 +21,7 @@ const sumStarterValues = (team: ITeam): number => {
     team.Flex,
     team.DST,
     team.K
-  ].reduce((acc, p) => (p ? acc + p.vor : acc), 0);
+  ].reduce((acc, p) => (p && p.vor ? acc + p.vor : acc), 0);
 };
 
 /**
@@ -224,6 +224,20 @@ export const setTrackedTeam = (
 const updateVOR = (players: IPlayer[], numberOfTeams: number): IPlayer[] => {
   const positions: Position[] = ["QB", "RB", "WR", "TE", "DST", "K"];
 
+  // we have 4 adp rankings from fantasyfootballcalculator. they're stored
+  // in player properties adp8, adp10, adp12, and adp14
+  let adp = "adp10";
+  if (numberOfTeams <= 8) {
+    adp = "adp8";
+  } else if (numberOfTeams > 10 && numberOfTeams <= 12) {
+    adp = "adp12";
+  } else if (numberOfTeams > 12) {
+    adp = "adp14";
+  }
+
+  // update player adp to whatever it is in an equivelant draft
+  players = players.map(p => ({ ...p, adp: p[adp] }));
+
   // #1, find replacement player index for each position
   // map each position to the number of players drafted before the lastPick
   const positionToCountMap = positions.reduce(
@@ -238,14 +252,15 @@ const updateVOR = (players: IPlayer[], numberOfTeams: number): IPlayer[] => {
 
   // #2, find replacement values at each position by finding the predicted points
   //     at 1+the number of expected players in that position drafted within 10 rounds
-  // filter by position, sort descending by pred points, and get the number of points by the replacement player
+  // filter by position, sort descending by prediction points, and get the number of points by the replacement player
   // map positions to their replacement values
   const positionToReplaceValueMap = positions.reduce(
     (acc, pos) => ({
       ...acc,
-      [pos]: players.filter(p => p.pos === pos).sort((a, b) => b.pred - a.pred)[
-        positionToCountMap[pos]
-      ].pred
+      [pos]: players
+        .filter(p => p.pos === pos)
+        .sort((a, b) => b.prediction - a.prediction)[positionToCountMap[pos]]
+        .prediction
     }),
     {}
   );
@@ -253,12 +268,27 @@ const updateVOR = (players: IPlayer[], numberOfTeams: number): IPlayer[] => {
   // #3, update players' VORs
   const newPlayers = players.map(p => ({
     ...p,
-    vor: p.pred - positionToReplaceValueMap[p.pos]
+    vor: p.prediction - positionToReplaceValueMap[p.pos]
   }));
 
   // #4, sort by their VOR
-  return newPlayers.sort((a, b) => b.vor - a.vor);
+  const valuablePlayers = newPlayers.filter(p => !isNaN(p.vor));
+  const unvaluablePlayers = newPlayers.filter(p => isNaN(p.vor));
+  return valuablePlayers
+    .sort((a, b) => b.vor - a.vor)
+    .concat(unvaluablePlayers);
 };
+
+/**
+ * Update the VOR for all the players not yet drafted. Is dependent on
+ * the number of teams currently in the draft
+ *
+ * @param state the current store state
+ */
+export const updatePlayerVORs = (state: IStoreState): IStoreState => ({
+  ...state,
+  undraftedPlayers: updateVOR(state.undraftedPlayers, state.numberOfTeams)
+});
 
 /**
  * If we're not done with the first round yet, update the number of teams

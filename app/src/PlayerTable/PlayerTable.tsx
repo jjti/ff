@@ -64,8 +64,6 @@ class PlayerTable extends React.Component<IProps, IState> {
       p => p.adp && currentPick + 10 > p.adp
     );
 
-    console.log(positionsToShow);
-
     const playersToRender =
       positionsToShow.length === 1 && positionsToShow[0] === "?"
         ? undraftedPlayers
@@ -130,15 +128,9 @@ class PlayerTable extends React.Component<IProps, IState> {
                   </th>
                   <th
                     className="th-right"
-                    data-tip="Predicted number of regular season points"
-                  >
-                    Prediction
-                  </th>
-                  <th
-                    className="th-right"
                     data-tip="Average of expert predictions (ESPN, FOX, CBS, NFL)"
                   >
-                    Experts
+                    Prediction
                   </th>
                   <th
                     className="th-right"
@@ -177,8 +169,7 @@ class PlayerTable extends React.Component<IProps, IState> {
                 {!this.props.mobile && (
                   <>
                     <td className="th-right">{p.adp}</td>
-                    <td className="th-right">{p.pred}</td>
-                    <td className="th-right">{p.experts}</td>
+                    <td className="th-right">{p.prediction}</td>
                     <td className="th-right">{p.madden}</td>
                     <td className="remove-player-td">
                       <button

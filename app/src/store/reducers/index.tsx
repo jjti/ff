@@ -5,17 +5,18 @@ import {
   incrementDraft,
   pickPlayer,
   setNumberOfTeams,
-  setTrackedTeam
+  setTrackedTeam,
+  updatePlayerVORs
 } from "./teams";
 
 export default (state = initialState, action: any): IStoreState => {
   switch (action.type) {
     case ACTION_TYPES.SET_PLAYERS: {
-      return {
+      return updatePlayerVORs({
         ...state,
         players: action.players,
         undraftedPlayers: action.players
-      };
+      });
     }
     case ACTION_TYPES.PICK_PLAYER: {
       return pickPlayer(state, action.player);

@@ -73,7 +73,7 @@ for (pos.data in pages.by.pos) {
       nfl.page.data[i,"name"] <- paste0(nfl.name.split[1], " ", nfl.name.split[2])
 
       if (pos.data == "DST") {
-        nfl.page.data[i,"name"] <- nfl.name.split[2]
+        nfl.page.data[i,"name"] <- nfl.name
       }
     }
 

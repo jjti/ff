@@ -5,11 +5,13 @@ export interface IPlayer {
   name: string;
   pos: Position;
   team: string;
-  vor: number;
-  adp: number;
-  pred: number;
-  replace_value: number;
-  experts: number;
+  prediction: number;
+  adp?: number; // one of adp8, adp10, adp12, or adp14
+  adp8: number;
+  adp10: number;
+  adp12: number;
+  adp14: number;
   madden: number;
+  vor?: number;
   href?: string;
 }

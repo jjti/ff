@@ -1,4 +1,3 @@
-#Load libraries
 library("plyr")
 library("data.table")
 library(rvest)
