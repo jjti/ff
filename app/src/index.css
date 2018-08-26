@@ -7,6 +7,8 @@ body {
   font-family: "Lato", sans-serif;
   color: #4a4a4a;
   overflow-x: hidden;
+  overflow-y: scroll; /* has to be scroll, not auto */
+  -webkit-overflow-scrolling: touch;
 }
 
 h1 {
