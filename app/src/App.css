@@ -1,6 +1,8 @@
 :root {
   --border-color: #d3d3d38c;
   --highlight-gray: #dadada59;
+  --highlight-blue: #4ca6e8;
+  --highlight-border: 1px solid var(--highlight-blue);
 }
 
 #App {
@@ -101,6 +103,11 @@ i {
   background-color: var(--highlight-gray);
   border-radius: 4px;
   padding: 3px;
+  border: 1px solid transparent;
+}
+
+.Options-Container:hover {
+  border: var(--highlight-border);
 }
 
 .Options-Container > p {

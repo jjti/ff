@@ -27,7 +27,7 @@ export const removePlayer = (player: IPlayer) => ({
  * "Reset" the draft, restoring initial player state
  */
 export const resetDraft = () => {
-  toast.info("Draft was Reset");
+  toast.info("Draft was reset");
 
   return {
     type: ACTION_TYPES.RESET_DRAFT

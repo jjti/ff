@@ -94,7 +94,7 @@ class Settings extends React.Component<IProps, IState> {
             </label>
 
             <label>
-              Start over
+              Reset
               <button
                 className="Options-Container"
                 onClick={() => this.props.resetDraft()}

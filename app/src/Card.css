@@ -9,7 +9,7 @@
 }
 
 .Card-Active {
-  border: 1px solid #4ca6e8;
+  border: var(--highlight-border);
 }
 
 .Card > h4 {
