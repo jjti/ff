@@ -1,8 +1,9 @@
 import { toast } from "react-toastify";
 
 import { IPlayer } from "../../Player";
-import { IStoreState } from "../store";
-import { resetStore } from "./teams";
+import { IRoster } from "../../Team";
+import { createTeam, IStoreState } from "../store";
+import { resetStore, updatePlayerVORs } from "./teams";
 
 export const getPlayers = (state: IStoreState) => state.undraftedPlayers;
 
@@ -51,6 +52,14 @@ export const undoPlayerPick = (state: IStoreState): IStoreState => {
  *
  * @param state state before roster format update
  */
-export const setRosterFormat = (state: IStoreState): IStoreState => {
-  return state;
-};
+export const setRosterFormat = (
+  state: IStoreState,
+  newRosterFormat: IRoster
+): IStoreState =>
+  updatePlayerVORs({
+    ...state,
+    rosterFormat: newRosterFormat,
+    teams: new Array(state.numberOfTeams)
+      .fill(null)
+      .map(() => createTeam(newRosterFormat))
+  });

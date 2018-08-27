@@ -98,7 +98,7 @@ class OrderTracker extends React.Component<IProps, State> {
   private getCardLength = (numberOfTeams: number): number => {
     const thisWidth = window.innerWidth * 0.65; // ~30px padding, 70% width of total window size
     const cardLength = Math.floor(thisWidth / numberOfTeams) - 7; // 8 == 2px border, 6px margin
-    return Math.min(cardLength, 80);
+    return Math.min(cardLength, 70);
   };
 }
 

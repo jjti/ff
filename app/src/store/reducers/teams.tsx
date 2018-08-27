@@ -4,7 +4,13 @@ import { toast } from "react-toastify";
 import { IPlayer, Position } from "../../Player";
 import { ITeam } from "../../Team";
 import { undoPlayerPick } from "../actions/players";
-import { createTeam, initialState, IStoreState, store } from "../store";
+import {
+  createTeam,
+  initialRoster,
+  initialState,
+  IStoreState,
+  store
+} from "../store";
 
 /**
  * Sum of the VOR of everyone on a ITeam. Used to keep track of
@@ -143,11 +149,11 @@ export const pickPlayer = (
  * "reset" the store, resettting the undraftedPlayers
  * @param state state to be reset
  */
-export const resetStore = (state: IStoreState): IStoreState => ({
-  ...initialState,
-  players: state.players,
-  undraftedPlayers: updateVOR(state.players, state.numberOfTeams)
-});
+export const resetStore = (state: IStoreState): IStoreState =>
+  updatePlayerVORs({
+    ...initialState,
+    players: state.players
+  });
 
 /**
  * Update the tracked team on the left side of the app
@@ -180,7 +186,10 @@ export const setTrackedTeam = (
  * @param players
  * @param numberOfTeams
  */
-const updateVOR = (players: IPlayer[], numberOfTeams: number): IPlayer[] => {
+const updateVOR = (state: IStoreState): IPlayer[] => {
+  const { numberOfTeams, rosterFormat } = state;
+  let { players } = state;
+
   const positions: Position[] = ["QB", "RB", "WR", "TE", "DST", "K"];
 
   // we have 4 adp rankings from fantasyfootballcalculator. they're stored
@@ -193,8 +202,7 @@ const updateVOR = (players: IPlayer[], numberOfTeams: number): IPlayer[] => {
   } else if (numberOfTeams > 12) {
     adp = "adp14";
   }
-
-  // update player adp to whatever it is in an equivelant draft
+  // update player adp to whatever it is in an equivelant league size
   players = players.map(p => ({ ...p, adp: p[adp] })).filter(p => p.prediction);
 
   // #1, find replacement player index for each position
@@ -208,6 +216,20 @@ const updateVOR = (players: IPlayer[], numberOfTeams: number): IPlayer[] => {
     }),
     {}
   );
+
+  // because #1 is based on a default league, with 1QB, 2RBs, etc, we need
+  // to account for specialty leagues where the numbers differ. We crudishly
+  // do that here, by comparing the number of players in the current roster to
+  // a "default" roster and multiplying the number of drafted players in that position
+  // accordingly
+  Object.keys(initialRoster)
+    .filter(k => positionToCountMap[k])
+    .forEach(pos => {
+      const newCountRatioIncr = rosterFormat[pos] / initialRoster[pos];
+      positionToCountMap[pos] = Math.round(
+        positionToCountMap[pos] * newCountRatioIncr
+      );
+    });
 
   // #2, find replacement values at each position by finding the predicted points
   //     at 1+the number of expected players in that position drafted within 10 rounds
@@ -246,7 +268,7 @@ const updateVOR = (players: IPlayer[], numberOfTeams: number): IPlayer[] => {
  */
 export const updatePlayerVORs = (state: IStoreState): IStoreState => ({
   ...state,
-  undraftedPlayers: updateVOR(state.undraftedPlayers, state.numberOfTeams)
+  undraftedPlayers: updateVOR(state)
 });
 
 /**
@@ -267,7 +289,6 @@ export const setNumberOfTeams = (
   const {
     currentPick,
     numberOfTeams: currNumberOfTeams,
-    players,
     rosterFormat,
     teams,
     trackedTeam
@@ -317,11 +338,13 @@ export const setNumberOfTeams = (
   // create a toast
   toast.info(`VOR updated for ${numberOfTeams} teams`);
 
-  return {
+  // build up whole state minus updated VOR stats
+  const newState = {
     ...state,
     numberOfTeams,
     teams: newTeams,
-    trackedTeam: newTrackedTeam,
-    undraftedPlayers: updateVOR(players, numberOfTeams)
+    trackedTeam: newTrackedTeam
   };
+
+  return updatePlayerVORs(newState);
 };

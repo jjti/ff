@@ -51,7 +51,7 @@ export default (state = initialState, action: any): IStoreState => {
       return { ...state, activeTeam: action.activeTeam };
     }
     case ACTION_TYPES.SET_ROSTER_FORMAT: {
-      return setRosterFormat(state);
+      return setRosterFormat(state, action.rosterFormat);
     }
     case ACTION_TYPES.TOGGLE_ROSTER_FORMATTING: {
       return { ...state, formattingRoster: !state.formattingRoster };

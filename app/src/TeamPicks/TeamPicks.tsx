@@ -126,7 +126,7 @@ class TeamPicks extends React.PureComponent<IProps, State> {
           </div>
         </div>
         <div className="Pick-Section">
-          <h3>BENCH</h3>
+          <h3>Bench</h3>
           <div className="Pick-Column">
             {trackedTeam.BENCH.map((p, i) => (
               <PlayerCard
@@ -149,7 +149,7 @@ class TeamPicks extends React.PureComponent<IProps, State> {
     }
 
     const thisWidth = window.innerWidth * 0.25 - 60; // 25% width of total window size, 15px padding on both sides
-    return Math.min(75, Math.floor(thisWidth / 3) - 8); // 8 == 2px border, 6px margin
+    return Math.min(85, Math.floor(thisWidth / 3) - 8); // 8 == 2px border, 6px margin
   };
 }
 

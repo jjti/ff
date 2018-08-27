@@ -99,7 +99,12 @@ export const createTeam = (rosterFormat: IRoster): ITeam => ({
   WR: new Array(rosterFormat.WR).fill(null)
 });
 
-const initialRoster: IRoster = {
+/**
+ * Typical ESPN, CBS, Yahoo League. I'm using this as baseline
+ * for VOR calculation. If the actual roster is changed, the
+ * VOR calculations need to be as well
+ */
+export const initialRoster: IRoster = {
   BENCH: 7,
   DST: 1,
   FLEX: 1,

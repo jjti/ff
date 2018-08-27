@@ -27,6 +27,7 @@
 }
 
 .Card > p {
+  font-size: 0.8vw !important;
   margin: 0;
   position: absolute;
   top: 45%;
