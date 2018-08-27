@@ -1,4 +1,13 @@
-export type Position = "QB" | "RB" | "WR" | "FLEX" | "TE" | "DST" | "K" | "?";
+export type Position =
+  | "QB"
+  | "RB"
+  | "WR"
+  | "FLEX"
+  | "TE"
+  | "DST"
+  | "K"
+  | "BENCH"
+  | "?";
 
 export interface IPlayer {
   bye: number;

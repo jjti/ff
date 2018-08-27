@@ -2,6 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { cssTransition, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 // @ts-ignore
 import ReactTooltip from "react-tooltip";
 
@@ -11,6 +12,7 @@ import Header from "./Header/Header";
 import OrderTracker from "./OrderTracker/OrderTracker";
 import { IPlayer } from "./Player";
 import PlayerTable from "./PlayerTable/PlayerTable";
+import RosterFormatter from "./RosterFormatter/RosterFormatter";
 import Settings from "./Settings/Settings";
 import { setPlayers } from "./store/actions/players";
 import TeamPicks from "./TeamPicks/TeamPicks";
@@ -85,6 +87,8 @@ class App extends React.PureComponent<IProps, IState> {
           <OrderTracker />
           <PlayerTable />
         </div>
+
+        <RosterFormatter />
 
         <ToastContainer
           className="toast-container"

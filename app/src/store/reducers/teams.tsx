@@ -75,7 +75,7 @@ export const pickPlayer = (
 
   const emptySpot = roster[player.pos].findIndex((p: IPlayer) => p === null);
   const emptyFLEXSpot = roster.FLEX.findIndex(p => p === null);
-  const emptyBenchSpot = roster.Bench.findIndex(b => b === null);
+  const emptyBenchSpot = roster.BENCH.findIndex(b => b === null);
   if (emptySpot > -1) {
     // there's an empty spot in this position
     roster[player.pos] = roster[player.pos].map(
@@ -89,11 +89,11 @@ export const pickPlayer = (
     roster.FLEX = roster.FLEX.map((p, i) => (i === emptyFLEXSpot ? player : p));
   } else {
     if (emptyBenchSpot > -1) {
-      roster.Bench = roster.Bench.map(
+      roster.BENCH = roster.BENCH.map(
         (b, i) => (i === emptyBenchSpot ? player : b)
       );
     } else {
-      roster.Bench = roster.Bench.concat([player]);
+      roster.BENCH = roster.BENCH.concat([player]);
     }
   }
   roster.StarterValue = sumStarterValues(roster);

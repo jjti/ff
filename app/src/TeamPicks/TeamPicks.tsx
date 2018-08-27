@@ -126,9 +126,9 @@ class TeamPicks extends React.PureComponent<IProps, State> {
           </div>
         </div>
         <div className="Pick-Section">
-          <h3>Bench</h3>
+          <h3>BENCH</h3>
           <div className="Pick-Column">
-            {trackedTeam.Bench.map((p, i) => (
+            {trackedTeam.BENCH.map((p, i) => (
               <PlayerCard
                 key={`bench_${i}`}
                 player={p}

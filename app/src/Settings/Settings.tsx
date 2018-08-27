@@ -2,7 +2,11 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import { resetDraft } from "../store/actions/players";
-import { setNumberOfTeams, setTrackedTeam } from "../store/actions/teams";
+import {
+  setNumberOfTeams,
+  setTrackedTeam,
+  toggleRosterFormatting
+} from "../store/actions/teams";
 import { IStoreState } from "../store/store";
 
 import "./Settings.css";
@@ -13,6 +17,7 @@ interface IProps {
   resetDraft: () => void;
   setNumberOfTeams: (count: number) => void;
   setTrackedTeam: (index: number) => void;
+  toggleRosterFormatting: () => void;
   trackedTeam: number;
 }
 
@@ -94,9 +99,17 @@ class Settings extends React.Component<IProps, IState> {
             </label>
 
             <label>
-              Reset
               <button
-                className="Options-Container"
+                className="Options-Container options-left"
+                onClick={() => this.props.toggleRosterFormatting()}
+              >
+                <p>Customize Roster</p>
+              </button>
+            </label>
+
+            <label>
+              <button
+                className="Options-Container options-left"
                 onClick={() => this.props.resetDraft()}
               >
                 <p>Reset Draft</p>
@@ -133,7 +146,8 @@ const mapStateToProps = ({
 const mapDispathToProps = (dispatch: any) => ({
   resetDraft: () => dispatch(resetDraft()),
   setNumberOfTeams: (count: number) => dispatch(setNumberOfTeams(count)),
-  setTrackedTeam: (index: number) => dispatch(setTrackedTeam(index))
+  setTrackedTeam: (index: number) => dispatch(setTrackedTeam(index)),
+  toggleRosterFormatting: () => dispatch(toggleRosterFormatting())
 });
 
 export default connect(

@@ -186,7 +186,6 @@ class PlayerTable extends React.Component<IProps, IState> {
                     <button
                       className="remove-player-x col col-remove"
                       onClick={e => {
-                        e.preventDefault();
                         e.stopPropagation();
                         this.props.removePlayer(p);
                       }}

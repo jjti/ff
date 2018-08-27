@@ -1,0 +1,52 @@
+.RosterFormatter-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 3;
+  background-color: #636363b0;
+}
+
+.RosterFormatter {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  width: 330px;
+  background-color: white;
+  border: var(--border-gray);
+  border-radius: 4px;
+  padding: 10px 20px;
+}
+
+.RosterFormatter > header > button {
+  height: 40px;
+  width: 30px;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.position-change-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+}
+
+.position-toggle {
+  width: 45%;
+}
+
+.position-button {
+  margin: 5px;
+  padding: 3px 8px;
+  font-weight: 500;
+}
+
+.position-button:first-child {
+  margin-left: auto;
+}
+
+.position-button:last-child {
+  margin-right: 15px;
+}

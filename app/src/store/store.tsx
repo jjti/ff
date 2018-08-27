@@ -24,6 +24,13 @@ export interface IStoreState {
   draftDirection: number; // 1 or -1
 
   /**
+   * Whether the app is currently in a state of "formatting the roster"
+   * When it is, there's a popup where the user toggles the number of players
+   * at QB, RB, WR, TE, FLEX, DST, and K
+   */
+  formattingRoster: boolean;
+
+  /**
    * The last picked players. Begins as null but is set thereafter
    */
   lastPickedPlayer: IPlayer | null;
@@ -81,7 +88,7 @@ export interface IStoreState {
  * Create an emptyTeam without any drafted players
  */
 export const createTeam = (rosterFormat: IRoster): ITeam => ({
-  Bench: new Array(rosterFormat.Bench).fill(null),
+  BENCH: new Array(rosterFormat.BENCH).fill(null),
   DST: new Array(rosterFormat.DST).fill(null),
   FLEX: new Array(rosterFormat.FLEX).fill(null),
   K: new Array(rosterFormat.K).fill(null),
@@ -93,7 +100,7 @@ export const createTeam = (rosterFormat: IRoster): ITeam => ({
 });
 
 const initialRoster: IRoster = {
-  Bench: 7,
+  BENCH: 7,
   DST: 1,
   FLEX: 1,
   K: 1,
@@ -107,6 +114,7 @@ export const initialState = {
   activeTeam: 0, // active team's index ([0-9]) that's currently drafting
   currentPick: 1, // 1-based
   draftDirection: 1, // either 1 (forward) or -1 (reverse)
+  formattingRoster: false,
   lastPickedPlayer: null,
   numberOfTeams: 10,
   past: null,

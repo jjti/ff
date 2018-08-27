@@ -43,3 +43,11 @@ export const setActiveTeam = (activeTeam: number) => ({
   activeTeam,
   type: ACTION_TYPES.SET_ACTIVE_TEAM
 });
+
+/**
+ * Toggle roster formatting. will open a modal for selecting number
+ * at each position
+ */
+export const toggleRosterFormatting = () => ({
+  type: ACTION_TYPES.TOGGLE_ROSTER_FORMATTING
+});

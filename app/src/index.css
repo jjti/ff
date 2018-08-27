@@ -49,6 +49,12 @@ label {
   color: #4a4a4a;
 }
 
+select {
+  font-weight: 300;
+  font-size: 12px;
+  font-family: "Lato", sans-serif;
+}
+
 a {
   margin: 0;
 }
@@ -67,7 +73,6 @@ select {
   border: none;
   background-color: transparent;
   outline: none;
-  margin-bottom: 5px;
   cursor: pointer;
 }
 

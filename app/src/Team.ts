@@ -13,7 +13,7 @@ export interface IRoster {
   TE: number;
   DST: number;
   K: number;
-  Bench: number;
+  BENCH: number;
 }
 
 /**
@@ -27,6 +27,6 @@ export interface ITeam {
   TE: TeamPlayer[];
   DST: TeamPlayer[];
   K: TeamPlayer[];
-  Bench: TeamPlayer[];
+  BENCH: TeamPlayer[];
   StarterValue?: number;
 }

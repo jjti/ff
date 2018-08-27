@@ -53,6 +53,9 @@ export default (state = initialState, action: any): IStoreState => {
     case ACTION_TYPES.SET_ROSTER_FORMAT: {
       return setRosterFormat(state);
     }
+    case ACTION_TYPES.TOGGLE_ROSTER_FORMATTING: {
+      return { ...state, formattingRoster: !state.formattingRoster };
+    }
     default:
       return state;
   }
