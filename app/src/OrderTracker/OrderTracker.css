@@ -24,6 +24,7 @@
 
 .OrderTracker {
   position: relative;
+  width: fit-content;
 }
 
 .Legend-Row {

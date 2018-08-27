@@ -10,9 +10,9 @@ import {
 import { incrementDraft, pickPlayer } from "../store/actions/teams";
 import { getPlayers } from "../store/reducers/players";
 import { IStoreState } from "../store/store";
+import { TeamPlayer } from "../Team";
 
 import "./PlayerTable.css";
-
 interface IProps {
   byeWeeks: { [key: number]: boolean };
   currentPick: number;
@@ -228,21 +228,22 @@ const mapStateToProps = (state: IStoreState) => {
 
   // add the positions to the object that the trackedTeam hasn't
   // filled their roster with (ie they have space for)
+  const notFilled = (pos: TeamPlayer[]) => !pos.every((p: IPlayer) => !!p);
   const valuedPositions = {} as any;
-  if (!QB.every((r: IPlayer) => !!r)) {
+  if (notFilled(QB)) {
     valuedPositions.QB = true;
   }
-  if (!RB.every((r: IPlayer) => !!r)) {
+  if (notFilled(RB)) {
     valuedPositions.RB = true;
   }
-  if (!WR.every((w: IPlayer) => !!w)) {
+  if (notFilled(WR)) {
     valuedPositions.WR = true;
   }
-  if (!FLEX.every((w: IPlayer) => !!w)) {
+  if (notFilled(FLEX)) {
     valuedPositions.RB = true;
     valuedPositions.WR = true;
   }
-  if (!TE.every((w: IPlayer) => !!w)) {
+  if (notFilled(TE)) {
     valuedPositions.TE = true;
   }
 
@@ -252,10 +253,10 @@ const mapStateToProps = (state: IStoreState) => {
   }
 
   // only want one of each K and DST, none on bench
-  if (!K) {
+  if (notFilled(K)) {
     valuedPositions.K = true;
   }
-  if (!DST) {
+  if (notFilled(DST)) {
     valuedPositions.DST = true;
   }
 

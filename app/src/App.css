@@ -80,6 +80,10 @@
   background-color: #eca80a;
 }
 
+.red-dot {
+  background-color: #ec510a;
+}
+
 i {
   border: solid lightgray;
   border-width: 0 1px 1px 0;
