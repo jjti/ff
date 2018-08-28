@@ -1,6 +1,11 @@
 import { ACTION_TYPES } from "../actions";
 import { initialState, IStoreState } from "../store";
-import { removePlayer, setRosterFormat, undoPlayerPick } from "./players";
+import {
+  removePlayer,
+  setRosterFormat,
+  togglePPR,
+  undoPlayerPick
+} from "./players";
 import {
   incrementDraft,
   pickPlayer,
@@ -52,6 +57,9 @@ export default (state = initialState, action: any): IStoreState => {
     }
     case ACTION_TYPES.SET_ROSTER_FORMAT: {
       return setRosterFormat(state, action.rosterFormat);
+    }
+    case ACTION_TYPES.TOGGLE_PPR: {
+      return togglePPR(state);
     }
     case ACTION_TYPES.TOGGLE_ROSTER_FORMATTING: {
       return { ...state, formattingRoster: !state.formattingRoster };

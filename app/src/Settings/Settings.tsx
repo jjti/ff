@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { resetDraft } from "../store/actions/players";
+import { resetDraft, togglePPR } from "../store/actions/players";
 import {
   setNumberOfTeams,
   setTrackedTeam,
@@ -15,8 +15,10 @@ interface IProps {
   currentPick: number;
   numberOfTeams: number;
   resetDraft: () => void;
+  ppr: boolean;
   setNumberOfTeams: (count: number) => void;
   setTrackedTeam: (index: number) => void;
+  togglePPR: () => void;
   toggleRosterFormatting: () => void;
   trackedTeam: number;
 }
@@ -40,7 +42,7 @@ class Settings extends React.Component<IProps, IState> {
 
   public render() {
     const { open } = this.state;
-    const { currentPick, numberOfTeams, trackedTeam } = this.props;
+    const { currentPick, numberOfTeams, ppr, trackedTeam } = this.props;
 
     // an array with the allowable number of teams: [6, 16]
     const allowableNumberOfTeams =
@@ -94,10 +96,15 @@ class Settings extends React.Component<IProps, IState> {
               </div>
             </label>
 
+            <label onClick={this.props.togglePPR}>
+              PPR
+              <div className={`toggle ${ppr ? "active" : ""}`} />
+            </label>
+
             <label>
               <button
                 className="Options-Container options-left"
-                onClick={() => this.props.toggleRosterFormatting()}
+                onClick={this.props.toggleRosterFormatting}
               >
                 <p>Customize Roster</p>
               </button>
@@ -106,7 +113,7 @@ class Settings extends React.Component<IProps, IState> {
             <label>
               <button
                 className="Options-Container options-left"
-                onClick={() => this.props.resetDraft()}
+                onClick={this.props.resetDraft}
               >
                 <p>Reset Draft</p>
               </button>
@@ -132,10 +139,12 @@ class Settings extends React.Component<IProps, IState> {
 const mapStateToProps = ({
   currentPick,
   numberOfTeams,
+  ppr,
   trackedTeam
 }: IStoreState) => ({
   currentPick,
   numberOfTeams,
+  ppr,
   trackedTeam
 });
 
@@ -143,6 +152,7 @@ const mapDispathToProps = (dispatch: any) => ({
   resetDraft: () => dispatch(resetDraft()),
   setNumberOfTeams: (count: number) => dispatch(setNumberOfTeams(count)),
   setTrackedTeam: (index: number) => dispatch(setTrackedTeam(index)),
+  togglePPR: () => dispatch(togglePPR()),
   toggleRosterFormatting: () => dispatch(toggleRosterFormatting())
 });
 

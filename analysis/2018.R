@@ -13,11 +13,13 @@ full.predictions <- rbind.fill(full.predictions, k.data)
 
 full.predictions$href <- full.predictions$img.url
 full.predictions$madden <- full.predictions$overall
-full.predictions$prediction <- round(full.predictions$prediction)
+full.predictions$predictionPPR <- round(full.predictions$predictionPPR)
+full.predictions$predictionSTN <- round(full.predictions$predictionSTN)
 full.predictions <- full.predictions[!duplicated(full.predictions$name),]
+full.predictions$bye <- full.predictions$bye.x
 colnames(full.predictions)
-full.predictions <- full.predictions[, c("name", "pos", "team", "prediction", "adp8", "adp10", "adp12", "adp14", "madden", "href", "bye")]
-full.predictions <- full.predictions[order(full.predictions$prediction, decreasing = TRUE),]
+full.predictions <- full.predictions[, c("name", "pos", "team", "predictionPPR", "predictionSTN", "adp8STN", "adp10STN", "adp12STN", "adp14STN","adp8PPR", "adp10PPR", "adp12PPR", "adp14PPR", "madden", "href", "bye")]
+full.predictions <- full.predictions[order(full.predictions$predictionPPR, decreasing = TRUE),]
 
 write_json(full.predictions, "/Users/josh/Documents/GitHub/ff/app/public/forecast.json")
 

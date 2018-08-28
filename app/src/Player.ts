@@ -14,12 +14,17 @@ export interface IPlayer {
   name: string;
   pos: Position;
   team: string;
-  prediction: number;
+  predictionPPR: number;
+  predictionSTN: number;
   adp?: number; // one of adp8, adp10, adp12, or adp14
-  adp8: number;
-  adp10: number;
-  adp12: number;
-  adp14: number;
+  adp8PPR: number;
+  adp10PPR: number;
+  adp12PPR: number;
+  adp14PPR: number;
+  adp8STN: number;
+  adp10STN: number;
+  adp12STN: number;
+  adp14STN: number;
   madden: number;
   vor?: number;
   href?: string;

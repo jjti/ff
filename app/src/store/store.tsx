@@ -55,6 +55,11 @@ export interface IStoreState {
   players: IPlayer[];
 
   /**
+   * Whether we're currently doing a Standard or a PPR draft
+   */
+  ppr: boolean;
+
+  /**
    * The roster of the teams being drafted for.
    * The default is 1QB, 2RB, 2WR, 1TE, 1FLEX, 1K, 1DST, and 7Bench, but this can be changed
    */
@@ -124,6 +129,7 @@ export const initialState = {
   numberOfTeams: 10,
   past: null,
   players: [],
+  ppr: false,
   rosterFormat: initialRoster,
   selectedPlayer: null,
   teams: new Array(10).fill(0).map(() => createTeam(initialRoster)), // doing 10 empty teams by default

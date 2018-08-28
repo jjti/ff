@@ -187,7 +187,7 @@ export const setTrackedTeam = (
  * @param numberOfTeams
  */
 const updateVOR = (state: IStoreState): IPlayer[] => {
-  const { numberOfTeams, rosterFormat } = state;
+  const { numberOfTeams, ppr, rosterFormat } = state;
   let { players } = state;
 
   const positions: Position[] = ["QB", "RB", "WR", "TE", "DST", "K"];
@@ -202,8 +202,17 @@ const updateVOR = (state: IStoreState): IPlayer[] => {
   } else if (numberOfTeams > 12) {
     adp = "adp14";
   }
+
+  if (ppr) {
+    adp += "PPR";
+  } else {
+    adp += "STN";
+  }
+
   // update player adp to whatever it is in an equivelant league size
-  players = players.map(p => ({ ...p, adp: p[adp] })).filter(p => p.prediction);
+  players = players
+    .map(p => ({ ...p, adp: p[adp] }))
+    .filter(p => (ppr ? p.predictionPPR : p.predictionSTN));
 
   // #1, find replacement player index for each position
   // map each position to the number of players drafted before the lastPick
@@ -240,8 +249,12 @@ const updateVOR = (state: IStoreState): IPlayer[] => {
       ...acc,
       [pos]: players
         .filter(p => p.pos === pos)
-        .sort((a, b) => b.prediction - a.prediction)[positionToCountMap[pos]]
-        .prediction
+        .sort(
+          (a, b) =>
+            ppr
+              ? b.predictionPPR - a.predictionPPR
+              : b.predictionSTN - a.predictionSTN
+        )[positionToCountMap[pos]][ppr ? "predictionPPR" : "predictionSTN"]
     }),
     {}
   );
@@ -249,7 +262,9 @@ const updateVOR = (state: IStoreState): IPlayer[] => {
   // #3, update players' VORs
   const newPlayers = players.map(p => ({
     ...p,
-    vor: p.prediction - positionToReplaceValueMap[p.pos]
+    vor:
+      (ppr ? p.predictionPPR : p.predictionSTN) -
+      positionToReplaceValueMap[p.pos]
   }));
 
   // #4, sort by their VOR

@@ -108,12 +108,12 @@ i {
   margin: 0 0 0 auto;
   background-color: var(--highlight-gray);
   border-radius: 4px;
-  padding: 3px;
   border: 1px solid transparent;
+  padding: 3px;
 }
 
 .Options-Container > p {
-  margin: 4px;
+  margin: 3px;
   font-size: 12px;
 }
 

@@ -19,6 +19,7 @@ interface IProps {
   mobile?: boolean;
   undraftedPlayers: any[];
   pickPlayer: (player: IPlayer) => void;
+  ppr: boolean;
   removePlayer: (player: IPlayer) => void;
   selectPlayer: (player: IPlayer) => void;
   skip: () => void;
@@ -57,7 +58,7 @@ class PlayerTable extends React.Component<IProps, IState> {
   ];
 
   public render() {
-    const { currentPick, mobile, undraftedPlayers } = this.props;
+    const { currentPick, mobile, ppr, undraftedPlayers } = this.props;
     const { positionsToShow } = this.state;
 
     const playersToRender =
@@ -181,7 +182,9 @@ class PlayerTable extends React.Component<IProps, IState> {
                 {/* Table data not rendered on mobile */}
                 {!mobile && (
                   <>
-                    <p className="col col-prediction">{p.prediction}</p>
+                    <p className="col col-prediction">
+                      {ppr ? p.predictionPPR : p.predictionSTN}
+                    </p>
                     <p className="col col-madden">{p.madden}</p>
                     <button
                       className="remove-player-x col col-remove"
@@ -268,6 +271,7 @@ const mapStateToProps = (state: IStoreState) => {
   return {
     byeWeeks,
     currentPick: state.currentPick,
+    ppr: state.ppr,
     undraftedPlayers: getPlayers(state),
     valuedPositions
   };

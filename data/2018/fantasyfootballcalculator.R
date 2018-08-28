@@ -6,7 +6,7 @@ library(plyr)
 library(rvest)
 
 # scrape 8, 10, 12, and 14 week timepoints from ffc
-scrapeFFC <- function(url) {
+scrapeFFC <- function(url, suffix) {
   adp.bye.data <- NULL
   for (count in seq(from = 8, to = 14, by = 2)) {
     full.url <- paste0(url, count, "-team/all")
@@ -17,7 +17,7 @@ scrapeFFC <- function(url) {
     data <- data.frame(data)
     
     # create a name for adp in this sized league, ex: adp-8
-    adp.col <- paste0("adp", count)
+    adp.col <- paste0("adp", count, suffix)
     colnames(data)[1] <- adp.col
     data <- data[, c("name", "bye", adp.col, "pos")]
     
@@ -37,7 +37,7 @@ scrapeFFC <- function(url) {
   adp.bye.data
 }
 
-adp.bye.data.ppr <- scrapeFFC("https://fantasyfootballcalculator.com/adp/ppr/")
-adp.bye.data.standard <- scrapeFFC("https://fantasyfootballcalculator.com/adp/standard/")
+adp.bye.data.ppr <- scrapeFFC("https://fantasyfootballcalculator.com/adp/ppr/", "PPR")
+adp.bye.data.standard <- scrapeFFC("https://fantasyfootballcalculator.com/adp/standard/", "STN")
 
-adp.bye.data <- adp.bye.data.ppr
+adp.bye.data <- merge(adp.bye.data.ppr, adp.bye.data.standard, by = c("name", "pos"))

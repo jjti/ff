@@ -63,3 +63,16 @@ export const setRosterFormat = (
       .fill(null)
       .map(() => createTeam(newRosterFormat))
   });
+
+/**
+ * toggle the PPR setting and make a notification
+ */
+export const togglePPR = (state: IStoreState): IStoreState => {
+  if (!state.ppr) {
+    toast.info("Using PPR Scoring");
+  } else {
+    toast.info("Using Standard Scoring");
+  }
+
+  return updatePlayerVORs({ ...state, ppr: !state.ppr });
+};

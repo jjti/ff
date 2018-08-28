@@ -53,26 +53,12 @@ label {
   color: #4a4a4a;
 }
 
-select {
-  font-weight: 300;
-  font-size: 12px;
-  font-family: "Lato", sans-serif;
-  -webkit-appearance:none;
-}
-
 a {
   margin: 0;
 }
 
 p.small {
   font-size: 10px;
-}
-
-select {
-  border: none;
-  background-color: transparent;
-  outline: none;
-  cursor: pointer;
 }
 
 header {
@@ -92,9 +78,21 @@ button:hover {
   cursor: pointer;
 }
 
+select {
+  font-weight: 300;
+  font-size: 12px;
+  font-family: "Lato", sans-serif;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+  padding: 3px;
+}
+
 label {
   display: flex;
   align-items: center;
+  height: 25px;
 }
 
 @media screen and (max-width: 700px) {

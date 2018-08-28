@@ -38,12 +38,15 @@ for (src in list(espn.data, cbs.data, nfl.data, fox.data, adp.bye.data)) {
 }
 
 # set prediction as the average of all sources for a given year
-src.names <- c("fox.2018", "espn.2018", "cbs.2018", "nfl.2018")
+ppr.names <- c("espn.2018", "cbs.2018.ppr")
+stn.names <- c("fox.2018", "cbs.2018.stn", "nfl.2018")
+src.names <- c(ppr.names, stn.names)
 for (s in src.names) {
   player.data[,s] <- as.numeric(as.character(player.data[,s]))
   player.data[,s] <- sapply(player.data[,s], function(x) ifelse(x < 10, NA, x))
 }
-player.data$prediction <- apply(player.data[, src.names], 1, mean, na.rm = TRUE) # took WAY too long to figure out
+player.data$predictionPPR <- apply(player.data[, ppr.names], 1, mean, na.rm = TRUE) # took WAY too long to figure out
+player.data$predictionSTN <- apply(player.data[, src.names], 1, mean, na.rm = TRUE) # took WAY too long to figure out
 
 
 ###
@@ -55,7 +58,8 @@ dst.fix <- function (x) {
   paste(name.split[-length(name.split)], collapse = " ")
 }
 dst.data$name <- lapply(dst.data$name, dst.fix)
-dst.data$prediction <- rep(0, nrow(dst.data))
+dst.data$predictionPPR <- rep(0, nrow(dst.data))
+dst.data$predictionSTN <- rep(0, nrow(dst.data))
 
 # try and figure out expert predictions from nfl.data
 nfl.dst.data <- nfl.data[nfl.data$pos == "DST",]
@@ -66,7 +70,8 @@ nfl.dst.data$name <- lapply(nfl.dst.data$name, dst.fix)
 for (row.index in 1:nrow(nfl.dst.data)) {
   team <- nfl.dst.data[row.index,]
   for (match in which(dst.data$name %like% team$name)) {
-    dst.data[match, "prediction"] <- team["nfl.2018"]
+    dst.data[match, "predictionPPR"] <- team["nfl.2018"]
+    dst.data[match, "predictionSTN"] <- team["nfl.2018"]
   }
 }
 
@@ -93,7 +98,7 @@ player.data <- merge(player.data, madden.data, by = c("name", "pos"))
 # Post-processing
 ###
 # must have a Madden score and an expert score in top three quartiles
-player.data <- player.data[player.data$prediction > 10 & player.data$overall > 40,]
+player.data <- player.data[player.data$predictionPPR > 10 & player.data$overall > 40,]
 
 # replace NA values with zeroes
 for (c in 1:ncol(player.data)){

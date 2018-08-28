@@ -9,3 +9,31 @@
 .options-left {
   margin: 0 0 0 auto;
 }
+
+.toggle {
+  position: relative;
+  margin-left: auto;
+  width: 35px;
+  height: 4px;
+  background-color: var(--highlight-gray);
+}
+
+.toggle:hover {
+  cursor: pointer;
+}
+
+.toggle::before {
+  position: absolute;
+  top: -7px;
+  height: 16px;
+  width: 16px;
+  border-radius: 16px;
+  background-color: #f2f2f2;
+  content: " ";
+  border: 1px solid #e8e8e8;
+}
+
+.toggle.active::before {
+  background-color: var(--highlight-blue);
+  right: 0;
+}
