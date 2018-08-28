@@ -4,15 +4,15 @@ import {
   removePlayer,
   setRosterFormat,
   togglePPR,
-  undoPlayerPick
+  undoPlayerPick,
+  updatePlayerVORs
 } from "./players";
 import {
   incrementDraft,
   pickPlayer,
   resetStore,
   setNumberOfTeams,
-  setTrackedTeam,
-  updatePlayerVORs
+  setTrackedTeam
 } from "./teams";
 
 export default (state = initialState, action: any): IStoreState => {
