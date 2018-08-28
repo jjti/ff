@@ -57,6 +57,7 @@ select {
   font-weight: 300;
   font-size: 12px;
   font-family: "Lato", sans-serif;
+  -webkit-appearance:none;
 }
 
 a {
