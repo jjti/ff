@@ -56,12 +56,12 @@ class Settings extends React.Component<IProps, IState> {
 
     return (
       <div className="Settings Section">
-        <header>
-          <h3 id="Settings-Header">Settings</h3>
+        <header className="Settings-Header" onClick={this.toggleSettings}>
+          <h3>Settings</h3>
           {open ? (
-            <i className="up Grayed" onClick={this.toggleSettings} />
+            <i className="up Grayed" />
           ) : (
-            <i className="down Grayed" onClick={this.toggleSettings} />
+            <i className="down Grayed" />
           )}
         </header>
         {open && (

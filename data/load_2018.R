@@ -2,6 +2,9 @@ library(plm)
 library(plyr)
 library(readxl)
 library(dplyr)
+library(stringr)
+library(DescTools)
+
 
 ###
 # Rescrape everything
@@ -18,10 +21,10 @@ if (FALSE) {
 ###
 # Add Expert Information
 ###
-load("/Users/jtimmons/Documents/GitHub/ff/data/2018/cbs.Rda")
-load("/Users/jtimmons/Documents/GitHub/ff/data/2018/nfl.Rda")
-load("/Users/jtimmons/Documents/GitHub/ff/data/2018/espn.Rda")
-load("/Users/jtimmons/Documents/GitHub/ff/data/2018/fox.Rda")
+load("/Users/josh/Documents/GitHub/ff/data/2018/cbs.Rda")
+load("/Users/josh/Documents/GitHub/ff/data/2018/nfl.Rda")
+load("/Users/josh/Documents/GitHub/ff/data/2018/espn.Rda")
+load("/Users/josh/Documents/GitHub/ff/data/2018/fox.Rda")
 player.data <- NULL
 for (src in list(espn.data, cbs.data, nfl.data, fox.data, adp.bye.data)) {
   # add the point values in player.data
@@ -71,7 +74,7 @@ for (row.index in 1:nrow(nfl.dst.data)) {
 ###
 # Add Madden Information
 ###
-madden.data <- read_excel("/Users/jtimmons/Documents/GitHub/ff/data/madden/madden_nfl_2018.xlsx", sheet = 1)
+madden.data <- read_excel("/Users/josh/Documents/GitHub/ff/data/madden/madden_nfl_2018.xlsx", sheet = 1)
 
 colnames(madden.data) <- lapply(tolower(colnames(madden.data)), function(x) gsub(" ", "_", x))
 madden.data$pos <- madden.data$position

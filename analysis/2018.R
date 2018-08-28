@@ -1,7 +1,7 @@
 library(plyr)
 library(jsonlite)
 
-source("/Users/jtimmons/Documents/GitHub/ff/data/load_2018.R")
+source("/Users/josh/Documents/GitHub/ff/data/load_2018.R")
 
 setwd("~/Documents/GitHub/ff/output")
 
@@ -19,5 +19,5 @@ colnames(full.predictions)
 full.predictions <- full.predictions[, c("name", "pos", "team", "prediction", "adp8", "adp10", "adp12", "adp14", "madden", "href", "bye")]
 full.predictions <- full.predictions[order(full.predictions$prediction, decreasing = TRUE),]
 
-write_json(full.predictions, "/Users/jtimmons/Documents/GitHub/ff/app/public/forecast.json")
+write_json(full.predictions, "/Users/josh/Documents/GitHub/ff/app/public/forecast.json")
 

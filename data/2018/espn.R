@@ -1,5 +1,4 @@
 library("plyr")
-library("data.table")
 library(rvest)
 
 setwd("~/Documents/GitHub/ff/data/2018")

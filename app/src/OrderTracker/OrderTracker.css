@@ -1,3 +1,12 @@
+.OrderTracker {
+  position: relative;
+}
+
+.OrderTracker-Header:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 .Team-Cards {
   display: flex;
 }
@@ -20,11 +29,6 @@
   position: relative;
   margin: 0;
   top: -10px;
-}
-
-.OrderTracker {
-  position: relative;
-  width: fit-content;
 }
 
 .Legend-Row {

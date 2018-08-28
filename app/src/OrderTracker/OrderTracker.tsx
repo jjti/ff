@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { setActiveTeam } from "../store/actions/teams";
 import { IStoreState } from "../store/store";
 import { ITeam } from "../Team";
+
 import "./OrderTracker.css";
 
 interface IProps {
@@ -56,12 +57,12 @@ class OrderTracker extends React.Component<IProps, State> {
 
     return (
       <div className="OrderTracker Section">
-        <header>
+        <header className="OrderTracker-Header" onClick={this.toggleOpen}>
           <h3>Teams</h3>
           {open ? (
-            <i className="up Grayed" onClick={this.toggleOpen} />
+            <i className="up Grayed" />
           ) : (
-            <i className="down Grayed" onClick={this.toggleOpen} />
+            <i className="down Grayed" />
           )}
         </header>
 

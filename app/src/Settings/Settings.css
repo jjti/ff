@@ -1,6 +1,11 @@
 .Settings {
 }
 
+.Settings-Header:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 .options-left {
   margin: 0 0 0 auto;
 }
