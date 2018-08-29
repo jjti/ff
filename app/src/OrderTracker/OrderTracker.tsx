@@ -49,21 +49,23 @@ class OrderTracker extends React.Component<IProps, State> {
   };
 
   public render() {
-    const { activeTeam, teams } = this.props;
+    const { activeTeam, currentPick, numberOfTeams, teams } = this.props;
     const { cardLength, open } = this.state;
 
+    // round tracker message
+    const roundTracker = `Round ${Math.ceil(
+      currentPick / numberOfTeams
+    )} – Pick ${currentPick}`;
+
     // amount to shift the "current draft" arrow from the left
-    const currentPickLeft = activeTeam * (cardLength + 14) + 0.2 * cardLength;
+    const activeTeamLeft = activeTeam * (cardLength + 14) + 0.2 * cardLength;
 
     return (
       <div className="OrderTracker Section">
         <header className="OrderTracker-Header" onClick={this.toggleOpen}>
           <h3>Teams</h3>
-          {open ? (
-            <i className="up Grayed" />
-          ) : (
-            <i className="down Grayed" />
-          )}
+          <p className="RoundTracker">{roundTracker}</p>
+          {open ? <i className="up Grayed" /> : <i className="down Grayed" />}
         </header>
 
         {open && (
@@ -83,10 +85,10 @@ class OrderTracker extends React.Component<IProps, State> {
                 </div>
               ))}
             </div>
-            <div className="Team-Arrow-Up" style={{ left: currentPickLeft }} />
+            <div className="Team-Arrow-Up" style={{ left: activeTeamLeft }} />
             <p
               className="Team-Arrow-Label small"
-              style={{ left: currentPickLeft + 21 }}
+              style={{ left: activeTeamLeft + 21 }}
             >
               Drafting
             </p>
@@ -105,10 +107,12 @@ class OrderTracker extends React.Component<IProps, State> {
 
 const mapStateToProps = ({
   activeTeam,
+  currentPick,
   numberOfTeams,
   teams
 }: IStoreState) => ({
   activeTeam,
+  currentPick,
   numberOfTeams,
   teams
 });

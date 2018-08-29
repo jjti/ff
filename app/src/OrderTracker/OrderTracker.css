@@ -4,7 +4,14 @@
 
 .OrderTracker-Header:hover {
   cursor: pointer;
+}
+
+.OrderTracker-Header:hover h3 {
   text-decoration: underline;
+}
+
+.RoundTracker {
+  margin: auto 30px 13px;
 }
 
 .Team-Cards {

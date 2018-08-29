@@ -127,20 +127,20 @@ class PlayerTable extends React.Component<IProps, IState> {
               VOR
             </p>
             <p
-              className="col col-adp"
-              data-tip="Average draft position (Fantasy Football Calculator)"
+              className="col col-prediction"
+              data-tip="Average of expert predictions (ESPN, FOX, CBS, NFL)"
             >
-              ADP
+              Prediction
             </p>
 
             {/* Table headers not rendered on mobile */}
             {!mobile && (
               <>
                 <p
-                  className="col col-prediction"
-                  data-tip="Average of expert predictions (ESPN, FOX, CBS, NFL)"
+                  className="col col-adp"
+                  data-tip="Average draft position (Fantasy Football Calculator)"
                 >
-                  Prediction
+                  ADP
                 </p>
                 <p
                   className="col col-madden"
@@ -177,14 +177,14 @@ class PlayerTable extends React.Component<IProps, IState> {
                 <p className="col col-pos">{p.pos}</p>
                 <p className="col col-team">{p.team}</p>
                 <p className="col col-vor">{p.vor}</p>
-                <p className="col col-adp">{p.adp}</p>
+                <p className="col col-prediction">
+                  {ppr ? p.predictionPPR : p.predictionSTN}
+                </p>
 
                 {/* Table data not rendered on mobile */}
                 {!mobile && (
                   <>
-                    <p className="col col-prediction">
-                      {ppr ? p.predictionPPR : p.predictionSTN}
-                    </p>
+                    <p className="col col-adp">{p.adp}</p>
                     <p className="col col-madden">{p.madden}</p>
                     <button
                       className="remove-player-x col col-remove"

@@ -112,9 +112,7 @@ const updateVOR = (state: IStoreState): IPlayer[] => {
   }
 
   // update player adp to whatever it is in an equivelant league size
-  players = players
-    .map(p => ({ ...p, adp: p[adp] }))
-    .filter(p => (ppr ? p.predictionPPR : p.predictionSTN));
+  players = players.map(p => ({ ...p, adp: p[adp] }));
 
   // #1, find replacement player index for each position
   // map each position to the number of players drafted before the lastPick
@@ -127,6 +125,7 @@ const updateVOR = (state: IStoreState): IPlayer[] => {
     }),
     {}
   );
+
   // total number of players at each position
   const positionToTotalCountMap = positions.reduce(
     (acc, pos) => ({
@@ -159,7 +158,7 @@ const updateVOR = (state: IStoreState): IPlayer[] => {
     (acc, pos) => ({
       ...acc,
       [pos]: players
-        .filter(p => (p.pos === pos && ppr ? p.predictionPPR : p.predictionSTN))
+        .filter(p => p.pos === pos)
         .sort(
           (a, b) =>
             ppr
