@@ -63,8 +63,8 @@ class Settings extends React.Component<IProps, IState> {
           {open ? <i className="up Grayed" /> : <i className="down Grayed" />}
         </header>
         {open && (
-          <aside>
-            <label>
+          <aside className="Settings-Container">
+            <label className="full-width">
               Your team
               <div className="Options-Container">
                 <select
@@ -80,7 +80,7 @@ class Settings extends React.Component<IProps, IState> {
               </div>
             </label>
 
-            <label>
+            <label className="full-width">
               Number of teams
               <div className="Options-Container">
                 <select
@@ -96,7 +96,7 @@ class Settings extends React.Component<IProps, IState> {
               </div>
             </label>
 
-            <label onClick={this.props.togglePPR}>
+            <label className="full-width" onClick={this.props.togglePPR}>
               PPR
               <div className={`toggle ${ppr ? "active" : ""}`} />
             </label>

@@ -6,6 +6,15 @@
   text-decoration: underline;
 }
 
+.Settings-Container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.full-width {
+  width: 100%;
+}
+
 .options-left {
   margin: 0 0 0 auto;
 }

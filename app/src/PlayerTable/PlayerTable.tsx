@@ -13,6 +13,7 @@ import { IStoreState } from "../store/store";
 import { TeamPlayer } from "../Team";
 
 import "./PlayerTable.css";
+
 interface IProps {
   byeWeeks: { [key: number]: boolean };
   currentPick: number;
@@ -20,6 +21,7 @@ interface IProps {
   undraftedPlayers: any[];
   pickPlayer: (player: IPlayer) => void;
   ppr: boolean;
+  rbHandcuffTeams: { [key: string]: boolean };
   removePlayer: (player: IPlayer) => void;
   selectPlayer: (player: IPlayer) => void;
   skip: () => void;
@@ -58,7 +60,13 @@ class PlayerTable extends React.Component<IProps, IState> {
   ];
 
   public render() {
-    const { currentPick, mobile, ppr, undraftedPlayers } = this.props;
+    const {
+      currentPick,
+      mobile,
+      ppr,
+      rbHandcuffTeams,
+      undraftedPlayers
+    } = this.props;
     const { positionsToShow } = this.state;
 
     const playersToRender =
@@ -114,6 +122,8 @@ class PlayerTable extends React.Component<IProps, IState> {
               <>
                 <div className="orange-dot" />
                 <p className="small">BYE week conflict with starter</p>
+                <div className="red-dot" />
+                <p className="small">RB handcuff</p>
               </>
             )}
           </div>
@@ -170,9 +180,11 @@ class PlayerTable extends React.Component<IProps, IState> {
                   <p>{p.name} </p>
                   {/* Add dots for information on bye week */}
                   {draftSoon[i] ? <div className="dot green-dot" /> : null}{" "}
-                  {this.props.byeWeeks[p.bye] && !mobile ? (
-                    <div className="dot orange-dot" />
-                  ) : null}
+                  {this.props.byeWeeks[p.bye] &&
+                    !mobile && <div className="dot orange-dot" />}
+                  {p.pos === "RB" &&
+                    rbHandcuffTeams[p.team] &&
+                    !mobile && <div className="dot red-dot" />}
                 </div>
                 <p className="col col-pos">{p.pos}</p>
                 <p className="col col-team">{p.team}</p>
@@ -268,10 +280,16 @@ const mapStateToProps = (state: IStoreState) => {
     .map(p => p && p.bye)
     .reduce((acc, bye) => (bye ? { ...acc, [bye]: true } : acc), {});
 
+  // find the teams of the rbs, other rbs on these teams will be handcuffs
+  const rbHandcuffTeams = [...RB, ...FLEX]
+    .filter((p: IPlayer) => p && p.pos === "RB")
+    .reduce((acc, p: IPlayer) => ({ ...acc, [p.team]: true }), {});
+
   return {
     byeWeeks,
     currentPick: state.currentPick,
     ppr: state.ppr,
+    rbHandcuffTeams,
     undraftedPlayers: getPlayers(state),
     valuedPositions
   };
