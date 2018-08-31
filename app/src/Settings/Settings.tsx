@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { resetDraft, togglePPR } from "../store/actions/players";
 import {
   setNumberOfTeams,
-  setTrackedTeam,
   toggleRosterFormatting
 } from "../store/actions/teams";
 import { IStoreState } from "../store/store";
@@ -17,10 +16,8 @@ interface IProps {
   resetDraft: () => void;
   ppr: boolean;
   setNumberOfTeams: (count: number) => void;
-  setTrackedTeam: (index: number) => void;
   togglePPR: () => void;
   toggleRosterFormatting: () => void;
-  trackedTeam: number;
 }
 
 interface IState {
@@ -42,7 +39,7 @@ class Settings extends React.Component<IProps, IState> {
 
   public render() {
     const { open } = this.state;
-    const { currentPick, numberOfTeams, ppr, trackedTeam } = this.props;
+    const { currentPick, numberOfTeams, ppr } = this.props;
 
     // an array with the allowable number of teams: [6, 16]
     const allowableNumberOfTeams =
@@ -64,22 +61,6 @@ class Settings extends React.Component<IProps, IState> {
         </header>
         {open && (
           <aside className="Settings-Container">
-            <label className="full-width">
-              Your team
-              <div className="Options-Container">
-                <select
-                  className="Tracked-Team-Select Grayed"
-                  onChange={this.updateTrackedTeam}
-                  value={trackedTeam}
-                >
-                  {new Array(numberOfTeams).fill(0).map((_, i) => (
-                    <option key={`Pick-Selection-${i}`} value={i}>{`Team ${i +
-                      1}`}</option>
-                  ))}
-                </select>
-              </div>
-            </label>
-
             <label className="full-width">
               Number of teams
               <div className="Options-Container">
@@ -124,11 +105,6 @@ class Settings extends React.Component<IProps, IState> {
     );
   }
 
-  private updateTrackedTeam = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const { value } = event.target;
-    this.props.setTrackedTeam(+value);
-  };
-
   private setNumberOfTeams = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
     const numberOfTeams = +value.split(" ")[0];
@@ -136,22 +112,15 @@ class Settings extends React.Component<IProps, IState> {
   };
 }
 
-const mapStateToProps = ({
+const mapStateToProps = ({ currentPick, numberOfTeams, ppr }: IStoreState) => ({
   currentPick,
   numberOfTeams,
-  ppr,
-  trackedTeam
-}: IStoreState) => ({
-  currentPick,
-  numberOfTeams,
-  ppr,
-  trackedTeam
+  ppr
 });
 
 const mapDispathToProps = (dispatch: any) => ({
   resetDraft: () => dispatch(resetDraft()),
   setNumberOfTeams: (count: number) => dispatch(setNumberOfTeams(count)),
-  setTrackedTeam: (index: number) => dispatch(setTrackedTeam(index)),
   togglePPR: () => dispatch(togglePPR()),
   toggleRosterFormatting: () => dispatch(toggleRosterFormatting())
 });

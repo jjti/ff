@@ -2,14 +2,18 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import { Position } from "../Player";
+import { setTrackedTeam } from "../store/actions/teams";
 import { IStoreState } from "../store/store";
 import { ITeam } from "../Team";
 import PlayerCard from "./PlayerCard";
 import "./TeamPicks.css";
 
 interface IProps {
-  trackedTeam: ITeam;
   mobile?: boolean;
+  numberOfTeams: number;
+  trackedTeam: number;
+  trackedTeamRoster: ITeam;
+  setTrackedTeam: (team: number) => void;
 }
 
 const initialState = {
@@ -45,7 +49,12 @@ class TeamPicks extends React.PureComponent<IProps, State> {
   }
 
   public render() {
-    const { mobile, trackedTeam } = this.props;
+    const {
+      mobile,
+      numberOfTeams,
+      trackedTeam,
+      trackedTeamRoster
+    } = this.props;
 
     // if it's mobile, return just the small header and separate Starter and Mobile
     // team members into separate tabs
@@ -64,10 +73,23 @@ class TeamPicks extends React.PureComponent<IProps, State> {
         <div className="Pick-Section">
           <header>
             <h3>Starters</h3>
+
+            <div className="Options-Container">
+              <select
+                className="Tracked-Team-Select Grayed"
+                onChange={this.updateTrackedTeam}
+                value={trackedTeam}
+              >
+                {new Array(numberOfTeams).fill(0).map((_, i) => (
+                  <option key={`Pick-Selection-${i}`} value={i}>{`Team ${i +
+                    1}`}</option>
+                ))}
+              </select>
+            </div>
           </header>
 
           <div className="Pick-Column">
-            {trackedTeam.QB.map((r, i) => (
+            {trackedTeamRoster.QB.map((r, i) => (
               <PlayerCard
                 key={r ? r.name : i}
                 player={r}
@@ -75,7 +97,7 @@ class TeamPicks extends React.PureComponent<IProps, State> {
                 length={this.state.cardLength}
               />
             ))}
-            {trackedTeam.RB.map((r, i) => (
+            {trackedTeamRoster.RB.map((r, i) => (
               <PlayerCard
                 key={r ? r.name : i}
                 player={r}
@@ -83,7 +105,7 @@ class TeamPicks extends React.PureComponent<IProps, State> {
                 length={this.state.cardLength}
               />
             ))}
-            {trackedTeam.WR.map((w, i) => (
+            {trackedTeamRoster.WR.map((w, i) => (
               <PlayerCard
                 key={w ? w.name : i}
                 player={w}
@@ -91,7 +113,7 @@ class TeamPicks extends React.PureComponent<IProps, State> {
                 length={this.state.cardLength}
               />
             ))}
-            {trackedTeam.FLEX.map((r, i) => (
+            {trackedTeamRoster.FLEX.map((r, i) => (
               <PlayerCard
                 key={r ? r.name : i}
                 player={r}
@@ -99,7 +121,7 @@ class TeamPicks extends React.PureComponent<IProps, State> {
                 length={this.state.cardLength}
               />
             ))}
-            {trackedTeam.TE.map((r, i) => (
+            {trackedTeamRoster.TE.map((r, i) => (
               <PlayerCard
                 key={r ? r.name : i}
                 player={r}
@@ -107,7 +129,7 @@ class TeamPicks extends React.PureComponent<IProps, State> {
                 length={this.state.cardLength}
               />
             ))}
-            {trackedTeam.DST.map((r, i) => (
+            {trackedTeamRoster.DST.map((r, i) => (
               <PlayerCard
                 key={r ? r.name : i}
                 player={r}
@@ -115,7 +137,7 @@ class TeamPicks extends React.PureComponent<IProps, State> {
                 length={this.state.cardLength}
               />
             ))}
-            {trackedTeam.K.map((r, i) => (
+            {trackedTeamRoster.K.map((r, i) => (
               <PlayerCard
                 key={r ? r.name : i}
                 player={r}
@@ -128,7 +150,7 @@ class TeamPicks extends React.PureComponent<IProps, State> {
         <div className="Pick-Section">
           <h3>Bench</h3>
           <div className="Pick-Column">
-            {trackedTeam.BENCH.map((p, i) => (
+            {trackedTeamRoster.BENCH.map((p, i) => (
               <PlayerCard
                 key={`bench_${i}`}
                 player={p}
@@ -142,6 +164,11 @@ class TeamPicks extends React.PureComponent<IProps, State> {
     );
   }
 
+  private updateTrackedTeam = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const { value } = event.target;
+    this.props.setTrackedTeam(+value);
+  };
+
   private getCardLength = (): number => {
     if (this.props.mobile) {
       const mobileWidth = window.innerWidth * 0.85;
@@ -153,8 +180,21 @@ class TeamPicks extends React.PureComponent<IProps, State> {
   };
 }
 
-const mapStateToProps = ({ teams, trackedTeam }: IStoreState) => ({
-  trackedTeam: teams[trackedTeam]
+const mapStateToProps = ({
+  numberOfTeams,
+  teams,
+  trackedTeam
+}: IStoreState) => ({
+  numberOfTeams,
+  trackedTeam,
+  trackedTeamRoster: teams[trackedTeam]
 });
 
-export default connect(mapStateToProps)(TeamPicks);
+const mapDispathToProps = (dispatch: any) => ({
+  setTrackedTeam: (index: number) => dispatch(setTrackedTeam(index))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispathToProps
+)(TeamPicks);

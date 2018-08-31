@@ -162,7 +162,7 @@ export const setTrackedTeam = (
   trackedTeam: number
 ): IStoreState => {
   // create a toast
-  toast.info(`Tracking Team ${trackedTeam + 1}`);
+  toast.info(`Viewing Team ${trackedTeam + 1}`);
 
   return {
     ...state,

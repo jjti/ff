@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { setActiveTeam } from "../store/actions/teams";
+import { setTrackedTeam } from "../store/actions/teams";
 import { IStoreState } from "../store/store";
 import { ITeam } from "../Team";
 
@@ -11,8 +11,9 @@ interface IProps {
   activeTeam: number;
   currentPick: number;
   numberOfTeams: number;
-  setActiveTeam: (activeTeam: number) => void;
+  setTrackedTeam: (team: number) => void;
   teams: ITeam[];
+  trackedTeam: number;
 }
 
 const initialState = {
@@ -49,7 +50,13 @@ class OrderTracker extends React.Component<IProps, State> {
   };
 
   public render() {
-    const { activeTeam, currentPick, numberOfTeams, teams } = this.props;
+    const {
+      activeTeam,
+      currentPick,
+      numberOfTeams,
+      teams,
+      trackedTeam
+    } = this.props;
     const { cardLength, open } = this.state;
 
     // round tracker message
@@ -74,11 +81,11 @@ class OrderTracker extends React.Component<IProps, State> {
               {teams.map((t, i) => (
                 <div
                   className={`Card ${
-                    i === activeTeam ? "Card-Active" : "Card-Empty"
+                    i === trackedTeam ? "Card-Active" : "Card-Empty"
                   }`}
                   key={i}
                   style={{ width: cardLength, height: cardLength }}
-                  onClick={() => this.props.setActiveTeam(i)}
+                  onClick={() => this.props.setTrackedTeam(i)}
                 >
                   <h4>{i + 1}</h4>
                   <p className="points">{t.StarterValue}</p>
@@ -109,16 +116,18 @@ const mapStateToProps = ({
   activeTeam,
   currentPick,
   numberOfTeams,
-  teams
+  teams,
+  trackedTeam
 }: IStoreState) => ({
   activeTeam,
   currentPick,
   numberOfTeams,
-  teams
+  teams,
+  trackedTeam
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-  setActiveTeam: (activeTeam: number) => dispatch(setActiveTeam(activeTeam))
+  setTrackedTeam: (teamToTrack: number) => dispatch(setTrackedTeam(teamToTrack))
 });
 
 export default connect(
