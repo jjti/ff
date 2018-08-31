@@ -43,7 +43,6 @@ stn.names <- c("fox.2018", "cbs.2018.stn", "nfl.2018")
 src.names <- c(ppr.names, stn.names)
 for (s in src.names) {
   player.data[,s] <- as.numeric(as.character(player.data[,s]))
-  player.data[,s] <- sapply(player.data[,s], function(x) ifelse(x < 10, NA, x))
 }
 player.data$predictionPPR <- apply(player.data[, ppr.names], 1, mean, na.rm = TRUE) # took WAY too long to figure out
 player.data$predictionSTN <- apply(player.data[, src.names], 1, mean, na.rm = TRUE) # took WAY too long to figure out
@@ -89,6 +88,8 @@ madden.data$name <- sapply(madden.data$name, function(x) {
   split.name <- strsplit(x, "\\s+")[[1]]
   name <- paste0(split.name[1], " ", split.name[2])
   name <- gsub("^\\s+|\\s+$", "", name)
+  name <- gsub("Jr|jr", "", name)
+  name <- gsub("II|III", "", name)
   gsub("[.']", "", name)
 })
 player.data <- merge(player.data, madden.data, by = c("name", "pos"))
@@ -97,8 +98,7 @@ player.data <- merge(player.data, madden.data, by = c("name", "pos"))
 ###
 # Post-processing
 ###
-# must have a Madden score and an expert score in top three quartiles
-player.data <- player.data[player.data$predictionPPR > 10 & player.data$overall > 40,]
+player.data <- player.data[player.data$predictionPPR > 0,]
 
 # replace NA values with zeroes
 for (c in 1:ncol(player.data)){

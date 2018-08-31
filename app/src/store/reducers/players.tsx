@@ -114,75 +114,89 @@ const updateVOR = (state: IStoreState): IPlayer[] => {
   // update player adp to whatever it is in an equivelant league size
   players = players.map(p => ({ ...p, adp: p[adp] }));
 
+  // total number of players at each position
+  const positionToTotalCountMap = {};
+  positions.forEach(pos => {
+    positionToTotalCountMap[pos] = players.filter(p => p.pos === pos).length;
+  });
+
   // #1, find replacement player index for each position
   // map each position to the number of players drafted before the lastPick
-  const positionToCountMap = positions.reduce(
-    (acc, pos) => ({
-      ...acc,
-      [pos]: players.filter(
-        p => p.pos === pos && p.adp && p.adp < numberOfTeams * 10
-      ).length
-    }),
-    {}
-  );
-
-  // total number of players at each position
-  const positionToTotalCountMap = positions.reduce(
-    (acc, pos) => ({
-      ...acc,
-      [pos]: players.filter(p => p.pos === pos).length
-    }),
-    {}
-  );
+  const positionToCountMap = {};
+  positions.forEach(pos => {
+    positionToCountMap[pos] = players.filter(
+      p => p.pos === pos && p.adp && p.adp > 0 && p.adp < numberOfTeams * 10
+    ).length; // || 0 to avoid NaN on never drafted positions (in first 10 rounds)
+  });
 
   // because #1 is based on a default league, with 1QB, 2RBs, etc, we need
   // to account for specialty leagues where the numbers differ. We crudishly
   // do that here, by comparing the number of players in the current roster to
   // a "default" roster and multiplying the number of drafted players in that position
   // accordingly
-  Object.keys(initialRoster)
-    .filter(k => positionToCountMap[k])
-    .forEach(pos => {
-      const newCountRatioIncr = rosterFormat[pos] / initialRoster[pos];
-      positionToCountMap[pos] = Math.min(
-        Math.round(positionToCountMap[pos] * newCountRatioIncr),
-        positionToTotalCountMap[pos] - 1
-      );
-    });
+  let totalPlayerCount = 0;
+  Object.keys(initialRoster).forEach(pos => {
+    // this is dumb af but lets guess that every team will draft 1 additional
+    // player in that position
+    positionToCountMap[pos] = positionToCountMap[pos] || 0;
+    positionToCountMap[pos] +=
+      (rosterFormat[pos] - initialRoster[pos]) * numberOfTeams;
+    positionToCountMap[pos] = Math.max(0, positionToCountMap[pos]);
+
+    totalPlayerCount += positionToCountMap[pos];
+  });
+
+  // sum the total number of players (to get the total number of players drafted
+  // to the number of teams * 10)
+  const ratioOfExpected = (numberOfTeams * 10) / totalPlayerCount;
+
+  // adjust so the total count sums to ~100 and we don't exceed the tt
+  Object.keys(positionToCountMap).forEach(pos => {
+    positionToCountMap[pos] = Math.floor(
+      positionToCountMap[pos] * ratioOfExpected
+    );
+  });
+
+  console.log(positionToCountMap);
 
   // #2, find replacement values at each position by finding the predicted points
   //     at 1+the number of expected players in that position drafted within 10 rounds
   // filter by position, sort descending by prediction points, and get the number of points by the replacement player
   // map positions to their replacement values
-  const positionToReplaceValueMap = positions.reduce(
-    (acc, pos) => ({
-      ...acc,
-      [pos]: players
-        .filter(p => p.pos === pos)
-        .sort(
-          (a, b) =>
-            ppr
-              ? b.predictionPPR - a.predictionPPR
-              : b.predictionSTN - a.predictionSTN
-        )[positionToCountMap[pos]][ppr ? "predictionPPR" : "predictionSTN"]
-    }),
-    {}
-  );
+  const positionToReplaceValueMap = {};
+  positions.forEach(pos => {
+    const sortedPlayers = players
+      .filter(p => p.pos === pos)
+      .sort(
+        (a, b) =>
+          ppr
+            ? b.predictionPPR - a.predictionPPR
+            : b.predictionSTN - a.predictionSTN
+      );
+
+    // if the "replacement player" is a tenable value, get his expected
+    // number of points
+    let replacementValue = 0;
+    if (positionToCountMap[pos] < positionToTotalCountMap[pos]) {
+      replacementValue =
+        sortedPlayers[positionToCountMap[pos]][
+          ppr ? "predictionPPR" : "predictionSTN"
+        ];
+    }
+
+    positionToReplaceValueMap[pos] = replacementValue;
+  });
 
   // #3, update players' VORs
-  const newPlayers = players.map(p => ({
+  players = players.map(p => ({
     ...p,
     vor:
       (ppr ? p.predictionPPR : p.predictionSTN) -
       positionToReplaceValueMap[p.pos]
   }));
+  players = players.filter(p => p.vor);
 
-  // #4, sort by their VOR
-  const valuablePlayers = newPlayers.filter(p => !isNaN(p.vor));
-  const unvaluablePlayers = newPlayers.filter(p => isNaN(p.vor));
-  return valuablePlayers
-    .sort((a, b) => b.vor - a.vor)
-    .concat(unvaluablePlayers);
+  return players.sort((a, b) => (a.vor && b.vor && b.vor - a.vor) || -1);
 };
 
 /**

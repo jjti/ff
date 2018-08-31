@@ -14,14 +14,13 @@
 
 .App-Left-Column {
   height: auto;
-  width: 25%;
+  width: 24%;
   min-width: 225px;
   border-right: 1px solid var(--border-color);
 }
 
 .App-Right-Column {
   height: 100%;
-  width: 75%;
   flex: 1 0 auto;
 }
 

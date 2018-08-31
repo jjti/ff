@@ -1,5 +1,6 @@
 .PlayerTable.Section {
   padding: 0;
+  border-bottom: unset;
 }
 
 #table-top-header {

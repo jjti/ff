@@ -29,7 +29,7 @@
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
 
-  border-bottom: 10px solid #c4c4c4;
+  border-bottom: 10px solid var(--highlight-gray);
 }
 
 .Team-Arrow-Label {

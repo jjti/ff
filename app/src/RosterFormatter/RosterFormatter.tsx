@@ -35,7 +35,6 @@ class RosterFormatter extends React.Component<IProps> {
    * change the number of players at the passed position
    */
   public changePositionCount = (pos: Position, change: number) => {
-    console.log(pos, change);
     const { rosterFormat } = this.props;
     const newCountAtPosition = Math.max(0, rosterFormat[pos] + change); // don't go negative
     const newRoster = { ...rosterFormat, [pos]: newCountAtPosition };
