@@ -12,8 +12,6 @@ import { IStoreState } from '../store/store';
 import { TeamPlayer } from '../Team';
 import PlayerTable from './PlayerTable';
 
-import './PlayerTable.css';
-
 interface IPlayerTableProps {
   /**
    * Key is bye week number, value is whether there's a conflict with starter

@@ -1,21 +1,21 @@
-import * as React from "react";
-import { connect } from "react-redux";
-import { cssTransition, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import * as React from 'react';
+import { connect } from 'react-redux';
+import { cssTransition, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // @ts-ignore
-import ReactTooltip from "react-tooltip";
+import ReactTooltip from 'react-tooltip';
 
-import "./App.css";
-import "./Card.css";
-import Header from "./Header/Header";
-import OrderTracker from "./OrderTracker/OrderTracker";
-import { IPlayer } from "./Player";
-import PlayerTableContainer from "./PlayerTable/PlayerTableContainer";
-import RosterFormatter from "./RosterFormatter/RosterFormatter";
-import Settings from "./Settings/Settings";
-import { setPlayers } from "./store/actions/players";
-import TeamPicks from "./TeamPicks/TeamPicks";
+import './App.css';
+import './Card.css';
+import Header from './Header/Header';
+import PickHistoryContainer from './PickHistory/PickHistoryContainer';
+import { IPlayer } from './Player';
+import PlayerTableContainer from './PlayerTable/PlayerTableContainer';
+import RosterFormatter from './RosterFormatter/RosterFormatter';
+import Settings from './Settings/Settings';
+import { setPlayers } from './store/actions/players';
+import TeamPicks from './TeamPicks/TeamPicks';
 
 interface IProps {
   setPlayers: (players: IPlayer[]) => void;
@@ -43,11 +43,11 @@ class App extends React.PureComponent<IProps, IState> {
       mobile: window.innerWidth < 700
     };
 
-    addEventListener("resize", () => {
+    addEventListener('resize', () => {
       this.setState({ mobile: window.innerWidth < 700 });
     });
 
-    xhttp.open("GET", `${process.env.PUBLIC_URL}/forecast.json`, true);
+    xhttp.open('GET', `${process.env.PUBLIC_URL}/forecast.json`, true);
     xhttp.send();
   }
 
@@ -68,8 +68,8 @@ class App extends React.PureComponent<IProps, IState> {
             closeButton={false}
             draggable={false}
             transition={cssTransition({
-              enter: "zoom",
-              exit: "zoom"
+              enter: 'zoom',
+              exit: 'zoom'
             })}
           />
         </div>
@@ -84,7 +84,7 @@ class App extends React.PureComponent<IProps, IState> {
           <TeamPicks />
         </div>
         <div className="App-Right-Column">
-          <OrderTracker />
+          <PickHistoryContainer />
           <PlayerTableContainer />
         </div>
 
@@ -99,8 +99,8 @@ class App extends React.PureComponent<IProps, IState> {
           closeButton={false}
           draggable={false}
           transition={cssTransition({
-            enter: "zoom",
-            exit: "zoom"
+            enter: 'zoom',
+            exit: 'zoom'
           })}
         />
         <ReactTooltip />

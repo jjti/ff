@@ -2,10 +2,6 @@
   position: relative;
 }
 
-.OrderTracker-Header:hover {
-  cursor: pointer;
-}
-
 .OrderTracker-Header:hover h3 {
   text-decoration: underline;
 }

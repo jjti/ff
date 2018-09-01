@@ -3,6 +3,8 @@ import { IPlayer, Position } from '../Player';
 
 import searchIcon from './search.png';
 
+import './PlayerTable.css';
+
 /** All possible positions. ? Means any position, don't filter */
 const filterPositions: Position[] = ['?', 'QB', 'RB', 'WR', 'TE', 'DST', 'K'];
 

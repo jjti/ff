@@ -4,10 +4,9 @@ import { connect } from 'react-redux';
 import { setTrackedTeam } from '../store/actions/teams';
 import { IStoreState } from '../store/store';
 import { ITeam } from '../Team';
+import PickHistory from './PickHistory';
 
-import './OrderTracker.css';
-
-interface IProps {
+interface IPickHistoryContainerProps {
   activeTeam: number;
   currentPick: number;
   numberOfTeams: number;
@@ -22,7 +21,7 @@ const initialState = {
 };
 type State = Readonly<typeof initialState>;
 
-class OrderTracker extends React.Component<IProps, State> {
+class OrderTracker extends React.Component<IPickHistoryContainerProps, State> {
   public readonly state: State = initialState;
 
   constructor(props: any) {
@@ -39,7 +38,7 @@ class OrderTracker extends React.Component<IProps, State> {
     );
   }
 
-  public componentWillReceiveProps = (props: IProps) => {
+  public componentWillReceiveProps = (props: IPickHistoryContainerProps) => {
     this.setState({
       cardLength: this.getCardLength(props.numberOfTeams)
     });
@@ -50,56 +49,26 @@ class OrderTracker extends React.Component<IProps, State> {
   };
 
   public render() {
-    const {
-      activeTeam,
-      currentPick,
-      numberOfTeams,
-      teams,
-      trackedTeam
-    } = this.props;
+    const { activeTeam, currentPick, numberOfTeams } = this.props;
     const { cardLength, open } = this.state;
 
     // round tracker message
-    const roundTracker = `Round ${Math.ceil(
+    const headerMessage = `Round ${Math.ceil(
       currentPick / numberOfTeams
     )} – Pick ${currentPick}`;
 
     // amount to shift the "current draft" arrow from the left
-    const activeTeamLeft = activeTeam * (cardLength + 14) + 0.2 * cardLength;
+    const cursorLeft = activeTeam * (cardLength + 14) + 0.2 * cardLength;
 
     return (
-      <div className="OrderTracker Section">
-        <header className="OrderTracker-Header" onClick={this.toggleOpen}>
-          <h3>Teams</h3>
-          <p>{roundTracker}</p>
-          {open ? <i className="up Grayed" /> : <i className="down Grayed" />}
-        </header>
-
-        {open && (
-          <>
-            <div className="Team-Cards">
-              {teams.map((t, i) => (
-                <div
-                  className={`Card ${
-                    i === trackedTeam ? 'Card-Active' : 'Card-Empty'
-                  }`}
-                  key={i}
-                  style={{ width: cardLength, height: cardLength }}
-                  onClick={() => this.props.setTrackedTeam(i)}>
-                  <h4>{i + 1}</h4>
-                  <p className="points">{t.StarterValue}</p>
-                </div>
-              ))}
-            </div>
-            <div className="Team-Arrow-Up" style={{ left: activeTeamLeft }} />
-            <p
-              className="Team-Arrow-Label small"
-              style={{ left: activeTeamLeft + 21 }}>
-              Drafting
-            </p>
-          </>
-        )}
-      </div>
+      <PickHistory
+        {...this.props}
+        cardLength={cardLength}
+        cursorLeft={cursorLeft}
+        open={open}
+        headerMessage={headerMessage}
+        toggleOpen={this.toggleOpen}
+      />
     );
   }
 
