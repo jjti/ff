@@ -1,11 +1,11 @@
-import * as React from "react";
-import { connect } from "react-redux";
+import * as React from 'react';
+import { connect } from 'react-redux';
 
-import { setTrackedTeam } from "../store/actions/teams";
-import { IStoreState } from "../store/store";
-import { ITeam } from "../Team";
+import { setTrackedTeam } from '../store/actions/teams';
+import { IStoreState } from '../store/store';
+import { ITeam } from '../Team';
 
-import "./OrderTracker.css";
+import './OrderTracker.css';
 
 interface IProps {
   activeTeam: number;
@@ -32,7 +32,7 @@ class OrderTracker extends React.Component<IProps, State> {
       ...initialState,
       cardLength: this.getCardLength(props.numberOfTeams)
     };
-    window.addEventListener("resize", () =>
+    window.addEventListener('resize', () =>
       this.setState({
         cardLength: this.getCardLength(this.props.numberOfTeams)
       })
@@ -71,7 +71,7 @@ class OrderTracker extends React.Component<IProps, State> {
       <div className="OrderTracker Section">
         <header className="OrderTracker-Header" onClick={this.toggleOpen}>
           <h3>Teams</h3>
-          <p className="RoundTracker">{roundTracker}</p>
+          <p>{roundTracker}</p>
           {open ? <i className="up Grayed" /> : <i className="down Grayed" />}
         </header>
 
@@ -81,12 +81,11 @@ class OrderTracker extends React.Component<IProps, State> {
               {teams.map((t, i) => (
                 <div
                   className={`Card ${
-                    i === trackedTeam ? "Card-Active" : "Card-Empty"
+                    i === trackedTeam ? 'Card-Active' : 'Card-Empty'
                   }`}
                   key={i}
                   style={{ width: cardLength, height: cardLength }}
-                  onClick={() => this.props.setTrackedTeam(i)}
-                >
+                  onClick={() => this.props.setTrackedTeam(i)}>
                   <h4>{i + 1}</h4>
                   <p className="points">{t.StarterValue}</p>
                 </div>
@@ -95,8 +94,7 @@ class OrderTracker extends React.Component<IProps, State> {
             <div className="Team-Arrow-Up" style={{ left: activeTeamLeft }} />
             <p
               className="Team-Arrow-Label small"
-              style={{ left: activeTeamLeft + 21 }}
-            >
+              style={{ left: activeTeamLeft + 21 }}>
               Drafting
             </p>
           </>

@@ -68,6 +68,10 @@ header {
   position: relative;
 }
 
+header > p {
+  margin: auto 30px 13px;
+}
+
 button {
   outline: none;
   background-image: none;

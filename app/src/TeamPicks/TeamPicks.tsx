@@ -1,19 +1,17 @@
-import * as React from "react";
-import { connect } from "react-redux";
+import * as React from 'react';
+import { connect } from 'react-redux';
 
-import { Position } from "../Player";
-import { setTrackedTeam } from "../store/actions/teams";
-import { IStoreState } from "../store/store";
-import { ITeam } from "../Team";
-import PlayerCard from "./PlayerCard";
-import "./TeamPicks.css";
+import { Position } from '../Player';
+import { IStoreState } from '../store/store';
+import { ITeam } from '../Team';
+import PlayerCard from './PlayerCard';
+import './TeamPicks.css';
 
 interface IProps {
   mobile?: boolean;
   numberOfTeams: number;
   trackedTeam: number;
   trackedTeamRoster: ITeam;
-  setTrackedTeam: (team: number) => void;
 }
 
 const initialState = {
@@ -29,32 +27,27 @@ class TeamPicks extends React.PureComponent<IProps, State> {
   };
 
   public starterPositions: Position[] = [
-    "QB",
-    "RB",
-    "RB",
-    "WR",
-    "WR",
-    "FLEX",
-    "TE",
-    "DST",
-    "K"
+    'QB',
+    'RB',
+    'RB',
+    'WR',
+    'WR',
+    'FLEX',
+    'TE',
+    'DST',
+    'K'
   ];
 
   constructor(props: any) {
     super(props);
     this.state = { ...initialState, cardLength: this.getCardLength() };
-    window.addEventListener("resize", () =>
+    window.addEventListener('resize', () =>
       this.setState({ cardLength: this.getCardLength() })
     );
   }
 
   public render() {
-    const {
-      mobile,
-      numberOfTeams,
-      trackedTeam,
-      trackedTeamRoster
-    } = this.props;
+    const { mobile, trackedTeam, trackedTeamRoster } = this.props;
 
     // if it's mobile, return just the small header and separate Starter and Mobile
     // team members into separate tabs
@@ -73,19 +66,7 @@ class TeamPicks extends React.PureComponent<IProps, State> {
         <div className="Pick-Section">
           <header>
             <h3>Starters</h3>
-
-            <div className="Options-Container Tracked-Team">
-              <select
-                className="Tracked-Team-Select Grayed"
-                onChange={this.updateTrackedTeam}
-                value={trackedTeam}
-              >
-                {new Array(numberOfTeams).fill(0).map((_, i) => (
-                  <option key={`Pick-Selection-${i}`} value={i}>{`Team ${i +
-                    1}`}</option>
-                ))}
-              </select>
-            </div>
+            <p>{`Team ${trackedTeam + 1}`}</p>
           </header>
 
           <div className="Pick-Column">
@@ -164,11 +145,6 @@ class TeamPicks extends React.PureComponent<IProps, State> {
     );
   }
 
-  private updateTrackedTeam = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const { value } = event.target;
-    this.props.setTrackedTeam(+value);
-  };
-
   private getCardLength = (): number => {
     if (this.props.mobile) {
       const mobileWidth = window.innerWidth * 0.85;
@@ -190,9 +166,7 @@ const mapStateToProps = ({
   trackedTeamRoster: teams[trackedTeam]
 });
 
-const mapDispathToProps = (dispatch: any) => ({
-  setTrackedTeam: (index: number) => dispatch(setTrackedTeam(index))
-});
+const mapDispathToProps = (dispatch: any) => ({});
 
 export default connect(
   mapStateToProps,
