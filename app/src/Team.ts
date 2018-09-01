@@ -28,7 +28,6 @@ export interface ITeam {
   DST: NullablePlayer[];
   K: NullablePlayer[];
   BENCH: NullablePlayer[];
-  StarterValue?: number;
 }
 
 /**
@@ -37,4 +36,5 @@ export interface ITeam {
 export interface IPick {
   player: NullablePlayer;
   team: number;
+  pickNumber: number;
 }

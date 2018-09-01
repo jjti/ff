@@ -1,11 +1,13 @@
 .Card {
-  border: 1px solid var(--border-color);
+  border: var(--border-gray);
   margin: 6px;
   position: relative;
   border-radius: 5px;
+  flex-shrink: 0;
 }
 
 .Card-Empty {
+  border: 1px dashed var(--border-color);
 }
 
 .Card-Active {
@@ -27,7 +29,7 @@
 }
 
 .Card > p {
-  font-size: 0.8vw !important;
+  font-size: 0.76vw !important;
   margin: 0;
   position: absolute;
   top: 45%;

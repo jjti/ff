@@ -1,55 +1,67 @@
 import * as React from 'react';
 
-import { ITeam } from '../Team';
+import { IPick } from '../Team';
 
 import './PickHistory.css';
 
 interface IPickHistoryProps {
+  activeTeam: number;
   cardLength: number;
-  cursorLeft: number;
   headerMessage: string;
   open: boolean;
-  teams: ITeam[];
+  pastPicks: IPick[];
   toggleOpen: () => void;
   trackedTeam: number;
 }
 
-export default ({
-  cardLength,
-  cursorLeft,
-  headerMessage,
-  open,
-  teams,
-  toggleOpen,
-  trackedTeam
-}: IPickHistoryProps) => (
-  <div className="OrderTracker Section">
-    <header className="OrderTracker-Header" onClick={toggleOpen}>
-      <h3>Teams</h3>
-      <p>{headerMessage}</p>
-      {open ? <i className="up Grayed" /> : <i className="down Grayed" />}
-    </header>
+export default React.forwardRef(
+  (
+    {
+      activeTeam,
+      cardLength,
+      headerMessage,
+      open,
+      pastPicks,
+      toggleOpen
+    }: IPickHistoryProps,
+    ref: any
+  ) => (
+    <div className="PickHistory Section">
+      <header className="PickHistory-Header" onClick={toggleOpen}>
+        <h3>Picks</h3>
+        <p>{headerMessage}</p>
+        {open ? <i className="up Grayed" /> : <i className="down Grayed" />}
+      </header>
 
-    {open && (
-      <>
-        <div className="Team-Cards">
-          {teams.map((t, i) => (
+      {open && (
+        <>
+          <div ref={ref} className="PicksRow">
             <div
-              className={`Card ${
-                i === trackedTeam ? 'Card-Active' : 'Card-Empty'
-              }`}
-              key={i}
+              className="Card Card-Empty"
               style={{ width: cardLength, height: cardLength }}>
-              <h4>{i + 1}</h4>
-              <p className="points">{t.StarterValue}</p>
+              <h5>{activeTeam + 1}</h5>
+
+              <div className="Currently-Drafting-Arrow">
+                <div className="Arrow-Up" />
+                <p className="small">Drafting</p>
+              </div>
             </div>
-          ))}
-        </div>
-        <div className="Team-Arrow-Up" style={{ left: cursorLeft }} />
-        <p className="Team-Arrow-Label small" style={{ left: cursorLeft + 21 }}>
-          Drafting
-        </p>
-      </>
-    )}
-  </div>
+
+            {pastPicks.map(p => (
+              <div
+                key={p.pickNumber}
+                className="Card"
+                style={{ width: cardLength, height: cardLength }}>
+                <h5>{p.team + 1}</h5>
+                <p>
+                  {p.player && p.player.tableName ? p.player.tableName : ''}
+                </p>
+                <p className="points">Pick {p.pickNumber}</p>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  )
 );

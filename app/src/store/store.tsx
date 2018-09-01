@@ -102,7 +102,6 @@ export const createTeam = (rosterFormat: IRoster): ITeam => ({
   K: new Array(rosterFormat.K).fill(null),
   QB: new Array(rosterFormat.QB).fill(null),
   RB: new Array(rosterFormat.RB).fill(null),
-  StarterValue: 0,
   TE: new Array(rosterFormat.TE).fill(null),
   WR: new Array(rosterFormat.WR).fill(null)
 });

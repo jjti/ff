@@ -8,19 +8,6 @@ import { createTeam, initialState, IStoreState, store } from '../store';
 import { updatePlayerVORs } from './players';
 
 /**
- * Sum of the VOR of everyone on a ITeam. Used to keep track of
- * how the draft is going
- *
- * @param team the team whose VOR we're trying to sum
- */
-const sumStarterValues = ({ QB, RB, WR, TE, FLEX, DST, K }: ITeam): number => {
-  return [...QB, ...RB, ...WR, ...TE, ...FLEX, ...DST, ...K].reduce(
-    (acc, p) => (p && p.vor ? acc + p.vor : acc),
-    0
-  );
-};
-
-/**
  * Increment the draft to the next round
  * @param state
  */
@@ -68,7 +55,7 @@ export const pickPlayer = (
   state: IStoreState,
   player: IPlayer
 ): IStoreState => {
-  const { undraftedPlayers, activeTeam, teams } = state;
+  const { activeTeam, currentPick, teams, undraftedPlayers } = state;
 
   // try and add the player to the team roster, respecting the limit at each position
   const newTeams = teams.map(t => ({ ...t }));
@@ -97,7 +84,6 @@ export const pickPlayer = (
       roster.BENCH = roster.BENCH.concat([player]);
     }
   }
-  roster.StarterValue = sumStarterValues(roster);
 
   // update the team in the array
   newTeams[activeTeam] = roster;
@@ -118,7 +104,10 @@ export const pickPlayer = (
     ),
 
     // add this pick to the history of picks
-    pastPicks: [{ player, team: activeTeam }, ...state.pastPicks],
+    pastPicks: [
+      { player, team: activeTeam, pickNumber: currentPick },
+      ...state.pastPicks
+    ],
 
     // save this player as the "lastPickedPlayer"
     lastPickedPlayer: player

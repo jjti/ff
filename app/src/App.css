@@ -21,7 +21,7 @@
 
 .App-Right-Column {
   height: 100%;
-  flex: 1 0 auto;
+  width: 76%;
 }
 
 .Section {

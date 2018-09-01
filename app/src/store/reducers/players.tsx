@@ -5,6 +5,34 @@ import { IPick, IRoster, ITeam, NullablePlayer } from '../../Team';
 import { createTeam, initialRoster, IStoreState } from '../store';
 
 /**
+ * Update the list of players in the store
+ * Set tableName on them
+ *
+ * @param state state before having players set
+ */
+export const setPlayers = (
+  state: IStoreState,
+  players: IPlayer[]
+): IStoreState => {
+  const getTableName = (name: string) => {
+    const splitName = name.split(' ');
+    return `${name[0]}. ${splitName[1]}`;
+  };
+
+  const playersWithTableName = players.filter(p => p.name).map(p => ({
+    ...p,
+    tableName: p.pos === 'DST' ? p.name : getTableName(p.name)
+  }));
+
+  return updatePlayerVORs({
+    ...state,
+    pastPicks: [],
+    players: playersWithTableName,
+    undraftedPlayers: playersWithTableName
+  });
+};
+
+/**
  * Remove the player from the store and the players array
  * Update the past history
  *
@@ -47,30 +75,41 @@ const removeFromRoster = (roster: ITeam, player: IPlayer): ITeam => {
 
 /**
  * Add the PlayerPick back into the list of teams and remove from the teams roster
+ * If the pick paramter is null, undo the last pick
  *
  * @param state state from current turn, about to be undone
  */
 export const undoPlayerPick = (
   state: IStoreState,
-  pick: IPick
+  pick?: IPick
 ): IStoreState => {
   const { pastPicks, teams, undraftedPlayers } = state;
 
-  if (pick.player === null) {
+  let pickToUndo = pick;
+  if (!pickToUndo && pastPicks.length) {
+    pickToUndo = pastPicks[0];
+  }
+
+  if (!pickToUndo || !pickToUndo.player) {
     return state;
   }
 
-  toast.info(`Undrafted ${pick.player.name}`);
+  toast.info(`Undrafted ${pickToUndo.player.name}`);
 
-  teams[pick.team] = removeFromRoster(teams[pick.team], pick.player);
+  teams[pickToUndo.team] = removeFromRoster(
+    teams[pickToUndo.team],
+    pickToUndo.player
+  );
 
   return {
     ...state,
-    pastPicks: pastPicks.filter(p => p !== pick),
+    activeTeam: pickToUndo.team,
+    currentPick: pickToUndo.pickNumber,
+    pastPicks: pastPicks.filter(p => p !== pickToUndo),
     undraftedPlayers: undraftedPlayers
-      .concat([pick.player])
-      .sort((a, b) => (a.vor && b.vor ? a.vor - b.vor : 0))
-  }; // if it's null, reset and return
+      .concat([pickToUndo.player])
+      .sort((a: IPlayer, b: IPlayer) => (a.vor && b.vor ? b.vor - a.vor : 0))
+  };
 };
 
 /**

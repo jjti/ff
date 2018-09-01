@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 
 import { setTrackedTeam } from '../store/actions/teams';
 import { IStoreState } from '../store/store';
-import { ITeam } from '../Team';
+import { IPick, ITeam } from '../Team';
 import PickHistory from './PickHistory';
 
 interface IPickHistoryContainerProps {
   activeTeam: number;
   currentPick: number;
   numberOfTeams: number;
+  pastPicks: IPick[];
   setTrackedTeam: (team: number) => void;
   teams: ITeam[];
   trackedTeam: number;
@@ -24,6 +25,8 @@ class PickHistoryContainer extends React.Component<
   IPickHistoryContainerProps,
   IPickHistoryContainerState
 > {
+  public pickRowRef: React.RefObject<HTMLDivElement> = React.createRef();
+
   constructor(props: any) {
     super(props);
 
@@ -43,6 +46,11 @@ class PickHistoryContainer extends React.Component<
     this.setState({
       cardLength: this.getCardLength(props.numberOfTeams)
     });
+
+    // scroll the pick row back to the left
+    if (this.pickRowRef.current) {
+      this.pickRowRef.current.scrollLeft = 0;
+    }
   };
 
   public toggleOpen = () => {
@@ -50,23 +58,18 @@ class PickHistoryContainer extends React.Component<
   };
 
   public render() {
-    const { activeTeam, currentPick, numberOfTeams } = this.props;
-    const { cardLength, open } = this.state;
+    const { currentPick, numberOfTeams } = this.props;
 
     // round tracker message
     const headerMessage = `Round ${Math.ceil(
       currentPick / numberOfTeams
     )} – Pick ${currentPick}`;
 
-    // amount to shift the "current draft" arrow from the left
-    const cursorLeft = activeTeam * (cardLength + 14) + 0.2 * cardLength;
-
     return (
       <PickHistory
         {...this.props}
-        cardLength={cardLength}
-        cursorLeft={cursorLeft}
-        open={open}
+        {...this.state}
+        ref={this.pickRowRef}
         headerMessage={headerMessage}
         toggleOpen={this.toggleOpen}
       />
@@ -75,8 +78,8 @@ class PickHistoryContainer extends React.Component<
 
   private getCardLength = (numberOfTeams: number): number => {
     const thisWidth = window.innerWidth * 0.65; // ~30px padding, 70% width of total window size
-    const cardLength = Math.floor(thisWidth / numberOfTeams) - 7; // 8 == 2px border, 6px margin
-    return Math.min(cardLength, 70);
+    const cardLength = Math.floor(thisWidth / numberOfTeams); // 8 == 2px border, 6px margin
+    return Math.min(cardLength, 75);
   };
 }
 
@@ -84,12 +87,14 @@ const mapStateToProps = ({
   activeTeam,
   currentPick,
   numberOfTeams,
+  pastPicks,
   teams,
   trackedTeam
 }: IStoreState) => ({
   activeTeam,
   currentPick,
   numberOfTeams,
+  pastPicks,
   teams,
   trackedTeam
 });

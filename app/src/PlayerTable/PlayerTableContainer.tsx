@@ -104,13 +104,6 @@ class PlayerTableContainer extends React.Component<
       );
     });
 
-    // we want names like A. Rodgers, rather than the full Aaron Rodgers
-    players = players.map(p => ({
-      ...p,
-      tableName:
-        p.pos !== 'DST' ? `${p.name[0]}. ${p.name.split(' ')[1]}` : p.name
-    }));
-
     // players that will be drafted soon
     const draftSoon = players.map(p => p.adp && currentPick + 10 > p.adp);
 
