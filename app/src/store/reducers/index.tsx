@@ -1,26 +1,26 @@
-import { ACTION_TYPES } from "../actions";
-import { initialState, IStoreState } from "../store";
+import { ACTION_TYPES } from '../actions';
+import { initialState, IStoreState } from '../store';
 import {
   removePlayer,
   setRosterFormat,
   togglePPR,
   undoPlayerPick,
   updatePlayerVORs
-} from "./players";
+} from './players';
 import {
   incrementDraft,
   pickPlayer,
   resetStore,
   setNumberOfTeams,
   setTrackedTeam
-} from "./teams";
+} from './teams';
 
 export default (state = initialState, action: any): IStoreState => {
   switch (action.type) {
     case ACTION_TYPES.SET_PLAYERS: {
       return updatePlayerVORs({
         ...state,
-        past: null,
+        pastPicks: [],
         players: action.players,
         undraftedPlayers: action.players
       });
@@ -29,7 +29,7 @@ export default (state = initialState, action: any): IStoreState => {
       return pickPlayer(state, action.player);
     }
     case ACTION_TYPES.UNDO_PICK_PLAYER: {
-      return undoPlayerPick(state);
+      return undoPlayerPick(state, action.pick);
     }
     case ACTION_TYPES.SET_TRACKED_TEAM: {
       return setTrackedTeam(state, action.trackedTeam);

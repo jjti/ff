@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 
 import { IPlayer } from '../../Player';
 import { ITeam } from '../../Team';
-import { undoPlayerPick } from '../actions/players';
+import { undoPlayerPick } from '../actions/teams';
 import { createTeam, initialState, IStoreState, store } from '../store';
 import { updatePlayerVORs } from './players';
 
@@ -117,8 +117,8 @@ export const pickPlayer = (
       (p: IPlayer) => !(p.name === player.name && p.pos === player.pos)
     ),
 
-    // add this previous state to the past
-    past: state,
+    // add this pick to the history of picks
+    pastPicks: [{ player, team: activeTeam }, ...state.pastPicks],
 
     // save this player as the "lastPickedPlayer"
     lastPickedPlayer: player

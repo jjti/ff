@@ -1,13 +1,14 @@
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify';
 
-import { IPlayer, Position } from "../../Player";
-import { IRoster } from "../../Team";
-import { createTeam, initialRoster, IStoreState } from "../store";
-import { resetStore } from "./teams";
+import { IPlayer, Position } from '../../Player';
+import { IPick, IRoster, ITeam, NullablePlayer } from '../../Team';
+import { createTeam, initialRoster, IStoreState } from '../store';
 
 /**
  * Remove the player from the store and the players array
  * Update the past history
+ *
+ * Past picks doesn't change
  *
  * @param state
  * @param player
@@ -21,7 +22,6 @@ export const removePlayer = (
 
   return {
     ...state,
-    past: state,
     undraftedPlayers: state.undraftedPlayers.filter(
       p => !(p.name === player.name && p.pos === player.pos)
     )
@@ -29,19 +29,48 @@ export const removePlayer = (
 };
 
 /**
- * Undo the last player selection by setting state to its past state object
- * TODO: make this a diff, kind of memory intense
+ * given a player and a team's roster, remove the player from the roster
+ */
+const removeFromRoster = (roster: ITeam, player: IPlayer): ITeam => {
+  return Object.keys(roster).reduce(
+    (acc: ITeam, pos) => ({
+      ...acc,
+      [pos]: roster[pos].reduce(
+        (players: NullablePlayer[], p: NullablePlayer) =>
+          p === player ? players.concat([null]) : players.concat([p]),
+        []
+      )
+    }),
+    {}
+  ) as ITeam;
+};
+
+/**
+ * Add the PlayerPick back into the list of teams and remove from the teams roster
  *
  * @param state state from current turn, about to be undone
  */
-export const undoPlayerPick = (state: IStoreState): IStoreState => {
-  const { past } = state;
+export const undoPlayerPick = (
+  state: IStoreState,
+  pick: IPick
+): IStoreState => {
+  const { pastPicks, teams, undraftedPlayers } = state;
 
-  if (state.lastPickedPlayer) {
-    toast.info(`Undrafted ${state.lastPickedPlayer.name}`);
+  if (pick.player === null) {
+    return state;
   }
 
-  return past || resetStore(state); // if it's null, reset and return
+  toast.info(`Undrafted ${pick.player.name}`);
+
+  teams[pick.team] = removeFromRoster(teams[pick.team], pick.player);
+
+  return {
+    ...state,
+    pastPicks: pastPicks.filter(p => p !== pick),
+    undraftedPlayers: undraftedPlayers
+      .concat([pick.player])
+      .sort((a, b) => (a.vor && b.vor ? a.vor - b.vor : 0))
+  }; // if it's null, reset and return
 };
 
 /**
@@ -67,9 +96,9 @@ export const setRosterFormat = (
  */
 export const togglePPR = (state: IStoreState): IStoreState => {
   if (!state.ppr) {
-    toast.info("Using PPR Scoring");
+    toast.info('Using PPR Scoring');
   } else {
-    toast.info("Using Standard Scoring");
+    toast.info('Using Standard Scoring');
   }
 
   return updatePlayerVORs({ ...state, ppr: !state.ppr });
@@ -90,23 +119,23 @@ const updateVOR = (state: IStoreState): IPlayer[] => {
   const { numberOfTeams, ppr, rosterFormat } = state;
   let { players } = state;
 
-  const positions: Position[] = ["QB", "RB", "WR", "TE", "DST", "K"];
+  const positions: Position[] = ['QB', 'RB', 'WR', 'TE', 'DST', 'K'];
 
   // we have 4 adp rankings from fantasyfootballcalculator. they're stored
   // in player properties adp8, adp10, adp12, and adp14
-  let adp = "adp10";
+  let adp = 'adp10';
   if (numberOfTeams <= 8) {
-    adp = "adp8";
+    adp = 'adp8';
   } else if (numberOfTeams > 10 && numberOfTeams <= 12) {
-    adp = "adp12";
+    adp = 'adp12';
   } else if (numberOfTeams > 12) {
-    adp = "adp14";
+    adp = 'adp14';
   }
 
   if (ppr) {
-    adp += "PPR";
+    adp += 'PPR';
   } else {
-    adp += "STN";
+    adp += 'STN';
   }
 
   // update player adp to whatever it is in an equivelant league size
@@ -176,7 +205,7 @@ const updateVOR = (state: IStoreState): IPlayer[] => {
     if (positionToCountMap[pos] < positionToTotalCountMap[pos]) {
       replacementValue =
         sortedPlayers[positionToCountMap[pos]][
-          ppr ? "predictionPPR" : "predictionSTN"
+          ppr ? 'predictionPPR' : 'predictionSTN'
         ];
     }
 

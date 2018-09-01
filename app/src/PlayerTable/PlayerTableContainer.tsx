@@ -2,14 +2,14 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import { IPlayer, Position } from '../Player';
+import { removePlayer, selectPlayer } from '../store/actions/players';
 import {
-  removePlayer,
-  selectPlayer,
+  incrementDraft,
+  pickPlayer,
   undoPlayerPick
-} from '../store/actions/players';
-import { incrementDraft, pickPlayer } from '../store/actions/teams';
+} from '../store/actions/teams';
 import { IStoreState } from '../store/store';
-import { TeamPlayer } from '../Team';
+import { NullablePlayer } from '../Team';
 import PlayerTable from './PlayerTable';
 
 interface IPlayerTableProps {
@@ -163,7 +163,7 @@ const mapStateToProps = (state: IStoreState) => {
 
   // add the positions to the object that the trackedTeam hasn't
   // filled their roster with (ie they have space for)
-  const notFilled = (pos: TeamPlayer[]) => !pos.every((p: IPlayer) => !!p);
+  const notFilled = (pos: NullablePlayer[]) => !pos.every((p: IPlayer) => !!p);
   const valuedPositions = {} as any;
   if (notFilled(QB)) {
     valuedPositions.QB = true;

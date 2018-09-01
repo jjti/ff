@@ -1,9 +1,9 @@
-import { applyMiddleware, createStore } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
+import { applyMiddleware, createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-import { IPlayer } from "../Player";
-import { IRoster, ITeam } from "../Team";
-import reducers from "./reducers";
+import { IPlayer } from '../Player';
+import { IPick, IRoster, ITeam } from '../Team';
+import reducers from './reducers';
 
 export interface IStoreState {
   /**
@@ -43,10 +43,13 @@ export interface IStoreState {
   numberOfTeams: number;
 
   /**
-   * An array of past store states. A store state is small enought that I'm just storing
-   * the whole past state as an object, rather than a diff, or partial state, etc
+   * An array of past player picks, ordered such that the first element is the most
+   * recent, the second is the second most recent, etc
+   *
+   * if the drafter skips a round, ie drafts no one, that position in the array is
+   * just null
    */
-  past: IStoreState | null;
+  pastPicks: IPick[];
 
   /**
    * All the players, and their stats, as retrieved from the server. This is NOT the
@@ -127,7 +130,7 @@ export const initialState = {
   formattingRoster: false,
   lastPickedPlayer: null,
   numberOfTeams: 10,
-  past: null,
+  pastPicks: [],
   players: [],
   ppr: false,
   rosterFormat: initialRoster,

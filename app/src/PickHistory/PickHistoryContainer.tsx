@@ -15,22 +15,23 @@ interface IPickHistoryContainerProps {
   trackedTeam: number;
 }
 
-const initialState = {
-  cardLength: 50,
-  open: true
-};
-type State = Readonly<typeof initialState>;
+interface IPickHistoryContainerState {
+  cardLength: number;
+  open: boolean;
+}
 
-class OrderTracker extends React.Component<IPickHistoryContainerProps, State> {
-  public readonly state: State = initialState;
-
+class PickHistoryContainer extends React.Component<
+  IPickHistoryContainerProps,
+  IPickHistoryContainerState
+> {
   constructor(props: any) {
     super(props);
 
     this.state = {
-      ...initialState,
-      cardLength: this.getCardLength(props.numberOfTeams)
+      cardLength: this.getCardLength(props.numberOfTeams),
+      open: true
     };
+
     window.addEventListener('resize', () =>
       this.setState({
         cardLength: this.getCardLength(this.props.numberOfTeams)
@@ -100,4 +101,4 @@ const mapDispatchToProps = (dispatch: any) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(OrderTracker);
+)(PickHistoryContainer);

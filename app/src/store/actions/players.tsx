@@ -1,8 +1,8 @@
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify';
 
-import { IPlayer } from "../../Player";
-import { IRoster } from "../../Team";
-import { ACTION_TYPES } from "./index";
+import { IPlayer } from '../../Player';
+import { IRoster } from '../../Team';
+import { ACTION_TYPES } from './index';
 
 /**
  * Set the list of players in the store
@@ -27,19 +27,12 @@ export const removePlayer = (player: IPlayer) => ({
  * "Reset" the draft, restoring initial player state
  */
 export const resetDraft = () => {
-  toast.info("Draft was reset");
+  toast.info('Draft was reset');
 
   return {
     type: ACTION_TYPES.RESET_DRAFT
   };
 };
-
-/**
- * undoes the last player pick
- */
-export const undoPlayerPick = () => ({
-  type: ACTION_TYPES.UNDO_PICK_PLAYER
-});
 
 /**
  * Select a player, highlighting it in the table.
