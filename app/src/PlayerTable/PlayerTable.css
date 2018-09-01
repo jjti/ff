@@ -18,7 +18,7 @@
 }
 
 .PlayerTable-Position-Buttons {
-  margin: auto;
+  margin: auto auto auto 30px;
 }
 
 .PlayerTable-Position-Buttons > button {

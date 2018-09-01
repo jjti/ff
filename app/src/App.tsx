@@ -11,7 +11,7 @@ import "./Card.css";
 import Header from "./Header/Header";
 import OrderTracker from "./OrderTracker/OrderTracker";
 import { IPlayer } from "./Player";
-import PlayerTable from "./PlayerTable/PlayerTable";
+import PlayerTableContainer from "./PlayerTable/PlayerTableContainer";
 import RosterFormatter from "./RosterFormatter/RosterFormatter";
 import Settings from "./Settings/Settings";
 import { setPlayers } from "./store/actions/players";
@@ -57,7 +57,7 @@ class App extends React.PureComponent<IProps, IState> {
       return (
         <div id="App">
           <TeamPicks mobile={true} />
-          <PlayerTable mobile={true} />
+          <PlayerTableContainer mobile={true} />
 
           <ToastContainer
             className="toast-container toast-container-mobile"
@@ -85,7 +85,7 @@ class App extends React.PureComponent<IProps, IState> {
         </div>
         <div className="App-Right-Column">
           <OrderTracker />
-          <PlayerTable />
+          <PlayerTableContainer />
         </div>
 
         <RosterFormatter />

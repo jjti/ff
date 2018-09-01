@@ -5,8 +5,6 @@ import { IRoster } from "../../Team";
 import { createTeam, initialRoster, IStoreState } from "../store";
 import { resetStore } from "./teams";
 
-export const getPlayers = (state: IStoreState) => state.undraftedPlayers;
-
 /**
  * Remove the player from the store and the players array
  * Update the past history
