@@ -2,6 +2,10 @@
   border-bottom: none;
 }
 
+.Tracked-Team {
+  margin-left: 30px;
+}
+
 .Pick-Column {
   display: flex;
   flex-wrap: wrap;

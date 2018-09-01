@@ -74,7 +74,7 @@ class TeamPicks extends React.PureComponent<IProps, State> {
           <header>
             <h3>Starters</h3>
 
-            <div className="Options-Container">
+            <div className="Options-Container Tracked-Team">
               <select
                 className="Tracked-Team-Select Grayed"
                 onChange={this.updateTrackedTeam}

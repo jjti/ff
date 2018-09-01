@@ -17,8 +17,32 @@
   padding: 8px;
 }
 
+.Player-Filter {
+  margin: 0 30px;
+  position: relative;
+}
+
+.Player-Filter-Input {
+  border: none;
+  border-bottom: var(--border-gray);
+  outline: none;
+  width: 110px;
+}
+
+.Player-Filter-Input:focus {
+  border-bottom: var(--highlight-border);
+}
+
+.Player-Filter-Icon {
+  position: absolute;
+  height: 17px;
+  opacity: 0.35;
+  top: 9px;
+  right: 7px;
+}
+
 .PlayerTable-Position-Buttons {
-  margin: auto auto auto 30px;
+  margin: 0 auto 0 10px;
 }
 
 .PlayerTable-Position-Buttons > button {
@@ -100,6 +124,10 @@
 
 .row-inactive {
   opacity: 0.45;
+}
+
+.Legend-Row {
+  margin: 8px 2px;
 }
 
 .Legend-Row > p {

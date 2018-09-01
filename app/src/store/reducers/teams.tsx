@@ -1,11 +1,11 @@
-import * as React from "react";
-import { toast } from "react-toastify";
+import * as React from 'react';
+import { toast } from 'react-toastify';
 
-import { IPlayer } from "../../Player";
-import { ITeam } from "../../Team";
-import { undoPlayerPick } from "../actions/players";
-import { createTeam, initialState, IStoreState, store } from "../store";
-import { updatePlayerVORs } from "./players";
+import { IPlayer } from '../../Player';
+import { ITeam } from '../../Team';
+import { undoPlayerPick } from '../actions/players';
+import { createTeam, initialState, IStoreState, store } from '../store';
+import { updatePlayerVORs } from './players';
 
 /**
  * Sum of the VOR of everyone on a ITeam. Used to keep track of
@@ -83,7 +83,7 @@ export const pickPlayer = (
       (p: IPlayer, i: number) => (i === emptySpot ? player : p)
     );
   } else if (
-    ["RB", "WR", "TE"].indexOf(player.pos) > -1 &&
+    ['RB', 'WR', 'TE'].indexOf(player.pos) > -1 &&
     emptyFLEXSpot > -1
   ) {
     // it's a FLEX position, check if there are any flex positions left
@@ -130,8 +130,7 @@ export const pickPlayer = (
       <div>Drafted {player.name}</div>
       <button
         className="Toast-Undo-Button"
-        onClick={() => store.dispatch(undoPlayerPick())}
-      >
+        onClick={() => store.dispatch(undoPlayerPick())}>
         Undo
       </button>
     </>
@@ -162,7 +161,9 @@ export const setTrackedTeam = (
   trackedTeam: number
 ): IStoreState => {
   // create a toast
-  toast.info(`Viewing Team ${trackedTeam + 1}`);
+  if (trackedTeam !== state.trackedTeam) {
+    toast.info(`Viewing Team ${trackedTeam + 1}`);
+  }
 
   return {
     ...state,
@@ -196,7 +197,7 @@ export const setNumberOfTeams = (
   // don't change anything if we're already done with a round
   if (currentPick > currNumberOfTeams) {
     throw new Error(
-      "Cannot change the number of teams after a round has already completed"
+      'Cannot change the number of teams after a round has already completed'
     );
   }
 
@@ -204,7 +205,7 @@ export const setNumberOfTeams = (
   // the number of teams that have already picked
   if (currentPick > numberOfTeams) {
     throw new Error(
-      "Cannot change number of teams to less than the number that have already drafted players"
+      'Cannot change number of teams to less than the number that have already drafted players'
     );
   }
 

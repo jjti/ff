@@ -155,8 +155,6 @@ const updateVOR = (state: IStoreState): IPlayer[] => {
     );
   });
 
-  console.log(positionToCountMap);
-
   // #2, find replacement values at each position by finding the predicted points
   //     at 1+the number of expected players in that position drafted within 10 rounds
   // filter by position, sort descending by prediction points, and get the number of points by the replacement player

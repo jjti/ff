@@ -46,7 +46,8 @@ a,
 th,
 tr,
 button,
-label {
+label,
+input {
   font-weight: 300;
   font-size: 14px;
   margin: 8px;

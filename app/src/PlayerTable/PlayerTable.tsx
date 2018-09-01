@@ -1,19 +1,28 @@
-import * as React from "react";
-import { IPlayer, Position } from "../Player";
+import * as React from 'react';
+import { IPlayer, Position } from '../Player';
+
+import searchIcon from './search.png';
 
 /** All possible positions. ? Means any position, don't filter */
-const filterPositions: Position[] = ["?", "QB", "RB", "WR", "TE", "DST", "K"];
+const filterPositions: Position[] = ['?', 'QB', 'RB', 'WR', 'TE', 'DST', 'K'];
+
+interface ITablePlayer extends IPlayer {
+  /** ex: A. Rodgers */
+  tableName: string;
+}
 
 interface IPlayerTableProps {
   byeWeeks: { [key: number]: boolean };
   draftSoon: boolean[];
   mobile: boolean;
+  nameFilter: string;
   pickPlayer: (player: IPlayer) => void;
-  players: IPlayer[];
+  players: ITablePlayer[];
   positionsToShow: Position[];
   ppr: boolean;
   rbHandcuffTeams: { [key: string]: boolean };
   removePlayer: (player: IPlayer) => void;
+  setNameFilter: (event: React.FormEvent<HTMLInputElement>) => void;
   setPositionFilter: (pos: Position) => void;
   skip: () => void;
   undo: () => void;
@@ -31,6 +40,7 @@ interface IPlayerTableProps {
 export default ({
   byeWeeks,
   draftSoon,
+  nameFilter,
   mobile,
   pickPlayer,
   players,
@@ -38,6 +48,7 @@ export default ({
   ppr,
   rbHandcuffTeams,
   removePlayer,
+  setNameFilter,
   setPositionFilter,
   skip,
   valuedPositions,
@@ -48,15 +59,27 @@ export default ({
       <header>
         {!mobile && <h3>Players</h3>}
 
+        {/* Name filter input element */}
+        {!mobile && (
+          <div className="Player-Filter">
+            <input
+              className="Player-Filter-Input"
+              type="text"
+              value={nameFilter}
+              onChange={setNameFilter}
+            />
+            <img className="Player-Filter-Icon" src={searchIcon} />
+          </div>
+        )}
+
         {/* Buttons for filtering on position */}
         <div className="PlayerTable-Position-Buttons">
           {filterPositions.map(p => (
             <button
               key={p}
-              className={positionsToShow.indexOf(p) > -1 ? "Active" : ""}
-              onClick={() => setPositionFilter(p)}
-            >
-              {p === "?" ? "All" : p}
+              className={positionsToShow.indexOf(p) > -1 ? 'Active' : ''}
+              onClick={() => setPositionFilter(p)}>
+              {p === '?' ? 'All' : p}
             </button>
           ))}
         </div>
@@ -99,8 +122,7 @@ export default ({
         </p>
         <p
           className="col col-prediction"
-          data-tip="Average of expert predictions (ESPN, FOX, CBS, NFL)"
-        >
+          data-tip="Average of expert predictions (ESPN, FOX, CBS, NFL)">
           Prediction
         </p>
 
@@ -109,14 +131,12 @@ export default ({
           <>
             <p
               className="col col-adp"
-              data-tip="Average draft position (Fantasy Football Calculator)"
-            >
+              data-tip="Average draft position (Fantasy Football Calculator)">
               ADP
             </p>
             <p
               className="col col-madden"
-              data-tip="Madden 2019 Overall player stat"
-            >
+              data-tip="Madden 2019 Overall player stat">
               Madden
             </p>
             <p className="col col-remove">Remove</p>
@@ -127,20 +147,19 @@ export default ({
 
     <div id="table">
       <div id="table-body">
-        {players.map((p: IPlayer, i) => (
+        {players.map((p: ITablePlayer, i) => (
           <div
             key={p.name + p.pos + p.team}
             onClick={() => pickPlayer(p)}
             className={
-              valuedPositions[p.pos] || mobile ? "row" : "row row-inactive"
-            }
-          >
+              valuedPositions[p.pos] || mobile ? 'row' : 'row row-inactive'
+            }>
             <div className="col col-name">
-              <p>{p.name}</p>
+              <p>{p.tableName}</p>
               {/* Add dots for information on bye week */}
-              {draftSoon[i] ? <div className="dot green-dot" /> : null}{" "}
+              {draftSoon[i] ? <div className="dot green-dot" /> : null}{' '}
               {byeWeeks[p.bye] && !mobile && <div className="dot orange-dot" />}
-              {p.pos === "RB" &&
+              {p.pos === 'RB' &&
                 rbHandcuffTeams[p.team] &&
                 !mobile && <div className="dot red-dot" />}
             </div>
