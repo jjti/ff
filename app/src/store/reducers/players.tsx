@@ -103,9 +103,13 @@ export const undoPlayerPick = (
 
   return {
     ...state,
-    activeTeam: pickToUndo.team,
-    currentPick: pickToUndo.pickNumber,
-    pastPicks: pastPicks.filter(p => p !== pickToUndo),
+    activeTeam: pick ? state.activeTeam : pickToUndo.team,
+    currentPick: pick ? state.currentPick : pickToUndo.pickNumber,
+    pastPicks: pastPicks.reduce(
+      (acc: IPick[], p: IPick) =>
+        p === pickToUndo ? acc.concat({ ...p, player: null }) : acc.concat(p),
+      []
+    ),
     undraftedPlayers: undraftedPlayers
       .concat([pickToUndo.player])
       .sort((a: IPlayer, b: IPlayer) => (a.vor && b.vor ? b.vor - a.vor : 0))

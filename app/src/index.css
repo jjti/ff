@@ -10,7 +10,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Lato", sans-serif;
-  color: #4a4a4a;
+  color: var(--dark-gray);
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
 }
@@ -51,7 +51,7 @@ input {
   font-weight: 300;
   font-size: 14px;
   margin: 8px;
-  color: #4a4a4a;
+  color: var(--dark-gray);
 }
 
 a {

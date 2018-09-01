@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { setTrackedTeam } from '../store/actions/teams';
+import { setTrackedTeam, undoPlayerPick } from '../store/actions/teams';
 import { IStoreState } from '../store/store';
 import { IPick, ITeam } from '../Team';
 import PickHistory from './PickHistory';
@@ -14,6 +14,7 @@ interface IPickHistoryContainerProps {
   setTrackedTeam: (team: number) => void;
   teams: ITeam[];
   trackedTeam: number;
+  undoPick: (pick: IPick) => void;
 }
 
 interface IPickHistoryContainerState {
@@ -100,7 +101,9 @@ const mapStateToProps = ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-  setTrackedTeam: (teamToTrack: number) => dispatch(setTrackedTeam(teamToTrack))
+  setTrackedTeam: (teamToTrack: number) =>
+    dispatch(setTrackedTeam(teamToTrack)),
+  undoPick: (pick: IPick) => dispatch(undoPlayerPick(pick))
 });
 
 export default connect(

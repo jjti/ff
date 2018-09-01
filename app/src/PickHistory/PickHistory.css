@@ -2,6 +2,10 @@
   position: relative;
 }
 
+.PickHistory:hover .Undo-Player-Pick {
+  display: block;
+}
+
 .PickHistory-Header:hover {
   cursor: pointer;
 }
@@ -14,6 +18,7 @@
   display: inline-flex;
   padding-bottom: 10px;
   width: 100%;
+  overflow-y: visible;
   overflow-x: auto;
 }
 
@@ -36,7 +41,48 @@
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
 
-  border-bottom: 10px solid var(--highlight-gray);
+  border-bottom: 10px solid var(--border-color);
+}
+
+.Undo-Player-Pick {
+  /* hide by default, only show when row is hovered */
+  display: none;
+
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  margin: 0;
+  border-radius: 20px;
+  border: var(--border-gray);
+  background-color: white;
+  content: " ";
+  height: 17px;
+  width: 17px;
+}
+
+.Undo-Player-Pick::before,
+.Undo-Player-Pick::after {
+  content: " ";
+  height: 7px;
+  width: 1px;
+  background-color: var(--border-color);
+  transform: rotate(45deg);
+  position: absolute;
+  top: 4px;
+  left: 7px;
+}
+
+.Undo-Player-Pick::after {
+  transform: rotate(-45deg);
+}
+
+.Card:hover > .Undo-Player-Pick {
+  border-color: var(--dark-gray);
+}
+
+.Card:hover > .Undo-Player-Pick::before,
+.Card:hover > .Undo-Player-Pick::after {
+  background-color: var(--dark-gray);
 }
 
 .Legend-Row {

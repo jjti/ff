@@ -12,6 +12,7 @@ interface IPickHistoryProps {
   pastPicks: IPick[];
   toggleOpen: () => void;
   trackedTeam: number;
+  undoPick: (pick: IPick) => void;
 }
 
 export default React.forwardRef(
@@ -22,7 +23,8 @@ export default React.forwardRef(
       headerMessage,
       open,
       pastPicks,
-      toggleOpen
+      toggleOpen,
+      undoPick
     }: IPickHistoryProps,
     ref: any
   ) => (
@@ -48,11 +50,18 @@ export default React.forwardRef(
             </div>
 
             {pastPicks.map(p => (
+              // If there was a player drafted, show their name and the undo button
               <div
                 key={p.pickNumber}
-                className="Card"
+                className={`Card ${p.player ? '' : 'Card-Empty'}`}
                 style={{ width: cardLength, height: cardLength }}>
                 <h5>{p.team + 1}</h5>
+                {p.player && (
+                  <button
+                    className="Undo-Player-Pick"
+                    onClick={() => undoPick(p)}
+                  />
+                )}
                 <p>
                   {p.player && p.player.tableName ? p.player.tableName : ''}
                 </p>

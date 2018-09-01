@@ -4,6 +4,7 @@
   position: relative;
   border-radius: 5px;
   flex-shrink: 0;
+  overflow-y: visible;
 }
 
 .Card-Empty {

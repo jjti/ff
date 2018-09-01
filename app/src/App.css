@@ -4,6 +4,7 @@
   --highlight-gray: #dadada59;
   --highlight-blue: #4ca6e8;
   --highlight-border: 1px solid var(--highlight-blue);
+  --dark-gray: #4a4a4a;
 }
 
 #App {
