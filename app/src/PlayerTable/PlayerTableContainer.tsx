@@ -3,11 +3,7 @@ import { connect } from 'react-redux';
 
 import { IPlayer, Position } from '../Player';
 import { removePlayer, selectPlayer } from '../store/actions/players';
-import {
-  incrementDraft,
-  pickPlayer,
-  undoPlayerPick
-} from '../store/actions/teams';
+import { pickPlayer, skipPick, undoPlayerPick } from '../store/actions/teams';
 import { IStoreState } from '../store/store';
 import { NullablePlayer } from '../Team';
 import PlayerTable from './PlayerTable';
@@ -212,7 +208,7 @@ const mapDispatchToProps = (dispatch: any) => ({
   pickPlayer: (player: IPlayer) => dispatch(pickPlayer(player)),
   removePlayer: (player: IPlayer) => dispatch(removePlayer(player)),
   selectPlayer: (player: IPlayer) => dispatch(selectPlayer(player)),
-  skip: () => dispatch(incrementDraft()),
+  skip: () => dispatch(skipPick()),
   undo: () => dispatch(undoPlayerPick())
 });
 

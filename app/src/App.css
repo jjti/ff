@@ -5,6 +5,7 @@
   --highlight-blue: #4ca6e8;
   --highlight-border: 1px solid var(--highlight-blue);
   --dark-gray: #4a4a4a;
+  --default-transition: all .7s cubic-bezier(0, 1.16, 1, 1);
 }
 
 #App {

@@ -58,6 +58,8 @@
   content: " ";
   height: 17px;
   width: 17px;
+
+  transition: var(--default-transition);
 }
 
 .Undo-Player-Pick::before,

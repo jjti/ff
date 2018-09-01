@@ -46,6 +46,19 @@ export const incrementDraft = (state: IStoreState): IStoreState => {
 };
 
 /**
+ * Don't pick any player, simply skip this draft pick
+ */
+export const skipPick = (state: IStoreState): IStoreState => {
+  return incrementDraft({
+    ...state,
+    pastPicks: [
+      { player: null, pickNumber: state.currentPick, team: state.activeTeam },
+      ...state.pastPicks
+    ]
+  });
+};
+
+/**
  * Remove the player from the players.store, add it to the team,
  * and increment the activeTeam
  *

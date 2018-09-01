@@ -13,6 +13,13 @@ export const pickPlayer = (player: IPlayer) => ({
 });
 
 /**
+ * Skip this active round, couldn't find drafted player
+ */
+export const skipPick = () => ({
+  type: ACTION_TYPES.SKIP_PICK
+});
+
+/**
  * undoes the last player pick
  */
 export const undoPlayerPick = (pick?: IPick | null) => ({

@@ -34,15 +34,18 @@
 .toggle::before {
   position: absolute;
   top: -7px;
+  right: 16px; /* same as width */
   height: 16px;
   width: 16px;
   border-radius: 16px;
   background-color: #f2f2f2;
   content: " ";
-  border: 1px solid #e8e8e8;
+  border: var(--border-gray);
+  transition: var(--default-transition);
 }
 
 .toggle.active::before {
+  border: none;
   background-color: var(--highlight-blue);
   right: 0;
 }

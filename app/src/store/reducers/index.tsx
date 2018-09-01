@@ -12,7 +12,8 @@ import {
   pickPlayer,
   resetStore,
   setNumberOfTeams,
-  setTrackedTeam
+  setTrackedTeam,
+  skipPick
 } from './teams';
 
 export default (state = initialState, action: any): IStoreState => {
@@ -49,6 +50,9 @@ export default (state = initialState, action: any): IStoreState => {
     }
     case ACTION_TYPES.SET_TRACKED_TEAM: {
       return setTrackedTeam(state, action.trackedTeam);
+    }
+    case ACTION_TYPES.SKIP_PICK: {
+      return skipPick(state);
     }
     case ACTION_TYPES.TOGGLE_PPR: {
       return togglePPR(state);
