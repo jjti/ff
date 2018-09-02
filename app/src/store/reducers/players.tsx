@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
-import { IPlayer, Position } from '../../Player';
-import { IPick, IRoster, ITeam, NullablePlayer } from '../../Team';
+import { IPlayer, Position } from '../../models/Player';
+import { IPick, IRoster, ITeam, NullablePlayer } from '../../models/Team';
 import { createTeam, initialRoster, IStoreState } from '../store';
 import { setActiveTeam } from './teams';
 
@@ -44,17 +44,12 @@ export const setPlayers = (
 export const removePlayer = (
   state: IStoreState,
   player: IPlayer
-): IStoreState => {
-  // create a toast
-  toast.info(`Removed ${player.name}`);
-
-  return {
-    ...state,
-    undraftedPlayers: state.undraftedPlayers.filter(
-      p => !(p.name === player.name && p.pos === player.pos)
-    )
-  };
-};
+): IStoreState => ({
+  ...state,
+  undraftedPlayers: state.undraftedPlayers.filter(
+    p => !(p.name === player.name && p.pos === player.pos)
+  )
+});
 
 /**
  * given a player and a team's roster, remove the player from the roster

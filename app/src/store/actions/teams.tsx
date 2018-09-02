@@ -1,5 +1,5 @@
-import { IPlayer } from '../../Player';
-import { IPick } from '../../Team';
+import { IPlayer } from '../../models/Player';
+import { IPick } from '../../models/Team';
 import { ACTION_TYPES } from './index';
 
 /**
@@ -10,6 +10,17 @@ import { ACTION_TYPES } from './index';
 export const pickPlayer = (player: IPlayer) => ({
   player,
   type: ACTION_TYPES.PICK_PLAYER
+});
+
+/**
+ * Like pickPlayer, but not on the currentPick.
+ * Instead, update a given pick that should already be in state/store
+ *
+ * @param pick the pick to update
+ */
+export const setPick = (pick: IPick) => ({
+  pick,
+  type: ACTION_TYPES.SET_PICK
 });
 
 /**

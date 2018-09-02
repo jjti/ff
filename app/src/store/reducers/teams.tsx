@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { toast } from 'react-toastify';
-import { IPlayer } from '../../Player';
-import { ITeam } from '../../Team';
+import { IPlayer } from '../../models/Player';
+import { IPick, ITeam } from '../../models/Team';
 import { undoPick } from '../actions/teams';
 import { createTeam, initialState, IStoreState, store } from '../store';
 import { updatePlayerVORs } from './players';
@@ -130,6 +130,25 @@ export const pickPlayer = (
 
   return newState;
 };
+
+/**
+ * Update the pick in the store, it's been changed somehow
+ *
+ * @param pick the pick to be updated
+ */
+export const setPick = (
+  state: IStoreState,
+  updatedPick: IPick
+): IStoreState => ({
+  ...state,
+  pastPicks: state.pastPicks.reduce(
+    (acc: IPick[], pick: IPick) =>
+      pick.pickNumber === updatedPick.pickNumber
+        ? [...acc, updatedPick]
+        : [...acc, pick],
+    []
+  )
+});
 
 /**
  * "reset" the store, resettting the undraftedPlayers

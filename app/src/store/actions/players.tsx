@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
-import { IPlayer } from '../../Player';
-import { IRoster } from '../../Team';
+import { IPlayer } from '../../models/Player';
+import { IRoster } from '../../models/Team';
 import { ACTION_TYPES } from './index';
 
 /**

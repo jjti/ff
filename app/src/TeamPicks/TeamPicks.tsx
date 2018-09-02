@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Position } from '../Player';
+import { Position } from '../models/Player';
+import { ITeam } from '../models/Team';
 import { IStoreState } from '../store/store';
-import { ITeam } from '../Team';
 import PlayerCard from './PlayerCard';
 import './TeamPicks.css';
 

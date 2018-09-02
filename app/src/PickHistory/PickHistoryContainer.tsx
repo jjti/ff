@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { IPick, ITeam } from '../models/Team';
 import { setTrackedTeam, undoPick } from '../store/actions/teams';
 import { IStoreState } from '../store/store';
-import { IPick, ITeam } from '../Team';
 import PickHistory from './PickHistory';
 
 interface IPickHistoryContainerProps {
@@ -25,7 +25,7 @@ class PickHistoryContainer extends React.Component<
   IPickHistoryContainerProps,
   IPickHistoryContainerState
 > {
-  public pickRowRef: React.RefObject<HTMLDivElement> = React.createRef();
+  public pickRowRef: any = React.createRef();
 
   constructor(props: any) {
     super(props);
@@ -69,7 +69,7 @@ class PickHistoryContainer extends React.Component<
       <PickHistory
         {...this.props}
         {...this.state}
-        ref={this.pickRowRef}
+        refProp={this.pickRowRef}
         headerMessage={headerMessage}
         toggleOpen={this.toggleOpen}
       />

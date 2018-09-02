@@ -13,6 +13,7 @@ import {
   pickPlayer,
   resetStore,
   setNumberOfTeams,
+  setPick,
   setTrackedTeam,
   skipPick
 } from './teams';
@@ -45,6 +46,9 @@ export default (state = initialState, action: any): IStoreState => {
     }
     case ACTION_TYPES.SET_PLAYERS: {
       return setPlayers(state, action.players);
+    }
+    case ACTION_TYPES.SET_PICK: {
+      return setPick(state, action.pick);
     }
     case ACTION_TYPES.SET_ROSTER_FORMAT: {
       return setRosterFormat(state, action.rosterFormat);

@@ -1,14 +1,16 @@
 import * as React from 'react';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 import { connect } from 'react-redux';
 import { cssTransition, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // @ts-ignore
 import ReactTooltip from 'react-tooltip';
+import { compose } from 'redux';
 import './App.css';
-import './Card.css';
 import Header from './Header/Header';
+import { IPlayer } from './models/Player';
 import PickHistoryContainer from './PickHistory/PickHistoryContainer';
-import { IPlayer } from './Player';
 import PlayerTableContainer from './PlayerTable/PlayerTableContainer';
 import RosterFormatter from './RosterFormatter/RosterFormatter';
 import Settings from './Settings/Settings';
@@ -111,7 +113,10 @@ const mapDispatchToProps = (dispatch: any) => ({
   setPlayers: (players: IPlayer[]) => dispatch(setPlayers(players))
 });
 
-export default connect(
-  () => ({}),
-  mapDispatchToProps
+export default compose(
+  DragDropContext(HTML5Backend),
+  connect(
+    () => ({}),
+    mapDispatchToProps
+  )
 )(App);

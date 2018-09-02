@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { IPlayer, Position } from '../Player';
+import { IPlayer, Position } from '../models/Player';
+import PlayerRow from './PlayerRow';
 import './PlayerTable.css';
 import searchIcon from './search.png';
 
@@ -147,44 +148,19 @@ export default ({
 
     <div id="table">
       <div id="table-body">
-        {players.map((p: ITablePlayer, i) => (
-          <div
-            key={p.name + p.pos + p.team}
-            onClick={() => pickPlayer(p)}
-            className={
-              valuedPositions[p.pos] || mobile ? 'row' : 'row row-inactive'
-            }>
-            <div className="col col-name">
-              <p>{p.tableName}</p>
-              {/* Add dots for information on bye week */}
-              {draftSoon[i] ? <div className="dot green-dot" /> : null}{' '}
-              {byeWeeks[p.bye] && !mobile && <div className="dot orange-dot" />}
-              {p.pos === 'RB' &&
-                rbHandcuffTeams[p.team] &&
-                !mobile && <div className="dot red-dot" />}
-            </div>
-            <p className="col col-pos">{p.pos}</p>
-            <p className="col col-team">{p.team}</p>
-            <p className="col col-vor">{p.vor}</p>
-            <p className="col col-prediction">
-              {ppr ? p.predictionPPR : p.predictionSTN}
-            </p>
-
-            {/* Table data not rendered on mobile */}
-            {!mobile && (
-              <>
-                <p className="col col-adp">{p.adp}</p>
-                <p className="col col-madden">{p.madden}</p>
-                <button
-                  className="remove-player-x col col-remove"
-                  onClick={e => {
-                    e.stopPropagation();
-                    removePlayer(p);
-                  }}
-                />
-              </>
-            )}
-          </div>
+        {players.map((player: ITablePlayer, i) => (
+          <PlayerRow
+            key={player.name + player.pos + player.team}
+            mobile={mobile}
+            pickPlayer={pickPlayer}
+            draftSoon={draftSoon[i]}
+            byeWeekConflict={byeWeeks[player.bye]}
+            inValuablePosition={valuedPositions[player.pos]}
+            player={player}
+            ppr={ppr}
+            rbHandcuff={player.pos === 'RB' && rbHandcuffTeams[player.team]}
+            removePlayer={removePlayer}
+          />
         ))}
       </div>
     </div>

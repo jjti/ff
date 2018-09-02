@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { IPick } from '../Team';
+import Card from '../Card/Card';
+import { IPick } from '../models/Team';
 import './PickHistory.css';
 
 interface IPickHistoryProps {
@@ -8,64 +9,59 @@ interface IPickHistoryProps {
   headerMessage: string;
   open: boolean;
   pastPicks: IPick[];
+  refProp: any;
   toggleOpen: () => void;
   trackedTeam: number;
   undoPick: (pick: IPick) => void;
 }
 
-export default React.forwardRef(
-  (
-    {
+export default class PickHistory extends React.Component<IPickHistoryProps> {
+  public render() {
+    const {
       activeTeam,
       cardLength,
       headerMessage,
       open,
       pastPicks,
-      toggleOpen,
-      undoPick
-    }: IPickHistoryProps,
-    ref: any
-  ) => (
-    <div className="PickHistory Section">
-      <header className="PickHistory-Header" onClick={toggleOpen}>
-        <h3>Picks</h3>
-        <p>{headerMessage}</p>
-        {open ? <i className="up Grayed" /> : <i className="down Grayed" />}
-      </header>
+      refProp,
+      toggleOpen
+    } = this.props;
 
-      {open && (
-        <>
-          <div ref={ref} className="PicksRow">
-            <div
-              className="Card Card-Empty"
-              style={{ width: cardLength, height: cardLength }}>
-              <h5>{activeTeam + 1}</h5>
+    return (
+      <div className="PickHistory Section">
+        <header className="PickHistory-Header" onClick={toggleOpen}>
+          <h3>Picks</h3>
+          <p>{headerMessage}</p>
+          {open ? <i className="up Grayed" /> : <i className="down Grayed" />}
+        </header>
 
-              <p className="points small">Drafting</p>
-            </div>
-
-            {pastPicks.map(p => (
-              // If there was a player drafted, show their name and the undo button
+        {open && (
+          <>
+            <div ref={refProp} className="PicksRow">
               <div
-                key={p.pickNumber}
-                className={`Card ${p.player ? '' : 'Card-Empty'}`}
+                className="Card Card-Empty"
                 style={{ width: cardLength, height: cardLength }}>
-                <h5>{p.team + 1}</h5>
-                {p.player && (
-                  <button
-                    className="Undo-Player-Pick"
-                    onClick={() => undoPick(p)}
-                  />
-                )}
-                <p className="small">
-                  {p.player && p.player.tableName ? p.player.tableName : ''}
-                </p>
-                <p className="points small">Pick {p.pickNumber}</p>
+                <h5>{activeTeam + 1}</h5>
+
+                <p className="points small">Drafting</p>
               </div>
-            ))}
-          </div>
-        </>
-      )}
-    </div>
-  )
-);
+
+              {pastPicks.map(pick => (
+                // If there was a player drafted, show their name and the undo button
+                <Card
+                  key={pick.pickNumber}
+                  // @ts-ignore
+                  length={cardLength}
+                  pick={pick}
+                  undoPick={this.props.undoPick}
+                />
+              ))}
+
+              <div className="PicksRow-Haze" />
+            </div>
+          </>
+        )}
+      </div>
+    );
+  }
+}

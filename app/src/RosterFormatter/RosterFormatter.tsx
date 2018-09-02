@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Position } from '../Player';
+import { Position } from '../models/Player';
+import { IRoster } from '../models/Team';
 import { setRosterFormat } from '../store/actions/players';
 import { toggleRosterFormatting } from '../store/actions/teams';
 import { IStoreState } from '../store/store';
-import { IRoster } from '../Team';
 import './RosterFormatter.css';
 
 interface IProps {

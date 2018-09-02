@@ -11,6 +11,7 @@
 }
 
 .PicksRow {
+  position: relative;
   display: inline-flex;
   padding-bottom: 10px;
   width: 100%;
@@ -20,6 +21,15 @@
 
 .PicksRow:hover .Undo-Player-Pick {
   display: block;
+}
+
+.PicksRow-Haze {
+  /* position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  box-shadow: inset -20px -10px 40px 6px white; */
 }
 
 .Currently-Drafting-Arrow {

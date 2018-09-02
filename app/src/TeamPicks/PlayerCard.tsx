@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IPlayer, Position } from '../Player';
+import { IPlayer, Position } from '../models/Player';
 
 interface IProps {
   player: IPlayer | null | undefined;

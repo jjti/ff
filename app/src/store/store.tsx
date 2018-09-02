@@ -1,7 +1,7 @@
 import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { IPlayer } from '../Player';
-import { IPick, IRoster, ITeam } from '../Team';
+import { IPlayer } from '../models/Player';
+import { IPick, IRoster, ITeam } from '../models/Team';
 import reducers from './reducers';
 
 export interface IStoreState {

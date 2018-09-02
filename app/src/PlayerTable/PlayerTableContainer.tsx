@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { IPlayer, Position } from '../Player';
+import { IPlayer, Position } from '../models/Player';
+import { NullablePlayer } from '../models/Team';
 import { removePlayer, selectPlayer } from '../store/actions/players';
 import { pickPlayer, skipPick, undoLast } from '../store/actions/teams';
 import { IStoreState } from '../store/store';
-import { NullablePlayer } from '../Team';
 import PlayerTable from './PlayerTable';
 
 interface IPlayerTableProps {
@@ -25,6 +25,7 @@ interface IPlayerTableProps {
   rbHandcuffTeams: { [key: string]: boolean };
   removePlayer: (player: IPlayer) => void;
   selectPlayer: (player: IPlayer) => void;
+
   skip: () => void;
   undo: () => void;
 
