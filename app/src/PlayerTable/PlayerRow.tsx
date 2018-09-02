@@ -15,6 +15,7 @@ interface IPlayerRowProps {
   player: IPlayer;
   ppr: boolean;
   rbHandcuff: boolean;
+  recommended: boolean;
   removePlayer: (player: IPlayer) => void;
 }
 
@@ -36,6 +37,7 @@ class PlayerRow extends React.Component<IPlayerRowProps> {
       player,
       ppr,
       rbHandcuff,
+      recommended,
       removePlayer
     } = this.props;
 
@@ -47,6 +49,7 @@ class PlayerRow extends React.Component<IPlayerRowProps> {
           <div className="col col-name">
             <p>{player.tableName}</p>
             {/* Add dots for information on bye week */}
+            {recommended && <div className="dot blue-dot" />}
             {draftSoon ? <div className="dot green-dot" /> : null}{' '}
             {byeWeekConflict && !mobile && <div className="dot orange-dot" />}
             {rbHandcuff && !mobile && <div className="dot red-dot" />}

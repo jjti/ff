@@ -3,7 +3,13 @@ import { toast } from 'react-toastify';
 import { IPlayer } from '../../models/Player';
 import { IPick, ITeam } from '../../models/Team';
 import { undoPick } from '../actions/teams';
-import { createTeam, initialState, IStoreState, store } from '../store';
+import {
+  createTeam,
+  initialRoster,
+  initialState,
+  IStoreState,
+  store
+} from '../store';
 import { updatePlayerVORs } from './players';
 
 /**
@@ -174,7 +180,8 @@ export const setPick = (
 export const resetStore = (state: IStoreState): IStoreState =>
   updatePlayerVORs({
     ...initialState,
-    players: state.players
+    players: state.players,
+    teams: new Array(10).fill(0).map(() => createTeam(initialRoster))
   });
 
 /**

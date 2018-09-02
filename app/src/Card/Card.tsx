@@ -27,6 +27,7 @@ interface ICardProps {
   playerMeta?: boolean;
   pos?: Position;
   removePlayer: (player: IPlayer) => void;
+  trackedTeamPicking?: boolean;
   undoPick: (pick: IPick) => void;
   setPick: (pick: IPick) => void;
 }
@@ -46,6 +47,7 @@ class Card extends React.Component<ICardProps> {
       pick,
       playerMeta,
       pos,
+      trackedTeamPicking,
       undoPick: undoPickInStore
     } = this.props;
 
@@ -57,7 +59,8 @@ class Card extends React.Component<ICardProps> {
       'Card',
       !pick.player && 'Card-Empty',
       isOver && 'Card-Hover',
-      canDrag && 'Card-Draggable'
+      canDrag && 'Card-Draggable',
+      trackedTeamPicking && 'Card-Active'
     ]
       .filter(c => c)
       .join(' ');

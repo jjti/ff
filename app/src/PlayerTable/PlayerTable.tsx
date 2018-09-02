@@ -21,7 +21,8 @@ interface IPlayerTableProps {
   players: ITablePlayer[];
   positionsToShow: Position[];
   ppr: boolean;
-  rbHandcuffTeams: { [key: string]: boolean };
+  rbHandcuff: boolean[];
+  recommended: boolean[];
   removePlayer: (player: IPlayer) => void;
   setNameFilter: (event: React.FormEvent<HTMLInputElement>) => void;
   setPositionFilter: (pos: Position) => void;
@@ -47,7 +48,8 @@ export default ({
   players,
   positionsToShow,
   ppr,
-  rbHandcuffTeams,
+  rbHandcuff,
+  recommended,
   removePlayer,
   setNameFilter,
   setPositionFilter,
@@ -159,7 +161,8 @@ export default ({
             inValuablePosition={valuedPositions[player.pos]}
             player={player}
             ppr={ppr}
-            rbHandcuff={player.pos === 'RB' && rbHandcuffTeams[player.team]}
+            rbHandcuff={rbHandcuff[i]}
+            recommended={recommended[i]}
             removePlayer={removePlayer}
           />
         ))}

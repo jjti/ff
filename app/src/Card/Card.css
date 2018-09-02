@@ -15,7 +15,7 @@
   border: var(--highlight-border);
 }
 
-.Card-Hover {
+.Card-Hover, .Card-Active {
   border-color: var(--blue);
 }
 

@@ -26,7 +26,8 @@ export default class PickHistory extends React.Component<IPickHistoryProps> {
       open,
       pastPicks,
       refProp,
-      toggleOpen
+      toggleOpen,
+      trackedTeam
     } = this.props;
 
     return (
@@ -50,6 +51,7 @@ export default class PickHistory extends React.Component<IPickHistoryProps> {
                   player: null,
                   team: activeTeam
                 }}
+                trackedTeamPicking={activeTeam === trackedTeam}
               />
 
               {pastPicks.map(pick => (

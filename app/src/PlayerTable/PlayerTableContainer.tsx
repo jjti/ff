@@ -74,7 +74,13 @@ class PlayerTableContainer extends React.Component<
   };
 
   public render() {
-    const { currentPick, mobile, undraftedPlayers } = this.props;
+    const {
+      currentPick,
+      mobile,
+      rbHandcuffTeams,
+      undraftedPlayers,
+      valuedPositions
+    } = this.props;
     const { nameFilter, positionsToShow } = this.state;
 
     // players after filtering by position
@@ -103,7 +109,26 @@ class PlayerTableContainer extends React.Component<
     }
 
     // players that will be drafted soon
-    const draftSoon = players.map(p => p.adp && currentPick + 11 > p.adp);
+    const draftSoon = players.map(p => p.adp && currentPick + 10 >= p.adp);
+
+    // players that are RB handcuffs
+    const rbHandcuff = players.map(
+      p => p.pos === 'RB' && rbHandcuffTeams[p.team]
+    );
+
+    // players that will are recommended
+    let recommendedCount = 0;
+    const recommended = players.map((p, i) => {
+      // for first few, it's likely a yes
+      if (recommendedCount < 3 && draftSoon[i] && valuedPositions[p.pos]) {
+        recommendedCount += 1;
+        return true;
+      } else if (i < 20 && rbHandcuff[i]) {
+        recommendedCount += 1;
+        return true;
+      }
+      return false;
+    });
 
     return (
       <PlayerTable
@@ -112,7 +137,9 @@ class PlayerTableContainer extends React.Component<
         draftSoon={draftSoon}
         nameFilter={nameFilter}
         mobile={!!mobile}
+        recommended={recommended}
         positionsToShow={positionsToShow}
+        rbHandcuff={rbHandcuff}
         setNameFilter={this.setNameFilter}
         setPositionFilter={this.setPositionFilter}
       />
