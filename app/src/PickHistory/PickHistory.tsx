@@ -6,6 +6,7 @@ import './PickHistory.css';
 interface IPickHistoryProps {
   activeTeam: number;
   cardLength: number;
+  currentPick: number;
   headerMessage: string;
   open: boolean;
   pastPicks: IPick[];
@@ -20,6 +21,7 @@ export default class PickHistory extends React.Component<IPickHistoryProps> {
     const {
       activeTeam,
       cardLength,
+      currentPick,
       headerMessage,
       open,
       pastPicks,
@@ -38,13 +40,17 @@ export default class PickHistory extends React.Component<IPickHistoryProps> {
         {open && (
           <>
             <div ref={refProp} className="PicksRow">
-              <div
-                className="Card Card-Empty"
-                style={{ width: cardLength, height: cardLength }}>
-                <h5>{activeTeam + 1}</h5>
-
-                <p className="points small">Drafting</p>
-              </div>
+              <Card
+                // @ts-ignore
+                currentPick={true}
+                // @ts-ignore
+                length={cardLength}
+                pick={{
+                  pickNumnber: currentPick,
+                  player: null,
+                  team: activeTeam
+                }}
+              />
 
               {pastPicks.map(pick => (
                 // If there was a player drafted, show their name and the undo button
@@ -53,7 +59,6 @@ export default class PickHistory extends React.Component<IPickHistoryProps> {
                   // @ts-ignore
                   length={cardLength}
                   pick={pick}
-                  undoPick={this.props.undoPick}
                 />
               ))}
 

@@ -49,6 +49,36 @@ export const skipPick = (state: IStoreState): IStoreState => {
 };
 
 /**
+ * add a plyer to a given team/roster
+ */
+const addPlayerToTeam = (player: IPlayer, team: ITeam): ITeam => {
+  const emptySpot = team[player.pos].findIndex((p: IPlayer) => p === null);
+  const emptyFLEXSpot = team.FLEX.findIndex(p => p === null);
+  const emptyBenchSpot = team.BENCH.findIndex(b => b === null);
+  if (emptySpot > -1) {
+    // there's an empty spot in this position
+    team[player.pos] = team[player.pos].map(
+      (p: IPlayer, i: number) => (i === emptySpot ? player : p)
+    );
+  } else if (
+    ['RB', 'WR', 'TE'].indexOf(player.pos) > -1 &&
+    emptyFLEXSpot > -1
+  ) {
+    // it's a FLEX position, check if there are any flex positions left
+    team.FLEX = team.FLEX.map((p, i) => (i === emptyFLEXSpot ? player : p));
+  } else {
+    if (emptyBenchSpot > -1) {
+      team.BENCH = team.BENCH.map(
+        (b, i) => (i === emptyBenchSpot ? player : b)
+      );
+    } else {
+      team.BENCH = team.BENCH.concat([player]);
+    }
+  }
+  return team;
+};
+
+/**
  * Remove the player from the players.store, add it to the team,
  * and increment the activeTeam
  *
@@ -58,38 +88,15 @@ export const pickPlayer = (
   state: IStoreState,
   player: IPlayer
 ): IStoreState => {
-  const { activeTeam, currentPick, teams, undraftedPlayers } = state;
+  const { activeTeam, currentPick, undraftedPlayers } = state;
+  let { teams } = state;
 
   // try and add the player to the team roster, respecting the limit at each position
-  const newTeams = teams.map(t => ({ ...t }));
-  const roster: ITeam = { ...newTeams[activeTeam] };
-
-  const emptySpot = roster[player.pos].findIndex((p: IPlayer) => p === null);
-  const emptyFLEXSpot = roster.FLEX.findIndex(p => p === null);
-  const emptyBenchSpot = roster.BENCH.findIndex(b => b === null);
-  if (emptySpot > -1) {
-    // there's an empty spot in this position
-    roster[player.pos] = roster[player.pos].map(
-      (p: IPlayer, i: number) => (i === emptySpot ? player : p)
-    );
-  } else if (
-    ['RB', 'WR', 'TE'].indexOf(player.pos) > -1 &&
-    emptyFLEXSpot > -1
-  ) {
-    // it's a FLEX position, check if there are any flex positions left
-    roster.FLEX = roster.FLEX.map((p, i) => (i === emptyFLEXSpot ? player : p));
-  } else {
-    if (emptyBenchSpot > -1) {
-      roster.BENCH = roster.BENCH.map(
-        (b, i) => (i === emptyBenchSpot ? player : b)
-      );
-    } else {
-      roster.BENCH = roster.BENCH.concat([player]);
-    }
-  }
-
-  // update the team in the array
-  newTeams[activeTeam] = roster;
+  teams = [
+    ...teams.slice(0, activeTeam),
+    addPlayerToTeam(player, teams[activeTeam]),
+    ...teams.slice(activeTeam + 1)
+  ];
 
   // create this latest pick object (for future reversion)
   const thisPick = { player, team: activeTeam, pickNumber: currentPick };
@@ -102,7 +109,7 @@ export const pickPlayer = (
     ...incrementDraft(state),
 
     // update teams with the modified roster
-    teams: newTeams,
+    teams,
 
     // remove the picked player
     undraftedPlayers: undraftedPlayers.filter(
@@ -139,16 +146,26 @@ export const pickPlayer = (
 export const setPick = (
   state: IStoreState,
   updatedPick: IPick
-): IStoreState => ({
-  ...state,
-  pastPicks: state.pastPicks.reduce(
-    (acc: IPick[], pick: IPick) =>
-      pick.pickNumber === updatedPick.pickNumber
-        ? [...acc, updatedPick]
-        : [...acc, pick],
-    []
-  )
-});
+): IStoreState => {
+  const { teams } = state;
+  return {
+    ...state,
+    pastPicks: state.pastPicks.reduce(
+      (acc: IPick[], pick: IPick) =>
+        pick.pickNumber === updatedPick.pickNumber
+          ? [...acc, updatedPick]
+          : [...acc, pick],
+      []
+    ),
+    teams: updatedPick.player
+      ? [
+          ...teams.slice(0, updatedPick.team),
+          addPlayerToTeam(updatedPick.player, teams[updatedPick.team]),
+          ...teams.slice(updatedPick.team + 1)
+        ]
+      : teams
+  };
+};
 
 /**
  * "reset" the store, resettting the undraftedPlayers
