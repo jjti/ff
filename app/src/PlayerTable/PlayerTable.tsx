@@ -101,13 +101,19 @@ export default ({
 
       {/* Legend for dots on the row */}
       <div className="Legend-Row">
-        <div className="green-dot" />
+        {!mobile && (
+          <>
+            <div className="dot blue-dot" />
+            <p className="small">Recommended</p>
+          </>
+        )}
+        <div className="dot green-dot" />
         <p className="small">Will be drafted soon</p>
         {!mobile && (
           <>
-            <div className="orange-dot" />
+            <div className="dot orange-dot" />
             <p className="small">BYE week conflict with starter</p>
-            <div className="red-dot" />
+            <div className="dot red-dot" />
             <p className="small">RB handcuff</p>
           </>
         )}

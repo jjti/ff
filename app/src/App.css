@@ -2,8 +2,8 @@
   --border-color: #d3d3d38c;
   --border-gray: 1px solid var(--border-color);
   --highlight-gray: #dadada59;
-  --highlight-blue: #4ca6e8;
-  --highlight-border: 1px solid var(--highlight-blue);
+  --blue: #4ca6e8;
+  --highlight-border: 1px solid var(--blue);
   --dark-gray: #4a4a4a;
   --default-transition: all .7s cubic-bezier(0, 1.16, 1, 1);
   --gray: #d3d3d3;
@@ -70,13 +70,15 @@
   padding-right: 0;
 }
 
-.green-dot,
-.orange-dot,
-.red-dot {
+.dot {
   height: 6px;
   width: 6px;
   border-radius: 10px;
   margin: auto 5px;
+}
+
+.blue-dot {
+  background-color: var(--blue);
 }
 
 .green-dot {

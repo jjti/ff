@@ -53,13 +53,20 @@ class Card extends React.Component<ICardProps> {
 
     const pickMessage = !playerMeta ? `Pick ${pick.pickNumber + 1}` : '';
 
+    const cardClass = [
+      'Card',
+      !pick.player && 'Card-Empty',
+      isOver && 'Card-Hover',
+      canDrag && 'Card-Draggable'
+    ]
+      .filter(c => c)
+      .join(' ');
+
     return connectDragSource(
       connectDropTarget(
         <div
           key={pick.pickNumber}
-          className={`Card ${!pick.player ? 'Card-Empty' : ''} ${
-            isOver ? 'Card-Hover' : ''
-          } ${canDrag ? 'Card-Draggable' : ''}`}
+          className={cardClass}
           style={{ width: length, height: length }}>
           {playerCard ? (
             // @ts-ignore
@@ -133,6 +140,10 @@ const cardTarget: DropTargetSpec<ICardProps> = {
       // it was another player_card, swap the two
       const droppedPick = monitor.getItem() as IPick;
 
+      if (droppedPick === pick) {
+        return;
+      }
+
       if (currentPick && droppedPick.player) {
         // if it's the currently drafting team, create a new pick from this
         pickPlayerStore(droppedPick.player);
@@ -152,6 +163,11 @@ const cardTarget: DropTargetSpec<ICardProps> = {
       setPickInStore({ ...pick, player: droppedPick.player });
     } else {
       const droppedPlayer = monitor.getItem();
+
+      if (droppedPlayer === pick.player) {
+        return;
+      }
+
       if (currentPick) {
         // if it's the currently drafting team, create a new pick from this
         pickPlayerStore(droppedPlayer);

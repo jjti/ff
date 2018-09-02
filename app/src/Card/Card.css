@@ -16,7 +16,7 @@
 }
 
 .Card-Hover {
-  border-color: var(--highlight-blue);
+  border-color: var(--blue);
 }
 
 .Card-Draggable:hover {

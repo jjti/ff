@@ -46,6 +46,6 @@
 
 .toggle.active::before {
   border: none;
-  background-color: var(--highlight-blue);
+  background-color: var(--blue);
   right: 0;
 }
