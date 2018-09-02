@@ -13,6 +13,7 @@ import { IPlayer, Position } from '../models/Player';
 import { IPick } from '../models/Team';
 import { removePlayer } from '../store/actions/players';
 import { pickPlayer, setPick, undoPick } from '../store/actions/teams';
+import { IStoreState } from '../store/store';
 import './Card.css';
 
 interface ICardProps {
@@ -23,6 +24,7 @@ interface ICardProps {
   length: number;
   pick: IPick;
   isOver: boolean;
+  numberOfTeams: number;
   pickPlayer: (player: IPlayer) => void;
   playerMeta?: boolean;
   pos?: Position;
@@ -44,6 +46,7 @@ class Card extends React.Component<ICardProps> {
       currentPick,
       length,
       isOver,
+      numberOfTeams,
       pick,
       playerMeta,
       pos,
@@ -53,7 +56,10 @@ class Card extends React.Component<ICardProps> {
 
     const playerCard = playerMeta && pos;
 
-    const pickMessage = !playerMeta ? `Pick ${pick.pickNumber + 1}` : '';
+    const pickMessage = !playerMeta
+      ? `R${Math.floor(pick.pickNumber / numberOfTeams) +
+          1}, P${pick.pickNumber + 1}`
+      : '';
 
     const cardClass = [
       'Card',
@@ -94,8 +100,7 @@ class Card extends React.Component<ICardProps> {
               </p>
             )}
 
-          {!playerCard &&
-            currentPick && <p className="points small">Drafting</p>}
+          {!playerCard && currentPick && <p className="small">Drafting</p>}
           {playerCard &&
             pick.player && <p className="points small">{pick.player.vor}</p>}
         </div>
@@ -189,7 +194,7 @@ const cardTarget: DropTargetSpec<ICardProps> = {
 };
 
 /** nothing */
-const mapStateToProps = () => ({});
+const mapStateToProps = ({ numberOfTeams }: IStoreState) => ({ numberOfTeams });
 
 /** only add ability to update a pick with a player */
 const mapDispatchToProps = (dispatch: Dispatch) => ({

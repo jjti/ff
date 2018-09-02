@@ -120,10 +120,13 @@ class PlayerTableContainer extends React.Component<
     let recommendedCount = 0;
     const recommended = players.map((p, i) => {
       // for first few, it's likely a yes
-      if (recommendedCount < 3 && draftSoon[i] && valuedPositions[p.pos]) {
-        recommendedCount += 1;
-        return true;
-      } else if (i < 20 && rbHandcuff[i]) {
+      if (recommendedCount < 3 && valuedPositions[p.pos]) {
+        if (draftSoon[i] || p.adp === 0) {
+          // accounting for players w/ a lack of adps
+          recommendedCount += 1;
+          return true;
+        }
+      } else if (i < 30 && rbHandcuff[i]) {
         recommendedCount += 1;
         return true;
       }
@@ -177,7 +180,9 @@ class PlayerTableContainer extends React.Component<
 }
 
 const mapStateToProps = (state: IStoreState) => {
-  const { QB, RB, WR, TE, FLEX, DST, K } = state.teams[state.trackedTeam];
+  const { QB, RB, WR, TE, FLEX, DST, K, BENCH } = state.teams[
+    state.trackedTeam
+  ];
 
   // add the positions to the object that the trackedTeam hasn't
   // filled their roster with (ie they have space for)
@@ -202,7 +207,19 @@ const mapStateToProps = (state: IStoreState) => {
 
   // after one of each main starter has been drafted, everything is valued
   if (!Object.keys(valuedPositions).length) {
-    ['QB', 'RB', 'WR', 'TE'].forEach(p => (valuedPositions[p] = true));
+    // always want more RBs and WRs
+    valuedPositions.RB = true;
+    valuedPositions.WR = true;
+
+    // only want one backup QB and TE
+    const QBBackupCount = BENCH.filter(p => p && p.pos === 'QB').length;
+    if (QBBackupCount < 1) {
+      valuedPositions.QB = true;
+    }
+    const TEBackupCount = BENCH.filter(p => p && p.pos === 'TE').length;
+    if (TEBackupCount < 1) {
+      valuedPositions.TE = true;
+    }
   }
 
   // only want one of each K and DST, none on bench

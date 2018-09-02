@@ -18,7 +18,7 @@
 }
 
 .Player-Filter {
-  margin: 0 30px;
+  margin: 0 10px;
   position: relative;
 }
 
@@ -26,7 +26,7 @@
   border: none;
   border-bottom: var(--border-gray);
   outline: none;
-  width: 110px;
+  width: 130px;
 }
 
 .Player-Filter-Input:focus {
