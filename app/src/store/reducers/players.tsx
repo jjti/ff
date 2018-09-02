@@ -95,8 +95,10 @@ export const undoLast = (state: IStoreState): IStoreState => {
       removeFromRoster(teams[lastPick.team], lastPick.player),
       ...teams.slice(lastPick.team + 1)
     ];
+
     undraftedPlayers = [lastPick.player, ...undraftedPlayers].sort(
-      (a: IPlayer, b: IPlayer) => (a.vor && b.vor ? b.vor - a.vor : 0)
+      // @ts-ignore
+      (a: IPlayer, b: IPlayer) => b.vor - a.vor
     );
   } else {
     toast.info('Undoing Skip');
