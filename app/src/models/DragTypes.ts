@@ -1,3 +1,4 @@
 export const DRAG_TYPES = {
+  PLAYER_CARD: 'PLAYER_CARD',
   PLAYER_ROW: 'PLAYER_ROW'
 };

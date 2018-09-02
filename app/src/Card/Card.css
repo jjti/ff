@@ -19,6 +19,10 @@
   border-color: var(--highlight-blue);
 }
 
+.Card-Draggable:hover {
+  cursor: grab;
+}
+
 .Card > h4 {
   margin: 0;
   position: absolute;

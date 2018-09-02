@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { DropTarget, DropTargetMonitor, DropTargetSpec } from 'react-dnd';
+import {
+  DragSource,
+  DragSourceSpec,
+  DropTarget,
+  DropTargetMonitor,
+  DropTargetSpec
+} from 'react-dnd';
 import { connect } from 'react-redux';
 import { compose, Dispatch } from 'redux';
 import { DRAG_TYPES } from '../models/DragTypes';
@@ -10,6 +16,8 @@ import { pickPlayer, setPick, undoPick } from '../store/actions/teams';
 import './Card.css';
 
 interface ICardProps {
+  canDrag: boolean;
+  connectDragSource?: any;
   connectDropTarget?: any;
   currentPick?: boolean;
   length: number;
@@ -29,6 +37,8 @@ interface ICardProps {
 class Card extends React.Component<ICardProps> {
   public render() {
     const {
+      canDrag,
+      connectDragSource,
       connectDropTarget,
       currentPick,
       length,
@@ -41,39 +51,58 @@ class Card extends React.Component<ICardProps> {
 
     const playerCard = playerMeta && pos;
 
-    return connectDropTarget(
-      <div
-        key={pick.pickNumber}
-        className={`Card ${!pick.player ? 'Card-Empty' : ''} ${
-          isOver ? 'Card-Hover' : ''
-        }`}
-        style={{ width: length, height: length }}>
-        {playerCard ? (
-          // @ts-ignore
-          <h5>{pos}</h5>
-        ) : (
-          <h5>{pick.team + 1}</h5>
-        )}
-        {pick.player &&
-          !playerCard && (
-            <button
-              className="Undo-Player-Pick"
-              onClick={() => undoPickInStore(pick)}
-            />
-          )}
-        <p className="small">
-          {pick.player && pick.player.tableName ? pick.player.tableName : ''}
-        </p>
-        {!playerCard &&
-          (currentPick ? (
-            <p className="points small">Drafting</p>
+    return connectDragSource(
+      connectDropTarget(
+        <div
+          key={pick.pickNumber}
+          className={`Card ${!pick.player ? 'Card-Empty' : ''} ${
+            isOver ? 'Card-Hover' : ''
+          } ${canDrag ? 'Card-Draggable' : ''}`}
+          style={{ width: length, height: length }}>
+          {playerCard ? (
+            // @ts-ignore
+            <h5>{pos}</h5>
           ) : (
-            <p className="points small">Pick {pick.pickNumber + 1}</p>
-          ))}
-      </div>
+            <h5>{pick.team + 1}</h5>
+          )}
+          {pick.player &&
+            !playerCard && (
+              <button
+                className="Undo-Player-Pick"
+                onClick={() => undoPickInStore(pick)}
+              />
+            )}
+
+          <p className="small">
+            {pick.player && pick.player.tableName ? pick.player.tableName : ''}
+          </p>
+          {!playerCard &&
+            (currentPick ? (
+              <p className="points small">Drafting</p>
+            ) : (
+              <p className="points small">Pick {pick.pickNumber + 1}</p>
+            ))}
+          {playerCard &&
+            pick.player && <p className="points small">{pick.player.vor}</p>}
+        </div>
+      )
     );
   }
 }
+
+/**
+ * behavior of the card as a drag source
+ */
+const cardSource: DragSourceSpec<ICardProps, IPick> = {
+  beginDrag: (props: ICardProps): IPick => {
+    return props.pick;
+  },
+
+  /** only allow picks with a a player to start a drag */
+  canDrag: (props: ICardProps): boolean => {
+    return !!props.pick.player;
+  }
+};
 
 /**
  * behavior for dropping player rows on pick history cards
@@ -94,19 +123,44 @@ const cardTarget: DropTargetSpec<ICardProps> = {
     }: ICardProps,
     monitor: DropTargetMonitor
   ) => {
-    const droppedPlayer = monitor.getItem();
-    if (currentPick) {
-      // if it's the currently drafting team, create a new pick from this
-      pickPlayerStore(droppedPlayer);
-    } else if (!pick.player) {
-      // the pick had been empty, we're setting it now
-      setPickInStore({ ...pick, player: droppedPlayer });
-      removePlayerStore(droppedPlayer);
-    } else {
-      // there had already been a picked player, add that player back to the table
+    const type = monitor.getItemType();
+
+    if (type === DRAG_TYPES.PLAYER_CARD) {
+      // it was another player_card, swap the two
+      const droppedPick = monitor.getItem() as IPick;
+
+      if (currentPick && droppedPick.player) {
+        // if it's the currently drafting team, create a new pick from this
+        pickPlayerStore(droppedPick.player);
+      }
+
       undoPickInStore(pick); // clears the selected player
-      setPickInStore({ ...pick, player: droppedPlayer });
-      removePlayerStore(droppedPlayer);
+      undoPickInStore(droppedPick); // clears the selected player
+
+      if (droppedPick.player) {
+        removePlayerStore(droppedPick.player);
+      }
+      if (pick.player) {
+        removePlayerStore(pick.player);
+      }
+
+      setPickInStore({ ...droppedPick, player: pick.player });
+      setPickInStore({ ...pick, player: droppedPick.player });
+    } else {
+      const droppedPlayer = monitor.getItem();
+      if (currentPick) {
+        // if it's the currently drafting team, create a new pick from this
+        pickPlayerStore(droppedPlayer);
+      } else if (!pick.player) {
+        // the pick had been empty, we're setting it now
+        setPickInStore({ ...pick, player: droppedPlayer });
+        removePlayerStore(droppedPlayer);
+      } else {
+        // there had already been a picked player, add that player back to the table
+        undoPickInStore(pick); // clears the selected player
+        setPickInStore({ ...pick, player: droppedPlayer });
+        removePlayerStore(droppedPlayer);
+      }
     }
   }
 };
@@ -127,8 +181,16 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps
   ),
-  DropTarget(DRAG_TYPES.PLAYER_ROW, cardTarget, (dragConnect, monitor) => ({
-    connectDropTarget: dragConnect.dropTarget(),
-    isOver: monitor.isOver()
-  }))
+  DragSource(DRAG_TYPES.PLAYER_CARD, cardSource, (dragConnect, monitor) => ({
+    canDrag: monitor.canDrag(),
+    connectDragSource: dragConnect.dragSource()
+  })),
+  DropTarget(
+    [DRAG_TYPES.PLAYER_ROW, DRAG_TYPES.PLAYER_CARD],
+    cardTarget,
+    (dragConnect, monitor) => ({
+      connectDropTarget: dragConnect.dropTarget(),
+      isOver: monitor.isOver()
+    })
+  )
 )(Card);
