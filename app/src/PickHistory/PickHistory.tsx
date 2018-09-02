@@ -41,10 +41,7 @@ export default React.forwardRef(
               style={{ width: cardLength, height: cardLength }}>
               <h5>{activeTeam + 1}</h5>
 
-              <div className="Currently-Drafting-Arrow">
-                <div className="Arrow-Up" />
-                <p className="small">Drafting</p>
-              </div>
+              <p className="points small">Drafting</p>
             </div>
 
             {pastPicks.map(p => (
@@ -60,10 +57,10 @@ export default React.forwardRef(
                     onClick={() => undoPick(p)}
                   />
                 )}
-                <p>
+                <p className="small">
                   {p.player && p.player.tableName ? p.player.tableName : ''}
                 </p>
-                <p className="points">Pick {p.pickNumber}</p>
+                <p className="points small">Pick {p.pickNumber}</p>
               </div>
             ))}
           </div>

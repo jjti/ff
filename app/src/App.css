@@ -6,6 +6,7 @@
   --highlight-border: 1px solid var(--highlight-blue);
   --dark-gray: #4a4a4a;
   --default-transition: all .7s cubic-bezier(0, 1.16, 1, 1);
+  --gray: #d3d3d3;
   --red: #ea5b4d;
   --orange: #eca80a;
   --green: #00d000;

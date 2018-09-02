@@ -84,23 +84,25 @@ class PlayerTableContainer extends React.Component<
 
     // filter by the nameFilter (for name and team)
     const nameFilterLower = nameFilter.toLowerCase();
-    players = players.filter(({ name }: IPlayer) => {
-      // check for whether the name, split is similar to nameFilter
-      const lowercaseName = name.toLowerCase();
-      const names = lowercaseName.split(' ');
-      const firstNameMatch = names[0].startsWith(nameFilterLower);
-      const lastNameMatch = names[1]
-        ? names[1].startsWith(nameFilterLower)
-        : false;
-      return (
-        lowercaseName.startsWith(nameFilterLower) ||
-        firstNameMatch ||
-        lastNameMatch
-      );
-    });
+    if (nameFilterLower) {
+      players = players.filter(({ name }: IPlayer) => {
+        // check for whether the name, split is similar to nameFilter
+        const lowercaseName = name.toLowerCase();
+        const names = lowercaseName.split(' ');
+        const firstNameMatch = names[0].startsWith(nameFilterLower);
+        const lastNameMatch = names[1]
+          ? names[1].startsWith(nameFilterLower)
+          : false;
+        return (
+          lowercaseName.startsWith(nameFilterLower) ||
+          firstNameMatch ||
+          lastNameMatch
+        );
+      });
+    }
 
     // players that will be drafted soon
-    const draftSoon = players.map(p => p.adp && currentPick + 10 > p.adp);
+    const draftSoon = players.map(p => p.adp && currentPick + 11 > p.adp);
 
     return (
       <PlayerTable

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { toast } from 'react-toastify';
-
 import { IPlayer } from '../../Player';
 import { ITeam } from '../../Team';
 import { undoPick } from '../actions/teams';
@@ -8,42 +7,33 @@ import { createTeam, initialState, IStoreState, store } from '../store';
 import { updatePlayerVORs } from './players';
 
 /**
+ * calculate the "active team", that is, the index of the next
+ * team to be picking, based on the currentPick
+ *
+ * we're assuming a snake draft, so it's pretty trivial to calculate
+ */
+export const setActiveTeam = (state: IStoreState): IStoreState => {
+  const { currentPick, numberOfTeams } = state;
+  let { activeTeam } = state;
+
+  if (Math.floor(currentPick / numberOfTeams) % 2 === 0) {
+    activeTeam = currentPick % numberOfTeams;
+  } else {
+    activeTeam = numberOfTeams - (currentPick % numberOfTeams) - 1;
+  }
+
+  return { ...state, activeTeam };
+};
+
+/**
  * Increment the draft to the next round
  * @param state
  */
-export const incrementDraft = (state: IStoreState): IStoreState => {
-  const { activeTeam, currentPick, draftDirection, numberOfTeams } = state;
-
-  // find what the next ActiveTeam is
-  let newActiveTeam = activeTeam;
-  let newDraftDirection = draftDirection;
-  if (draftDirection === 1) {
-    // we're moving left-to-right
-    if (activeTeam === numberOfTeams - 1) {
-      // now we're going other direction, but not changing current team
-      newDraftDirection = -1;
-    } else {
-      newActiveTeam++; // move one more to the right
-    }
-  } else {
-    // we're moving right-to-left
-    if (activeTeam === 0) {
-      // no we're going other direction, but not changing current team yet
-      newDraftDirection = 1;
-    } else {
-      newActiveTeam--;
-    }
-  }
-
-  return {
+export const incrementDraft = (state: IStoreState): IStoreState =>
+  setActiveTeam({
     ...state,
-
-    // update the activeTeam, currentPick and draftDirection
-    activeTeam: newActiveTeam,
-    currentPick: currentPick + 1,
-    draftDirection: newDraftDirection
-  };
-};
+    currentPick: state.currentPick + 1
+  });
 
 /**
  * Don't pick any player, simply skip this draft pick

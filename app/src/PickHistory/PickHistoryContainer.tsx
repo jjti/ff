@@ -63,7 +63,7 @@ class PickHistoryContainer extends React.Component<
     // round tracker message
     const headerMessage = `Round ${Math.ceil(
       currentPick / numberOfTeams
-    )} – Pick ${currentPick}`;
+    )} – Pick ${currentPick + 1}`;
 
     return (
       <PickHistory

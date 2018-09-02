@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-
 import { resetDraft, togglePPR } from '../store/actions/players';
 import {
   setNumberOfTeams,
@@ -8,7 +7,6 @@ import {
   toggleRosterFormatting
 } from '../store/actions/teams';
 import { IStoreState } from '../store/store';
-
 import './Settings.css';
 
 interface IProps {
@@ -54,7 +52,7 @@ class Settings extends React.Component<IProps, IState> {
           Array.from(new Array(11))
             .fill(0)
             .map((_, i) => i + 6)
-            .filter(n => n >= currentPick);
+            .filter(n => n > currentPick);
 
     const disabledOptions = currentPick > numberOfTeams;
 

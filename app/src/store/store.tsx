@@ -11,16 +11,10 @@ export interface IStoreState {
   activeTeam: number;
 
   /**
-   * the current 1-based draft index. is incremented by one during each
+   * the current draft index. is incremented by one during each
    * successive draft selection
    */
-  currentPick: number; // index of current pick + 1
-
-  /**
-   * 1 or -1 for whether the draft is progressing to the right (upwards in activeTeam index)
-   * or down (downards in activeTeam index)
-   */
-  draftDirection: number; // 1 or -1
+  currentPick: number; // index of current pick
 
   /**
    * Whether the app is currently in a state of "formatting the roster"
@@ -123,8 +117,7 @@ export const initialRoster: IRoster = {
 
 export const initialState = {
   activeTeam: 0, // active team's index ([0-9]) that's currently drafting
-  currentPick: 1, // 1-based
-  draftDirection: 1, // either 1 (forward) or -1 (reverse)
+  currentPick: 0, // index of current pick
   formattingRoster: false,
   lastPickedPlayer: null,
   numberOfTeams: 10,

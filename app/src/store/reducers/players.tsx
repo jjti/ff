@@ -1,12 +1,8 @@
 import { toast } from 'react-toastify';
 import { IPlayer, Position } from '../../Player';
-import {
-  IPick,
-  IRoster,
-  ITeam,
-  NullablePlayer
-  } from '../../Team';
+import { IPick, IRoster, ITeam, NullablePlayer } from '../../Team';
 import { createTeam, initialRoster, IStoreState } from '../store';
+import { setActiveTeam } from './teams';
 
 /**
  * Update the list of players in the store
@@ -82,7 +78,7 @@ const removeFromRoster = (roster: ITeam, player: IPlayer): ITeam => {
  * Unlike undoPick, this isn't player specific
  */
 export const undoLast = (state: IStoreState): IStoreState => {
-  const { pastPicks } = state;
+  const { currentPick, pastPicks } = state;
   let { teams, undraftedPlayers } = state;
 
   if (!pastPicks.length) {
@@ -106,14 +102,13 @@ export const undoLast = (state: IStoreState): IStoreState => {
     toast.info('Undoing Skip');
   }
 
-  return {
+  return setActiveTeam({
     ...state,
-    activeTeam: lastPick.team,
-    currentPick: lastPick.pickNumber,
+    currentPick: currentPick - 1,
     pastPicks: pastPicks.slice(1),
     teams,
     undraftedPlayers
-  };
+  });
 };
 
 /**
@@ -299,9 +294,11 @@ const updateVOR = (state: IStoreState): IPlayer[] => {
       (ppr ? p.predictionPPR : p.predictionSTN) -
       positionToReplaceValueMap[p.pos]
   }));
-  players = players.filter(p => p.vor);
 
-  return players.sort((a, b) => (a.vor && b.vor && b.vor - a.vor) || -1);
+  players = players.filter(p => p.vor !== undefined);
+
+  // @ts-ignore
+  return players.sort((a, b) => b.vor - a.vor || -1);
 };
 
 /**

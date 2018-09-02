@@ -41,6 +41,10 @@
   right: 7px;
 }
 
+.Player-Table-Control-Buttons {
+  display: flex;
+}
+
 .PlayerTable-Position-Buttons {
   margin: 0 auto 0 10px;
 }
@@ -181,9 +185,13 @@
   background-color: #535353;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
   .skip-button {
     margin-left: auto;
+  }
+
+  .Player-Filter {
+    margin: 0 5px;
   }
 }
 
