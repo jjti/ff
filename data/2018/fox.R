@@ -50,6 +50,8 @@ fox.page.data <- read_html("http://msn.foxsports.com/fantasy/football/commission
   html_node("#playerTable") %>%
   html_table(fill = TRUE)
 
+fox.page.data
+
 
 fox.data <- data.frame()
 for (pos.data in pages.by.pos) {

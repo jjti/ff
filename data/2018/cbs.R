@@ -77,12 +77,9 @@ scrapeCBS <- function(suffix) {
   cbs.data
 }
 
-cbs.data.ppr <- scrapeCBS("/ppr/projections/2018/ytd")
-cbs.data.standard <- scrapeCBS("/standard/projections/2018/ytd")
-
-cbs.data <- cbs.data.ppr
+cbs.data <- scrapeCBS("/ppr/projections/2018/ytd")
 cbs.data$cbs.2018.ppr <- cbs.data$cbs.2018
-cbs.data$cbs.2018.stn <- cbs.data.standard$cbs.2018
+cbs.data$cbs.2018.stn <- scrapeCBS("/standard/projections/2018/ytd")$cbs.2018
 cbs.data <- cbs.data[, c("name", "pos", "cbs.2018.ppr", "cbs.2018.stn")]
 
 ###

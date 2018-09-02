@@ -135,11 +135,6 @@ export default ({
               data-tip="Average draft position (Fantasy Football Calculator)">
               ADP
             </p>
-            <p
-              className="col col-madden"
-              data-tip="Madden 2019 Overall player stat">
-              Madden
-            </p>
             <p className="col col-remove">Remove</p>
           </>
         )}

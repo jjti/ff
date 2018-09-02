@@ -63,7 +63,6 @@ class PlayerRow extends React.Component<IPlayerRowProps> {
         {!mobile && (
           <>
             <p className="col col-adp">{player.adp}</p>
-            <p className="col col-madden">{player.madden}</p>
             <button
               className="remove-player-x col col-remove"
               onClick={e => {

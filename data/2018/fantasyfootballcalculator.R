@@ -19,7 +19,7 @@ scrapeFFC <- function(url, suffix) {
     # create a name for adp in this sized league, ex: adp-8
     adp.col <- paste0("adp", count, suffix)
     colnames(data)[1] <- adp.col
-    data <- data[, c("name", "bye", adp.col, "pos")]
+    data <- data[, c("name", "bye", adp.col, "pos", "team")]
     
     # replace PK with K and DEF with DST
     data$pos <- sapply(data$pos, function(x) gsub("PK", "K", x))

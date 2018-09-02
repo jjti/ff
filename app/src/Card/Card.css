@@ -39,8 +39,9 @@
 
 .Card > p {
   margin: 0;
-  position: absolute;
-  top: 45%;
+  position: relative;
+  top: 60%;
+  transform: translateY(-50%);
   left: 7%;
 }
 

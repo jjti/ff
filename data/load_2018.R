@@ -73,32 +73,12 @@ for (row.index in 1:nrow(nfl.dst.data)) {
     dst.data[match, "predictionSTN"] <- team["nfl.2018"]
   }
 }
-
-
-###
-# Add Madden Information
-###
-madden.data <- read_excel("/Users/josh/Documents/GitHub/ff/data/madden/madden_nfl_2018.xlsx", sheet = 1)
-
-colnames(madden.data) <- lapply(tolower(colnames(madden.data)), function(x) gsub(" ", "_", x))
-madden.data$pos <- madden.data$position
-madden.data$pos <- sapply(madden.data$pos, function(x) gsub("HB", "RB", x))
-madden.data$pos <- sapply(madden.data$pos, function(x) gsub("FB", "RB", x))
-madden.data$name <- sapply(madden.data$name, function(x) {
-  split.name <- strsplit(x, "\\s+")[[1]]
-  name <- paste0(split.name[1], " ", split.name[2])
-  name <- gsub("^\\s+|\\s+$", "", name)
-  name <- gsub("Jr|jr", "", name)
-  name <- gsub("II|III", "", name)
-  gsub("[.']", "", name)
-})
-player.data <- merge(player.data, madden.data, by = c("name", "pos"))
-
+dst.data <- dst.data[dst.data$nfl.2018 > 0,]
 
 ###
 # Post-processing
 ###
-player.data <- player.data[player.data$predictionPPR > 0,]
+player.data <- player.data[player.data$predictionPPR > 15,]
 
 # replace NA values with zeroes
 for (c in 1:ncol(player.data)){
@@ -106,6 +86,8 @@ for (c in 1:ncol(player.data)){
     player.data[is.na(player.data[,c]), c] <- 0
   }
 }
+
+player.data <- player.data[player.data$predictionPPR > 15,]
 
 qb.data <- player.data[player.data$pos == "QB",]
 rb.data <- player.data[player.data$pos == "RB",]

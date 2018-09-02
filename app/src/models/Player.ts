@@ -29,7 +29,6 @@ export interface IPlayer {
   adp10STN: number;
   adp12STN: number;
   adp14STN: number;
-  madden: number;
 
   /**
    * Player's value over other players in the same position

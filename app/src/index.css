@@ -64,7 +64,7 @@ a {
 }
 
 p.small {
-  font-size: calc(5px + 0.4vw);
+  font-size: calc(4px + 0.5vw);
 }
 
 span.small {

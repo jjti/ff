@@ -51,6 +51,8 @@ class Card extends React.Component<ICardProps> {
 
     const playerCard = playerMeta && pos;
 
+    const pickMessage = !playerMeta ? `Pick ${pick.pickNumber + 1}` : '';
+
     return connectDragSource(
       connectDropTarget(
         <div
@@ -73,15 +75,17 @@ class Card extends React.Component<ICardProps> {
               />
             )}
 
-          <p className="small">
-            {pick.player && pick.player.tableName ? pick.player.tableName : ''}
-          </p>
+          {pick.player &&
+            pick.player.tableName && (
+              <p className="small">
+                {pick.player.tableName}
+                <br />
+                {pickMessage}
+              </p>
+            )}
+
           {!playerCard &&
-            (currentPick ? (
-              <p className="points small">Drafting</p>
-            ) : (
-              <p className="points small">Pick {pick.pickNumber + 1}</p>
-            ))}
+            currentPick && <p className="points small">Drafting</p>}
           {playerCard &&
             pick.player && <p className="points small">{pick.player.vor}</p>}
         </div>
@@ -100,7 +104,7 @@ const cardSource: DragSourceSpec<ICardProps, IPick> = {
 
   /** only allow picks with a a player to start a drag */
   canDrag: (props: ICardProps): boolean => {
-    return !!props.pick.player;
+    return !!props.pick.player && !props.playerMeta;
   }
 };
 

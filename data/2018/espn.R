@@ -11,7 +11,7 @@ espn_urls <- lapply(espn_pages, function(x) paste0(espn_base_url, "?startIndex="
 #Scrape
 espn.page <- "http://games.espn.com/ffl/tools/projections?startIndex=0"
 espn.data <- data.frame()
-for (espn.page in espn_urls) {
+for (espn.page in espn_urls[1:2]) {
   espn.page.data <- read_html(espn.page)
   espn.this.data <- espn.page.data %>%
     html_node(".playerTableTable") %>%
@@ -25,8 +25,8 @@ for (espn.page in espn_urls) {
   espn.popups <- espn.popups[!duplicated(espn.popups[,"playerid"]),]
 
   espn.this.data <- espn.this.data[espn.this.data$PLAYERS != "RNK", ] # bs rows
-  espn.this.data <- espn.this.data[,c(2, 13)]
   colnames(espn.this.data) <- tolower(colnames(espn.this.data))
+  espn.this.data <- espn.this.data[,c(2, 13)]
   espn.this.data$espn.2018 <- espn.this.data$total
 
   espn.this.data$name <- NA
