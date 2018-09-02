@@ -84,7 +84,6 @@ export const undoLast = (state: IStoreState): IStoreState => {
   // check and adjust for the last team pick
   const lastPick = pastPicks[0];
   if (lastPick.player) {
-    toast.info(`Undrafted ${lastPick.player.name}`);
     teams = [
       ...teams.slice(0, lastPick.team),
       removeFromRoster(teams[lastPick.team], lastPick.player),
@@ -123,8 +122,6 @@ export const undoPick = (state: IStoreState, pick: IPick): IStoreState => {
     return state;
   }
 
-  toast.info(`Undrafted ${pick.player.name}`);
-
   teams = [
     ...teams.slice(0, pick.team),
     removeFromRoster(teams[pick.team], pick.player),
@@ -140,7 +137,8 @@ export const undoPick = (state: IStoreState, pick: IPick): IStoreState => {
     ),
     teams,
     undraftedPlayers: [pick.player, ...undraftedPlayers].sort(
-      (a: IPlayer, b: IPlayer) => (a.vor && b.vor ? b.vor - a.vor : 0)
+      (a: IPlayer, b: IPlayer) =>
+        a.vor !== undefined && b.vor !== undefined ? b.vor - a.vor : 0
     )
   };
 };

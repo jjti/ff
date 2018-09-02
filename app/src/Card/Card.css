@@ -15,6 +15,10 @@
   border: var(--highlight-border);
 }
 
+.Card-Hover {
+  border-color: var(--highlight-blue);
+}
+
 .Card > h4 {
   margin: 0;
   position: absolute;
