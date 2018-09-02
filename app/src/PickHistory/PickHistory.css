@@ -79,12 +79,12 @@
 }
 
 .Card:hover > .Undo-Player-Pick {
-  border-color: var(--dark-gray);
+  border-color: var(--red);
 }
 
 .Card:hover > .Undo-Player-Pick::before,
 .Card:hover > .Undo-Player-Pick::after {
-  background-color: var(--dark-gray);
+  background-color: var(--red);
 }
 
 .Legend-Row {

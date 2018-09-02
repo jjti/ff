@@ -1,13 +1,11 @@
-import * as React from "react";
-import { connect } from "react-redux";
-
-import { Position } from "../Player";
-import { setRosterFormat } from "../store/actions/players";
-import { toggleRosterFormatting } from "../store/actions/teams";
-import { IStoreState } from "../store/store";
-import { IRoster } from "../Team";
-
-import "./RosterFormatter.css";
+import * as React from 'react';
+import { connect } from 'react-redux';
+import { Position } from '../Player';
+import { setRosterFormat } from '../store/actions/players';
+import { toggleRosterFormatting } from '../store/actions/teams';
+import { IStoreState } from '../store/store';
+import { IRoster } from '../Team';
+import './RosterFormatter.css';
 
 interface IProps {
   formattingRoster: boolean;
@@ -21,14 +19,14 @@ class RosterFormatter extends React.Component<IProps> {
    * The order the positions should show up in the modal
    */
   public orderedPositions: Position[] = [
-    "QB",
-    "RB",
-    "WR",
-    "TE",
-    "FLEX",
-    "DST",
-    "K",
-    "BENCH"
+    'QB',
+    'RB',
+    'WR',
+    'TE',
+    'FLEX',
+    'DST',
+    'K',
+    'BENCH'
   ];
 
   /**
@@ -51,8 +49,7 @@ class RosterFormatter extends React.Component<IProps> {
     return (
       <div
         className="RosterFormatter-backdrop"
-        onClick={this.props.toggleRosterFormatting}
-      >
+        onClick={this.props.toggleRosterFormatting}>
         <div className="RosterFormatter" onClick={e => e.stopPropagation()}>
           <header>
             <h3>Customize Roster</h3>
@@ -64,16 +61,15 @@ class RosterFormatter extends React.Component<IProps> {
           <div className="position-change-section">
             {this.orderedPositions.map(k => (
               <label className="position-toggle" key={k}>
-                {`${rosterFormat[k]} ${k === "BENCH" ? "Bench" : k}${
-                  rosterFormat[k] !== 1 && k !== "BENCH" ? "s" : ""
+                {`${rosterFormat[k]} ${k === 'BENCH' ? 'Bench' : k}${
+                  rosterFormat[k] !== 1 && k !== 'BENCH' ? 's' : ''
                 }`}
                 <button
                   className="Options-Container position-button"
                   onClick={e => {
                     e.stopPropagation();
                     this.changePositionCount(k, 1);
-                  }}
-                >
+                  }}>
                   +
                 </button>
                 <button
@@ -81,8 +77,7 @@ class RosterFormatter extends React.Component<IProps> {
                   onClick={e => {
                     e.preventDefault();
                     this.changePositionCount(k, -1);
-                  }}
-                >
+                  }}>
                   −
                 </button>
               </label>

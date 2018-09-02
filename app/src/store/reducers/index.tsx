@@ -5,7 +5,8 @@ import {
   setPlayers,
   setRosterFormat,
   togglePPR,
-  undoPlayerPick
+  undoLast,
+  undoPick
 } from './players';
 import {
   incrementDraft,
@@ -60,8 +61,11 @@ export default (state = initialState, action: any): IStoreState => {
     case ACTION_TYPES.TOGGLE_ROSTER_FORMATTING: {
       return { ...state, formattingRoster: !state.formattingRoster };
     }
-    case ACTION_TYPES.UNDO_PICK_PLAYER: {
-      return undoPlayerPick(state, action.pick);
+    case ACTION_TYPES.UNDO_LAST: {
+      return undoLast(state);
+    }
+    case ACTION_TYPES.UNDO_PICK: {
+      return undoPick(state, action.pick);
     }
     default:
       return state;

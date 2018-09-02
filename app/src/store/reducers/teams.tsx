@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 
 import { IPlayer } from '../../Player';
 import { ITeam } from '../../Team';
-import { undoPlayerPick } from '../actions/teams';
+import { undoPick } from '../actions/teams';
 import { createTeam, initialState, IStoreState, store } from '../store';
 import { updatePlayerVORs } from './players';
 
@@ -101,6 +101,9 @@ export const pickPlayer = (
   // update the team in the array
   newTeams[activeTeam] = roster;
 
+  // create this latest pick object (for future reversion)
+  const thisPick = { player, team: activeTeam, pickNumber: currentPick };
+
   // create the new state
   const newState = {
     ...state,
@@ -117,10 +120,7 @@ export const pickPlayer = (
     ),
 
     // add this pick to the history of picks
-    pastPicks: [
-      { player, team: activeTeam, pickNumber: currentPick },
-      ...state.pastPicks
-    ],
+    pastPicks: [thisPick, ...state.pastPicks],
 
     // save this player as the "lastPickedPlayer"
     lastPickedPlayer: player
@@ -132,7 +132,7 @@ export const pickPlayer = (
       <div>Drafted {player.name}</div>
       <button
         className="Toast-Undo-Button"
-        onClick={() => store.dispatch(undoPlayerPick())}>
+        onClick={() => store.dispatch(undoPick(thisPick))}>
         Undo
       </button>
     </>

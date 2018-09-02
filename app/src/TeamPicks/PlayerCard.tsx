@@ -1,6 +1,5 @@
-import * as React from "react";
-
-import { IPlayer, Position } from "../Player";
+import * as React from 'react';
+import { IPlayer, Position } from '../Player';
 
 interface IProps {
   player: IPlayer | null | undefined;
@@ -25,12 +24,12 @@ export default class PlayerCard extends React.PureComponent<IProps> {
 
     // just first initial and last name, full team name for DST
     const playerName =
-      pos === "DST"
+      pos === 'DST'
         ? player.name
         : player.name
-            .split(" ")
+            .split(' ')
             .map((n, i) => (i ? n : n.charAt(0)))
-            .join(". ");
+            .join('. ');
 
     return (
       <div className="Card" style={style}>

@@ -1,7 +1,11 @@
 import { toast } from 'react-toastify';
-
 import { IPlayer, Position } from '../../Player';
-import { IPick, IRoster, ITeam, NullablePlayer } from '../../Team';
+import {
+  IPick,
+  IRoster,
+  ITeam,
+  NullablePlayer
+  } from '../../Team';
 import { createTeam, initialRoster, IStoreState } from '../store';
 
 /**
@@ -65,7 +69,7 @@ const removeFromRoster = (roster: ITeam, player: IPlayer): ITeam => {
       ...acc,
       [pos]: roster[pos].reduce(
         (players: NullablePlayer[], p: NullablePlayer) =>
-          p === player ? players.concat([null]) : players.concat([p]),
+          p === player ? [...players, null] : [...players, p],
         []
       )
     }),
@@ -74,45 +78,78 @@ const removeFromRoster = (roster: ITeam, player: IPlayer): ITeam => {
 };
 
 /**
+ * Undo the last pick/skip action
+ * Unlike undoPick, this isn't player specific
+ */
+export const undoLast = (state: IStoreState): IStoreState => {
+  const { pastPicks } = state;
+  let { teams, undraftedPlayers } = state;
+
+  if (!pastPicks.length) {
+    // cannot do anything on the zero-th pick
+    return state;
+  }
+
+  // check and adjust for the last team pick
+  const lastPick = pastPicks[0];
+  if (lastPick.player) {
+    toast.info(`Undrafted ${lastPick.player.name}`);
+    teams = [
+      ...teams.slice(0, lastPick.team),
+      removeFromRoster(teams[lastPick.team], lastPick.player),
+      ...teams.slice(lastPick.team + 1)
+    ];
+    undraftedPlayers = [lastPick.player, ...undraftedPlayers].sort(
+      (a: IPlayer, b: IPlayer) => (a.vor && b.vor ? b.vor - a.vor : 0)
+    );
+  } else {
+    toast.info('Undoing Skip');
+  }
+
+  return {
+    ...state,
+    activeTeam: lastPick.team,
+    currentPick: lastPick.pickNumber,
+    pastPicks: pastPicks.slice(1),
+    teams,
+    undraftedPlayers
+  };
+};
+
+/**
  * Add the PlayerPick back into the list of teams and remove from the teams roster
  * If the pick paramter is null, undo the last pick
  *
  * @param state state from current turn, about to be undone
  */
-export const undoPlayerPick = (
-  state: IStoreState,
-  pick?: IPick
-): IStoreState => {
-  const { pastPicks, teams, undraftedPlayers } = state;
+export const undoPick = (state: IStoreState, pick: IPick): IStoreState => {
+  const { pastPicks, undraftedPlayers } = state;
+  let { teams } = state;
 
-  let pickToUndo = pick;
-  if (!pickToUndo && pastPicks.length) {
-    pickToUndo = pastPicks[0];
-  }
-
-  if (!pickToUndo || !pickToUndo.player) {
+  if (!pick.player) {
+    // should never happen
     return state;
   }
 
-  toast.info(`Undrafted ${pickToUndo.player.name}`);
+  toast.info(`Undrafted ${pick.player.name}`);
 
-  teams[pickToUndo.team] = removeFromRoster(
-    teams[pickToUndo.team],
-    pickToUndo.player
-  );
+  teams = [
+    ...teams.slice(0, pick.team),
+    removeFromRoster(teams[pick.team], pick.player),
+    ...teams.slice(pick.team + 1)
+  ];
 
   return {
     ...state,
-    activeTeam: pick ? state.activeTeam : pickToUndo.team,
-    currentPick: pick ? state.currentPick : pickToUndo.pickNumber,
     pastPicks: pastPicks.reduce(
       (acc: IPick[], p: IPick) =>
-        p === pickToUndo ? acc.concat({ ...p, player: null }) : acc.concat(p),
+        p === pick ? acc.concat({ ...p, player: null }) : acc.concat(p),
       []
     ),
-    undraftedPlayers: undraftedPlayers
-      .concat([pickToUndo.player])
-      .sort((a: IPlayer, b: IPlayer) => (a.vor && b.vor ? b.vor - a.vor : 0))
+    teams,
+    undraftedPlayers: [pick.player, ...undraftedPlayers].sort(
+      (a: IPlayer, b: IPlayer) => (a.vor && b.vor ? b.vor - a.vor : 0)
+    )
   };
 };
 

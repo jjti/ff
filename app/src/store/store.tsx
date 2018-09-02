@@ -1,6 +1,5 @@
 import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-
 import { IPlayer } from '../Player';
 import { IPick, IRoster, ITeam } from '../Team';
 import reducers from './reducers';

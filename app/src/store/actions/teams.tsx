@@ -20,11 +20,18 @@ export const skipPick = () => ({
 });
 
 /**
- * undoes the last player pick
+ * undoes the last pick/skip
  */
-export const undoPlayerPick = (pick?: IPick | null) => ({
+export const undoLast = () => ({
+  type: ACTION_TYPES.UNDO_LAST
+});
+
+/**
+ * undoes the a given pick, may not be the last one
+ */
+export const undoPick = (pick: IPick) => ({
   pick,
-  type: ACTION_TYPES.UNDO_PICK_PLAYER
+  type: ACTION_TYPES.UNDO_PICK
 });
 
 /**

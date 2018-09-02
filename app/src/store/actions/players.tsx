@@ -1,5 +1,4 @@
 import { toast } from 'react-toastify';
-
 import { IPlayer } from '../../Player';
 import { IRoster } from '../../Team';
 import { ACTION_TYPES } from './index';

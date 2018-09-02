@@ -2,10 +2,8 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { cssTransition, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 // @ts-ignore
 import ReactTooltip from 'react-tooltip';
-
 import './App.css';
 import './Card.css';
 import Header from './Header/Header';

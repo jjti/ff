@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-
 import { Position } from '../Player';
 import { IStoreState } from '../store/store';
 import { ITeam } from '../Team';
