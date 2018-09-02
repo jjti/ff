@@ -196,6 +196,9 @@ const updateVOR = (state: IStoreState): IPlayer[] => {
   const { numberOfTeams, ppr, rosterFormat } = state;
   let { players } = state;
 
+  // how many rounds we care about from a VOR perspective
+  const numberOfRounds = numberOfTeams;
+  // the drafable positions (TODO: account for FLEX)
   const positions: Position[] = ['QB', 'RB', 'WR', 'TE', 'DST', 'K'];
 
   // we have 4 adp rankings from fantasyfootballcalculator. they're stored
@@ -229,7 +232,11 @@ const updateVOR = (state: IStoreState): IPlayer[] => {
   const positionToCountMap = {};
   positions.forEach(pos => {
     positionToCountMap[pos] = players.filter(
-      p => p.pos === pos && p.adp && p.adp > 0 && p.adp < numberOfTeams * 10
+      p =>
+        p.pos === pos &&
+        p.adp &&
+        p.adp > 0 &&
+        p.adp <= numberOfTeams * numberOfRounds
     ).length; // || 0 to avoid NaN on never drafted positions (in first 10 rounds)
   });
 
@@ -241,7 +248,7 @@ const updateVOR = (state: IStoreState): IPlayer[] => {
   let totalPlayerCount = 0;
   Object.keys(initialRoster).forEach(pos => {
     // this is dumb af but lets guess that every team will draft 1 additional
-    // player in that position
+    // player in that position for each additional player in the modified roster
     positionToCountMap[pos] = positionToCountMap[pos] || 0;
     positionToCountMap[pos] +=
       (rosterFormat[pos] - initialRoster[pos]) * numberOfTeams;
@@ -251,10 +258,10 @@ const updateVOR = (state: IStoreState): IPlayer[] => {
   });
 
   // sum the total number of players (to get the total number of players drafted
-  // to the number of teams * 10)
-  const ratioOfExpected = (numberOfTeams * 10) / totalPlayerCount;
+  // to the number of teams * numberOfRounds)
+  const ratioOfExpected = (numberOfTeams * numberOfRounds) / totalPlayerCount;
 
-  // adjust so the total count sums to ~100 and we don't exceed the tt
+  // adjust so the total count sums to ~100 (default) and we don't exceed it
   Object.keys(positionToCountMap).forEach(pos => {
     positionToCountMap[pos] = Math.floor(
       positionToCountMap[pos] * ratioOfExpected
@@ -267,7 +274,8 @@ const updateVOR = (state: IStoreState): IPlayer[] => {
   // map positions to their replacement values
   const positionToReplaceValueMap = {};
   positions.forEach(pos => {
-    const sortedPlayers = players
+    // sort the players, in that position, by their VOR
+    const sortedPlayersInPosition = players
       .filter(p => p.pos === pos)
       .sort(
         (a, b) =>
@@ -277,11 +285,11 @@ const updateVOR = (state: IStoreState): IPlayer[] => {
       );
 
     // if the "replacement player" is a tenable value, get his expected
-    // number of points
+    // number of points, otherwise it says zero
     let replacementValue = 0;
     if (positionToCountMap[pos] < positionToTotalCountMap[pos]) {
       replacementValue =
-        sortedPlayers[positionToCountMap[pos]][
+        sortedPlayersInPosition[positionToCountMap[pos]][
           ppr ? 'predictionPPR' : 'predictionSTN'
         ];
     }

@@ -27,11 +27,10 @@ interface IState {
 
 class Settings extends React.Component<IProps, IState> {
   /**
-   * Start off with the Settings Section open... needed to set team#
-   * and which team is currently being tracked
+   * Start off with the Settings Section false...
    */
   public state: IState = {
-    open: true
+    open: false
   };
 
   public toggleSettings = () => {
