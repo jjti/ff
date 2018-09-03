@@ -15,6 +15,7 @@ interface ITablePlayer extends IPlayer {
 interface IPlayerTableProps {
   byeWeeks: { [key: number]: boolean };
   draftSoon: boolean[];
+  filteredPlayers: boolean[];
   mobile: boolean;
   nameFilter: string;
   pickPlayer: (player: IPlayer) => void;
@@ -22,7 +23,7 @@ interface IPlayerTableProps {
   positionsToShow: Position[];
   ppr: boolean;
   rbHandcuff: boolean[];
-  recommended: boolean[];
+  recommended: IPlayer[]; // names that are recommended
   removePlayer: (player: IPlayer) => void;
   setNameFilter: (event: React.FormEvent<HTMLInputElement>) => void;
   setPositionFilter: (pos: Position) => void;
@@ -42,6 +43,7 @@ interface IPlayerTableProps {
 export default ({
   byeWeeks,
   draftSoon,
+  filteredPlayers,
   nameFilter,
   mobile,
   pickPlayer,
@@ -151,21 +153,23 @@ export default ({
 
     <div id="table">
       <div id="table-body">
-        {players.map((player: ITablePlayer, i) => (
-          <PlayerRow
-            key={player.name + player.pos + player.team}
-            mobile={mobile}
-            pickPlayer={pickPlayer}
-            draftSoon={draftSoon[i]}
-            byeWeekConflict={byeWeeks[player.bye]}
-            inValuablePosition={valuedPositions[player.pos]}
-            player={player}
-            ppr={ppr}
-            rbHandcuff={rbHandcuff[i]}
-            recommended={recommended[i]}
-            removePlayer={removePlayer}
-          />
-        ))}
+        {players
+          .filter((_, i) => !filteredPlayers[i])
+          .map((player: ITablePlayer, i) => (
+            <PlayerRow
+              key={player.name + player.pos + player.team}
+              mobile={mobile}
+              pickPlayer={pickPlayer}
+              draftSoon={draftSoon[i]}
+              byeWeekConflict={byeWeeks[player.bye]}
+              inValuablePosition={valuedPositions[player.pos]}
+              player={player}
+              ppr={ppr}
+              rbHandcuff={rbHandcuff[i]}
+              recommended={recommended.indexOf(player) > -1}
+              removePlayer={removePlayer}
+            />
+          ))}
       </div>
     </div>
   </div>

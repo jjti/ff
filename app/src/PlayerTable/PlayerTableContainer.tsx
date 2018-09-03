@@ -78,22 +78,29 @@ class PlayerTableContainer extends React.Component<
       currentPick,
       mobile,
       rbHandcuffTeams,
-      undraftedPlayers,
+      undraftedPlayers: players,
       valuedPositions
     } = this.props;
     const { nameFilter, positionsToShow } = this.state;
 
     // players after filtering by position
-    let players =
+    // array of booleans for whether not to show the player
+    let filteredPlayers =
       positionsToShow.length === 1 && positionsToShow[0] === '?'
-        ? undraftedPlayers
-        : undraftedPlayers.filter(p => positionsToShow.indexOf(p.pos) > -1);
+        ? new Array(players.length).fill(false)
+        : players.map(p => positionsToShow.indexOf(p.pos) < 0);
 
     // filter by the nameFilter (for name and team)
     const nameFilterLower = nameFilter.toLowerCase();
     if (nameFilterLower) {
-      players = players.filter(({ name }: IPlayer) => {
+      filteredPlayers = filteredPlayers.map((filtered, i) => {
+        if (filtered) {
+          // it's already filtered
+          return true;
+        }
+
         // check for whether the name, split is similar to nameFilter
+        const { name } = players[i];
         const lowercaseName = name.toLowerCase();
         const names = lowercaseName.split(' ');
         const firstNameMatch = names[0].startsWith(nameFilterLower);
@@ -118,26 +125,27 @@ class PlayerTableContainer extends React.Component<
 
     // players that will are recommended
     let recommendedCount = 0;
-    const recommended = players.map((p, i) => {
+    const recommended = players.reduce((acc, p, i) => {
       // for first few, it's likely a yes
       if (recommendedCount < 3 && valuedPositions[p.pos]) {
         if (draftSoon[i] || p.adp === 0) {
           // accounting for players w/ a lack of adps
           recommendedCount += 1;
-          return true;
+          return [...acc, p];
         }
       } else if (i < 30 && rbHandcuff[i]) {
         recommendedCount += 1;
-        return true;
+        return [...acc, p];
       }
-      return false;
-    });
+      return acc;
+    }, []);
 
     return (
       <PlayerTable
         {...this.props}
         players={players}
         draftSoon={draftSoon}
+        filteredPlayers={filteredPlayers}
         nameFilter={nameFilter}
         mobile={!!mobile}
         recommended={recommended}

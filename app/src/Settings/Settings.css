@@ -24,7 +24,7 @@
   margin-left: auto;
   width: 35px;
   height: 4px;
-  background-color: var(--highlight-gray);
+  background-color: var(--light-gray);
 }
 
 .toggle:hover {

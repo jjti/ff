@@ -4,7 +4,7 @@
 }
 
 #table-top-header {
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: var(--border-gray);
   z-index: 2;
   background-color: white;
   padding: 8px;
@@ -58,7 +58,7 @@
 
 .PlayerTable-Position-Buttons > button.Active {
   opacity: 1;
-  background-color: var(--highlight-gray);
+  background-color: var(--light-gray);
 }
 
 .PlayerTable-Position-Buttons > button:hover {
@@ -93,7 +93,7 @@
 }
 
 .row:hover {
-  background-color: var(--highlight-gray);
+  background-color: var(--light-gray);
   cursor: pointer;
 }
 

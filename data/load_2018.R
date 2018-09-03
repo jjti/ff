@@ -9,7 +9,7 @@ library(DescTools)
 ###
 # Rescrape everything
 ###
-if (FALSE) {
+if (TRUE) {
   sources <- c("cbs", "espn", "fox", "nfl", "fantasyfootballcalculator")
   for (source in sources) {
     setwd("~/Documents/GitHub/ff/data")
