@@ -30,6 +30,11 @@ export default class Header extends React.Component {
             Madden
           </a>
         </p>
+        <p>
+          <a href="https://github.com/JJTimmons/ff" target="_blank">
+            Source code
+          </a>
+        </p>
       </div>
     );
   }
