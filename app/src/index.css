@@ -59,6 +59,11 @@ select:disabled, button:disabled {
   opacity: 0.5;
 }
 
+.disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
 a {
   margin: 0;
 }

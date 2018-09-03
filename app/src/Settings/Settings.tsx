@@ -53,7 +53,7 @@ class Settings extends React.Component<IProps, IState> {
             .map((_, i) => i + 6)
             .filter(n => n > currentPick);
 
-    const disabledOptions = currentPick > numberOfTeams;
+    const disabledOptions = currentPick > 0;
 
     return (
       <div className="Settings Section">
@@ -88,7 +88,7 @@ class Settings extends React.Component<IProps, IState> {
                     : ''
                 }>
                 <select
-                  className="Grayed"
+                  className={`Grayed ${disabledOptions ? 'disabled' : ''}`}
                   value={`${numberOfTeams} Teams`}
                   disabled={disabledOptions}
                   onChange={this.setNumberOfTeams}>
@@ -99,9 +99,18 @@ class Settings extends React.Component<IProps, IState> {
               </div>
             </label>
 
-            <label className="full-width" onClick={this.props.togglePPR}>
+            <label
+              className="full-width"
+              onClick={disabledOptions ? () => ({}) : this.props.togglePPR}
+              data-tip={
+                disabledOptions ? 'Reset draft to customize team rosters' : ''
+              }>
               PPR
-              <div className={`toggle ${ppr ? 'active' : ''}`} />
+              <div
+                className={`toggle ${ppr ? 'active' : ''} ${
+                  disabledOptions ? 'disabled' : ''
+                }`}
+              />
             </label>
 
             <label
