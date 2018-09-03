@@ -121,8 +121,8 @@ class PlayerTableContainer extends React.Component<
     const draftSoon = players.map(p => p.adp && currentPick + 10 >= p.adp);
 
     // players that are RB handcuffs
-    const rbHandcuff = players.map(
-      p => p.pos === 'RB' && rbHandcuffTeams[p.team]
+    const rbHandcuffs = players.filter(
+      (p, i) => !filteredPlayers[i] && p.pos === 'RB' && rbHandcuffTeams[p.team]
     );
 
     // players that will are recommended
@@ -135,7 +135,7 @@ class PlayerTableContainer extends React.Component<
           recommendedCount += 1;
           return [...acc, p];
         }
-      } else if (i < 30 && rbHandcuff[i]) {
+      } else if (i < 30 && rbHandcuffs.indexOf(p) > -1) {
         recommendedCount += 1;
         return [...acc, p];
       }
@@ -152,7 +152,7 @@ class PlayerTableContainer extends React.Component<
         mobile={!!mobile}
         recommended={recommended}
         positionsToShow={positionsToShow}
-        rbHandcuff={rbHandcuff}
+        rbHandcuffs={rbHandcuffs}
         setNameFilter={this.setNameFilter}
         setPositionFilter={this.setPositionFilter}
       />
