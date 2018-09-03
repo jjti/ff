@@ -14,7 +14,7 @@ export default class Header extends React.Component {
             target="_blank">
             value over replacement
           </a>{' '}
-          from{' '}
+          estimated from{' '}
           <a href="http://games.espn.com/ffl/tools/projections" target="_blank">
             expert
           </a>{' '}
@@ -22,12 +22,6 @@ export default class Header extends React.Component {
             href="https://www.cbssports.com/fantasy/football/stats/weeklyprojections/QB"
             target="_blank">
             predictions
-          </a>{' '}
-          and{' '}
-          <a
-            href="https://www.easports.com/madden-nfl/player-ratings"
-            target="_blank">
-            Madden
           </a>
         </p>
         <p>

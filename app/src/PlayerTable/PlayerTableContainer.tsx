@@ -95,7 +95,7 @@ class PlayerTableContainer extends React.Component<
     if (nameFilterLower) {
       filteredPlayers = filteredPlayers.map((filtered, i) => {
         if (filtered) {
-          // it's already filtered
+          // it's already being filtered out
           return true;
         }
 
@@ -107,7 +107,9 @@ class PlayerTableContainer extends React.Component<
         const lastNameMatch = names[1]
           ? names[1].startsWith(nameFilterLower)
           : false;
-        return (
+
+        // filter out all players but those that match the search term
+        return !(
           lowercaseName.startsWith(nameFilterLower) ||
           firstNameMatch ||
           lastNameMatch

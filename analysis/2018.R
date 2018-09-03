@@ -18,9 +18,3 @@ full.predictions <- full.predictions[, c("name", "pos", "team", "predictionPPR",
 full.predictions <- full.predictions[order(full.predictions$predictionPPR, decreasing = TRUE),]
 
 write_json(full.predictions, "/Users/josh/Documents/GitHub/ff/app/public/forecast.json")
-
-cbs.data[cbs.data$name == "Adrian Peterson",]
-espn.data[espn.data$name == "Adrian Peterson",]
-fox.data[fox.data$name == "Adrian Peterson",]
-player.data[player.data$name == "LeVeon Bell",]
-player.data[player.data$name == "Adrian Peterson",]
