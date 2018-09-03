@@ -49,7 +49,7 @@ class PlayerRow extends React.Component<IPlayerRowProps> {
           <div className="col col-name">
             <p>{player.tableName}</p>
             {/* Add dots for information on bye week */}
-            {recommended && <div className="dot blue-dot" />}
+            {recommended && !mobile && <div className="dot blue-dot" />}
             {draftSoon ? <div className="dot green-dot" /> : null}{' '}
             {byeWeekConflict && !mobile && <div className="dot orange-dot" />}
             {rbHandcuff && !mobile && <div className="dot red-dot" />}

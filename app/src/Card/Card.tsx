@@ -154,7 +154,9 @@ const cardTarget: DropTargetSpec<ICardProps> = {
 
       if (currentPick && droppedPick.player) {
         // if it's the currently drafting team, create a new pick from this
+        undoPickInStore(droppedPick); // clears the selected player
         pickPlayerStore(droppedPick.player);
+        return;
       }
 
       undoPickInStore(pick); // clears the selected player
