@@ -18,15 +18,9 @@ So if there are 10 teams, and we expect 8 QBs to be drafted within the first 100
 
 Since the expected number of drafted players at each position depends on the number of teams, the app recalculates VOR if the number of teams changes.
 
-## Tracking teams' VOR
-
-The app keeps tally of every teams' summed VOR (for their starters). It's a real-time index for how well everyone is doing.
-
-![screen shot 2018-08-18 at 5 58 15 pm](https://user-images.githubusercontent.com/13923102/44303512-5115fd80-a310-11e8-8005-811895620d92.png)
-
 ## Building out a Roster
 
-The user can track their (or anyone else's) team during the draft. Since the starting roster is all that contributes to points-per-week, positions that are already filled are grayed out (QB in the example above).
+The user can track their (or anyone else's) team during the draft. Since the starting roster is all that contributes to points-per-week, positions that are already filled are grayed out (QB in the example above). There are also recommendations for which player to pick by a combination of using the player's VOR, ADP, and the user's existing roster.
 
 ![screen shot 2018-08-18 at 5 55 19 pm](https://user-images.githubusercontent.com/13923102/44303477-e9f84900-a30f-11e8-9119-286d37dc159b.png)
 
@@ -34,10 +28,10 @@ The user can track their (or anyone else's) team during the draft. Since the sta
 
 Small tags are also shown next to the player names indicating if they're likely to be drafted soon (given ADP) and whether there's a schedule conflict between the player and another key player (QB, RB, WR, or TE).
 
-![screen shot 2018-08-18 at 6 00 19 pm](https://user-images.githubusercontent.com/13923102/44303524-9c301080-a310-11e8-9ead-829609af1142.png)
+<img width="1440" alt="screen shot 2018-09-04 at 6 36 28 pm" src="https://user-images.githubusercontent.com/13923102/45061205-7f663d80-b071-11e8-98c8-01ae83f0619d.png">
 
 ## Controls
 
-Clicking on a player drafts the player to the active team (currently drafting). Users can also skip the current turn (not drafting a player), undo the last round's pick (if they make a mistake), or remove a player (if the player was drafted already but they missed it).
+Clicking on a player drafts the player to the active team (currently drafting). Users can also skip the current turn (not drafting a player), undo the last round's pick (if they make a mistake), or remove a player (if the player was drafted already but they missed it). They can also drag and drop player rows onto the row of prior picks, and swap picks up in the pick history row.
 
 ![screen shot 2018-08-18 at 6 01 05 pm](https://user-images.githubusercontent.com/13923102/44303527-b4a02b00-a310-11e8-9b0d-edc25883a8c6.png)
