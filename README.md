@@ -34,4 +34,5 @@ Small tags are also shown next to the player names indicating if they're likely 
 
 Clicking on a player drafts the player to the active team (currently drafting). Users can also skip the current turn (not drafting a player), undo the last round's pick (if they make a mistake), or remove a player (if the player was drafted already but they missed it). They can also drag and drop player rows onto the row of prior picks, and swap picks up in the pick history row.
 
-![screen shot 2018-08-18 at 6 01 05 pm](https://user-images.githubusercontent.com/13923102/44303527-b4a02b00-a310-11e8-9b0d-edc25883a8c6.png)
+<img width="910" alt="screen shot 2018-09-04 at 6 40 08 pm" src="https://user-images.githubusercontent.com/13923102/45061311-f8fe2b80-b071-11e8-9b9a-19d246805a07.png">
+
