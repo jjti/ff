@@ -20,13 +20,13 @@ Since the expected number of drafted players at each position depends on the num
 
 ## Building out a Roster
 
-The user can track their (or anyone else's) team during the draft. Since the starting roster is all that contributes to points-per-week, positions that are already filled are grayed out (QB in the example above). There are also recommendations for which player to pick by a combination of using the player's VOR, ADP, and the user's existing roster.
+The user can track their (or anyone else's) team during the draft. Since the starting roster is all that contributes to points-per-week, positions that are already filled are grayed out (QB in the example above).
 
 ![screen shot 2018-08-18 at 5 55 19 pm](https://user-images.githubusercontent.com/13923102/44303477-e9f84900-a30f-11e8-9119-286d37dc159b.png)
 
 ## Tips on picks
 
-Small tags are also shown next to the player names indicating if they're likely to be drafted soon (given ADP) and whether there's a schedule conflict between the player and another key player (QB, RB, WR, or TE).
+Small tags are also shown next to the player names indicating if they're likely to be drafted soon (given ADP) and whether there's a schedule conflict between the player and another key player (QB, RB, WR, or TE). There are also recommendations for which player to pick by a combination of using the player's VOR, ADP, and the user's existing roster.
 
 <img width="1440" alt="screen shot 2018-09-04 at 6 36 28 pm" src="https://user-images.githubusercontent.com/13923102/45061205-7f663d80-b071-11e8-98c8-01ae83f0619d.png">
 
