@@ -1,6 +1,6 @@
 # Fantasy Football
 
-[An app](http://www.ffdraft2018.com/) for drafting the best fantasy football team possible.
+[An app](https://www.ffdraft.app/) for drafting the best fantasy football team possible.
 
 ## Predictions
 
