@@ -30,7 +30,6 @@
 .position-change-section {
   display: flex;
   flex-wrap: wrap;
-  justify-content: start;
 }
 
 .position-toggle {

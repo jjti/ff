@@ -41,21 +41,23 @@ export default class PickHistory extends React.Component<IPickHistoryProps> {
         {open && (
           <>
             <div ref={refProp} className="PicksRow">
-              <Card
+              {
                 // @ts-ignore
-                currentPick={true}
-                // @ts-ignore
-                length={cardLength}
-                pick={{
-                  pickNumnber: currentPick,
-                  player: null,
-                  team: activeTeam
-                }}
-                trackedTeamPicking={activeTeam === trackedTeam}
-              />
+                <Card
+                  currentPick={true}
+                  length={cardLength}
+                  pick={{
+                    pickNumnber: currentPick,
+                    player: null,
+                    team: activeTeam
+                  }}
+                  trackedTeamPicking={activeTeam === trackedTeam}
+                />
+              }
 
               {pastPicks.map(pick => (
                 // If there was a player drafted, show their name and the undo button
+                // @ts-ignore
                 <Card
                   key={pick.pickNumber}
                   // @ts-ignore

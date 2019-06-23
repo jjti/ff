@@ -72,6 +72,7 @@ class TeamPicks extends React.Component<IProps, State> {
 
           <div className="Pick-Column">
             {trackedTeamRoster.QB.map((r, i) => (
+              // @ts-ignore
               <Card
                 key={r ? r.name : i}
                 // @ts-ignore
@@ -82,6 +83,7 @@ class TeamPicks extends React.Component<IProps, State> {
               />
             ))}
             {trackedTeamRoster.RB.map((r, i) => (
+              // @ts-ignore
               <Card
                 key={r ? r.name : i}
                 // @ts-ignore
@@ -92,6 +94,7 @@ class TeamPicks extends React.Component<IProps, State> {
               />
             ))}
             {trackedTeamRoster.WR.map((r, i) => (
+              // @ts-ignore
               <Card
                 key={r ? r.name : i}
                 // @ts-ignore
@@ -102,6 +105,7 @@ class TeamPicks extends React.Component<IProps, State> {
               />
             ))}
             {trackedTeamRoster.FLEX.map((r, i) => (
+              // @ts-ignore
               <Card
                 key={r ? r.name : i}
                 // @ts-ignore
@@ -112,6 +116,7 @@ class TeamPicks extends React.Component<IProps, State> {
               />
             ))}
             {trackedTeamRoster.TE.map((r, i) => (
+              // @ts-ignore
               <Card
                 key={r ? r.name : i}
                 // @ts-ignore
@@ -122,6 +127,7 @@ class TeamPicks extends React.Component<IProps, State> {
               />
             ))}
             {trackedTeamRoster.DST.map((r, i) => (
+              // @ts-ignore
               <Card
                 key={r ? r.name : i}
                 // @ts-ignore
@@ -132,6 +138,7 @@ class TeamPicks extends React.Component<IProps, State> {
               />
             ))}
             {trackedTeamRoster.K.map((r, i) => (
+              // @ts-ignore
               <Card
                 key={r ? r.name : i}
                 // @ts-ignore
@@ -147,6 +154,7 @@ class TeamPicks extends React.Component<IProps, State> {
           <h3>Bench</h3>
           <div className="Pick-Column">
             {trackedTeamRoster.BENCH.map((r, i) => (
+              // @ts-ignore
               <Card
                 key={r ? r.name : i}
                 // @ts-ignore
