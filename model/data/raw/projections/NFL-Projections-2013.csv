@@ -1,4 +1,4 @@
-"name","pos","team_nfl","positionRank_nfl","overallRank_nfl","passYds_nfl","passTds_nfl","passInt_nfl","rushYds_nfl","rushTds_nfl","recYds_nfl","recTds_nfl","twoPts_nfl","fumbles_nfl","pts_nfl"
+"name_nfl","pos","team_nfl","positionRank_nfl","overallRank_nfl","passYds_nfl","passTds_nfl","passInt_nfl","rushYds_nfl","rushTds_nfl","recYds_nfl","recTds_nfl","twoPts_nfl","fumbles_nfl","pts_nfl"
 "Drew Brees","QB","NO",1,1,5232,38,16,154,1,0,0,2,7,340.68
 "Aaron Rodgers","QB","GB",2,1,4452,37,11,346,2,0,0,0,5,340.68
 "Peyton Manning","QB","DEN",3,3,5014,40,9,54,0,0,0,1,8,333.96

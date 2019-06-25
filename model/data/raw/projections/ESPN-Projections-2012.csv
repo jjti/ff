@@ -1,4 +1,4 @@
-"name","pos","team_espn","positionRank_espn","overallRank_espn","passAtt_espn","passComp_espn","passYds_espn","passTds_espn","passInt_espn","rushYds_espn","rushTds_espn","recYds_espn","recTds_espn","twoPts_espn","fumbles_espn","pts_espn"
+"name_espn","pos","team_espn","positionRank_espn","overallRank_espn","passAtt_espn","passComp_espn","passYds_espn","passTds_espn","passInt_espn","rushYds_espn","rushTds_espn","recYds_espn","recTds_espn","twoPts_espn","fumbles_espn","pts_espn"
 "Aaron Rodgers","QB","GB",1,1,501,348,4512,43,7,216,4,0,0,NA,NA,381
 "Tom Brady","QB","NE",2,2,590,383,4924,40,13,167,2,0,0,NA,NA,354
 "Drew Brees","QB","NO",3,3,614,430,4921,41,14,50,2,0,0,NA,NA,345

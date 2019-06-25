@@ -2,3 +2,5 @@ bs4
 requests
 pandas
 numpy
+jupyter
+xlrd

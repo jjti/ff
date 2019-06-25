@@ -1,4 +1,4 @@
-"name","pos","team_nfl","positionRank_nfl","overallRank_nfl","passYds_nfl","passTds_nfl","passInt_nfl","rushYds_nfl","rushTds_nfl","recYds_nfl","recTds_nfl","twoPts_nfl","fumbles_nfl","pts_nfl"
+"name_nfl","pos","team_nfl","positionRank_nfl","overallRank_nfl","passYds_nfl","passTds_nfl","passInt_nfl","rushYds_nfl","rushTds_nfl","recYds_nfl","recTds_nfl","twoPts_nfl","fumbles_nfl","pts_nfl"
 "Aaron Rodgers","QB","GB",1,1,4797,39,9,289,2,0,0,0,0,370.78
 "Tom Brady","QB","NE",2,2,5294,43,11,32,0,0,0,1,1,364.96
 "Cam Newton","QB","CAR",3,3,3876,23,15,840,10,0,0,2,1,363.04
