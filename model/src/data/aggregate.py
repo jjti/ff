@@ -14,12 +14,17 @@ import os
 
 import pandas as pd
 
+INTERIM = os.path.join("..", "..", "data", "interim")
+PROCESSED = os.path.join("..", "..", "data", "processed")
 
-def projections(out_dir="../../data/interim"):
+
+def projections(out_dir=INTERIM):
     """Gather all the projection data."""
 
     p_files = []
-    for d_name, _, f_names in os.walk("../../data/raw/projections"):
+    for d_name, _, f_names in os.walk(
+        os.path.join("..", "..", "data", "raw", "projections")
+    ):
         for f_name in f_names:
             p_files.append(os.path.join(d_name, f_name))
 
@@ -35,7 +40,7 @@ def projections(out_dir="../../data/interim"):
         else:
             df_2018 = pd.merge(df_2018, p_df, how="outer")
     df_2018 = df_2018.drop("img_url", axis=1)
-    df_2018.to_csv(os.path.join(out_dir, "2018_projections.csv"))
+    df_2018.to_csv(os.path.join(out_dir, "2018_projections.csv"), index=False)
 
     # Load and parse the rest of the data from 2012-2014
     for year in [2012, 2013, 2014]:
@@ -55,15 +60,113 @@ def projections(out_dir="../../data/interim"):
                 df = p_df
             else:
                 df = pd.merge(df, p_df, how="outer")
-        df.to_csv(os.path.join(out_dir, f"{year}_projections.csv"))
+        df.to_csv(os.path.join(out_dir, f"{year}_projections.csv"), index=False)
+
+
+def madden(out_dir=INTERIM):
+    """Parse Madden stats to the interim directory.
+    """
+
+    p_files = []
+    for d_name, _, f_names in os.walk(
+        os.path.join("..", "..", "data", "raw", "madden")
+    ):
+        for f_name in f_names:
+            p_files.append(os.path.join(d_name, f_name))
+
+    for year in [2012, 2013, 2014, 2018]:
+        df = pd.DataFrame()
+        for p_file in [p for p in p_files if str(year) in p]:
+            pfr = pd.read_csv(p_file)
+
+            if year == 2013 or year == 2014:
+                pfr["name"] = pfr["First Name"] + "_" + pfr["Last Name"]
+            if year == 2018:
+                pfr["name"] = pfr["Name"]
+            if year == 2012:
+                pfr["pos"] = pfr["position"]
+                pfr["madden_ovr"] = pfr["overall"]
+            else:
+                pfr["pos"] = pfr["Position"]
+                pfr["madden_ovr"] = pfr["Overall"]
+
+            pfr["name"] = pfr["name"].apply(ffname)
+            pfr["pos"] = pfr["pos"].apply(ffpos)
+            pfr[["name", "pos", "madden_ovr"]].to_csv(
+                os.path.join(out_dir, f"{year}_madden.csv"), index=False
+            )
+
+
+def results(out_dir=INTERIM):
+    """Parse the football_reference_scrape data to end of season fantasy results.
+    """
+
+    pfr = pd.read_csv(
+        os.path.join("..", "..", "data", "raw", "pro_football_reference.csv")
+    )
+
+    pfr["name"] = pfr.player.apply(ffname)
+    pfr["pos"] = pfr["fantasy_pos"]
+    pfr["pts"] = pfr.fantasy_points
+    pfr["pts_ppr"] = pfr.fantasy_points_ppr
+
+    pfr = pfr[["name", "pos", "pts", "pts_ppr", "year"]]
+
+    for year in [2012, 2013, 2014, 2018]:
+        pfr[pfr.year == year].to_csv(
+            os.path.join(out_dir, f"{year}_results.csv"), index=False
+        )
+
+
+def final(out_dir=PROCESSED):
+    """Aggregate the projections, madden and the fantasy points into a single table
+    """
+
+    full_df = pd.DataFrame()
+    for year in [2012, 2013, 2014, 2018]:
+        year_projections = pd.read_csv(os.path.join(INTERIM, f"{year}_projections.csv"))
+        year_madden = pd.read_csv(os.path.join(INTERIM, f"{year}_madden.csv"))
+        year_results = pd.read_csv(os.path.join(INTERIM, f"{year}_results.csv"))
+
+        year_df = year_projections.merge(year_madden, how="outer").merge(
+            year_results, how="outer"
+        )
+
+        if year == 2012:
+            full_df = year_df
+        else:
+            full_df = full_df.merge(year_df, how="outer")
+
+    # drop rows where espn_pts are NaN (gets rid of a lot of defensive players)
+    full_df = full_df.dropna(subset=["pts_espn"])
+
+    full_df.to_csv(os.path.join(PROCESSED, "data.csv"), index=False)
 
 
 def ffname(name):
     """Remove extraneous characters that may differ between sources.
     """
 
-    return name.strip().replace(".", "").replace("*", "").replace(" ", "_").lower()
+    return (
+        name.lower()
+        .replace(".", "")
+        .replace("*", "")
+        .replace("'", "")
+        .replace("jr", "")
+        .strip()
+        .replace(" ", "_")
+    )
+
+
+def ffpos(pos):
+    """Unify positions
+    """
+
+    return pos.upper().strip().replace("HB", "RB").replace("FB", "RB")
 
 
 if __name__ == "__main__":
     projections()
+    madden()
+    results()
+    final()
