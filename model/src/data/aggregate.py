@@ -137,8 +137,23 @@ def final(out_dir=PROCESSED):
         else:
             full_df = full_df.merge(year_df, how="outer")
 
-    # drop rows where espn_pts are NaN (gets rid of a lot of defensive players)
-    full_df = full_df.dropna(subset=["pts_espn"])
+    # re-order
+    full_df = full_df[
+        [
+            "name",
+            "pos",
+            "year",
+            "madden_ovr",
+            "pts_cbs",
+            "pts_ppr_cbs",
+            "pts_nfl",
+            "pts_espn",
+            "pts_fox",
+            "pts_yahoo",
+            "pts",
+            "pts_ppr",
+        ]
+    ]
 
     full_df.to_csv(os.path.join(PROCESSED, "data.csv"), index=False)
 

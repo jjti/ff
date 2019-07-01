@@ -4,3 +4,4 @@ pandas
 numpy
 jupyter
 xlrd
+selenium
