@@ -430,7 +430,10 @@ def scrape_nfl(out=RAW_PROJECTIONS):
                 elif len(pos_team) == 1:
                     continue  # player not on a team
                 else:
-                    data = [name, pos_team[0], pos_team[1]]
+                    team = pos_team[1]
+                    if team == "LA":
+                        team = "LAR"
+                    data = [name, pos_team[0], team]
 
                 data += [
                     td.get_text().strip() if "-" not in td.get_text() else np.nan
