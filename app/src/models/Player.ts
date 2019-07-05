@@ -30,28 +30,15 @@ export interface IPlayer extends IScoring {
   bye: number;
 
   /**
-   * average draft position based on PPR vs standard and league size
+   * average draft position
    */
-  adp8Ppr: number;
-  adp8Standard: number;
-  adp10Ppr: number;
-  adp10Standard: number;
-  adp12Ppr: number;
-  adp12Standard: number;
-  adp14Ppr: number;
-  adp14Standard: number;
+  adp: number;
 
   /**
    * forecasted number of points. Multiple each of the player's
    * stats by the number of points assigned to each
    */
   forecast?: number;
-
-  /**
-   * Player's ADP based on whether on the number of teams and
-   * whether the league's scoring is PPR
-   */
-  adp?: number;
 
   /**
    * Player's value over other players in the same position

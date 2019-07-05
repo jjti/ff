@@ -25,6 +25,11 @@ export interface IStoreState {
   formattingRoster: boolean;
 
   /**
+   * Whether the app is currently in a state of changing league scoring
+   */
+  formattingScoring: boolean;
+
+  /**
    * The last picked players. Begins as null but is set thereafter
    */
   lastPickedPlayer: IPlayer | null;
@@ -152,6 +157,7 @@ export const initialState = {
   activeTeam: 0, // active team's index ([0-9]) that's currently drafting
   currentPick: 0, // index of current pick
   formattingRoster: false,
+  formattingScoring: false,
   lastPickedPlayer: null,
   numberOfTeams: 10,
   pastPicks: [],

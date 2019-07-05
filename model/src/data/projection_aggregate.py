@@ -12,7 +12,7 @@ pd.set_option("display.max_columns", 500)
 YEAR = 2019
 
 PROJECTIONS = os.path.join("..", "..", "data", "raw", "projections")
-ADP = os.path.join("..", "..", "data", "raw", "adp", f"FFC-{YEAR}.csv")
+ADP = os.path.join("..", "..", "data", "raw", "adp", f"FantasyPros-{YEAR}.csv")
 
 CBS = os.path.join(PROJECTIONS, f"CBS-Projections-{YEAR}.csv")
 ESPN = os.path.join(PROJECTIONS, f"ESPN-Projections-{YEAR}.csv")
@@ -22,7 +22,7 @@ OUTPUT = os.path.join("..", "..", "data", "processed", f"Projections-{YEAR}")
 
 REG = r"(.*?)_([a-zA-Z0-9])"
 
-HEADERS = ["key", "name", "pos", "team", "bye"]
+HEADERS = ["key", "name", "pos", "team", "bye", "adp"]
 
 STATS = {
     "pass_tds",
@@ -79,7 +79,7 @@ def aggregate():
             lambda x: x["team" + other_src] if x["team"] is np.nan else x["team"],
             axis=1,
         )
-    df = df.sort_values("adp_8_ppr")
+    df = df.sort_values("adp")
 
     for stat in STATS:
         stat_cols = [c for c in df.columns if stat in c]
@@ -87,15 +87,13 @@ def aggregate():
 
     # keep only the means
     df = df.reset_index()  # add key back as a column
-    adps = sorted([c for c in df.columns if "adp" in c])
-    df = df[COLS + adps]
+    df = df[COLS]
     df = df.round(1)
 
     # drop rows where all the stats fields are null
     df = df.dropna(axis=0, subset=STATS, how="all")
 
-    for adp in adps:
-        df[adp] = df[adp].fillna(-1).astype(int)
+    df["adp"] = df["adp"].fillna(-1.0)
 
     df.to_csv(OUTPUT + ".csv", index=False)
 

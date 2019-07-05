@@ -52,6 +52,9 @@ export default (state = initialState, action: any): IStoreState => {
     case ACTION_TYPES.SET_ROSTER_FORMAT: {
       return setRosterFormat(state, action.rosterFormat);
     }
+    case ACTION_TYPES.SET_SCORE_FORMAT: {
+      return { ...state, scoring: action.scoring };
+    }
     case ACTION_TYPES.SET_TRACKED_TEAM: {
       return setTrackedTeam(state, action.trackedTeam);
     }
@@ -60,6 +63,9 @@ export default (state = initialState, action: any): IStoreState => {
     }
     case ACTION_TYPES.TOGGLE_ROSTER_FORMATTING: {
       return { ...state, formattingRoster: !state.formattingRoster };
+    }
+    case ACTION_TYPES.TOGGLE_SCORE_FORMATTING: {
+      return { ...state, formattingScoring: !state.formattingScoring };
     }
     case ACTION_TYPES.UNDO_LAST: {
       return undoLast(state);

@@ -34,16 +34,6 @@ export const resetDraft = () => {
 };
 
 /**
- * Select a player, highlighting it in the table.
- * Is done to check for schedule duplications
- * @param player the player to "select" or highlight
- */
-export const selectPlayer = (player: IPlayer) => ({
-  player,
-  type: ACTION_TYPES.SELECT_PLAYER
-});
-
-/**
  * Change the roster format
  */
 export const setRosterFormat = (rosterFormat: IRoster) => ({

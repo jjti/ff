@@ -194,7 +194,12 @@ export const updatePlayerVORs = (state: IStoreState): IStoreState => ({
  * @param numberOfTeams
  */
 const updateVOR = (state: IStoreState): IPlayer[] => {
-  const { numberOfTeams, rosterFormat, scoring } = state;
+  const {
+    numberOfTeams,
+    rosterFormat,
+    scoring,
+    players: playersNoForecast
+  } = state;
 
   // how many rounds we care about from a VOR perspective
   const numberOfRounds = numberOfTeams;
@@ -202,8 +207,7 @@ const updateVOR = (state: IStoreState): IPlayer[] => {
   const positions: Position[] = ['QB', 'RB', 'WR', 'TE', 'DST', 'K'];
 
   // get player array with estimated draft positions
-  const playersADP = playersWithADP(state);
-  let players = playersWithForecast(scoring, playersADP);
+  let players = playersWithForecast(scoring, playersNoForecast);
 
   // total number of players at each position
   const positionToTotalCountMap = {};
@@ -284,37 +288,6 @@ const updateVOR = (state: IStoreState): IPlayer[] => {
 
   // @ts-ignore
   return players.sort((a, b) => b.vor - a.vor || -1);
-};
-
-/**
- * Check league size and points per reception to update each player's
- * PPR. Based on Fantasy Football Calculator
- */
-const playersWithADP = (store: IStoreState): IPlayer[] => {
-  const { numberOfTeams, scoring, players } = store;
-
-  // whether to show PPR ADP depends on the receptions settings
-  const ppr = scoring.receptions >= 0.5;
-
-  // we have 4 adp rankings from fantasyfootballcalculator. they're stored
-  // in player properties adp8, adp10, adp12, and adp14
-  let adp = 'adp10';
-  if (numberOfTeams <= 8) {
-    adp = 'adp8';
-  } else if (numberOfTeams > 10 && numberOfTeams <= 12) {
-    adp = 'adp12';
-  } else if (numberOfTeams > 12) {
-    adp = 'adp14';
-  }
-
-  if (ppr) {
-    adp += 'Ppr';
-  } else {
-    adp += 'Standard';
-  }
-
-  // set player adp to whatever it is in an equivelant league size
-  return players.map(p => ({ ...p, adp: p[adp] }));
 };
 
 /**

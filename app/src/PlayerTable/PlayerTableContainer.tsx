@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { IPlayer, Position } from '../models/Player';
 import { NullablePlayer } from '../models/Team';
-import { removePlayer, selectPlayer } from '../store/actions/players';
+import { removePlayer } from '../store/actions/players';
 import { pickPlayer, skipPick, undoLast } from '../store/actions/teams';
 import { IStoreState } from '../store/store';
 import PlayerTable from './PlayerTable';
@@ -23,7 +23,6 @@ interface IPlayerTableProps {
    */
   rbHandcuffTeams: { [key: string]: boolean };
   removePlayer: (player: IPlayer) => void;
-  selectPlayer: (player: IPlayer) => void;
 
   skip: () => void;
   undo: () => void;
@@ -261,7 +260,6 @@ const mapStateToProps = (state: IStoreState) => {
 const mapDispatchToProps = (dispatch: any) => ({
   pickPlayer: (player: IPlayer) => dispatch(pickPlayer(player)),
   removePlayer: (player: IPlayer) => dispatch(removePlayer(player)),
-  selectPlayer: (player: IPlayer) => dispatch(selectPlayer(player)),
   skip: () => dispatch(skipPick()),
   undo: () => dispatch(undoLast())
 });

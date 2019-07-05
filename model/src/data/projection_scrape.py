@@ -136,9 +136,9 @@ def scrape():
 
     try:
         scrape_espn()
-        scrape_cbs()
-        scrape_nfl()
-        scrape_ffc()
+        # scrape_cbs()
+        # scrape_nfl()
+        scrape_fantasy_pros()
     except Exception as err:
         print(str(err))
         traceback.print_exc()
@@ -469,72 +469,56 @@ def scrape_nfl(out=RAW_PROJECTIONS):
     validate(df)
 
 
-def scrape_ffc(out=RAW_ADP):
-    """Scrape the FFC website for 8, 10, 12, 14 person leagues in non-PPR and PPR format
+def scrape_fantasy_pros(out=RAW_ADP):
+    """Scrape the Fantasy Pros website for ADP information
 
-    example PPR:
-    https://fantasyfootballcalculator.com/adp/ppr
-
-    example PPR 12-person:
-    https://fantasyfootballcalculator.com/adp/ppr/14-team/all
+    https://www.fantasypros.com/nfl/adp/overall.php
     """
 
-    print("scraping Fantasy Football Calculator")
+    print("scraping Fantasy Pros")
 
     df = None
-    for team_count in [8, 10, 12, 14]:
-        for ppr in [True, False]:
-            page_url = (
-                f"https://fantasyfootballcalculator.com/adp/ppr/{team_count}-team/all"
-                if ppr
-                else f"https://fantasyfootballcalculator.com/adp/standard/{team_count}-team/all"
-            )
-            DRIVER.get(page_url)
-            time.sleep(1.5)
-            scroll()
-            time.sleep(1.5)
+    DRIVER.get("https://www.fantasypros.com/nfl/adp/overall.php")
+    time.sleep(1.5)
+    scroll()
+    time.sleep(1.5)
 
-            soup = BeautifulSoup(
-                DRIVER.execute_script("return document.body.innerHTML"), "html.parser"
-            )
-            table = soup.find("tbody")
+    soup = BeautifulSoup(
+        DRIVER.execute_script("return document.body.innerHTML"), "html.parser"
+    )
+    table = soup.select(".player-table")[0]
+    table_body = table.find("tbody")
 
-            headers = [e.get_text() for e in table.find_all("tr")[0].find_all("th")]
-            headers = [column(h) for h in headers]
+    players = []
+    for tr in table_body.find_all("tr"):
+        tds = tr.find_all("td")
 
-            wanted = {"name", "pos", "team", "bye"}
+        name_team_bye = tds[1]
+        if len(name_team_bye.find_all("small")) < 1:
+            continue
 
-            players = []
-            ppr_key = "ppr" if ppr else "standard"
-            adp = f"adp_{team_count}_{ppr_key}"
-            for tr in table.find_all("tr")[1:]:
-                data = [e.get_text().strip() for e in tr.find_all("td")]
+        name = name_team_bye.find_all("a")[0].get_text()
+        team = name_team_bye.find_all("small")[0].get_text()
+        bye = name_team_bye.find_all("small")[-1].get_text()
+        bye = bye[1:-1]  # remove paranthesis
 
-                player_data = {}
+        pos = tds[2].get_text()
+        for n in range(10):
+            pos = pos.replace(str(n), "")
 
-                player_data[adp] = data[0]
-                for h, d in zip(headers, data):
-                    if h in wanted:
-                        player_data[h] = d
+        if pos == "DST":
+            name = name.split(" ")[-2]
+            team = NAME_TEAM_MAP[name]
 
-                if player_data["pos"] == "DEF":
-                    player_data["pos"] = "DST"
-                    player_data["name"] = TEAM_NAME_MAP[player_data["team"]]
-                elif player_data["pos"] == "PK":
-                    player_data["pos"] = "K"
+        adp = tds[-1].get_text()
 
-                players.append(player_data)
+        player_data = {"name": name, "team": team, "bye": bye, "pos": pos, "adp": adp}
+        players.append(player_data)
 
-            new_df = pd.DataFrame(players)
-            new_df = add_key(new_df)
-            new_df = new_df.set_index("key")
+    df = pd.DataFrame(players)
+    df = add_key(df)
 
-            if df is None:
-                df = new_df
-            else:
-                df = df.join(new_df[adp], how="outer")
-
-    df.to_csv(os.path.join(out, f"FFC-{YEAR}.csv"))
+    df.to_csv(os.path.join(out, f"FantasyPros-{YEAR}.csv"), index=False)
 
     validate(df, strict=False)
 
