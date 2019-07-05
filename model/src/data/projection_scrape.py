@@ -1,6 +1,7 @@
 import os
 import time
 import re
+import traceback
 
 import pandas as pd
 import numpy as np
@@ -140,6 +141,7 @@ def scrape():
         scrape_ffc()
     except Exception as err:
         print(str(err))
+        traceback.print_exc()
     DRIVER.quit()
 
 
@@ -153,9 +155,6 @@ def scrape_espn(
     """
 
     print("scraping ESPN")
-
-    def scroll():
-        DRIVER.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
     # set this to the p
     DRIVER.get(url)
@@ -272,7 +271,9 @@ def scrape_cbs(
         page_url = f"{url}/{pos}/{YEAR}/season/projections/ppr/"
 
         DRIVER.get(page_url)
-        time.sleep(1)
+        time.sleep(0.5)
+        scroll()
+        time.sleep(0.5)
 
         soup = BeautifulSoup(
             DRIVER.execute_script("return document.body.innerHTML"), "html.parser"
@@ -401,7 +402,9 @@ def scrape_nfl(out=RAW_PROJECTIONS):
     players = []
     for page_url, headers in pages:
         DRIVER.get(page_url)
-        time.sleep(1)
+        time.sleep(0.5)
+        scroll()
+        time.sleep(0.5)
 
         headers = [column(h) for h in headers]
         headers = ["name", "pos", "team"] + headers
@@ -447,8 +450,11 @@ def scrape_nfl(out=RAW_PROJECTIONS):
                 next_button = DRIVER.find_element_by_link_text(">")
                 actions = ActionChains(DRIVER)
                 actions.move_to_element(next_button).click().perform()
+
                 time.sleep(0.5)
-            except Exception as err:
+                scroll()
+                time.sleep(0.5)
+            except:
                 break
 
     df = pd.DataFrame(players)
@@ -477,7 +483,7 @@ def scrape_ffc(out=RAW_ADP):
 
     print("scraping Fantasy Football Calculator")
 
-    players = []
+    df = None
     for team_count in [8, 10, 12, 14]:
         for ppr in [True, False]:
             page_url = (
@@ -486,7 +492,9 @@ def scrape_ffc(out=RAW_ADP):
                 else f"https://fantasyfootballcalculator.com/adp/standard/{team_count}-team/all"
             )
             DRIVER.get(page_url)
-            time.sleep(1)
+            time.sleep(0.5)
+            scroll()
+            time.sleep(0.5)
 
             soup = BeautifulSoup(
                 DRIVER.execute_script("return document.body.innerHTML"), "html.parser"
@@ -496,29 +504,41 @@ def scrape_ffc(out=RAW_ADP):
             headers = [e.get_text() for e in table.find_all("tr")[0].find_all("th")]
             headers = [column(h) for h in headers]
 
+            wanted = {"name", "pos", "team"}
+
+            players = []
+            ppr_key = "ppr" if ppr else "standard"
+            adp = f"adp_{team_count}_{ppr_key}"
             for tr in table.find_all("tr")[1:]:
                 data = [e.get_text().strip() for e in tr.find_all("td")]
 
                 player_data = {}
+
+                player_data[adp] = data[0]
                 for h, d in zip(headers, data):
-                    player_data[h] = d
-                    player_data["team_count"] = team_count
-                    player_data["ppr"] = ppr
+                    if h in wanted:
+                        player_data[h] = d
+
                 if player_data["pos"] == "DEF":
                     player_data["pos"] = "DST"
                     player_data["name"] = TEAM_NAME_MAP[player_data["team"]]
                 elif player_data["pos"] == "PK":
                     player_data["pos"] = "K"
+
                 players.append(player_data)
 
-    df = pd.DataFrame(players)
-    df["adp"] = df["#"]
+            new_df = pd.DataFrame(players)
+            new_df = add_key(new_df)
+            new_df = new_df.set_index("key")
 
-    df = add_key(df)
+            if df is None:
+                df = new_df
+            else:
+                df = df.join(new_df[adp], how="outer")
 
-    df.to_csv(os.path.join(out, f"FFC-{YEAR}.csv"), index=False)
+    df.to_csv(os.path.join(out, f"FFC-{YEAR}.csv"))
 
-    validate(df)
+    validate(df, strict=False)
 
     return df
 
@@ -554,22 +574,36 @@ def add_key(df):
     name_regex = re.compile("[^a-z ]+")
 
     def name(n):
-        return name_regex.sub("", n.lower()).replace(" ", "_")
+        n = n.lower().replace("sr", "").replace("st.", "").strip()
+        n = name_regex.sub("", n).strip().replace("  ", " ").split(" ")[:2]
+        return "_".join(n)
 
     df["key"] = df.apply(lambda x: name(x["name"]) + "_" + x["pos"], axis=1)
 
     return df
 
 
-def validate(df):
+def validate(df, strict=True):
     """Throw an exception if we're missing players at a certain position. These number of estimates."""
 
     pos_counts = {"QB": 32, "RB": 64, "WR": 64, "TE": 32, "DST": 32, "K": 32}
 
+    if "key" in df.columns:
+        dups = df[df.duplicated(subset="key")]
+        if len(dups):
+            print(dups)
+            raise RuntimeWarning("duplicated key")
+
     for pos, count in pos_counts.items():
         actual_count = len(df[df.pos == pos])
-        if actual_count < count:
+        if strict and actual_count < count:
             raise RuntimeWarning(f"only {actual_count} {pos}'s")
+        elif not strict and actual_count * 2 < count:
+            raise RuntimeWarning(f"only {actual_count} {pos}'s")
+
+
+def scroll():
+    DRIVER.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
 
 if __name__ == "__main__":

@@ -133,16 +133,14 @@ export default ({
         </p>
         <p
           className="col col-prediction"
-          data-tip="Average of expert predictions (ESPN, FOX, CBS, NFL)">
-          Prediction
+          data-tip="Experts' consensus projection">
+          Projection
         </p>
 
         {/* Table headers not rendered on mobile */}
         {!mobile && (
           <>
-            <p
-              className="col col-adp"
-              data-tip="Average draft position (Fantasy Football Calculator)">
+            <p className="col col-adp" data-tip="Average draft position">
               ADP
             </p>
             <p className="col col-remove">Remove</p>

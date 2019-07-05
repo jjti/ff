@@ -126,9 +126,13 @@ i {
   font-size: 12px;
 }
 
+.Options-Container:hover {
+  background-color: var(--gray);
+}
+
 .Grayed {
   cursor: pointer;
-  color: #4a4a4a;
+  color: var(--dark-gray);
 }
 
 .Grayed:hover {
