@@ -1,7 +1,4 @@
 .PHONY: data
 
-scrape:
-	cd src/data && python3 pro_football_reference_scape.py
-
-parse:
-	cd src/data && python3 aggregate.py
+projections:
+	cd src/data && python3 projection_scrape.py && python3 projection_aggregate.py
