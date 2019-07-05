@@ -153,7 +153,7 @@ export default ({
           .filter((_, i) => !filteredPlayers[i])
           .map((player: ITablePlayer, i) => (
             <PlayerRow
-              key={player.name + player.pos + player.team}
+              key={player.key}
               mobile={mobile}
               pickPlayer={pickPlayer}
               draftSoon={draftSoon[i]}

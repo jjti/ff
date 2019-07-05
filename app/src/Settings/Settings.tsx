@@ -25,10 +25,11 @@ interface IState {
 
 class Settings extends React.Component<IProps, IState> {
   /**
-   * Start off with the Settings Section false...
+   * Start off with the Settings Section open because picking
+   * team is important for draft order
    */
   public state: IState = {
-    open: false
+    open: true
   };
 
   public toggleSettings = () => {

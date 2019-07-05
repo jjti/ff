@@ -5,6 +5,7 @@ import os
 import re
 
 import pandas as pd
+import numpy as np
 
 pd.set_option("display.max_columns", 500)
 
@@ -61,12 +62,23 @@ def aggregate():
     df = pd.read_csv(ADP)
     df = df.set_index("key")
     for i, other in enumerate([CBS, ESPN, NFL]):
+        other_src = "_" + src[i]
         other_df = pd.read_csv(other)
         other_df = other_df.set_index("key")
-        other_df = other_df.drop(["name", "pos", "team"], axis=1)
-        other_df.columns = [h + "_" + src[i] for h in other_df.columns]
+        other_df.columns = [h + other_src for h in other_df.columns]
 
-        df = df.join(other_df)
+        df = df.join(other_df, how="outer")
+        df["pos"] = df.apply(
+            lambda x: x["pos" + other_src] if x["pos"] is np.nan else x["pos"], axis=1
+        )
+        df["name"] = df.apply(
+            lambda x: x["name" + other_src] if x["name"] is np.nan else x["name"],
+            axis=1,
+        )
+        df["team"] = df.apply(
+            lambda x: x["team" + other_src] if x["team"] is np.nan else x["team"],
+            axis=1,
+        )
     df = df.sort_values("adp_8_ppr")
 
     for stat in STATS:
@@ -74,10 +86,13 @@ def aggregate():
         df[stat] = df[stat_cols].mean(axis=1)
 
     # keep only the means
-    df = df.reset_index()
+    df = df.reset_index()  # add key back as a column
     adps = sorted([c for c in df.columns if "adp" in c])
     df = df[COLS + adps]
     df = df.round(1)
+
+    # drop rows where all the stats fields are null
+    df = df.dropna(axis=0, subset=STATS, how="all")
 
     for adp in adps:
         df[adp] = df[adp].fillna(-1).astype(int)

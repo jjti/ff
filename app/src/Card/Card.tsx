@@ -57,8 +57,8 @@ class Card extends React.Component<ICardProps> {
     const playerCard = playerMeta && pos;
 
     const pickMessage = !playerMeta
-      ? `R${Math.floor(pick.pickNumber / numberOfTeams) +
-          1}, P${pick.pickNumber + 1}`
+      ? `${Math.floor(pick.pickNumber / numberOfTeams) + 1}.${pick.pickNumber +
+          1}`
       : '';
 
     const cardClass = [
@@ -83,26 +83,25 @@ class Card extends React.Component<ICardProps> {
           ) : (
             <h5>{pick.team + 1}</h5>
           )}
-          {pick.player &&
-            !playerCard && (
-              <button
-                className="Undo-Player-Pick"
-                onClick={() => undoPickInStore(pick)}
-              />
-            )}
+          {pick.player && !playerCard && (
+            <button
+              className="Undo-Player-Pick"
+              onClick={() => undoPickInStore(pick)}
+            />
+          )}
 
-          {pick.player &&
-            pick.player.tableName && (
-              <p className="small">
-                {pick.player.tableName}
-                <br />
-                {pickMessage}
-              </p>
-            )}
+          {pick.player && pick.player.tableName && (
+            <p className="small">
+              {pick.player.tableName}
+              <br />
+              {pickMessage}
+            </p>
+          )}
 
           {!playerCard && currentPick && <p className="small">Drafting</p>}
-          {playerCard &&
-            pick.player && <p className="points small">{pick.player.vor}</p>}
+          {playerCard && pick.player && (
+            <p className="points small">{pick.player.vor}</p>
+          )}
         </div>
       )
     );

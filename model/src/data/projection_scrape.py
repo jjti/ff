@@ -297,6 +297,7 @@ def scrape_cbs(
 
                 name = name_cell.find("a").get_text()
                 pos, team = [v.get_text().strip() for v in name_cell.find_all("span")]
+                pos = pos.replace("FB", "RB")
                 data = [name, pos, team]
             else:
                 team = (
@@ -588,7 +589,7 @@ def validate(df, strict=True):
         actual_count = len(df[df.pos == pos])
         if strict and actual_count < count:
             raise RuntimeWarning(f"only {actual_count} {pos}'s")
-        elif not strict and actual_count * 2 < count:
+        elif not strict and actual_count * 3 < count:
             raise RuntimeWarning(f"only {actual_count} {pos}'s")
 
 

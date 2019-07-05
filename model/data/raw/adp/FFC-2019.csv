@@ -1,245 +1,248 @@
 key,adp_8_ppr,bye,name,pos,team,adp_8_standard,adp_10_ppr,adp_10_standard,adp_12_ppr,adp_12_standard,adp_14_ppr,adp_14_standard
-adams_WR_GB,8,11,Davante Adams,WR,GB,9,8,9,8,9,8,9
-agholor_WR_PHI,,,,,,,,,,,192,209
-allen_QB_BUF,,,,,,134,148,136,145,136,150,135
-allen_WR_LAC,26,12,Keenan Allen,WR,LAC,32,24,33,24,33,26,32
-allison_WR_GB,95,11,Geronimo Allison,WR,GB,127,97,104,99,109,98,111
-anderson_RB_DET,,,,,,,,,172,188,176,174
-anderson_WR_NYJ,76,4,Robby Anderson,WR,NYJ,76,77,74,74,74,73,75
-andrews_TE_BAL,,,,,,,,,,170,204,183
-armstead_RB_JAX,,,,,,,,,195,183,179,188
-badgley_K_LAC,,,,,,153,177,175,209,202,212,214
-bailey_K_MIN,,,,,,,,,210,198,229,228
-ballage_RB_MIA,,,,,,,,,177,172,166,163
-barber_RB_TB,,,,,,128,147,109,138,101,135,96
+adams_WR_GB,8,11,Davante Adams,WR,GB,9,8,8,8,9,8,9
+agholor_WR_PHI,,,,,,,,,,,187,209
+allen_QB_BUF,,,,,,134,153,137,144,138,151,135
+allen_WR_LAC,25,12,Keenan Allen,WR,LAC,32,24,33,24,33,26,32
+allison_WR_GB,95,11,Geronimo Allison,WR,GB,126,98,104,99,109,100,110
+amendola_WR_DET,,,,,,,,,,,229,
+anderson_RB_DET,,,,,,,,,186,188,178,174
+anderson_WR_NYJ,75,4,Robby Anderson,WR,NYJ,76,76,74,74,74,73,75
+andrews_TE_BAL,,,,,,,154,,,173,206,182
+armstead_RB_JAX,,,,,,,,,191,189,180,186
+badgley_K_LAC,,,,,,155,172,174,207,201,216,215
+bailey_K_MIN,,,,,,,,,208,198,233,229
+ballage_RB_MIA,,,,,,,,,171,174,167,163
+barber_RB_TB,,,,,,128,143,110,137,101,134,97
 barkley_RB_NYG,1,11,Saquon Barkley,RB,NYG,1,1,2,1,2,1,1
-bears_DST_CHI,77,6,Bears,DST,CHI,75,90,87,95,95,99,98
-beasley_WR_BUF,,,,,,,,,,,220,185
+bears_DST_CHI,78,6,Bears,DST,CHI,75,91,87,95,95,99,95
+beasley_WR_BUF,,,,,,,,,,,223,185
 beckham_WR_CLE,13,7,Odell Beckham Jr,WR,CLE,14,13,15,13,15,14,16
-bell_RB_NYJ,9,4,LeVeon Bell,RB,NYJ,8,9,8,9,8,9,7
-bernard_RB_CIN,,,,,,,,,193,,205,201
-bills_DST_BUF,,,,,,147,,,203,205,213,218
-boyd_WR_CIN,70,9,Tyler Boyd,WR,CIN,74,68,72,67,69,65,71
-brady_QB_NE,104,10,Tom Brady,QB,NE,108,121,107,126,113,132,115
-brees_QB_NO,67,9,Drew Brees,QB,NO,62,74,73,80,75,75,74
-breida_RB_SF,,,,,,,,158,174,145,158,130
-broncos_DST_DEN,142,10,Broncos,DST,DEN,137,167,167,186,161,164,161
-brown_RB_LAR,,,,,,,,,182,180,184,208
-brown_WR_BUF,,,,,,,,,198,195,196,178
-brown_WR_FA,,,,,,,,169,160,159,153,154
+bell_RB_NYJ,9,4,LeVeon Bell,RB,NYJ,8,9,9,9,8,9,7
+bernard_RB_CIN,,,,,,,,,175,,207,200
+bills_DST_BUF,,,,,,148,,,203,206,215,217
+boyd_WR_CIN,70,9,Tyler Boyd,WR,CIN,74,68,72,68,68,66,71
+brady_QB_NE,97,10,Tom Brady,QB,NE,109,121,107,126,113,130,115
+brees_QB_NO,67,9,Drew Brees,QB,NO,62,75,73,79,75,76,73
+breida_RB_SF,,,,,,,,156,170,145,157,132
+broncos_DST_DEN,143,10,Broncos,DST,DEN,137,162,167,181,157,165,161
+brown_RB_LAR,,,,,,,,,183,178,184,208
+brown_WR_BAL,,,,,,,157,170,158,158,153,156
+brown_WR_BUF,,,,,,,,,,194,197,178
 brown_WR_OAK,19,6,Antonio Brown,WR,OAK,21,19,22,19,22,19,21
-brown_WR_TEN,,,,,,,,,,,,200
-browns_DST_CLE,133,7,Browns,DST,CLE,135,127,135,136,140,138,143
-burton_TE_CHI,,,,,,106,131,128,176,123,175,95
-butker_K_KC,131,12,Harrison Butker,K,KC,143,144,147,162,162,172,175
-campbell_WR_IND,,,,,,133,153,164,142,148,140,147
-cardinals_DST_ARI,,,,,,,,,,,221,
-carr_QB_OAK,,,,,,,,,179,175,169,176
-carson_RB_SEA,59,11,Chris Carson,RB,SEA,50,58,47,55,45,52,45
-chargers_DST_LAC,107,12,Chargers,DST,LAC,105,119,115,123,122,128,128
-chubb_RB_CLE,22,7,Nick Chubb,RB,CLE,19,22,17,22,17,22,18
-cobb_WR_DAL,,,,,,,,,192,185,194,210
-cohen_RB_CHI,64,6,Tarik Cohen,RB,CHI,58,64,65,61,62,61,60
-coleman_RB_SF,71,4,Tevin Coleman,RB,SF,68,67,64,63,61,69,68
-colts_DST_IND,,,,,,,,,206,200,217,204
+brown_WR_TEN,,,,,,,,,,,,201
+browns_DST_CLE,129,7,Browns,DST,CLE,136,126,136,136,140,138,144
+burton_TE_CHI,,,,,,103,132,128,172,124,175,98
+butker_K_KC,130,12,Harrison Butker,K,KC,143,142,146,162,161,173,175
+callaway_WR_CLE,,,,,,,,,,,160,
+campbell_WR_IND,,,,,,133,145,164,142,147,140,147
+cardinals_DST_ARI,,,,,,,,,,,213,
+carr_QB_OAK,,,,,,,,,185,177,170,176
+carson_RB_SEA,60,11,Chris Carson,RB,SEA,50,57,47,54,45,52,45
+chargers_DST_LAC,107,12,Chargers,DST,LAC,106,118,115,123,122,128,129
+chiefs_DST_KC,,,,,,,,,,,,206
+chubb_RB_CLE,22,7,Nick Chubb,RB,CLE,19,22,17,22,17,22,19
+cobb_WR_DAL,,,,,,,,,190,182,194,211
+cohen_RB_CHI,64,6,Tarik Cohen,RB,CHI,59,64,65,61,62,61,61
+coleman_RB_SF,72,4,Tevin Coleman,RB,SF,68,66,64,64,60,69,65
+colts_DST_IND,,,,,,,,,196,200,221,204
 conner_RB_PIT,14,7,James Conner,RB,PIT,11,14,12,14,13,13,11
 cook_RB_MIN,18,12,Dalvin Cook,RB,MIN,16,18,14,18,14,17,15
-cook_TE_NO,81,9,Jared Cook,TE,NO,81,76,80,78,78,78,82
+cook_TE_NO,82,9,Jared Cook,TE,NO,81,77,80,77,78,78,81
 cooks_WR_LAR,41,9,Brandin Cooks,WR,LAR,43,42,45,42,46,42,44
-cooper_WR_DAL,29,8,Amari Cooper,WR,DAL,34,28,34,29,35,28,33
-cousins_QB_MIN,119,12,Kirk Cousins,QB,MIN,116,164,165,150,150,154,142
-coutee_WR_HOU,134,10,Keke Coutee,WR,HOU,,117,134,116,133,120,138
-cowboys_DST_DAL,135,8,Cowboys,DST,DAL,142,154,162,146,152,151,152
-crosby_K_GB,149,11,Mason Crosby,K,GB,,176,179,204,203,222,223
-darnold_QB_NYJ,,,,,,,,,199,192,190,189
-davis_RB_CHI,,,,,,,,,163,156,198,141
-davis_WR_TEN,118,11,Corey Davis,WR,TEN,99,105,106,104,104,111,97
+cooper_WR_DAL,29,8,Amari Cooper,WR,DAL,34,29,34,30,35,27,33
+cousins_QB_MIN,118,12,Kirk Cousins,QB,MIN,115,158,166,153,150,154,145
+coutee_WR_HOU,135,10,Keke Coutee,WR,HOU,,117,131,116,133,121,138
+cowboys_DST_DAL,134,8,Cowboys,DST,DAL,142,151,161,146,152,149,152
+crosby_K_GB,150,11,Mason Crosby,K,GB,,173,180,205,202,225,223
+darnold_QB_NYJ,,,,,,,,,193,192,193,193
+davis_RB_CHI,,,,,,,,,154,159,199,141
+davis_WR_TEN,116,11,Corey Davis,WR,TEN,100,103,106,101,105,110,96
 diggs_WR_MIN,36,12,Stefon Diggs,WR,MIN,36,37,40,37,40,37,40
-doyle_TE_IND,,,,,,,,,170,,195,237
+doyle_TE_IND,,,,,,,,,180,,201,237
 drake_RB_MIA,53,5,Kenyan Drake,RB,MIA,55,50,51,47,51,47,50
-eagles_DST_PHI,137,10,Eagles,DST,PHI,144,170,168,194,191,171,179
-ebron_TE_IND,69,6,Eric Ebron,TE,IND,59,70,70,73,72,72,65
-edelman_WR_NE,38,10,Julian Edelman,WR,NE,42,39,41,39,44,39,42
-edmonds_RB_ARI,,,,,,,,,,,216,220
-edwards_RB_BAL,,,,,,,,,,,214,193
-eifert_TE_CIN,,,,,,,,,,,,227
-ekeler_RB_LAC,124,12,Austin Ekeler,RB,LAC,141,113,130,105,126,107,110
-elliott_K_PHI,151,10,Jake Elliott,K,PHI,151,174,182,202,207,209,206
-elliott_RB_DAL,2,8,Ezekiel Elliott,RB,DAL,2,3,1,4,1,2,2
-engram_TE_NYG,57,11,Evan Engram,TE,NYG,67,63,68,66,68,67,72
-enunwa_WR_NYJ,,,,,,,,,,,224,157
-ers_DST_SF,,,,,,,,,,,231,
+eagles_DST_PHI,137,10,Eagles,DST,PHI,144,167,168,194,191,172,179
+ebron_TE_IND,69,6,Eric Ebron,TE,IND,61,69,71,73,72,72,66
+edelman_WR_NE,38,10,Julian Edelman,WR,NE,42,40,41,39,44,39,43
+edmonds_RB_ARI,,,,,,,,,,,219,222
+edwards_RB_BAL,,,,,,,,,,,217,196
+eifert_TE_CIN,,,,,,,,,,,,228
+ekeler_RB_LAC,125,12,Austin Ekeler,RB,LAC,141,112,134,105,126,106,113
+elliott_K_PHI,147,10,Jake Elliott,K,PHI,153,170,181,197,205,212,207
+elliott_RB_DAL,2,8,Ezekiel Elliott,RB,DAL,2,4,1,3,1,2,2
+engram_TE_NYG,58,11,Evan Engram,TE,NYG,67,63,68,65,69,65,72
+enunwa_WR_NYJ,,,,,,,,,,,224,165
+ers_DST_SF,,,,,,,,,,,235,
 ertz_TE_PHI,27,10,Zach Ertz,TE,PHI,30,27,36,28,36,30,36
 evans_WR_TB,20,7,Mike Evans,WR,TB,22,20,21,20,21,20,22
-fairbairn_K_HOU,143,10,Kaimi Fairbairn,K,HOU,145,158,154,168,157,183,182
-falcons_DST_ATL,,,,,,,,,,,,211
-fant_TE_FA,,,,,,150,,146,189,189,174,192
-fitzgerald_WR_ARI,97,12,Larry Fitzgerald,WR,ARI,120,96,108,97,107,103,109
-fitzpatrick_QB_MIA,,,,,,,,,,,,222
-flacco_QB_DEN,,,,,,,,,,,219,
-foles_QB_JAX,,,,,,,,183,171,,193,212
-foreman_RB_HOU,138,10,Donta Foreman,RB,HOU,148,108,126,101,124,108,124
-foster_WR_BUF,,,,,,,,,184,,173,191
-fournette_RB_JAX,25,10,Leonard Fournette,RB,JAX,24,25,24,26,23,25,23
-freeman_RB_ATL,30,9,Devonta Freeman,RB,ATL,31,33,31,33,30,27,29
-freeman_RB_DEN,126,10,Royce Freeman,RB,DEN,97,98,88,96,90,94,93
-fuller_WR_HOU,85,10,Will Fuller,WR,HOU,79,87,81,83,81,83,79
-funchess_WR_IND,,,,,,124,161,139,155,129,152,126
-gallup_WR_DAL,,,,,,,,,181,,177,205
-garoppolo_QB_SF,,,,,,140,146,144,139,138,144,136
-ginn_WR_NO,,,,,,,,,,,225,
-godwin_WR_TB,60,7,Chris Godwin,WR,TB,60,54,58,53,59,53,57
-goedert_TE_PHI,,,,,,,,,151,168,206,226
-goff_QB_LAR,96,9,Jared Goff,QB,LAR,94,104,99,108,103,104,103
-golladay_WR_DET,44,5,Kenny Golladay,WR,DET,47,45,48,46,48,46,46
-goodwin_WR_SF,,,,,,,,155,187,147,186,148
+fairbairn_K_HOU,142,10,Kaimi Fairbairn,K,HOU,145,156,155,176,156,185,183
+falcons_DST_ATL,,,,,,,,,,,226,212
+fant_TE_FA,,,,,,152,,144,192,186,176,191
+fitzgerald_WR_ARI,96,12,Larry Fitzgerald,WR,ARI,120,96,108,97,106,101,109
+fitzpatrick_QB_MIA,,,,,,,,,,,,224
+flacco_QB_DEN,,,,,,,,,,,222,
+foles_QB_JAX,,,,,,,,182,,,195,216
+foreman_RB_HOU,136,10,Donta Foreman,RB,HOU,149,108,124,102,123,107,124
+foster_WR_BUF,,,,,,,,,178,,174,189
+fournette_RB_JAX,26,10,Leonard Fournette,RB,JAX,24,26,24,27,23,25,23
+freeman_RB_ATL,31,9,Devonta Freeman,RB,ATL,31,33,31,33,30,29,29
+freeman_RB_DEN,127,10,Royce Freeman,RB,DEN,96,99,88,96,91,95,93
+fuller_WR_HOU,85,10,Will Fuller,WR,HOU,79,87,81,84,80,83,78
+funchess_WR_IND,,,,,,123,160,142,152,129,152,127
+gallup_WR_DAL,,,,,,,,,182,,177,205
+garoppolo_QB_SF,,,,,,140,146,143,140,137,145,136
+ginn_WR_NO,,,,,,,,,,,230,
+godwin_WR_TB,59,7,Chris Godwin,WR,TB,58,53,58,52,59,53,58
+goedert_TE_PHI,,,,,,,,,,169,210,226
+goff_QB_LAR,98,9,Jared Goff,QB,LAR,95,105,101,109,103,104,103
+golladay_WR_DET,44,5,Kenny Golladay,WR,DET,47,45,48,46,48,46,47
+goodwin_WR_SF,,,,,,,,154,187,149,189,148
 gordon_RB_LAC,6,12,Melvin Gordon,RB,LAC,5,6,6,6,6,6,6
-gostkowski_K_NE,145,10,Stephen Gostkowski,K,NE,146,162,163,183,181,189,198
-gould_K_SF,147,4,Robbie Gould,K,SF,152,172,177,196,206,208,221
-graham_TE_GB,,,,,,,151,137,159,167,162,167
-green_WR_CIN,33,9,A.J. Green,WR,CIN,28,31,29,31,28,32,30
-guice_RB_WAS,72,10,Derrius Guice,RB,WAS,61,72,60,69,57,66,54
+gostkowski_K_NE,145,10,Stephen Gostkowski,K,NE,147,161,163,179,183,190,198
+gould_K_SF,148,4,Robbie Gould,K,SF,154,168,177,201,204,208,220
+graham_TE_GB,,,,,,,147,135,156,166,162,167
+green_WR_CIN,33,9,A.J. Green,WR,CIN,28,31,29,31,28,32,31
+guice_RB_WAS,73,10,Derrius Guice,RB,WAS,60,71,60,69,57,68,54
 gurley_RB_LAR,17,9,Todd Gurley,RB,LAR,13,17,16,17,16,18,13
-hamilton_WR_DEN,,,,,,,,,148,184,148,173
-hardman_WR_KC,123,12,Mecole Hardman,WR,KC,125,111,114,118,115,112,114
-harris_RB_FA,148,12,Damien Harris,RB,FA,,124,143,121,131,123,159
-harry_WR_NE,90,10,N'Keal Harry,WR,NE,107,94,92,100,92,91,101
-henderson_RB_FA,73,12,Darrell Henderson,RB,FA,84,71,75,70,73,70,80
-henry_RB_TEN,37,11,Derrick Henry,RB,TEN,27,36,23,38,24,38,24
-henry_TE_LAC,58,12,Hunter Henry,TE,LAC,72,61,59,64,60,64,64
-herndon_TE_NYJ,,,,,,,,,165,165,182,199
-hill_RB_FA,,,,,,,157,152,147,163,145,168
-hill_WR_KC,40,12,Tyreek Hill,WR,KC,46,40,44,40,42,40,49
-hilton_WR_IND,24,6,T.Y. Hilton,WR,IND,26,26,26,25,26,24,27
-hines_RB_IND,,,,,,,155,,143,176,136,197
-hockenson_TE_DET,144,5,T.J. Hockenson,TE,DET,112,133,132,128,143,100,117
-hooper_TE_ATL,115,9,Austin Hooper,TE,ATL,,128,151,122,158,97,162
+hamilton_WR_DEN,,,,,,,,,150,181,148,173
+hardman_WR_KC,112,12,Mecole Hardman,WR,KC,125,116,113,120,115,112,114
+harris_RB_FA,149,12,Damien Harris,RB,FA,,125,141,121,130,123,153
+harry_WR_NE,92,10,N'Keal Harry,WR,NE,107,94,93,100,94,93,100
+henderson_RB_FA,71,12,Darrell Henderson,RB,FA,84,72,75,70,73,70,80
+henry_RB_TEN,37,11,Derrick Henry,RB,TEN,27,38,23,38,24,38,24
+henry_TE_LAC,57,12,Hunter Henry,TE,LAC,71,60,59,63,61,64,64
+herndon_TE_NYJ,,,,,,,,,161,167,183,199
+hill_RB_FA,,,,,,,,150,147,164,142,164
+hill_WR_KC,40,12,Tyreek Hill,WR,KC,46,39,44,40,41,40,49
+hilton_WR_IND,24,6,T.Y. Hilton,WR,IND,26,25,26,25,26,24,27
+hines_RB_IND,,,,,,,150,,139,190,136,197
+hockenson_TE_DET,144,5,T.J. Hockenson,TE,DET,112,131,129,128,144,97,117
+hooper_TE_ATL,117,9,Austin Hooper,TE,ATL,,129,148,122,160,98,158
 hopkins_WR_HOU,7,10,DeAndre Hopkins,WR,HOU,7,7,7,7,7,7,8
-howard_RB_PHI,103,10,Jordan Howard,RB,PHI,73,93,76,93,76,93,73
-howard_TE_TB,48,7,O.J. Howard,TE,TB,53,55,52,57,52,56,55
-hunt_RB_CLE,87,7,Kareem Hunt,RB,CLE,86,83,84,86,87,84,85
-hyde_RB_KC,127,12,Carlos Hyde,RB,KC,111,120,110,113,102,114,106
-ingram_RB_BAL,49,8,Mark Ingram,RB,BAL,40,46,38,44,39,44,38
-isabella_WR_ARI,,,,,,,,,190,178,165,181
-jackson_QB_BAL,,,,,,,159,157,152,142,159,144
-jackson_WR_PHI,129,10,DeSean Jackson,WR,PHI,131,132,117,129,120,127,121
-jacobs_RB_OAK,35,6,Josh Jacobs,RB,OAK,38,35,30,35,31,35,34
-jaguars_DST_JAX,102,10,Jaguars,DST,JAX,98,109,111,120,118,124,122
-jeffery_WR_PHI,74,10,Alshon Jeffery,WR,PHI,70,73,69,71,71,71,69
-jets_DST_NYJ,,,,,,,,180,,199,218,230
+howard_RB_PHI,103,10,Jordan Howard,RB,PHI,73,93,76,92,77,92,74
+howard_TE_TB,49,7,O.J. Howard,TE,TB,53,55,52,58,52,56,55
+hunt_RB_CLE,88,7,Kareem Hunt,RB,CLE,86,83,84,85,88,84,86
+hyde_RB_KC,132,12,Carlos Hyde,RB,KC,111,120,109,111,102,115,105
+ingram_RB_BAL,48,8,Mark Ingram,RB,BAL,40,46,38,44,39,44,38
+isabella_WR_ARI,,,,,,,,,189,179,164,181
+jackson_QB_BAL,,,,,,,155,157,148,142,159,143
+jackson_WR_PHI,128,10,DeSean Jackson,WR,PHI,131,130,119,129,120,127,121
+jacobs_RB_OAK,35,6,Josh Jacobs,RB,OAK,37,35,30,35,31,35,34
+jaguars_DST_JAX,102,10,Jaguars,DST,JAX,98,109,111,119,118,124,123
+jeffery_WR_PHI,74,10,Alshon Jeffery,WR,PHI,70,73,70,72,71,71,69
+jets_DST_NYJ,,,,,,,,,,,218,232
 johnson_RB_ARI,5,12,David Johnson,RB,ARI,6,5,5,5,5,5,5
-johnson_RB_CLE,,,,,,,,,,,210,216
-johnson_RB_DET,39,5,Kerryon Johnson,RB,DET,41,38,35,36,34,36,37
-jones_RB_GB,31,11,Aaron Jones,RB,GB,33,30,28,27,27,31,31
-jones_RB_TB,99,7,Ronald Jones II,RB,TB,136,92,100,90,97,92,105
+johnson_RB_CLE,,,,,,,,,,,211,221
+johnson_RB_DET,39,5,Kerryon Johnson,RB,DET,41,36,35,36,34,36,37
+jones_RB_GB,30,11,Aaron Jones,RB,GB,33,28,28,26,27,31,30
+jones_RB_TB,99,7,Ronald Jones II,RB,TB,135,92,99,89,97,91,106
 jones_WR_ATL,11,9,Julio Jones,WR,ATL,12,11,11,11,12,12,12
-jones_WR_BUF,,,,,,,,,,,,234
-jones_WR_DET,106,5,Marvin Jones,WR,DET,101,99,96,98,100,105,102
-kamara_RB_NO,4,9,Alvin Kamara,RB,NO,3,4,3,2,3,4,3
-kelce_TE_KC,16,12,Travis Kelce,TE,KC,17,16,19,16,19,16,17
-kirk_WR_ARI,84,12,Christian Kirk,WR,ARI,88,80,90,79,89,80,89
+jones_WR_BUF,,,,,,,,,,,,235
+jones_WR_DET,105,5,Marvin Jones,WR,DET,101,97,96,98,100,105,102
+kamara_RB_NO,4,9,Alvin Kamara,RB,NO,3,2,3,2,4,4,3
+kelce_TE_KC,15,12,Travis Kelce,TE,KC,17,16,19,16,19,16,17
+kirk_WR_ARI,84,12,Christian Kirk,WR,ARI,88,80,90,80,89,80,89
 kittle_TE_SF,32,4,George Kittle,TE,SF,35,34,37,34,37,34,35
 kumerow_WR_GB,,,,,,,,,,,,219
-kupp_WR_LAR,50,9,Cooper Kupp,WR,LAR,51,48,53,50,53,49,52
-landry_WR_CLE,61,7,Jarvis Landry,WR,CLE,66,57,63,54,67,58,67
-lewis_RB_TEN,,,,,,,168,161,157,166,149,151
-lindsay_RB_DEN,45,10,Phillip Lindsay,RB,DEN,45,43,46,43,43,43,41
-lockett_WR_SEA,55,11,Tyler Lockett,WR,SEA,64,52,54,52,54,54,59
-luck_QB_IND,42,6,Andrew Luck,QB,IND,37,47,43,49,47,48,43
-lutz_K_NO,141,9,Wil Lutz,K,NO,149,150,160,169,173,180,195
+kupp_WR_LAR,50,9,Cooper Kupp,WR,LAR,51,49,53,50,53,49,52
+landry_WR_CLE,61,7,Jarvis Landry,WR,CLE,66,56,63,55,67,58,67
+lewis_RB_TEN,,,,,,,,162,157,165,150,150
+lindsay_RB_DEN,45,10,Phillip Lindsay,RB,DEN,45,44,46,43,43,43,41
+lockett_WR_SEA,56,11,Tyler Lockett,WR,SEA,64,52,54,53,54,54,59
+luck_QB_IND,42,6,Andrew Luck,QB,IND,38,47,43,48,47,48,42
+lutz_K_NO,139,9,Wil Lutz,K,NO,150,148,159,168,170,182,194
 mack_RB_IND,34,6,Marlon Mack,RB,IND,25,32,27,32,25,33,25
-maher_K_DAL,,,,,,,,178,208,209,227,225
-mahomes_QB_KC,28,12,Pat Mahomes,QB,KC,23,29,25,30,29,29,26
-mattison_RB_MIN,109,12,Alexander Mattison,RB,MIN,,134,142,134,144,129,145
-mayfield_QB_CLE,56,7,Baker Mayfield,QB,CLE,54,62,61,68,64,63,62
-mccaffrey_RB_CAR,3,7,Christian McCaffrey,RB,CAR,4,2,4,3,4,3,4
-mccoy_RB_BUF,116,6,LeSean McCoy,RB,BUF,110,102,97,94,96,95,94
-mcdonald_TE_PIT,91,7,Vance McDonald,TE,PIT,90,85,91,84,83,86,87
-mckinnon_RB_SF,136,4,Jerick McKinnon,RB,SF,114,118,119,106,110,110,108
-metcalf_WR_SEA,100,11,D.K. Metcalf,WR,SEA,92,101,98,102,99,102,99
-michel_RB_NE,54,10,Sony Michel,RB,NE,39,51,42,51,41,50,39
-miller_RB_HOU,80,10,Lamar Miller,RB,HOU,69,75,66,72,65,76,66
-miller_WR_CHI,,,,,,,156,153,141,141,143,140
+maher_K_DAL,,,,,,,,178,206,208,231,227
+mahomes_QB_KC,28,12,Pat Mahomes,QB,KC,23,30,25,29,29,28,26
+mattison_RB_MIN,110,12,Alexander Mattison,RB,MIN,,140,145,130,143,129,142
+mayfield_QB_CLE,55,7,Baker Mayfield,QB,CLE,54,62,61,67,64,63,62
+mccaffrey_RB_CAR,3,7,Christian McCaffrey,RB,CAR,4,3,4,4,3,3,4
+mccoy_RB_BUF,119,6,LeSean McCoy,RB,BUF,105,104,97,94,96,96,94
+mcdonald_TE_PIT,90,7,Vance McDonald,TE,PIT,90,86,91,83,83,86,87
+mckinnon_RB_SF,138,4,Jerick McKinnon,RB,SF,114,119,118,110,110,111,108
+metcalf_WR_SEA,101,11,D.K. Metcalf,WR,SEA,93,101,98,103,99,103,99
+michel_RB_NE,54,10,Sony Michel,RB,NE,39,51,42,51,42,50,39
+miller_RB_HOU,80,10,Lamar Miller,RB,HOU,69,74,67,71,65,75,68
+miller_WR_CHI,,,,,,,152,153,141,141,144,139
 mixon_RB_CIN,12,9,Joe Mixon,RB,CIN,10,12,10,12,10,11,10
-moncrief_WR_PIT,,,,,,,143,159,133,149,141,156
-montgomery_RB_CHI,43,6,David Montgomery,RB,CHI,57,41,39,41,38,41,48
-moore_WR_CAR,68,7,D.J. Moore,WR,CAR,78,65,78,62,77,68,77
+moncrief_WR_PIT,,,,,,,138,160,133,148,141,157
+montgomery_RB_CHI,43,6,David Montgomery,RB,CHI,57,41,39,41,38,41,46
+moore_WR_CAR,68,7,D.J. Moore,WR,CAR,78,65,78,60,76,67,77
 moore_WR_SEA,,,,,,,,,,,,180
-murray_QB_FA,88,12,Kyler Murray,QB,FA,102,91,93,92,98,90,100
+murray_QB_FA,87,12,Kyler Murray,QB,FA,99,88,92,90,98,90,101
 murray_RB_NO,86,9,Latavius Murray,RB,NO,89,82,82,82,82,81,83
-myers_K_SEA,,,,,,,,,,,,236
-newton_QB_CAR,93,7,Cam Newton,QB,CAR,96,100,103,103,106,101,104
-njoku_TE_CLE,98,7,David Njoku,TE,CLE,100,95,101,91,91,89,88
-ollison_RB_ATL,,,,,,,,,,,,184
-olsen_TE_CAR,101,7,Greg Olsen,TE,CAR,126,145,138,154,154,146,150
-packers_DST_GB,,,,,,,,,,,226,233
-panthers_DST_CAR,,,,,,,,,,,223,229
-parker_WR_MIA,,,,,,,,,164,187,160,190
-patriots_DST_NE,,,,,,139,169,171,200,196,202,213
-penny_RB_SEA,82,11,Rashaad Penny,RB,SEA,77,79,71,77,66,77,70
-peterson_RB_WAS,112,10,Adrian Peterson,RB,WAS,123,138,121,127,112,122,112
-pettis_WR_SF,78,4,Dante Pettis,WR,SF,87,78,89,76,88,79,90
-prater_K_DET,,,,,,,,,,208,228,235
-prescott_QB_DAL,130,8,Dak Prescott,QB,DAL,109,137,129,131,132,139,146
-rams_DST_LAR,94,9,Rams,DST,LAR,91,103,102,111,111,116,119
-ravens_DST_BAL,111,8,Ravens,DST,BAL,118,123,122,135,128,137,134
-reed_TE_WAS,,,,,,,149,172,180,169,197,202
-ridley_WR_ATL,52,9,Calvin Ridley,WR,ATL,65,49,57,48,58,51,58
-rivers_QB_LAC,122,12,Philip Rivers,QB,LAC,85,116,95,119,93,119,91
-robinson_WR_CHI,83,6,Allen Robinson,WR,CHI,83,84,86,81,85,82,86
-rodgers_QB_GB,47,11,Aaron Rodgers,QB,GB,44,53,49,56,49,55,47
-roethlisberger_QB_PIT,113,7,Ben Roethlisberger,QB,PIT,119,122,118,124,121,125,123
-rosas_K_NYG,,,,,,,,,,,230,232
-ross_WR_CIN,,,,,,,,,,,211,224
-rudolph_TE_MIN,,,,,,,141,140,173,171,161,170
-ryan_QB_ATL,66,9,Matt Ryan,QB,ATL,63,69,67,75,70,74,63
-saints_DST_NO,,,,,,,171,173,197,197,201,207
-samuel_WR_CAR,,,,,,,126,127,125,125,130,133
-samuel_WR_FA,,,,,,,135,,167,201,163,194
-samuels_RB_PIT,125,7,Jaylen Samuels,RB,PIT,103,115,112,110,108,109,113
-sanders_RB_FA,92,12,Miles Sanders,RB,FA,95,86,83,85,84,85,84
-sanders_WR_DEN,110,10,Emmanuel Sanders,WR,DEN,117,139,116,132,116,133,118
-sanu_WR_ATL,,,,,,,,,,,,165
-seahawks_DST_SEA,,,,,,,,,,,207,215
-seferianjenkins_TE_NE,,,,,,,,,,,,187
-shepard_WR_NYG,89,11,Sterling Shepard,WR,NYG,93,89,94,88,94,96,92
-singletary_RB_FA,,,,,,,152,156,137,134,126,129
-smith_RB_ATL,,,,,,,130,125,117,117,113,116
-smith_WR_NO,,,,,,,,170,188,179,170,172
-smithschuster_WR_PIT,15,7,JuJu Smith-Schuster,WR,PIT,18,15,18,15,18,15,19
-snead_WR_BAL,,,,,,,,,,,,139
-stafford_QB_DET,,,,,,,,174,201,182,181,164
-steelers_DST_PIT,,,,,,,,,,174,215,217
-stills_WR_MIA,,,,,,,,,191,186,191,186
-sutton_WR_DEN,139,10,Courtland Sutton,WR,DEN,129,114,105,114,105,118,107
-tate_WR_NYG,105,11,Golden Tate,WR,NYG,104,106,149,107,135,106,132
-tavecchio_K_ATL,150,9,Giorgio Tavecchio,K,ATL,154,173,181,207,204,203,231
-texans_DST_HOU,146,10,Texans,DST,HOU,132,163,150,158,146,155,149
+myers_K_SEA,,,,,,,,,,,,238
+newton_QB_CAR,94,7,Cam Newton,QB,CAR,97,100,103,104,108,102,104
+njoku_TE_CLE,100,7,David Njoku,TE,CLE,104,95,100,91,90,89,88
+ollison_RB_ATL,,,,,,,,,,,188,187
+olsen_TE_CAR,104,7,Greg Olsen,TE,CAR,127,144,138,155,154,146,151
+packers_DST_GB,,,,,,,,,,,228,234
+panthers_DST_CAR,,,,,,,,,,,,230
+parker_WR_MIA,,,,,,,,,167,184,161,190
+patriots_DST_NE,,,,,,139,166,172,199,197,203,213
+penny_RB_SEA,83,11,Rashaad Penny,RB,SEA,77,79,69,78,66,77,70
+peterson_RB_WAS,114,10,Adrian Peterson,RB,WAS,124,139,120,127,112,122,111
+pettis_WR_SF,77,4,Dante Pettis,WR,SF,87,78,89,76,87,79,90
+prater_K_DET,,,,,,,,,204,207,232,236
+prescott_QB_DAL,123,8,Dak Prescott,QB,DAL,108,133,130,131,132,139,146
+rams_DST_LAR,93,9,Rams,DST,LAR,91,102,102,112,111,116,119
+ravens_DST_BAL,111,8,Ravens,DST,BAL,119,123,122,135,128,137,134
+reed_TE_WAS,,,,,,,,175,174,168,198,203
+ridley_WR_ATL,52,9,Calvin Ridley,WR,ATL,65,48,57,49,58,51,57
+rivers_QB_LAC,126,12,Philip Rivers,QB,LAC,85,114,95,118,93,120,91
+robinson_WR_CHI,81,6,Allen Robinson,WR,CHI,83,84,86,81,85,82,85
+rodgers_QB_GB,47,11,Aaron Rodgers,QB,GB,44,54,49,56,50,55,48
+roethlisberger_QB_PIT,109,7,Ben Roethlisberger,QB,PIT,118,122,117,124,121,125,125
+rosas_K_NYG,,,,,,,,,,,234,233
+ross_WR_CIN,,,,,,,,,,,220,225
+rudolph_TE_MIN,,,,,,,,149,165,175,163,169
+ryan_QB_ATL,66,9,Matt Ryan,QB,ATL,63,70,66,75,70,74,63
+saints_DST_NO,,,,,,146,165,171,198,196,200,210
+samuel_WR_CAR,,,,,,,124,127,125,125,131,133
+samuel_WR_FA,,,,,,,,,169,199,166,192
+samuels_RB_PIT,122,7,Jaylen Samuels,RB,PIT,102,115,112,106,107,109,112
+sanders_RB_FA,91,12,Miles Sanders,RB,FA,94,85,83,87,84,85,84
+sanders_WR_DEN,113,10,Emmanuel Sanders,WR,DEN,116,134,116,134,116,133,118
+sanu_WR_ATL,,,,,,,,,,,227,170
+seahawks_DST_SEA,,,,,,,,,,,209,214
+seferianjenkins_TE_NE,,,,,,,,,,,,188
+shepard_WR_NYG,89,11,Sterling Shepard,WR,NYG,92,90,94,88,92,94,92
+singletary_RB_FA,,,,,,,149,158,138,134,126,126
+smith_RB_ATL,,,,,,,128,126,117,117,113,116
+smith_WR_NO,,,,,,,,169,177,187,171,172
+smithschuster_WR_PIT,16,7,JuJu Smith-Schuster,WR,PIT,18,15,18,15,18,15,18
+snead_WR_BAL,,,,,,,,,,,,140
+stafford_QB_DET,,,,,,,,176,195,180,181,166
+steelers_DST_PIT,,,,,,,,,,172,214,218
+stills_WR_MIA,,,,,,,,,173,176,196,184
+sutton_WR_DEN,140,10,Courtland Sutton,WR,DEN,130,113,105,114,104,119,107
+tate_WR_NYG,106,11,Golden Tate,WR,NYG,110,106,151,107,136,108,131
+tavecchio_K_ATL,151,9,Giorgio Tavecchio,K,ATL,156,169,179,202,203,205,231
+texans_DST_HOU,146,10,Texans,DST,HOU,132,159,152,160,146,155,149
 thielen_WR_MIN,23,12,Adam Thielen,WR,MIN,29,23,32,23,32,23,28
-thomas_WR_NE,,,,,,,,,185,190,188,166
+thomas_WR_NE,,,,,,,,,188,185,191,162
 thomas_WR_NO,10,9,Michael Thomas,WR,NO,15,10,13,10,11,10,14
-thompson_RB_KC,,,,,,,,,166,160,178,169
-thompson_RB_WAS,,,,,,,165,,175,,168,238
-trubisky_QB_CHI,,,,,,,160,148,161,155,157,160
-tucker_K_BAL,114,8,Justin Tucker,K,BAL,121,136,131,156,153,167,171
-valdesscantling_WR_GB,120,11,Marquez Valdes-Scantling,WR,GB,,107,145,112,137,121,155
-vikings_DST_MIN,132,12,Vikings,DST,MIN,138,142,133,144,139,147,137
-vinatieri_K_IND,140,6,Adam Vinatieri,K,IND,155,175,176,205,193,199,203
-walker_TE_TEN,128,11,Delanie Walker,TE,TEN,113,125,141,149,130,134,125
-washington_WR_PIT,,,,,,,140,123,130,127,131,127
-watkins_WR_KC,65,12,Sammy Watkins,WR,KC,56,66,62,65,63,62,61
-watson_QB_HOU,51,10,Deshaun Watson,QB,HOU,49,56,55,60,56,59,56
-watson_TE_NE,,,,,,,,,,177,,
-wentz_QB_PHI,75,10,Carson Wentz,QB,PHI,80,81,85,87,86,88,76
-westbrook_WR_JAX,121,10,Dede Westbrook,WR,JAX,130,110,120,109,119,115,131
-white_RB_NE,63,10,James White,RB,NE,82,59,77,58,79,57,78
-williams_RB_GB,,,,,,,,,178,194,185,177
+thompson_RB_KC,152,12,Darwin Thompson,RB,KC,,,,164,162,179,168
+thompson_RB_WAS,,,,,,,,,166,,169,239
+trubisky_QB_CHI,,,,,,,164,147,163,155,158,160
+tucker_K_BAL,115,8,Justin Tucker,K,BAL,121,135,132,159,153,168,171
+valdesscantling_WR_GB,121,11,Marquez Valdes-Scantling,WR,GB,151,107,140,113,135,118,155
+vikings_DST_MIN,133,12,Vikings,DST,MIN,138,137,133,145,139,147,137
+vinatieri_K_IND,141,6,Adam Vinatieri,K,IND,157,171,173,200,193,202,202
+walker_TE_TEN,131,11,Delanie Walker,TE,TEN,117,136,139,149,131,135,122
+washington_WR_PIT,,,,,,,141,123,132,127,132,128
+watkins_WR_KC,65,12,Sammy Watkins,WR,KC,56,67,62,66,63,62,60
+watson_QB_HOU,51,10,Deshaun Watson,QB,HOU,49,58,55,62,55,59,56
+watson_TE_NE,,,,,,,,,,171,,
+wentz_QB_PHI,76,10,Carson Wentz,QB,PHI,80,81,85,86,86,88,79
+westbrook_WR_JAX,124,10,Dede Westbrook,WR,JAX,129,110,121,108,119,114,130
+white_RB_NE,63,10,James White,RB,NE,82,59,77,57,79,57,76
+williams_RB_GB,,,,,,,,,184,195,186,177
 williams_RB_KC,21,12,Damien Williams,RB,KC,20,21,20,21,20,21,20
-williams_WR_LAC,62,12,Mike Williams,WR,LAC,52,60,56,59,55,60,53
-williams_WR_OAK,,,,,,,166,166,140,164,142,158
-wilson_QB_SEA,79,11,Russell Wilson,QB,SEA,71,88,79,89,80,87,81
-wilson_WR_MIA,,,,,,,,,,,200,
-winston_QB_TB,117,7,Jameis Winston,QB,TB,122,112,113,115,114,117,120
-woods_WR_LAR,46,9,Robert Woods,WR,LAR,48,44,50,45,50,45,51
-yeldon_RB_BUF,,,,,,,,,,,187,196
-zuerlein_K_LAR,108,9,Greg Zuerlein,K,LAR,115,129,124,153,151,156,153
+williams_WR_LAC,62,12,Mike Williams,WR,LAC,52,61,56,59,56,60,53
+williams_WR_OAK,,,,,,,163,165,143,163,143,159
+wilson_QB_SEA,79,11,Russell Wilson,QB,SEA,72,89,79,93,81,87,82
+wilson_WR_MIA,,,,,,,,,,,204,
+winston_QB_TB,120,7,Jameis Winston,QB,TB,122,111,114,115,114,117,120
+woods_WR_LAR,46,9,Robert Woods,WR,LAR,48,43,50,45,49,45,51
+yeldon_RB_BUF,,,,,,,,,,,192,195
+zuerlein_K_LAR,108,9,Greg Zuerlein,K,LAR,113,127,125,151,151,156,154

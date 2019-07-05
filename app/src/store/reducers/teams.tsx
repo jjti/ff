@@ -10,7 +10,7 @@ import {
   IStoreState,
   store
 } from '../store';
-import { updatePlayerVORs } from './players';
+import { INITIAL_PLAYERS, updatePlayerVORs } from './players';
 
 /**
  * calculate the "active team", that is, the index of the next
@@ -63,8 +63,8 @@ const addPlayerToTeam = (player: IPlayer, team: ITeam): ITeam => {
   const emptyBenchSpot = team.BENCH.findIndex(b => b === null);
   if (emptySpot > -1) {
     // there's an empty spot in this position
-    team[player.pos] = team[player.pos].map(
-      (p: IPlayer, i: number) => (i === emptySpot ? player : p)
+    team[player.pos] = team[player.pos].map((p: IPlayer, i: number) =>
+      i === emptySpot ? player : p
     );
   } else if (
     ['RB', 'WR', 'TE'].indexOf(player.pos) > -1 &&
@@ -74,8 +74,8 @@ const addPlayerToTeam = (player: IPlayer, team: ITeam): ITeam => {
     team.FLEX = team.FLEX.map((p, i) => (i === emptyFLEXSpot ? player : p));
   } else {
     if (emptyBenchSpot > -1) {
-      team.BENCH = team.BENCH.map(
-        (b, i) => (i === emptyBenchSpot ? player : b)
+      team.BENCH = team.BENCH.map((b, i) =>
+        i === emptyBenchSpot ? player : b
       );
     } else {
       team.BENCH = team.BENCH.concat([player]);
@@ -180,7 +180,7 @@ export const setPick = (
 export const resetStore = (state: IStoreState): IStoreState =>
   updatePlayerVORs({
     ...initialState,
-    players: state.players,
+    players: INITIAL_PLAYERS,
     teams: new Array(10).fill(0).map(() => createTeam(initialRoster))
   });
 

@@ -5,6 +5,8 @@ import { IPick, IRoster, ITeam, NullablePlayer } from '../../models/Team';
 import { createTeam, initialRoster, IStoreState } from '../store';
 import { setActiveTeam } from './teams';
 
+export let INITIAL_PLAYERS: IPlayer[];
+
 interface IPlayerForecast extends IPlayer {
   forecast: number;
 }
@@ -24,12 +26,15 @@ export const setPlayers = (
     return `${name[0]}. ${splitName[1]}`;
   };
 
-  const playersWithTableName = players
-    .filter(p => p.name)
-    .map(p => ({
-      ...p,
-      tableName: p.pos === 'DST' ? p.name : getTableName(p.name)
-    }));
+  const playersWithTableName = players.map(p => ({
+    ...p,
+    tableName: p.pos === 'DST' ? p.name : getTableName(p.name)
+  }));
+
+  // hacky but am storing players here for a reset event
+  if (!INITIAL_PLAYERS) {
+    INITIAL_PLAYERS = playersWithTableName;
+  }
 
   return updatePlayerVORs({
     ...state,
@@ -53,9 +58,7 @@ export const removePlayer = (
   player: IPlayer
 ): IStoreState => ({
   ...state,
-  undraftedPlayers: state.undraftedPlayers.filter(
-    p => !(p.name === player.name && p.pos === player.pos)
-  )
+  undraftedPlayers: state.undraftedPlayers.filter(p => p.key !== player.key)
 });
 
 /**
