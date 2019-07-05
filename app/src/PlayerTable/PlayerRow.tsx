@@ -13,7 +13,6 @@ interface IPlayerRowProps {
   mobile: boolean;
   pickPlayer: (player: IPlayer) => void;
   player: IPlayer;
-  ppr: boolean;
   rbHandcuff: boolean;
   recommended: boolean;
   removePlayer: (player: IPlayer) => void;
@@ -35,7 +34,6 @@ class PlayerRow extends React.Component<IPlayerRowProps> {
       mobile,
       pickPlayer,
       player,
-      ppr,
       rbHandcuff,
       recommended,
       removePlayer
@@ -58,9 +56,7 @@ class PlayerRow extends React.Component<IPlayerRowProps> {
         <p className="col col-pos">{player.pos}</p>
         <p className="col col-team">{player.team}</p>
         <p className="col col-vor">{player.vor}</p>
-        <p className="col col-prediction">
-          {ppr ? player.predictionPPR : player.predictionSTN}
-        </p>
+        <p className="col col-prediction">{player.forecast}</p>
 
         {/* Table data not rendered on mobile */}
         {!mobile && (

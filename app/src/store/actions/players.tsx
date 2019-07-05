@@ -50,10 +50,3 @@ export const setRosterFormat = (rosterFormat: IRoster) => ({
   rosterFormat,
   type: ACTION_TYPES.SET_ROSTER_FORMAT
 });
-
-/**
- * Change whether we're judging players in PPR or Standard league
- */
-export const togglePPR = () => ({
-  type: ACTION_TYPES.TOGGLE_PPR
-});

@@ -17,6 +17,13 @@ import Settings from './Settings/Settings';
 import { setPlayers } from './store/actions/players';
 import TeamPicks from './TeamPicks/TeamPicks';
 
+/**
+ * A player projection payload from Pandas in backend.
+ */
+interface IPlayerProjectionPayload {
+  data: IPlayer[];
+}
+
 interface IProps {
   setPlayers: (players: IPlayer[]) => void;
 }
@@ -31,11 +38,12 @@ class App extends React.PureComponent<IProps, IState> {
 
     // set the player list using setPlayers
     const xhttp = new XMLHttpRequest();
-    let playerDataArray: any = {};
     xhttp.onreadystatechange = function() {
       if (this.readyState === 4 && this.status === 200) {
-        playerDataArray = JSON.parse(xhttp.responseText);
-        props.setPlayers(playerDataArray);
+        const playerProjectionData: IPlayerProjectionPayload = JSON.parse(
+          xhttp.responseText
+        );
+        props.setPlayers(playerProjectionData.data);
       }
     };
 
@@ -47,7 +55,7 @@ class App extends React.PureComponent<IProps, IState> {
       this.setState({ mobile: window.innerWidth < 700 });
     });
 
-    xhttp.open('GET', `${process.env.PUBLIC_URL}/forecast.json`, true);
+    xhttp.open('GET', `${process.env.PUBLIC_URL}/Projections-2019.json`, true);
     xhttp.send();
   }
 

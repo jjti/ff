@@ -4,7 +4,6 @@ import {
   removePlayer,
   setPlayers,
   setRosterFormat,
-  togglePPR,
   undoLast,
   undoPick
 } from './players';
@@ -58,9 +57,6 @@ export default (state = initialState, action: any): IStoreState => {
     }
     case ACTION_TYPES.SKIP_PICK: {
       return skipPick(state);
-    }
-    case ACTION_TYPES.TOGGLE_PPR: {
-      return togglePPR(state);
     }
     case ACTION_TYPES.TOGGLE_ROSTER_FORMATTING: {
       return { ...state, formattingRoster: !state.formattingRoster };

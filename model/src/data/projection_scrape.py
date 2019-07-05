@@ -131,7 +131,7 @@ TEAM_NAME_MAP = {}
 
 
 def scrape():
-    """Scrape from all the sources and average columns into one dataframe
+    """Scrape from all the sources and save to ./data/raw
     """
 
     try:
@@ -250,8 +250,6 @@ def scrape_espn(
 
     validate(df)
 
-    return df
-
 
 def scrape_cbs(
     url="https://www.cbssports.com/fantasy/football/stats", out=RAW_PROJECTIONS
@@ -335,8 +333,6 @@ def scrape_cbs(
     df.to_csv(os.path.join(out, f"CBS-Projections-{YEAR}.csv"), index=False)
 
     validate(df)
-
-    return df
 
 
 def scrape_nfl(out=RAW_PROJECTIONS):
@@ -468,8 +464,6 @@ def scrape_nfl(out=RAW_PROJECTIONS):
 
     validate(df)
 
-    return df
-
 
 def scrape_ffc(out=RAW_ADP):
     """Scrape the FFC website for 8, 10, 12, 14 person leagues in non-PPR and PPR format
@@ -492,9 +486,9 @@ def scrape_ffc(out=RAW_ADP):
                 else f"https://fantasyfootballcalculator.com/adp/standard/{team_count}-team/all"
             )
             DRIVER.get(page_url)
-            time.sleep(0.5)
+            time.sleep(1.5)
             scroll()
-            time.sleep(0.5)
+            time.sleep(1.5)
 
             soup = BeautifulSoup(
                 DRIVER.execute_script("return document.body.innerHTML"), "html.parser"
@@ -504,7 +498,7 @@ def scrape_ffc(out=RAW_ADP):
             headers = [e.get_text() for e in table.find_all("tr")[0].find_all("th")]
             headers = [column(h) for h in headers]
 
-            wanted = {"name", "pos", "team"}
+            wanted = {"name", "pos", "team", "bye"}
 
             players = []
             ppr_key = "ppr" if ppr else "standard"
@@ -540,8 +534,6 @@ def scrape_ffc(out=RAW_ADP):
 
     validate(df, strict=False)
 
-    return df
-
 
 def column(text):
     """Parse column to common format.
@@ -573,12 +565,16 @@ def add_key(df):
 
     name_regex = re.compile("[^a-z ]+")
 
-    def name(n):
+    def name(n):  # get last name
         n = n.lower().replace("sr", "").replace("st.", "").strip()
-        n = name_regex.sub("", n).strip().replace("  ", " ").split(" ")[:2]
-        return "_".join(n)
+        n = name_regex.sub("", n).strip().replace("  ", " ").split(" ")
+        return n[1] if len(n) > 1 else n[0]
 
-    df["key"] = df.apply(lambda x: name(x["name"]) + "_" + x["pos"], axis=1)
+    df["key"] = df.apply(
+        lambda x: name(x["name"]) + "_" + x["pos"] + "_" + x["team"], axis=1
+    )
+
+    df = df.drop_duplicates("key")
 
     return df
 
@@ -586,13 +582,7 @@ def add_key(df):
 def validate(df, strict=True):
     """Throw an exception if we're missing players at a certain position. These number of estimates."""
 
-    pos_counts = {"QB": 32, "RB": 64, "WR": 64, "TE": 32, "DST": 32, "K": 32}
-
-    if "key" in df.columns:
-        dups = df[df.duplicated(subset="key")]
-        if len(dups):
-            print(dups)
-            raise RuntimeWarning("duplicated key")
+    pos_counts = {"QB": 32, "RB": 64, "WR": 64, "TE": 28, "DST": 32, "K": 32}
 
     for pos, count in pos_counts.items():
         actual_count = len(df[df.pos == pos])

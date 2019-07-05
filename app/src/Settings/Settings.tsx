@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { resetDraft, togglePPR } from '../store/actions/players';
+import { resetDraft } from '../store/actions/players';
 import {
   setNumberOfTeams,
   setTrackedTeam,
@@ -13,10 +13,8 @@ interface IProps {
   currentPick: number;
   numberOfTeams: number;
   resetDraft: () => void;
-  ppr: boolean;
   setNumberOfTeams: (count: number) => void;
   setTrackedTeam: (team: number) => void;
-  togglePPR: () => void;
   toggleRosterFormatting: () => void;
   trackedTeam: number;
 }
@@ -38,7 +36,7 @@ class Settings extends React.Component<IProps, IState> {
   };
 
   public render() {
-    const { currentPick, numberOfTeams, ppr, trackedTeam } = this.props;
+    const { currentPick, numberOfTeams, trackedTeam } = this.props;
     const { open } = this.state;
 
     // an array with the allowable number of teams: [6, 16]
@@ -100,20 +98,6 @@ class Settings extends React.Component<IProps, IState> {
             </label>
 
             <label
-              className="full-width"
-              onClick={disabledOptions ? () => ({}) : this.props.togglePPR}
-              data-tip={
-                disabledOptions ? 'Reset draft to customize team rosters' : ''
-              }>
-              PPR
-              <div
-                className={`toggle ${ppr ? 'active' : ''} ${
-                  disabledOptions ? 'disabled' : ''
-                }`}
-              />
-            </label>
-
-            <label
               data-tip={
                 disabledOptions ? 'Reset draft to customize team rosters' : ''
               }>
@@ -153,12 +137,10 @@ class Settings extends React.Component<IProps, IState> {
 const mapStateToProps = ({
   currentPick,
   numberOfTeams,
-  ppr,
   trackedTeam
 }: IStoreState) => ({
   currentPick,
   numberOfTeams,
-  ppr,
   trackedTeam
 });
 
@@ -166,7 +148,6 @@ const mapDispathToProps = (dispatch: any) => ({
   resetDraft: () => dispatch(resetDraft()),
   setNumberOfTeams: (count: number) => dispatch(setNumberOfTeams(count)),
   setTrackedTeam: (index: number) => dispatch(setTrackedTeam(index)),
-  togglePPR: () => dispatch(togglePPR()),
   toggleRosterFormatting: () => dispatch(toggleRosterFormatting())
 });
 

@@ -1,6 +1,7 @@
 import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { IPlayer } from '../models/Player';
+import { IScoring } from '../models/Scoring';
 import { IPick, IRoster, ITeam } from '../models/Team';
 import reducers from './reducers';
 
@@ -51,15 +52,15 @@ export interface IStoreState {
   players: IPlayer[];
 
   /**
-   * Whether we're currently doing a Standard or a PPR draft
-   */
-  ppr: boolean;
-
-  /**
    * The roster of the teams being drafted for.
    * The default is 1QB, 2RB, 2WR, 1TE, 1FLEX, 1K, 1DST, and 7Bench, but this can be changed
    */
   rosterFormat: IRoster;
+
+  /**
+   * The user's league scoring. The default is for an ESPN league
+   */
+  scoring: IScoring;
 
   /**
    * Currently selected player (one click)
@@ -115,6 +116,38 @@ export const initialRoster: IRoster = {
   WR: 2
 };
 
+/**
+ * Default scoring for an ESPN league.
+ * See: https://support.espn.com/hc/en-us/articles/360003914032-Scoring-Formats
+ */
+export const initialScore: IScoring = {
+  passYds: 0.04,
+  passTds: 4.0, // tslint:disable-line
+  passInts: -2.0,
+  receptions: 0.0,
+  receptionYds: 0.1,
+  receptionTds: 6.0,
+  rushYds: 0.1,
+  rushTds: 6.0,
+  fumbles: -2.0,
+  twoPts: 2.0,
+  kickExtraPoints: 1.0,
+  kick019: 3.0,
+  kick2029: 3.0,
+  kick3039: 3.0,
+  kick4049: 4.0,
+  kick50: 5.0,
+  dfInts: 2.0,
+  dfTds: 6.0,
+  dfSacks: 1.0,
+  dfPointsAllowedPerGame: 0,
+  dfFumbles: 2.0,
+  dfSafeties: 2.0
+};
+
+/**
+ * Initial state of the redux store
+ */
 export const initialState = {
   activeTeam: 0, // active team's index ([0-9]) that's currently drafting
   currentPick: 0, // index of current pick
@@ -125,6 +158,7 @@ export const initialState = {
   players: [],
   ppr: false,
   rosterFormat: initialRoster,
+  scoring: initialScore,
   selectedPlayer: null,
   teams: new Array(10).fill(0).map(() => createTeam(initialRoster)), // doing 10 empty teams by default
   trackedTeam: 0, // team to track in TeamPicks

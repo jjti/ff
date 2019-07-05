@@ -1,8 +1,13 @@
 import { toast } from 'react-toastify';
 import { IPlayer, Position } from '../../models/Player';
+import { IScoring } from '../../models/Scoring';
 import { IPick, IRoster, ITeam, NullablePlayer } from '../../models/Team';
 import { createTeam, initialRoster, IStoreState } from '../store';
 import { setActiveTeam } from './teams';
+
+interface IPlayerForecast extends IPlayer {
+  forecast: number;
+}
 
 /**
  * Update the list of players in the store
@@ -19,10 +24,12 @@ export const setPlayers = (
     return `${name[0]}. ${splitName[1]}`;
   };
 
-  const playersWithTableName = players.filter(p => p.name).map(p => ({
-    ...p,
-    tableName: p.pos === 'DST' ? p.name : getTableName(p.name)
-  }));
+  const playersWithTableName = players
+    .filter(p => p.name)
+    .map(p => ({
+      ...p,
+      tableName: p.pos === 'DST' ? p.name : getTableName(p.name)
+    }));
 
   return updatePlayerVORs({
     ...state,
@@ -162,17 +169,15 @@ export const setRosterFormat = (
   });
 
 /**
- * toggle the PPR setting and make a notification
+ * Update the VOR for all the players not yet drafted. Is dependent on
+ * the number of teams currently in the draft
+ *
+ * @param state the current store state
  */
-export const togglePPR = (state: IStoreState): IStoreState => {
-  if (!state.ppr) {
-    toast.info('Using PPR Scoring');
-  } else {
-    toast.info('Using Standard Scoring');
-  }
-
-  return updatePlayerVORs({ ...state, ppr: !state.ppr });
-};
+export const updatePlayerVORs = (state: IStoreState): IStoreState => ({
+  ...state,
+  undraftedPlayers: updateVOR(state)
+});
 
 /**
  * recalculate VOR for the players.
@@ -186,33 +191,16 @@ export const togglePPR = (state: IStoreState): IStoreState => {
  * @param numberOfTeams
  */
 const updateVOR = (state: IStoreState): IPlayer[] => {
-  const { numberOfTeams, ppr, rosterFormat } = state;
-  let { players } = state;
+  const { numberOfTeams, rosterFormat, scoring } = state;
 
   // how many rounds we care about from a VOR perspective
   const numberOfRounds = numberOfTeams;
   // the drafable positions (TODO: account for FLEX)
   const positions: Position[] = ['QB', 'RB', 'WR', 'TE', 'DST', 'K'];
 
-  // we have 4 adp rankings from fantasyfootballcalculator. they're stored
-  // in player properties adp8, adp10, adp12, and adp14
-  let adp = 'adp10';
-  if (numberOfTeams <= 8) {
-    adp = 'adp8';
-  } else if (numberOfTeams > 10 && numberOfTeams <= 12) {
-    adp = 'adp12';
-  } else if (numberOfTeams > 12) {
-    adp = 'adp14';
-  }
-
-  if (ppr) {
-    adp += 'PPR';
-  } else {
-    adp += 'STN';
-  }
-
-  // update player adp to whatever it is in an equivelant league size
-  players = players.map(p => ({ ...p, adp: p[adp] }));
+  // get player array with estimated draft positions
+  const playersADP = playersWithADP(state);
+  let players = playersWithForecast(scoring, playersADP);
 
   // total number of players at each position
   const positionToTotalCountMap = {};
@@ -270,21 +258,14 @@ const updateVOR = (state: IStoreState): IPlayer[] => {
     // sort the players, in that position, by their VOR
     const sortedPlayersInPosition = players
       .filter(p => p.pos === pos)
-      .sort(
-        (a, b) =>
-          ppr
-            ? b.predictionPPR - a.predictionPPR
-            : b.predictionSTN - a.predictionSTN
-      );
+      .sort((a, b) => b.forecast - a.forecast);
 
     // if the "replacement player" is a tenable value, get his expected
     // number of points, otherwise it says zero
     let replacementValue = 0;
     if (positionToCountMap[pos] < positionToTotalCountMap[pos]) {
       replacementValue =
-        sortedPlayersInPosition[positionToCountMap[pos]][
-          ppr ? 'predictionPPR' : 'predictionSTN'
-        ];
+        sortedPlayersInPosition[positionToCountMap[pos]].forecast;
     }
 
     positionToReplaceValueMap[pos] = replacementValue;
@@ -293,9 +274,7 @@ const updateVOR = (state: IStoreState): IPlayer[] => {
   // #3, update players' VORs
   players = players.map(p => ({
     ...p,
-    vor:
-      (ppr ? p.predictionPPR : p.predictionSTN) -
-      positionToReplaceValueMap[p.pos]
+    vor: p.forecast - positionToReplaceValueMap[p.pos]
   }));
 
   players = players.filter(p => p.vor !== undefined);
@@ -305,12 +284,50 @@ const updateVOR = (state: IStoreState): IPlayer[] => {
 };
 
 /**
- * Update the VOR for all the players not yet drafted. Is dependent on
- * the number of teams currently in the draft
- *
- * @param state the current store state
+ * Check league size and points per reception to update each player's
+ * PPR. Based on Fantasy Football Calculator
  */
-export const updatePlayerVORs = (state: IStoreState): IStoreState => ({
-  ...state,
-  undraftedPlayers: updateVOR(state)
-});
+const playersWithADP = (store: IStoreState): IPlayer[] => {
+  const { numberOfTeams, scoring, players } = store;
+
+  // whether to show PPR ADP depends on the receptions settings
+  const ppr = scoring.receptions >= 0.5;
+
+  // we have 4 adp rankings from fantasyfootballcalculator. they're stored
+  // in player properties adp8, adp10, adp12, and adp14
+  let adp = 'adp10';
+  if (numberOfTeams <= 8) {
+    adp = 'adp8';
+  } else if (numberOfTeams > 10 && numberOfTeams <= 12) {
+    adp = 'adp12';
+  } else if (numberOfTeams > 12) {
+    adp = 'adp14';
+  }
+
+  if (ppr) {
+    adp += 'Ppr';
+  } else {
+    adp += 'Standard';
+  }
+
+  // set player adp to whatever it is in an equivelant league size
+  return players.map(p => ({ ...p, adp: p[adp] }));
+};
+
+/**
+ * Update the players by forecasting their season-end points. Use league score
+ * and the league's point settings
+ * @param scoring league scoring settings
+ * @param players list of players
+ */
+const playersWithForecast = (
+  scoring: IScoring,
+  players: IPlayer[]
+): IPlayerForecast[] => {
+  return players.map(p => ({
+    ...p,
+    forecast: Math.round(
+      Object.keys(scoring).reduce((acc, k) => acc + scoring[k] * p[k], 0.0)
+    )
+  }));
+};

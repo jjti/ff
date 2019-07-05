@@ -21,7 +21,6 @@ interface IPlayerTableProps {
   pickPlayer: (player: IPlayer) => void;
   players: ITablePlayer[];
   positionsToShow: Position[];
-  ppr: boolean;
   rbHandcuffs: IPlayer[];
   recommended: IPlayer[]; // names that are recommended
   removePlayer: (player: IPlayer) => void;
@@ -49,7 +48,6 @@ export default ({
   pickPlayer,
   players,
   positionsToShow,
-  ppr,
   rbHandcuffs,
   recommended,
   removePlayer,
@@ -162,7 +160,6 @@ export default ({
               byeWeekConflict={byeWeeks[player.bye]}
               inValuablePosition={valuedPositions[player.pos]}
               player={player}
-              ppr={ppr}
               rbHandcuff={rbHandcuffs.indexOf(player) > -1}
               recommended={recommended.indexOf(player) > -1}
               removePlayer={removePlayer}

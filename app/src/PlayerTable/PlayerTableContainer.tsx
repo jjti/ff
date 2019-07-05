@@ -16,7 +16,6 @@ interface IPlayerTableProps {
   mobile?: boolean;
   undraftedPlayers: any[];
   pickPlayer: (player: IPlayer) => void;
-  ppr: boolean;
 
   /**
    * Key is the team name, defined for a team if there's a player on
@@ -253,7 +252,6 @@ const mapStateToProps = (state: IStoreState) => {
   return {
     byeWeeks,
     currentPick: state.currentPick,
-    ppr: state.ppr,
     rbHandcuffTeams,
     undraftedPlayers: state.undraftedPlayers,
     valuedPositions

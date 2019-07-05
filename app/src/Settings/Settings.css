@@ -18,34 +18,3 @@
 .options-left {
   margin: 0 0 0 auto;
 }
-
-.toggle {
-  position: relative;
-  margin-left: auto;
-  width: 35px;
-  height: 4px;
-  background-color: var(--light-gray);
-}
-
-.toggle:hover {
-  cursor: pointer;
-}
-
-.toggle::before {
-  position: absolute;
-  top: -7px;
-  right: 16px; /* same as width */
-  height: 16px;
-  width: 16px;
-  border-radius: 16px;
-  background-color: #f2f2f2;
-  content: " ";
-  border: var(--border-gray);
-  transition: var(--default-transition);
-}
-
-.toggle.active::before {
-  border: none;
-  background-color: var(--blue);
-  right: 0;
-}
