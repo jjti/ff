@@ -303,7 +303,39 @@ const playersWithForecast = (
   return players.map(p => ({
     ...p,
     forecast: Math.round(
-      Object.keys(scoring).reduce((acc, k) => acc + scoring[k] * p[k], 0.0)
+      Object.keys(scoring).reduce(
+        (acc, k) =>
+          k === 'dfPointsAllowedPerGame'
+            ? acc + 16 * dstPointsPerGame(p[k])
+            : acc + scoring[k] * p[k],
+        0.0
+      )
     )
   }));
+};
+
+/**
+ * estimate the points a team will earn from points against over season
+ * @param pts average number of points per game
+ */
+const dstPointsPerGame = (pts: number): number => {
+  if (pts === null) {
+    return 0;
+  }
+  if (pts < 1) {
+    return 5;
+  } else if (pts < 7) {
+    return 4;
+  } else if (pts < 14) {
+    return 3;
+  } else if (pts < 18) {
+    return 1;
+  } else if (pts < 28) {
+    return 0;
+  } else if (pts < 35) {
+    return -1;
+  } else if (pts < 46) {
+    -3;
+  }
+  return -5;
 };

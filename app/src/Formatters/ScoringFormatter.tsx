@@ -19,14 +19,14 @@ interface IProps {
 class ScoringFormatter extends React.Component<IProps> {
   /** Offensive settings */
   private offense = {
-    passYds: 'Thrown yard',
+    passYds: '25 passing yards',
     passTds: 'Thrown TD', // tslint:disable-line
-    passInts: 'Thrown interception',
+    passInts: 'Interception',
     receptions: 'Reception',
-    receptionYds: 'Reception yard',
-    receptionTds: 'Reception TD',
-    rushYds: 'Rush yard',
-    rushTds: 'Rush TD',
+    receptionYds: '10 receiving yards',
+    receptionTds: 'TD reception',
+    rushYds: '10 rushing yards',
+    rushTds: 'Rushing TD',
     fumbles: 'Fumble',
     twoPts: '2PT Conversion'
   };
@@ -46,9 +46,17 @@ class ScoringFormatter extends React.Component<IProps> {
     dfInts: 'Defensive interception',
     dfTds: 'Defensive TD',
     dfSacks: 'Defensive sack', // tslint:disable-line
-    dfPointsAllowedPerGame: 'Defensive points allowed',
     dfFumbles: 'Fumble recovery',
     dfSafeties: 'Safety'
+  };
+
+  /**
+   * Some stats are reported as multiples, but should be 1:1 during forecasting
+   */
+  private multiple = {
+    passYds: 25,
+    receptionYds: 10,
+    rushYds: 10
   };
 
   public render() {
@@ -80,9 +88,14 @@ class ScoringFormatter extends React.Component<IProps> {
                     id={k}
                     name={k}
                     type="number"
-                    defaultValue={scoring[k]}
+                    defaultValue={
+                      this.multiple[k]
+                        ? scoring[k] * this.multiple[k]
+                        : scoring[k]
+                    }
                     onBlur={this.onBlur}
                   />
+                  <small>pts</small>
                 </div>
               ))}
             </div>
@@ -99,6 +112,7 @@ class ScoringFormatter extends React.Component<IProps> {
                     defaultValue={scoring[k]}
                     onBlur={this.onBlur}
                   />
+                  <small>pts</small>
                 </div>
               ))}
 
@@ -113,6 +127,7 @@ class ScoringFormatter extends React.Component<IProps> {
                     defaultValue={scoring[k]}
                     onBlur={this.onBlur}
                   />
+                  <small>pts</small>
                 </div>
               ))}
             </div>
@@ -129,7 +144,14 @@ class ScoringFormatter extends React.Component<IProps> {
     const { scoring, dispatchSetScoreFormat } = this.props;
     const { id, value } = e.target;
 
-    dispatchSetScoreFormat({ ...scoring, [id]: value });
+    let numValue: number;
+    if (this.multiple[id]) {
+      numValue = parseInt(value, 10) / this.multiple[id];
+    } else {
+      numValue = parseInt(value, 10);
+    }
+
+    dispatchSetScoreFormat({ ...scoring, [id]: numValue });
   };
 }
 

@@ -48,7 +48,3 @@
 .position-button:first-child {
   margin-left: auto;
 }
-
-.position-button:last-child {
-  margin-right: 15px;
-}
