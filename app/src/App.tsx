@@ -8,11 +8,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import ReactTooltip from 'react-tooltip';
 import { compose } from 'redux';
 import './App.css';
+import RosterFormatter from './Formatters/RosterFormatter';
+import ScoringFormatter from './Formatters/ScoringFormatter';
 import Header from './Header/Header';
 import { IPlayer } from './models/Player';
 import PickHistoryContainer from './PickHistory/PickHistoryContainer';
 import PlayerTableContainer from './PlayerTable/PlayerTableContainer';
-import RosterFormatter from './RosterFormatter/RosterFormatter';
 import Settings from './Settings/Settings';
 import { setPlayers } from './store/actions/players';
 import TeamPicks from './TeamPicks/TeamPicks';
@@ -81,6 +82,7 @@ class App extends React.PureComponent<IProps, IState> {
         </div>
 
         <RosterFormatter />
+        <ScoringFormatter />
 
         <ToastContainer
           className="toast-container"

@@ -1,0 +1,24 @@
+.scoring-columns {
+    display: flex;
+}
+
+.scoring-column {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.scoring-column.left-column {
+    margin-right: 20px;
+}
+
+.scoring-input {
+    display: flex;
+}
+
+.scoring-input > input {
+    margin-left: auto;
+    width: 50px;
+    text-align: right;
+    padding-right: 5px;
+}

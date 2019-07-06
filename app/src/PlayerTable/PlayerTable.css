@@ -14,7 +14,7 @@
 }
 
 #table {
-  padding: 8px;
+  padding: 8px 0;
 }
 
 .Player-Filter {
@@ -151,6 +151,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 8px;
 }
 
 .remove-player-x {

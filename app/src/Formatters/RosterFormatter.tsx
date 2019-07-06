@@ -48,11 +48,13 @@ class RosterFormatter extends React.Component<IProps> {
 
     return (
       <div
-        className="RosterFormatter-backdrop"
+        className="Formatter-backdrop"
         onClick={this.props.toggleRosterFormatting}>
-        <div className="RosterFormatter" onClick={e => e.stopPropagation()}>
+        <div
+          className="Formatter RosterFormatter"
+          onClick={e => e.stopPropagation()}>
           <header>
-            <h3>Customize Roster</h3>
+            <h3>Change Roster</h3>
             <button
               className="remove-player-x"
               onClick={this.props.toggleRosterFormatting}

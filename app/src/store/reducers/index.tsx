@@ -7,6 +7,7 @@ import {
   undoLast,
   undoPick
 } from './players';
+import { setScoringFormat } from './scoring';
 import {
   incrementDraft,
   pickPlayer,
@@ -53,7 +54,7 @@ export default (state = initialState, action: any): IStoreState => {
       return setRosterFormat(state, action.rosterFormat);
     }
     case ACTION_TYPES.SET_SCORE_FORMAT: {
-      return { ...state, scoring: action.scoring };
+      return setScoringFormat(state, action.scoring);
     }
     case ACTION_TYPES.SET_TRACKED_TEAM: {
       return setTrackedTeam(state, action.trackedTeam);

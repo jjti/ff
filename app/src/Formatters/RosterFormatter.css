@@ -1,4 +1,4 @@
-.RosterFormatter-backdrop {
+.Formatter-backdrop {
   position: absolute;
   top: 0;
   left: 0;
@@ -8,19 +8,22 @@
   background-color: #636363b0;
 }
 
-.RosterFormatter {
+.Formatter {
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
   left: 50%;
-  width: 330px;
   background-color: white;
   border: var(--border-gray);
   border-radius: 4px;
-  padding: 10px 20px;
+  padding: 20px;
 }
 
-.RosterFormatter > header > button {
+.RosterFormatter {
+  max-width: 450px;
+}
+
+.Formatter > header > button {
   height: 40px;
   width: 30px;
   margin-left: auto;

@@ -34,6 +34,7 @@ h3 {
 h4 {
   font-size: 18px;
   font-weight: 600;
+  margin: 10px 5px;
 }
 
 h5 {
@@ -52,6 +53,12 @@ input {
   font-size: 14px;
   margin: 8px;
   color: var(--dark-gray);
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
 }
 
 select:disabled, button:disabled {
@@ -94,6 +101,7 @@ button {
 }
 
 button:hover {
+  text-decoration: underline;
   cursor: pointer;
 }
 

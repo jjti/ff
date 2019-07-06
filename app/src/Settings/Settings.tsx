@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { resetDraft } from '../store/actions/players';
+import { toggleScoringFormatting } from '../store/actions/scoring';
 import {
   setNumberOfTeams,
   setTrackedTeam,
@@ -16,6 +17,7 @@ interface IProps {
   setNumberOfTeams: (count: number) => void;
   setTrackedTeam: (team: number) => void;
   toggleRosterFormatting: () => void;
+  toggleScoringFormatting: () => void;
   trackedTeam: number;
 }
 
@@ -81,11 +83,7 @@ class Settings extends React.Component<IProps, IState> {
               Number of teams
               <div
                 className="Options-Container"
-                data-tip={
-                  disabledOptions
-                    ? 'Reset draft to change the number of teams'
-                    : ''
-                }>
+                data-tip={disabledOptions ? 'Reset to change team count' : ''}>
                 <select
                   className={`Grayed ${disabledOptions ? 'disabled' : ''}`}
                   value={`${numberOfTeams} Teams`}
@@ -98,15 +96,21 @@ class Settings extends React.Component<IProps, IState> {
               </div>
             </label>
 
-            <label
-              data-tip={
-                disabledOptions ? 'Reset draft to customize team rosters' : ''
-              }>
+            <label data-tip={disabledOptions ? 'Reset to change rosters' : ''}>
               <button
                 className="Options-Container options-left"
                 onClick={this.props.toggleRosterFormatting}
                 disabled={disabledOptions}>
-                <p>Customize Roster</p>
+                <p>Roster</p>
+              </button>
+            </label>
+
+            <label data-tip={disabledOptions ? 'Reset to change scoring' : ''}>
+              <button
+                className="Options-Container options-left"
+                onClick={this.props.toggleScoringFormatting}
+                disabled={disabledOptions}>
+                <p>Scoring</p>
               </button>
             </label>
 
@@ -114,7 +118,7 @@ class Settings extends React.Component<IProps, IState> {
               <button
                 className="Options-Container options-left"
                 onClick={this.props.resetDraft}>
-                <p>Reset Draft</p>
+                <p>Reset</p>
               </button>
             </label>
           </aside>
@@ -149,7 +153,8 @@ const mapDispathToProps = (dispatch: any) => ({
   resetDraft: () => dispatch(resetDraft()),
   setNumberOfTeams: (count: number) => dispatch(setNumberOfTeams(count)),
   setTrackedTeam: (index: number) => dispatch(setTrackedTeam(index)),
-  toggleRosterFormatting: () => dispatch(toggleRosterFormatting())
+  toggleRosterFormatting: () => dispatch(toggleRosterFormatting()),
+  toggleScoringFormatting: () => dispatch(toggleScoringFormatting())
 });
 
 export default connect(
