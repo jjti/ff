@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import './Header.css';
 
 export default class Header extends React.Component {
@@ -25,9 +26,7 @@ export default class Header extends React.Component {
           </a>
         </p>
         <p>
-          <a href="https://github.com/JJTimmons/ff" target="_blank">
-            Source code
-          </a>
+          <Link to="/about">Overview</Link>
         </p>
       </div>
     );

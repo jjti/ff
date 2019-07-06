@@ -136,8 +136,8 @@ def scrape():
 
     try:
         scrape_espn()
-        # scrape_cbs()
-        # scrape_nfl()
+        scrape_cbs()
+        scrape_nfl()
         scrape_fantasy_pros()
     except Exception as err:
         print(str(err))

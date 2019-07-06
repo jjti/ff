@@ -127,7 +127,7 @@ export default ({
         <p className="col col-pos">Position</p>
         <p className="col col-team">Team</p>
         <p className="col col-vor" data-tip="Value over replacement">
-          VOR
+          Value
         </p>
         <p
           className="col col-prediction"

@@ -1,0 +1,13 @@
+.About {
+    max-width: 800px;
+    margin: 50px auto;
+}
+
+.About > p,.About > p > a {
+    font-size: 17px !important;
+    line-height: 1.7;
+}
+
+.About-back-button {
+    text-decoration: unset;
+}
