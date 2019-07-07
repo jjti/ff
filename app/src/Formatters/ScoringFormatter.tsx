@@ -78,6 +78,7 @@ class ScoringFormatter extends React.Component<IProps> {
                 <InputNumber
                   id={k}
                   name={k}
+                  key={k}
                   type="number"
                   defaultValue={
                     this.multiple[k]
@@ -98,6 +99,7 @@ class ScoringFormatter extends React.Component<IProps> {
                 <InputNumber
                   id={k}
                   name={k}
+                  key={k}
                   type="number"
                   defaultValue={scoring[k]}
                   onBlur={this.onBlur}
@@ -114,6 +116,7 @@ class ScoringFormatter extends React.Component<IProps> {
                 <InputNumber
                   id={k}
                   name={k}
+                  key={k}
                   type="number"
                   defaultValue={scoring[k]}
                   onBlur={this.onBlur}

@@ -25,7 +25,7 @@ h2 {
 }
 
 h3 {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
   margin: 10px 5px;
 }
@@ -83,6 +83,7 @@ select:disabled, button:disabled {
 }
 
 a {
+  text-decoration: underline;
   margin: 0;
 }
 

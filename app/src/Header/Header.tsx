@@ -6,11 +6,13 @@ export default class Header extends React.Component {
   public render() {
     return (
       <div className="Header Section">
-        <h1 id="App-Header">ffdraft.app</h1>
+        <div id="Header-Title">
+          <h1 id="App-Header">ffdraft.app</h1>
+          <button className=".Grayed">
+            <Link to="/about">About</Link>
+          </button>
+        </div>
         <p>A value based fantasy football draft wizard</p>
-        <button className=".Grayed" style={{ marginLeft: 0 }}>
-          <Link to="/about">About</Link>
-        </button>
       </div>
     );
   }

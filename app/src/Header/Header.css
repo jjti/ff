@@ -5,3 +5,11 @@
 #App-Header > p {
   margin: 8px;
 }
+
+#Header-Title {
+  display: flex;
+}
+
+#Header-Title > button {
+  margin-left: 10px;
+}

@@ -59,6 +59,7 @@ class RosterFormatter extends React.Component<IProps> {
           {this.orderedPositions.map(k => (
             <Input
               id={k}
+              key={k}
               type="number"
               className="position-input"
               value={rosterFormat[k]}
