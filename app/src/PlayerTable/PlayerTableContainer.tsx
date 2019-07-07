@@ -182,8 +182,8 @@ class PlayerTableContainer extends React.Component<
   /**
    * update the filter for searching for a plauer by name or team
    */
-  private setNameFilter = (event: React.FormEvent<HTMLInputElement>) => {
-    this.setState({ nameFilter: event.currentTarget.value });
+  private setNameFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ nameFilter: e.target.value });
   };
 }
 

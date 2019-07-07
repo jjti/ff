@@ -1,3 +1,4 @@
+import { InputNumber, Modal } from 'antd';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { IScoring } from '../models/Scoring';
@@ -62,78 +63,66 @@ class ScoringFormatter extends React.Component<IProps> {
   public render() {
     const { formattingScoring, scoring } = this.props;
 
-    if (!formattingScoring) {
-      return null;
-    }
-
     return (
-      <div
-        className="Formatter-backdrop"
-        onClick={this.props.toggleScoringFormatting}>
-        <div className="Formatter" onClick={e => e.stopPropagation()}>
-          <header>
-            <h3>Change League Scoring</h3>
-            <button
-              className="remove-player-x"
-              onClick={this.props.toggleScoringFormatting}
-            />
-          </header>
-          <div className="scoring-columns">
-            <div className="scoring-column left-column">
-              <h4>Offense</h4>
-              {Object.keys(this.offense).map(k => (
-                <div className="scoring-input" key={k}>
-                  <label htmlFor={k}>{this.offense[k]}</label>
-                  <input
-                    id={k}
-                    name={k}
-                    type="number"
-                    defaultValue={
-                      this.multiple[k]
-                        ? scoring[k] * this.multiple[k]
-                        : scoring[k]
-                    }
-                    onBlur={this.onBlur}
-                  />
-                  <small>pts</small>
-                </div>
-              ))}
-            </div>
+      <Modal
+        title="Change scoring"
+        visible={formattingScoring}
+        onOk={this.props.toggleScoringFormatting}
+        onCancel={this.props.toggleScoringFormatting}>
+        <div className="scoring-columns">
+          <div className="scoring-column left-column">
+            <h5>Offense</h5>
+            {Object.keys(this.offense).map(k => (
+              <div className="scoring-input" key={k}>
+                <label htmlFor={k}>{this.offense[k]}</label>
+                <InputNumber
+                  id={k}
+                  name={k}
+                  type="number"
+                  defaultValue={
+                    this.multiple[k]
+                      ? scoring[k] * this.multiple[k]
+                      : scoring[k]
+                  }
+                  onBlur={this.onBlur}
+                />
+              </div>
+            ))}
+          </div>
 
-            <div className="scoring-column">
-              <h4>Kicking</h4>
-              {Object.keys(this.kickers).map(k => (
-                <div className="scoring-input" key={k}>
-                  <label htmlFor={k}>{this.kickers[k]}</label>
-                  <input
-                    id={k}
-                    name={k}
-                    type="number"
-                    defaultValue={scoring[k]}
-                    onBlur={this.onBlur}
-                  />
-                  <small>pts</small>
-                </div>
-              ))}
+          <div className="scoring-column">
+            <h5>Kicking</h5>
+            {Object.keys(this.kickers).map(k => (
+              <div className="scoring-input" key={k}>
+                <label htmlFor={k}>{this.kickers[k]}</label>
+                <InputNumber
+                  id={k}
+                  name={k}
+                  type="number"
+                  defaultValue={scoring[k]}
+                  onBlur={this.onBlur}
+                />
+              </div>
+            ))}
+          </div>
 
-              <h4>Defense</h4>
-              {Object.keys(this.dst).map(k => (
-                <div className="scoring-input" key={k}>
-                  <label htmlFor={k}>{this.dst[k]}</label>
-                  <input
-                    id={k}
-                    name={k}
-                    type="number"
-                    defaultValue={scoring[k]}
-                    onBlur={this.onBlur}
-                  />
-                  <small>pts</small>
-                </div>
-              ))}
-            </div>
+          <div className="scoring-column">
+            <h5>Defense</h5>
+            {Object.keys(this.dst).map(k => (
+              <div className="scoring-input" key={k}>
+                <label htmlFor={k}>{this.dst[k]}</label>
+                <InputNumber
+                  id={k}
+                  name={k}
+                  type="number"
+                  defaultValue={scoring[k]}
+                  onBlur={this.onBlur}
+                />
+              </div>
+            ))}
           </div>
         </div>
-      </div>
+      </Modal>
     );
   }
 

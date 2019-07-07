@@ -1,3 +1,4 @@
+import { Select } from 'antd';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { resetDraft } from '../store/actions/players';
@@ -39,7 +40,7 @@ class Settings extends React.Component<IProps, IState> {
   };
 
   public render() {
-    const { currentPick, numberOfTeams, trackedTeam } = this.props;
+    const { currentPick, numberOfTeams } = this.props;
     const { open } = this.state;
 
     // an array with the allowable number of teams: [6, 16]
@@ -66,34 +67,30 @@ class Settings extends React.Component<IProps, IState> {
           <aside className="Settings-Container">
             <label className="full-width">
               Your team
-              <div className="Options-Container">
-                <select
-                  className="Tracked-Team-Select Grayed"
-                  onChange={this.updateTrackedTeam}
-                  value={trackedTeam}>
-                  {new Array(numberOfTeams).fill(0).map((_, i) => (
-                    <option key={`Pick-Selection-${i}`} value={i}>{`Team ${i +
-                      1}`}</option>
-                  ))}
-                </select>
-              </div>
+              <Select
+                className="Settings-Select"
+                onChange={this.updateTrackedTeam}
+                defaultValue={1}>
+                {new Array(numberOfTeams).fill(0).map((_, i) => (
+                  <Select.Option
+                    key={`Pick-Selection-${i}`}
+                    value={i + 1}>{`Team ${i + 1}`}</Select.Option>
+                ))}
+              </Select>
             </label>
 
             <label className="full-width">
               Number of teams
-              <div
-                className="Options-Container"
-                data-tip={disabledOptions ? 'Reset to change team count' : ''}>
-                <select
-                  className={`Grayed ${disabledOptions ? 'disabled' : ''}`}
-                  value={`${numberOfTeams} Teams`}
-                  disabled={disabledOptions}
-                  onChange={this.setNumberOfTeams}>
-                  {allowableNumberOfTeams.map(n => (
-                    <option key={`${n}-Teams-Select`}>{`${n} Teams`}</option>
-                  ))}
-                </select>
-              </div>
+              <Select
+                className="Settings-Select"
+                onChange={this.setNumberOfTeams}
+                defaultValue={10}>
+                {allowableNumberOfTeams.map(n => (
+                  <Select.Option
+                    key={n}
+                    value={n}>{`${n} Teams`}</Select.Option>
+                ))}
+              </Select>
             </label>
 
             <label data-tip={disabledOptions ? 'Reset to change rosters' : ''}>
@@ -127,15 +124,12 @@ class Settings extends React.Component<IProps, IState> {
     );
   }
 
-  private updateTrackedTeam = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const { value } = event.target;
-    this.props.setTrackedTeam(+value);
+  private updateTrackedTeam = (value: number) => {
+    this.props.setTrackedTeam(value);
   };
 
-  private setNumberOfTeams = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const { value } = event.target;
-    const numberOfTeams = +value.split(' ')[0];
-    this.props.setNumberOfTeams(numberOfTeams);
+  private setNumberOfTeams = (value: number) => {
+    this.props.setNumberOfTeams(value);
   };
 }
 

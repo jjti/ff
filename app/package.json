@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "repository": "https://github.com/JJTimmons/ff",
   "dependencies": {
+    "antd": "^3.20.1",
     "react": "^16.8.6",
     "react-dnd": "^8.0.3",
     "react-dnd-html5-backend": "^8.0.3",

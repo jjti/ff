@@ -45,13 +45,25 @@ p,
 a,
 th,
 tr,
-button,
 label,
-input {
+button {
+  margin: 8px;
+}
+
+p,
+a,
+th,
+tr,
+label,
+input,
+button {
   font-weight: 300;
   font-size: 14px;
-  margin: 8px;
   color: var(--dark-gray);
+}
+
+label {
+  margin-right: 8px;
 }
 
 input[type=number]::-webkit-inner-spin-button, 
@@ -118,7 +130,10 @@ select {
 label {
   display: flex;
   align-items: center;
-  height: 25px;
+}
+
+.ant-modal-close {
+  margin: unset;
 }
 
 @media screen and (max-width: 700px) {

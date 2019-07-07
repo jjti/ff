@@ -1,3 +1,4 @@
+import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';

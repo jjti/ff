@@ -1,50 +1,20 @@
-.Formatter-backdrop {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 3;
-  background-color: #636363b0;
-}
-
-.Formatter {
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  left: 50%;
-  background-color: white;
-  border: var(--border-gray);
-  border-radius: 4px;
-  padding: 20px;
-}
-
-.RosterFormatter {
-  max-width: 450px;
-}
-
-.Formatter > header > button {
-  height: 40px;
-  width: 30px;
-  margin-left: auto;
-  margin-right: 0;
+.ant-modal {
+  width: fit-content !important;
 }
 
 .position-change-section {
-  display: flex;
-  flex-wrap: wrap;
+  width: 450px;
 }
 
-.position-toggle {
-  width: 45%;
+.position-input {
+  width: fit-content;
+  margin: 8px;
 }
 
-.position-button {
-  margin: 5px;
-  padding: 3px 8px;
-  font-weight: 500;
+.ant-input-group .ant-input {
+  width: 40px;
 }
 
-.position-button:first-child {
-  margin-left: auto;
+.ant-input-number-input {
+  height: 100%;
 }

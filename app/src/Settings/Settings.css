@@ -1,6 +1,11 @@
 .Settings {
 }
 
+.Settings-Select {
+  width: 120px;
+  margin-left: auto;
+}
+
 .Settings-Header:hover {
   cursor: pointer;
   text-decoration: underline;

@@ -1,3 +1,4 @@
+import { Input, Modal } from 'antd';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Position } from '../models/Player';
@@ -32,61 +33,41 @@ class RosterFormatter extends React.Component<IProps> {
   /**
    * change the number of players at the passed position
    */
-  public changePositionCount = (pos: Position, change: number) => {
+  public changePositionCount = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id: pos, value } = e.target;
     const { rosterFormat } = this.props;
-    const newCountAtPosition = Math.max(0, rosterFormat[pos] + change); // don't go negative
-    const newRoster = { ...rosterFormat, [pos]: newCountAtPosition };
-    this.props.setRosterFormat(newRoster);
+
+    let numvalue = parseInt(value, 10) || 0;
+    numvalue = Math.max(numvalue, 0);
+    numvalue = Math.round(numvalue);
+
+    console.log(value, numvalue);
+
+    this.props.setRosterFormat({ ...rosterFormat, [pos]: numvalue });
   };
 
   public render() {
     const { formattingRoster, rosterFormat } = this.props;
 
-    if (!formattingRoster) {
-      return null;
-    }
-
     return (
-      <div
-        className="Formatter-backdrop"
-        onClick={this.props.toggleRosterFormatting}>
-        <div
-          className="Formatter RosterFormatter"
-          onClick={e => e.stopPropagation()}>
-          <header>
-            <h3>Change Roster</h3>
-            <button
-              className="remove-player-x"
-              onClick={this.props.toggleRosterFormatting}
+      <Modal
+        title="Change roster"
+        visible={formattingRoster}
+        onOk={this.props.toggleRosterFormatting}
+        onCancel={this.props.toggleRosterFormatting}>
+        <div className="position-change-section">
+          {this.orderedPositions.map(k => (
+            <Input
+              id={k}
+              type="number"
+              className="position-input"
+              value={rosterFormat[k]}
+              onChange={this.changePositionCount}
+              addonAfter={k}
             />
-          </header>
-          <div className="position-change-section">
-            {this.orderedPositions.map(k => (
-              <label className="position-toggle" key={k}>
-                {`${rosterFormat[k]} ${k === 'BENCH' ? 'Bench' : k}${
-                  rosterFormat[k] !== 1 && k !== 'BENCH' ? 's' : ''
-                }`}
-                <button
-                  className="Options-Container position-button"
-                  onClick={e => {
-                    e.stopPropagation();
-                    this.changePositionCount(k, 1);
-                  }}>
-                  +
-                </button>
-                <button
-                  className="Options-Container position-button"
-                  onClick={e => {
-                    e.preventDefault();
-                    this.changePositionCount(k, -1);
-                  }}>
-                  −
-                </button>
-              </label>
-            ))}
-          </div>
+          ))}
         </div>
-      </div>
+      </Modal>
     );
   }
 }

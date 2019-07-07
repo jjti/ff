@@ -1,8 +1,8 @@
+import { Input } from 'antd';
 import * as React from 'react';
 import { IPlayer, Position } from '../models/Player';
 import PlayerRow from './PlayerRow';
 import './PlayerTable.css';
-import searchIcon from './search.png';
 
 /** All possible positions. ? Means any position, don't filter */
 const filterPositions: Position[] = ['?', 'QB', 'RB', 'WR', 'TE', 'DST', 'K'];
@@ -24,7 +24,7 @@ interface IPlayerTableProps {
   rbHandcuffs: IPlayer[];
   recommended: IPlayer[]; // names that are recommended
   removePlayer: (player: IPlayer) => void;
-  setNameFilter: (event: React.FormEvent<HTMLInputElement>) => void;
+  setNameFilter: (e: React.ChangeEvent<HTMLInputElement>) => void;
   setPositionFilter: (pos: Position) => void;
   skip: () => void;
   undo: () => void;
@@ -64,15 +64,12 @@ export default ({
 
         {/* Name filter input element */}
         {!mobile && (
-          <div className="Player-Filter">
-            <input
-              className="Player-Filter-Input"
-              type="text"
-              value={nameFilter}
-              onChange={setNameFilter}
-            />
-            <img className="Player-Filter-Icon" src={searchIcon} />
-          </div>
+          <Input.Search
+            className="Player-Search"
+            placeholder="Name"
+            onChange={setNameFilter}
+            value={nameFilter}
+          />
         )}
 
         {/* Buttons for filtering on position */}

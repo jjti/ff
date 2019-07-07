@@ -17,28 +17,9 @@
   padding: 8px 0;
 }
 
-.Player-Filter {
-  margin: 0 10px;
-  position: relative;
-}
-
-.Player-Filter-Input {
-  border: none;
-  border-bottom: var(--border-gray);
-  outline: none;
-  width: 130px;
-}
-
-.Player-Filter-Input:focus {
-  border-bottom: var(--highlight-border);
-}
-
-.Player-Filter-Icon {
-  position: absolute;
-  height: 17px;
-  opacity: 0.35;
-  top: 9px;
-  right: 7px;
+.Player-Search {
+  width: 120px;
+  margin: auto 20px;
 }
 
 .Player-Table-Control-Buttons {
