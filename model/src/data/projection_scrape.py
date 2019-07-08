@@ -11,14 +11,16 @@ from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 
+DRIVER_PATH = os.path.sep + os.path.join("usr", "local", "bin", "chromedriver")
+DRIVER_OPTIONS = webdriver.ChromeOptions()
+DRIVER_OPTIONS.add_argument("--headless")
+DRIVER_OPTIONS.add_argument("--window-size=1200x900")
+DRIVER_OPTIONS.add_argument("--no-sandbox")
+DRIVER_OPTIONS.add_argument("--disable-dev-shm-usage")
+DRIVER = webdriver.Chrome(chrome_options=DRIVER_OPTIONS, executable_path=DRIVER_PATH)
+
 RAW_PROJECTIONS = os.path.join("..", "..", "data", "raw", "projections")
 RAW_ADP = os.path.join("..", "..", "data", "raw", "adp")
-DRIVER_PATH = os.path.sep + os.path.join("usr", "local", "bin", "chromedriver")
-"""The path to a chrome DRIVER for the scraping of JS apps.
-I put my binary in /usr/local/bin
-http://chromedriver.chromium.org/
-"""
-DRIVER = webdriver.Chrome(DRIVER_PATH)
 
 YEAR = 2019
 

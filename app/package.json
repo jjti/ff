@@ -23,10 +23,7 @@
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject",
-    "deploy:cloudfront": "aws cloudfront create-invalidation --distribution-id E2UNBWCKDABKA6 --paths \"/*\" --profile personal",
-    "deploy:s3": "aws s3 sync ./build s3://www.ffdraft.app --acl public-read --sse --delete --cache-control max-age=10800,public --profile personal",
-    "deploy": "npm run build && npm run deploy:s3 && npm run deploy:cloudfront"
+    "eject": "react-scripts-ts eject"
   },
   "devDependencies": {
     "@types/jest": "^23.3.14",

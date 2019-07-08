@@ -18,8 +18,6 @@ import Settings from './Settings/Settings';
 import { setPlayers } from './store/actions/players';
 import TeamPicks from './TeamPicks/TeamPicks';
 
-import playerData from './projections.json';
-
 interface IProps {
   setPlayers: (players: IPlayer[]) => void;
 }
@@ -33,7 +31,13 @@ class App extends React.PureComponent<IProps, IState> {
     super(props);
 
     // set the player list using setPlayers
-    props.setPlayers(playerData.data);
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState === 4 && this.status === 200) {
+        const playerDataArray = JSON.parse(xhttp.responseText);
+        props.setPlayers(playerDataArray.data);
+      }
+    };
 
     this.state = {
       mobile: window.innerWidth < 700
@@ -42,6 +46,9 @@ class App extends React.PureComponent<IProps, IState> {
     addEventListener('resize', () => {
       this.setState({ mobile: window.innerWidth < 700 });
     });
+
+    xhttp.open('GET', `${process.env.PUBLIC_URL}/projections.json`, true);
+    xhttp.send();
   }
 
   public render() {

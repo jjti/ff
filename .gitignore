@@ -1,5 +1,6 @@
+.env
 **/.DS_Store
-.vscode
+nohup.out
 
 # History files
 .Rhistory
