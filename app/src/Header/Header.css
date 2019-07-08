@@ -1,5 +1,5 @@
 #App-Header {
-  margin: 0 0 15px 8px
+  margin: 0 0 0 8px
 }
 
 #App-Header > p {
@@ -8,6 +8,7 @@
 
 #Header-Title {
   display: flex;
+  align-items: baseline;
 }
 
 #Header-Title > button {

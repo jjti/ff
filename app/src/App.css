@@ -51,6 +51,9 @@ i.Grayed {
 }
 
 .toast-container > .Toastify__toast {
+  /* not happy with current appearance */
+  display: none;
+
   color: #fff;
   background-color: #222;
   opacity: 0.9;

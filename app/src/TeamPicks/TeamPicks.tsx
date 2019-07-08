@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import Card from '../Card/Card';
 import { Position } from '../models/Player';
-import { ITeam } from '../models/Team';
+import { ITeam, NullablePlayer } from '../models/Team';
 import { IStoreState } from '../store/store';
 import './TeamPicks.css';
 
@@ -14,8 +14,7 @@ interface IProps {
 }
 
 const initialState = {
-  cardLength: 50,
-  showStarters: true
+  cardLength: 50
 };
 
 type State = Readonly<typeof initialState>;
@@ -28,8 +27,6 @@ class TeamPicks extends React.Component<IProps, State> {
   public starterPositions: Position[] = [
     'QB',
     'RB',
-    'RB',
-    'WR',
     'WR',
     'FLEX',
     'TE',
@@ -71,83 +68,19 @@ class TeamPicks extends React.Component<IProps, State> {
           </header>
 
           <div className="Pick-Column">
-            {trackedTeamRoster.QB.map((r, i) => (
-              // @ts-ignore
-              <Card
-                key={r ? r.name : i}
+            {this.starterPositions.map(pos =>
+              trackedTeamRoster[pos].map((p: NullablePlayer, j: number) => (
                 // @ts-ignore
-                pick={{ player: r, pickNumber: 0, team: 0 }}
-                playerMeta={true}
-                pos="QB"
-                length={this.state.cardLength}
-              />
-            ))}
-            {trackedTeamRoster.RB.map((r, i) => (
-              // @ts-ignore
-              <Card
-                key={r ? r.name : i}
-                // @ts-ignore
-                pick={{ player: r, pickNumber: 0, team: 0 }}
-                playerMeta={true}
-                pos="RB"
-                length={this.state.cardLength}
-              />
-            ))}
-            {trackedTeamRoster.WR.map((r, i) => (
-              // @ts-ignore
-              <Card
-                key={r ? r.name : i}
-                // @ts-ignore
-                pick={{ player: r, pickNumber: 0, team: 0 }}
-                playerMeta={true}
-                pos="WR"
-                length={this.state.cardLength}
-              />
-            ))}
-            {trackedTeamRoster.FLEX.map((r, i) => (
-              // @ts-ignore
-              <Card
-                key={r ? r.name : i}
-                // @ts-ignore
-                pick={{ player: r, pickNumber: 0, team: 0 }}
-                playerMeta={true}
-                pos="FLEX"
-                length={this.state.cardLength}
-              />
-            ))}
-            {trackedTeamRoster.TE.map((r, i) => (
-              // @ts-ignore
-              <Card
-                key={r ? r.name : i}
-                // @ts-ignore
-                pick={{ player: r, pickNumber: 0, team: 0 }}
-                playerMeta={true}
-                pos="TE"
-                length={this.state.cardLength}
-              />
-            ))}
-            {trackedTeamRoster.DST.map((r, i) => (
-              // @ts-ignore
-              <Card
-                key={r ? r.name : i}
-                // @ts-ignore
-                pick={{ player: r, pickNumber: 0, team: 0 }}
-                playerMeta={true}
-                pos="DST"
-                length={this.state.cardLength}
-              />
-            ))}
-            {trackedTeamRoster.K.map((r, i) => (
-              // @ts-ignore
-              <Card
-                key={r ? r.name : i}
-                // @ts-ignore
-                pick={{ player: r, pickNumber: 0, team: 0 }}
-                playerMeta={true}
-                pos="K"
-                length={this.state.cardLength}
-              />
-            ))}
+                <Card
+                  key={p ? p.name : `${pos}${j}`}
+                  // @ts-ignore
+                  pick={{ player: p, pickNumber: 0, team: 0 }}
+                  playerMeta={true}
+                  pos={pos}
+                  length={this.state.cardLength}
+                />
+              ))
+            )}
           </div>
         </div>
         <div className="Pick-Section">
