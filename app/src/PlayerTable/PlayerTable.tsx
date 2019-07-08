@@ -1,4 +1,4 @@
-import { Input } from 'antd';
+import { Input, Tooltip } from 'antd';
 import * as React from 'react';
 import { IPlayer, Position } from '../models/Player';
 import PlayerRow from './PlayerRow';
@@ -60,7 +60,7 @@ export default ({
   <div className="PlayerTable Section">
     <div id="table-top-header" className="Stick-Section">
       <header>
-        {!mobile && <h3>Players</h3>}
+        {!mobile ? <h3>Players</h3> : <h3>ffdraft.app</h3>}
 
         {/* Name filter input element */}
         {!mobile && (
@@ -85,17 +85,17 @@ export default ({
         </div>
 
         {/* Buttons for skipping and undoing actions */}
-        <div className="Player-Table-Control-Buttons">
-          {!mobile && (
+        {!mobile && (
+          <div className="Player-Table-Control-Buttons">
             <button className="Grayed skip-button" onClick={skip}>
               Skip
             </button>
-          )}
 
-          <button className="Grayed undo-button" onClick={undo}>
-            Undo
-          </button>
-        </div>
+            <button className="Grayed undo-button" onClick={undo}>
+              Undo
+            </button>
+          </div>
+        )}
       </header>
 
       {/* Legend for dots on the row */}
@@ -124,19 +124,19 @@ export default ({
         <p className="col col-pos">Position</p>
         <p className="col col-team">Team</p>
         <p className="col col-vor" data-tip="Value over replacement">
-          Value
+          <Tooltip title="Value over replacement">Value</Tooltip>
         </p>
-        <p
-          className="col col-prediction"
-          data-tip="Experts' consensus projection">
-          Projection
+        <p className="col col-prediction">
+          <Tooltip title="Experts consensus projection">
+            {!mobile ? 'Projections' : 'Points'}
+          </Tooltip>
         </p>
 
         {/* Table headers not rendered on mobile */}
         {!mobile && (
           <>
-            <p className="col col-adp" data-tip="Average draft position">
-              ADP
+            <p className="col col-adp">
+              <Tooltip title="Average draft position">ADP</Tooltip>
             </p>
             <p className="col col-remove">Remove</p>
           </>

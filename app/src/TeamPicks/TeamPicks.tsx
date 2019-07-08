@@ -47,16 +47,8 @@ class TeamPicks extends React.Component<IProps, State> {
 
     const trackedTeamRoster = teams[trackedTeam];
 
-    // if it's mobile, return just the small header and separate Starter and Mobile
-    // team members into separate tabs
     if (mobile) {
-      return (
-        <div className="TeamPicks">
-          <header>
-            <h3>ffdraft.app</h3>
-          </header>
-        </div>
-      );
+      return null;
     }
 
     return (

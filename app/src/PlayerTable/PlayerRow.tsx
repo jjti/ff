@@ -1,3 +1,4 @@
+import { Button } from 'antd';
 import * as React from 'react';
 import { DragSource } from 'react-dnd';
 import { DRAG_TYPES } from '../models/DragTypes';
@@ -64,13 +65,20 @@ class PlayerRow extends React.Component<IPlayerRowProps> {
             <p className="col col-adp">
               {player.adp && player.adp > 0 ? player.adp : ''}
             </p>
-            <button
-              className="remove-player-x col col-remove"
-              onClick={e => {
-                e.stopPropagation();
-                removePlayer(player);
-              }}
-            />
+            <div className="col col-remove">
+              <Button
+                icon="close"
+                shape="circle"
+                size="small"
+                type="dashed"
+                className="remove-player-button"
+                style={{ marginRight: 10 }}
+                onClick={e => {
+                  e.stopPropagation();
+                  removePlayer(player);
+                }}
+              />
+            </div>
           </>
         )}
       </div>

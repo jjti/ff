@@ -10,22 +10,3 @@
 .Pick-Section-Header {
   display: flex;
 }
-
-@media screen and (max-width: 700px) {
-  .TeamPicks {
-    top: 0px;
-    height: 30px;
-    padding: 11px;
-    position: sticky;
-    background-color: white;
-  }
-
-  .TeamPicks > header {
-    padding: 0 5px;
-    justify-content: space-between;
-  }
-
-  .TeamPicks > header > h3 {
-    margin: 0;
-  }
-}

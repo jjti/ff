@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { cssTransition, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // @ts-ignore
-import ReactTooltip from 'react-tooltip';
 import { compose } from 'redux';
 import './App.css';
 import RosterFormatter from './Formatters/RosterFormatter';
@@ -104,7 +103,6 @@ class App extends React.PureComponent<IProps, IState> {
             exit: 'zoom'
           })}
         />
-        <ReactTooltip />
       </div>
     );
   }

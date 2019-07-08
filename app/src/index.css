@@ -45,8 +45,7 @@ p,
 a,
 th,
 tr,
-label,
-button {
+label {
   margin: 8px;
 }
 
@@ -141,5 +140,9 @@ label {
   #root {
     width: 100%;
     margin: 0;
+  }
+
+  p.small {
+    font-size: calc(8px + 0.5vw);
   }
 }

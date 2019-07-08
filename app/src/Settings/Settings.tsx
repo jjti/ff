@@ -1,4 +1,5 @@
-import { Select } from 'antd';
+import { Button, Select, Tooltip } from 'antd';
+import { saveAs } from 'file-saver';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { resetDraft } from '../store/actions/players';
@@ -8,6 +9,7 @@ import {
   setTrackedTeam,
   toggleRosterFormatting
 } from '../store/actions/teams';
+import { INITIAL_PLAYERS } from '../store/reducers/players';
 import { IStoreState } from '../store/store';
 import './Settings.css';
 
@@ -93,30 +95,41 @@ class Settings extends React.Component<IProps, IState> {
               </Select>
             </label>
 
-            <label data-tip={disabledOptions ? 'Reset to change rosters' : ''}>
-              <button
-                className="Options-Container options-left"
-                onClick={this.props.toggleRosterFormatting}
-                disabled={disabledOptions}>
-                <p>Roster</p>
-              </button>
-            </label>
-
-            <label data-tip={disabledOptions ? 'Reset to change scoring' : ''}>
-              <button
-                className="Options-Container options-left"
-                onClick={this.props.toggleScoringFormatting}
-                disabled={disabledOptions}>
-                <p>Scoring</p>
-              </button>
+            <label>
+              <Tooltip title="Change rosters">
+                <Button
+                  className="options-left"
+                  onClick={this.props.toggleRosterFormatting}
+                  disabled={disabledOptions}>
+                  Roster
+                </Button>
+              </Tooltip>
             </label>
 
             <label>
-              <button
-                className="Options-Container options-left"
-                onClick={this.props.resetDraft}>
-                <p>Reset</p>
-              </button>
+              <Tooltip title="Change scoring">
+                <Button
+                  className="options-left"
+                  onClick={this.props.toggleScoringFormatting}
+                  disabled={disabledOptions}>
+                  Scoring
+                </Button>
+              </Tooltip>
+            </label>
+
+            <label>
+              <Tooltip title="Download stats">
+                <Button icon="download" onClick={this.saveStats} />
+              </Tooltip>
+            </label>
+
+            <label>
+              <Button
+                className="options-left"
+                onClick={this.props.resetDraft}
+                type="danger">
+                Reset
+              </Button>
             </label>
           </aside>
         )}
@@ -130,6 +143,14 @@ class Settings extends React.Component<IProps, IState> {
 
   private setNumberOfTeams = (value: number) => {
     this.props.setNumberOfTeams(value);
+  };
+
+  private saveStats = () => {
+    const blob = new Blob([JSON.stringify(INITIAL_PLAYERS)], {
+      type: 'application/json;charset=utf-8'
+    });
+
+    saveAs(blob, 'ffdraft-stats.json');
   };
 }
 
