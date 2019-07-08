@@ -2,6 +2,7 @@ import os
 import time
 import re
 import traceback
+import datetime
 
 import pandas as pd
 import numpy as np
@@ -11,6 +12,7 @@ from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 
+# helpful resource for setting this up on headless Ubuntu: https://tecadmin.net/setup-selenium-chromedriver-on-ubuntu/
 DRIVER_PATH = os.path.sep + os.path.join("usr", "local", "bin", "chromedriver")
 DRIVER_OPTIONS = webdriver.ChromeOptions()
 DRIVER_OPTIONS.add_argument("--headless")
@@ -135,6 +137,8 @@ TEAM_NAME_MAP = {}
 def scrape():
     """Scrape from all the sources and save to ./data/raw
     """
+
+    print(datetime.datetime.now())
 
     try:
         scrape_espn()

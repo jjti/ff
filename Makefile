@@ -19,12 +19,14 @@ projections:
 	cd ./model/src/data && \
 	python3 projection_scrape.py && \
 	python3 projection_aggregate.py
-	aws s3 cp ./model/data/processed/Projections-${YEAR}.json ${S3_BUCKET}/projections.json --acl public-read --sse --cache-control max-age=10800,public --profile personal
+	aws s3 cp ./model/data/processed/Projections-${YEAR}.json ${S3_BUCKET}/projections.json --acl public-read --sse --cache-control max-age=10800,public
 
 ssh:
 	ssh -i ${EC2_PEM} ${EC2}
 
 deploy-server:
-	rsync -v --stats --progress -e "ssh -i ${EC2_PEM}" --exclude 'app' -a . ${EC2}:~
-	nohup ssh -i $(EC2_PEM) $(EC2):~ 'watch -n 10800 make projections'
+	rsync -v --stats --progress -e "ssh -i ${EC2_PEM}" --exclude 'app' --exclude '.git' -a . ${EC2}:~
+
+start-server:
+	watch -n 10800 make projections
 
