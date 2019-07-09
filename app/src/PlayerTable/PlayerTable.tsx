@@ -14,6 +14,7 @@ interface ITablePlayer extends IPlayer {
 
 interface IPlayerTableProps {
   byeWeeks: { [key: number]: boolean };
+  currentPick: number;
   draftSoon: boolean[];
   filteredPlayers: boolean[];
   mobile: boolean;
@@ -41,6 +42,7 @@ interface IPlayerTableProps {
  */
 export default ({
   byeWeeks,
+  currentPick,
   draftSoon,
   filteredPlayers,
   nameFilter,
@@ -60,7 +62,7 @@ export default ({
   <div className="PlayerTable Section">
     <div id="table-top-header" className="Stick-Section">
       <header>
-        {!mobile ? <h3>Players</h3> : <h3>ffdraft.app</h3>}
+        {!mobile && <h3>Players</h3>}
 
         {/* Name filter input element */}
         {!mobile && (
@@ -104,12 +106,8 @@ export default ({
           <>
             <div className="dot blue-dot" />
             <p className="small">Recommended</p>
-          </>
-        )}
-        <div className="dot green-dot" />
-        <p className="small">Will be drafted soon</p>
-        {!mobile && (
-          <>
+            <div className="dot green-dot" />
+            <p className="small">Will be drafted soon</p>
             <div className="dot orange-dot" />
             <p className="small">BYE week conflict with starter</p>
             <div className="dot red-dot" />

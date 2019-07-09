@@ -167,4 +167,22 @@ i.Grayed {
     padding: unset;
     border: unset;
   }
+
+  .position-input {
+    margin: 6px !important;
+  }
+
+  .ant-modal-body {
+    display: flex;
+  }
+
+  .scoring-columns {
+    flex: unset;
+    flex-wrap: wrap;
+  }
+
+  .scoring-column {
+    margin-right: 0 !important;
+    width: 100% !important;
+  }
 }

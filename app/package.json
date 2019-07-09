@@ -4,6 +4,7 @@
   "repository": "https://github.com/JJTimmons/ff",
   "dependencies": {
     "antd": "^3.20.1",
+    "antd-mobile": "^2.2.14",
     "file-saver": "^2.0.2",
     "react": "^16.8.6",
     "react-dnd": "^8.0.3",

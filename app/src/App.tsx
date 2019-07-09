@@ -10,6 +10,7 @@ import './App.css';
 import RosterFormatter from './Formatters/RosterFormatter';
 import ScoringFormatter from './Formatters/ScoringFormatter';
 import Header from './Header/Header';
+import MobileSettings from './MobileSettings/MobileSettings';
 import { IPlayer } from './models/Player';
 import PickHistoryContainer from './PickHistory/PickHistoryContainer';
 import PlayerTableContainer from './PlayerTable/PlayerTableContainer';
@@ -55,22 +56,12 @@ class App extends React.PureComponent<IProps, IState> {
     if (this.state.mobile) {
       return (
         <div id="App">
+          <MobileSettings />
           <TeamPicks mobile={true} />
           <PlayerTableContainer mobile={true} />
 
-          <ToastContainer
-            className="toast-container toast-container-mobile"
-            position="bottom-left"
-            autoClose={1500}
-            hideProgressBar={true}
-            pauseOnHover={false}
-            closeButton={false}
-            draggable={false}
-            transition={cssTransition({
-              enter: 'zoom',
-              exit: 'zoom'
-            })}
-          />
+          <RosterFormatter />
+          <ScoringFormatter />
         </div>
       );
     }

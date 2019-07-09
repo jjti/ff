@@ -154,25 +154,6 @@
 }
 
 @media screen and (max-width: 700px) {
-  .TeamPicks {
-    top: 0px;
-    height: 100%;
-    padding: 11px;
-    position: sticky;
-    background-color: white;
-  }
-
-  .TeamPicks > header {
-    padding: 0 5px;
-    justify-content: space-between;
-  }
-
-  .TeamPicks > header > h3 {
-    margin: 0;
-  }
-}
-
-@media screen and (max-width: 700px) {
   .PlayerTable {
     position: unset;
   }
@@ -182,6 +163,7 @@
   }
 
   #table-top-header > header {
+    padding-top: 4px;
     flex-wrap: wrap;
   }
 
@@ -194,6 +176,12 @@
     position: absolute;
     top: -45px;
     right: 10px;
+  }
+
+  .Legend-Row {
+    position: absolute;
+    top: 15px;
+    left: 130px;
   }
 
   .col {
