@@ -2,7 +2,6 @@ import * as React from 'react';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { connect } from 'react-redux';
-import { cssTransition, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // @ts-ignore
 import { compose } from 'redux';
@@ -77,23 +76,8 @@ class App extends React.PureComponent<IProps, IState> {
           <PickHistoryContainer />
           <PlayerTableContainer />
         </div>
-
         <RosterFormatter />
         <ScoringFormatter />
-
-        <ToastContainer
-          className="toast-container"
-          position="bottom-left"
-          autoClose={1750}
-          hideProgressBar={true}
-          pauseOnHover={false}
-          closeButton={false}
-          draggable={false}
-          transition={cssTransition({
-            enter: 'zoom',
-            exit: 'zoom'
-          })}
-        />
       </div>
     );
   }

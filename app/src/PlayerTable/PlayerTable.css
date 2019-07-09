@@ -7,7 +7,7 @@
   border-bottom: var(--border-gray);
   z-index: 2;
   background-color: white;
-  padding: 0 8px;
+  padding: 8px;
   border-radius: inherit;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
