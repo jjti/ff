@@ -30,3 +30,6 @@ deploy-server:
 start-server:
 	watch -n 10800 make projections
 
+notebook:
+	cd model/src/notebooks && jupyter notebook
+

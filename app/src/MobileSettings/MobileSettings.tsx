@@ -1,4 +1,4 @@
-import { Dropdown, Icon, Menu } from 'antd';
+import { Button, Dropdown, Menu } from 'antd';
 import { NavBar } from 'antd-mobile';
 import * as React from 'react';
 import { connect } from 'react-redux';
@@ -36,7 +36,7 @@ class MobileSettings extends React.Component<IProps> {
                   </Menu.Item>
                 </Menu>
               }>
-              <Icon type="menu" style={{ height: 30, width: 30 }} />
+              <Button icon="menu" />
             </Dropdown>
           }
           style={{ display: 'flex' }}>

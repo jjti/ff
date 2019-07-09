@@ -78,6 +78,14 @@
   cursor: pointer;
 }
 
+.row:focus {
+  background-color: var(--light-gray);
+}
+
+.row:active {
+  background-color: var(--light-gray);
+}
+
 /* FLEX one wide by default */
 .col {
   flex: 1;

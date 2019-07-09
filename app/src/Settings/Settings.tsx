@@ -72,11 +72,11 @@ class Settings extends React.Component<IProps, IState> {
               <Select
                 className="Settings-Select"
                 onChange={this.updateTrackedTeam}
-                defaultValue={1}>
+                defaultValue={0}>
                 {new Array(numberOfTeams).fill(0).map((_, i) => (
                   <Select.Option
                     key={`Pick-Selection-${i}`}
-                    value={i + 1}>{`Team ${i + 1}`}</Select.Option>
+                    value={i}>{`Team ${i + 1}`}</Select.Option>
                 ))}
               </Select>
             </label>

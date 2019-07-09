@@ -5,21 +5,19 @@
 .am-navbar-left {
     display: flex;
     align-items: center;
-    top: 0;
-    height: 50px;
-    width: 50px;
-    position: relative;
-    padding-top: 15px;
-    padding-left: 12px;
-    z-index: 5;
+    margin: auto 15px;
 }
 
 .am-navbar-title {
     display: flex;
     align-items: center;
-    margin-left: 75px;
+    margin-left: 15px;
 }
 
+.ant-dropdown-trigger {
+    font-size: 20px;
+    border: none;
+}
 
 .dropdown-overlap {
     width: 150px;
