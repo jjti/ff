@@ -13,6 +13,7 @@ interface ITablePlayer extends IPlayer {
 }
 
 interface IPlayerTableProps {
+  adpCol: string;
   byeWeeks: { [key: number]: boolean };
   currentPick: number;
   draftSoon: boolean[];
@@ -41,8 +42,8 @@ interface IPlayerTableProps {
  * with another starter (will both sit that week), or is a handcuff to another RB
  */
 export default ({
+  adpCol,
   byeWeeks,
-  currentPick,
   draftSoon,
   filteredPlayers,
   nameFilter,
@@ -149,6 +150,7 @@ export default ({
           .map((player: ITablePlayer, i) => (
             <PlayerRow
               key={player.key}
+              adpCol={adpCol}
               mobile={mobile}
               pickPlayer={pickPlayer}
               draftSoon={draftSoon[i]}

@@ -215,6 +215,11 @@ const updateVOR = (state: IStoreState): IPlayer[] => {
     positionToTotalCountMap[pos] = players.filter(p => p.pos === pos).length;
   });
 
+  const adpDiff = [0, 0.5, 1].map(ppr => Math.abs(ppr - scoring.receptions));
+  const minDiff = Math.min(...adpDiff);
+  const minDiffIndex = adpDiff.indexOf(minDiff);
+  const adpCol = { 0: 'std', 1: 'halfPpr', 2: 'ppr' }[minDiffIndex];
+
   // #1, find replacement player index for each position
   // map each position to the number of players drafted before the lastPick
   const positionToCountMap = {};
@@ -222,9 +227,9 @@ const updateVOR = (state: IStoreState): IPlayer[] => {
     positionToCountMap[pos] = players.filter(
       p =>
         p.pos === pos &&
-        p.adp &&
-        p.adp > 0 &&
-        p.adp <= numberOfTeams * numberOfRounds
+        p[adpCol] &&
+        p[adpCol] > 0 &&
+        p[adpCol] <= numberOfTeams * numberOfRounds
     ).length; // || 0 to avoid NaN on never drafted positions (in first 10 rounds)
   });
 

@@ -304,6 +304,10 @@ def scrape_cbs(
                 name = name_cell.find("a").get_text()
                 pos, team = [v.get_text().strip() for v in name_cell.find_all("span")]
                 pos = pos.replace("FB", "RB")
+                if team == "WAS":
+                    team = "WSH"
+                if team == "JAC":
+                    team = "JAX"
                 data = [name, pos, team]
             else:
                 team = (
@@ -478,53 +482,83 @@ def scrape_nfl(out=RAW_PROJECTIONS):
 def scrape_fantasy_pros(out=RAW_ADP):
     """Scrape the Fantasy Pros website for ADP information
 
+    standard:
     https://www.fantasypros.com/nfl/adp/overall.php
+
+    half_ppr:
+    https://www.fantasypros.com/nfl/adp/half-point-ppr-overall.php
+
+    ppr:
+    https://www.fantasypros.com/nfl/adp/ppr-overall.php
     """
 
     print("scraping Fantasy Pros")
 
+    urls = {
+        "std": "https://www.fantasypros.com/nfl/adp/overall.php",
+        "half_ppr": "https://www.fantasypros.com/nfl/adp/half-point-ppr-overall.php",
+        "ppr": "https://www.fantasypros.com/nfl/adp/ppr-overall.php",
+    }
+
     df = None
-    DRIVER.get("https://www.fantasypros.com/nfl/adp/overall.php")
-    time.sleep(1.5)
-    scroll()
-    time.sleep(1.5)
+    df_set = False
 
-    soup = BeautifulSoup(
-        DRIVER.execute_script("return document.body.innerHTML"), "html.parser"
-    )
-    table = soup.select(".player-table")[0]
-    table_body = table.find("tbody")
+    for ppr_type, url in urls.items():
+        DRIVER.get(url)
+        time.sleep(1.5)
+        scroll()
+        time.sleep(1.5)
 
-    players = []
-    for tr in table_body.find_all("tr"):
-        tds = tr.find_all("td")
+        soup = BeautifulSoup(
+            DRIVER.execute_script("return document.body.innerHTML"), "html.parser"
+        )
+        table = soup.select(".player-table")[0]
+        table_body = table.find("tbody")
 
-        name_team_bye = tds[1]
-        if len(name_team_bye.find_all("small")) < 1:
-            continue
+        players = []
+        for tr in table_body.find_all("tr"):
+            tds = tr.find_all("td")
 
-        name = name_team_bye.find_all("a")[0].get_text()
-        team = name_team_bye.find_all("small")[0].get_text()
-        if team == "JAC":
-            team = "JAX"
-        bye = name_team_bye.find_all("small")[-1].get_text()
-        bye = bye[1:-1]  # remove paranthesis
+            name_team_bye = tds[1]
+            if len(name_team_bye.find_all("small")) < 1:
+                continue
 
-        pos = tds[2].get_text()
-        for n in range(10):
-            pos = pos.replace(str(n), "")
+            name = name_team_bye.find_all("a")[0].get_text()
+            team = name_team_bye.find_all("small")[0].get_text()
+            if team == "JAC":
+                team = "JAX"
+            bye = name_team_bye.find_all("small")[-1].get_text()
+            bye = bye[1:-1]  # remove paranthesis
 
-        if pos == "DST":
-            name = name.split(" ")[-2]
-            team = NAME_TEAM_MAP[name]
+            pos = tds[2].get_text()
+            for n in range(10):
+                pos = pos.replace(str(n), "")
 
-        adp = tds[-1].get_text()
+            if pos == "DST":
+                name = name.split(" ")[-2]
+                team = NAME_TEAM_MAP[name]
 
-        player_data = {"name": name, "team": team, "bye": bye, "pos": pos, "adp": adp}
-        players.append(player_data)
+            adp = tds[-1].get_text()
 
-    df = pd.DataFrame(players)
-    df = add_key(df)
+            player_data = {
+                "name": name,
+                "team": team,
+                "bye": bye,
+                "pos": pos,
+                ppr_type: adp,
+            }
+            players.append(player_data)
+
+        player_d = pd.DataFrame(players)
+        player_d = add_key(player_d)
+
+        if not df_set:
+            df = player_d
+            df_set = True
+        else:
+            df = pd.merge(df, player_d, on="key", how="outer")
+
+    df = df[["key", "name", "pos", "team", "bye"] + list(urls.keys())]
 
     df.to_csv(os.path.join(out, f"FantasyPros-{YEAR}.csv"), index=False)
 

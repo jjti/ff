@@ -22,7 +22,7 @@ OUTPUT = os.path.join("..", "..", "data", "processed", f"Projections-{YEAR}")
 
 REG = r"(.*?)_([a-zA-Z0-9])"
 
-HEADERS = ["key", "name", "pos", "team", "bye", "adp"]
+HEADERS = ["key", "name", "pos", "team", "bye", "std", "half_ppr", "ppr"]
 
 STATS = {
     "pass_tds",
@@ -79,7 +79,7 @@ def aggregate():
             lambda x: x["team" + other_src] if x["team"] is np.nan else x["team"],
             axis=1,
         )
-    df = df.sort_values("adp")
+    df = df.sort_values("std")
 
     for stat in STATS:
         stat_cols = [c for c in df.columns if stat in c]
@@ -93,7 +93,9 @@ def aggregate():
     # drop rows where all the stats fields are null
     df = df.dropna(axis=0, subset=STATS, how="all")
 
-    df["adp"] = df["adp"].fillna(-1.0)
+    df["std"] = df["std"].fillna(-1.0)
+    df["half_ppr"] = df["half_ppr"].fillna(-1.0)
+    df["ppr"] = df["ppr"].fillna(-1.0)
 
     df.to_csv(OUTPUT + ".csv", index=False)
 

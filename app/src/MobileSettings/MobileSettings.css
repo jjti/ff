@@ -1,22 +1,12 @@
-.am-navbar {
-    border-bottom: var(--border-gray);
-}
-
-.am-navbar-left {
+.MobileSettings {
     display: flex;
     align-items: center;
-    margin: auto 15px;
-}
-
-.am-navbar-title {
-    display: flex;
-    align-items: center;
-    margin-left: 15px;
 }
 
 .ant-dropdown-trigger {
-    font-size: 20px;
+    font-size: 25px;
     border: none;
+    margin: 0px 10px;
 }
 
 .dropdown-overlap {

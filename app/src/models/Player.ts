@@ -32,7 +32,9 @@ export interface IPlayer extends IScoring {
   /**
    * average draft position
    */
-  adp: number;
+  std: number;
+  halfPpr: number;
+  ppr: number;
 
   /**
    * forecasted number of points. Multiple each of the player's

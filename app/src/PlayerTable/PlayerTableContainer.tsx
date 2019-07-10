@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { IPlayer, Position } from '../models/Player';
+import { IScoring } from '../models/Scoring';
 import { NullablePlayer } from '../models/Team';
 import { removePlayer } from '../store/actions/players';
 import { pickPlayer, skipPick, undoLast } from '../store/actions/teams';
@@ -23,6 +24,8 @@ interface IPlayerTableProps {
    */
   rbHandcuffTeams: { [key: string]: boolean };
   removePlayer: (player: IPlayer) => void;
+
+  scoring: IScoring;
 
   skip: () => void;
   undo: () => void;
@@ -76,6 +79,7 @@ class PlayerTableContainer extends React.Component<
       currentPick,
       mobile,
       rbHandcuffTeams,
+      scoring,
       undraftedPlayers: players,
       valuedPositions
     } = this.props;
@@ -140,9 +144,15 @@ class PlayerTableContainer extends React.Component<
       return acc;
     }, []);
 
+    const adpDiff = [0, 0.5, 1].map(ppr => Math.abs(ppr - scoring.receptions));
+    const minDiff = Math.min(...adpDiff);
+    const minDiffIndex = adpDiff.indexOf(minDiff);
+    const adpCol = { 0: 'std', 1: 'halfPpr', 2: 'ppr' }[minDiffIndex];
+
     return (
       <PlayerTable
         {...this.props}
+        adpCol={adpCol}
         players={players}
         draftSoon={draftSoon}
         filteredPlayers={filteredPlayers}
@@ -252,6 +262,7 @@ const mapStateToProps = (state: IStoreState) => {
     byeWeeks,
     currentPick: state.currentPick,
     rbHandcuffTeams,
+    scoring: state.scoring,
     undraftedPlayers: state.undraftedPlayers,
     valuedPositions
   };

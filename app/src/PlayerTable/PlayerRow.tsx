@@ -6,6 +6,7 @@ import { IPlayer } from '../models/Player';
 import './PlayerTable.css';
 
 interface IPlayerRowProps {
+  adpCol: string;
   byeWeekConflict: boolean;
   connectDragPreview?: any;
   connectDragSource?: any;
@@ -27,6 +28,7 @@ interface IPlayerRowProps {
 class PlayerRow extends React.Component<IPlayerRowProps> {
   public render() {
     const {
+      adpCol,
       byeWeekConflict,
       connectDragPreview,
       connectDragSource,
@@ -63,7 +65,7 @@ class PlayerRow extends React.Component<IPlayerRowProps> {
         {!mobile && (
           <>
             <p className="col col-adp">
-              {player.adp && player.adp > 0 ? player.adp : ''}
+              {player[adpCol] && player[adpCol] > 0 ? player[adpCol] : ''}
             </p>
             <div className="col col-remove">
               <Button
