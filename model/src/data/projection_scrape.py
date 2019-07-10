@@ -19,7 +19,7 @@ DRIVER_OPTIONS.add_argument("--headless")
 DRIVER_OPTIONS.add_argument("--window-size=1200x900")
 DRIVER_OPTIONS.add_argument("--no-sandbox")
 DRIVER_OPTIONS.add_argument("--disable-dev-shm-usage")
-DRIVER = webdriver.Chrome(chrome_options=DRIVER_OPTIONS, executable_path=DRIVER_PATH)
+DRIVER = webdriver.Chrome(options=DRIVER_OPTIONS, executable_path=DRIVER_PATH)
 
 RAW_PROJECTIONS = os.path.join("..", "..", "data", "raw", "projections")
 RAW_ADP = os.path.join("..", "..", "data", "raw", "adp")
@@ -505,6 +505,8 @@ def scrape_fantasy_pros(out=RAW_ADP):
 
         name = name_team_bye.find_all("a")[0].get_text()
         team = name_team_bye.find_all("small")[0].get_text()
+        if team == "JAC":
+            team = "JAX"
         bye = name_team_bye.find_all("small")[-1].get_text()
         bye = bye[1:-1]  # remove paranthesis
 

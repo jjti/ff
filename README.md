@@ -2,15 +2,9 @@
 
 [An app](https://www.ffdraft.app/) for drafting the best fantasy football team possible.
 
-## Predictions
-
-I forecasted every players' points for the season using a mix of expert ratings (ESPN, FOX, CBS, and NFL) and stats from Madden 2019. Against historical data, the models' R-squared's were better than any source on its own.
-
-![full](https://user-images.githubusercontent.com/13923102/43682303-f861f7e2-983e-11e8-98f5-07ec2a89e998.png)
-
 ## Value over replacement
 
-The app ranks players by their [value over replacement (VOR)](https://support.fantasypros.com/hc/en-us/articles/115005868747-What-is-value-based-drafting-What-do-player-draft-values-mean-VORP-VONA-VOLS-VBD-) which is the best way I'm aware of for comparing players at different positions. The app does this by calculating the "replacement value" for each position. The replacement value is 1+ the number that are expected to be drafted within the first 10 rounds of a draft.
+The app ranks players by their [value over replacement (VOR)](https://support.fantasypros.com/hc/en-us/articles/115005868747-What-is-value-based-drafting-What-do-player-draft-values-mean-VORP-VONA-VOLS-VBD-). The app does this by calculating the "replacement value" for each position. The replacement value is 1+ the number that are expected to be drafted within the first 10 rounds of a draft.
 
 ![screen shot 2018-08-18 at 5 35 32 pm](https://user-images.githubusercontent.com/13923102/44303360-0b0b6a80-a30d-11e8-8901-179bfa8ac693.png)
 
@@ -35,4 +29,3 @@ Small tags are also shown next to the player names indicating if they're likely 
 Clicking on a player drafts the player to the active team (currently drafting). Users can also skip the current turn (not drafting a player), undo the last round's pick (if they make a mistake), or remove a player (if the player was drafted already but they missed it). They can also drag and drop player rows onto the row of prior picks, and swap picks up in the pick history row.
 
 <img width="700" alt="screen shot 2018-09-04 at 6 40 08 pm" src="https://user-images.githubusercontent.com/13923102/45061311-f8fe2b80-b071-11e8-9b9a-19d246805a07.png">
-
