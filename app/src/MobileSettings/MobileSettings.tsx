@@ -1,4 +1,4 @@
-import { Button, Dropdown, Menu } from 'antd';
+import { Button } from 'antd';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { resetDraft } from '../store/actions/players';
@@ -17,25 +17,33 @@ class MobileSettings extends React.Component<IProps> {
   public render() {
     return (
       <div className="MobileSettings">
-        <Dropdown
-          overlay={
-            <Menu style={{ width: 120 }}>
-              <Menu.Item onClick={this.props.undoPick}>Undo Pick</Menu.Item>
-              <Menu.Item onClick={this.props.toggleScoringFormatting}>
-                Change Scoring
-              </Menu.Item>
-              <Menu.Item onClick={this.props.toggleRosterFormatting}>
-                Change Roster
-              </Menu.Item>
-              <Menu.Item onClick={this.props.resetDraft}>Reset Draft</Menu.Item>
-            </Menu>
-          }>
-          <Button icon="menu" />
-        </Dropdown>
-        <h3>ffdraft.app</h3>
-        <div className="draft-dot">
-          <div className="dot green-dot" />
-          <p className="small">Will be drafted soon</p>
+        <header>
+          <h2>ffdraft.app</h2>
+          <div className="draft-dot">
+            <div className="dot green-dot" />
+            <p className="small">Will be drafted soon</p>
+          </div>
+        </header>
+        <div className="buttons">
+          <Button
+            size="small"
+            onClick={this.props.toggleScoringFormatting}
+            style={{ marginRight: 10 }}>
+            Scoring
+          </Button>
+          <Button size="small" onClick={this.props.toggleRosterFormatting}>
+            Roster
+          </Button>
+          <Button
+            size="small"
+            type="dashed"
+            onClick={this.props.resetDraft}
+            style={{ marginLeft: 'auto', marginRight: 10 }}>
+            Reset
+          </Button>
+          <Button size="small" type="dashed" onClick={this.props.undoPick}>
+            Undo
+          </Button>
         </div>
       </div>
     );

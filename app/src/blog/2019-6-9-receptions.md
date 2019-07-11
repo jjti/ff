@@ -85,4 +85,4 @@ I started with PPR because it's so commonly discussed. But it is also covered gr
 
 In the short-term I want to expand this approach to look at the number of teams in the league, number of QBs, points per passing touchdown, etc. Again, my guess is that those changes have knock-on effects for draft strategy that don't present themselves in most existing rankings.
 
-Also, please check out my draft assistant at [https://www.ffdraft.app/](https://www.ffdraft.app/). It has up-to-date (every 3hrs) aggregated projections with customizable league scoring and league size. Receptions are worth 0.0 points dy default, but you can change in `Settings > Score` to see how the value based rankings change (ps: it's best on desktop).
+Also, please check out my draft assistant at [https://www.ffdraft.app/](https://www.ffdraft.app/). It has up-to-date (every 3hrs) aggregated projections with customizable league scoring and league size. You can change the value of receptions in `Settings > Score` to see how it affects value based rankings (ps: it's best on desktop).

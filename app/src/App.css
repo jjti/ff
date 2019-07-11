@@ -21,7 +21,7 @@
 .App-Left-Column {
   height: auto;
   width: 24%;
-  min-width: 225px;
+  min-width: 260px;
   border-right: var(--border-gray);
 }
 
@@ -173,6 +173,7 @@ i.Grayed {
 
   .ant-modal-body {
     display: flex;
+    padding: 12px;
   }
 
   .scoring-columns {

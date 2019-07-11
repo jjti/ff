@@ -7,7 +7,21 @@ import About from './About/About';
 import App from './App';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
+import { setPlayers } from './store/actions/players';
 import { store } from './store/store';
+
+window.onload = () => {
+  // set the player list using setPlayers
+  const xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState === 4 && this.status === 200) {
+      const playerDataArray = JSON.parse(xhttp.responseText);
+      store.dispatch(setPlayers(playerDataArray.data));
+    }
+  };
+  xhttp.open('GET', `${process.env.PUBLIC_URL}/projections.json`, true);
+  xhttp.send();
+};
 
 ReactDOM.render(
   <Provider store={store}>
@@ -18,4 +32,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root') as HTMLElement
 );
+
 registerServiceWorker();

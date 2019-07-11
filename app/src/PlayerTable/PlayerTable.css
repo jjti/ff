@@ -78,6 +78,10 @@
   cursor: pointer;
 }
 
+.row:visited {
+  background-color: var(--light-gray);
+}
+
 .row:focus {
   background-color: var(--light-gray);
 }

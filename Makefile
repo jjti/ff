@@ -3,9 +3,9 @@ export
 
 YEAR=2019
 
-.PHONY: data
+.PHONY: data app
 
-start: copy-projections
+app: copy-projections
 	cd app && npm run start
 
 deploy:
