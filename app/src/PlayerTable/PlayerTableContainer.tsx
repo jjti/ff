@@ -119,20 +119,27 @@ class PlayerTableContainer extends React.Component<
       });
     }
 
+    const adpDiff = [0, 0.5, 1].map(ppr => Math.abs(ppr - scoring.receptions));
+    const minDiff = Math.min(...adpDiff);
+    const minDiffIndex = adpDiff.indexOf(minDiff);
+    const adpCol = { 0: 'std', 1: 'halfPpr', 2: 'ppr' }[minDiffIndex];
+
     // players that will be drafted soon
-    const draftSoon = players.map(p => p.adp > 0 && currentPick + 10 >= p.adp);
+    const draftSoon = players.map(
+      p => p[adpCol] > 0 && currentPick + 10 >= p[adpCol]
+    );
 
     // players that are RB handcuffs
     const rbHandcuffs = players.filter(
       (p, i) => !filteredPlayers[i] && p.pos === 'RB' && rbHandcuffTeams[p.team]
     );
 
-    // players that will are recommended
+    // players that will be recommended
     let recommendedCount = 0;
     const recommended = players.reduce((acc, p, i) => {
       // for first few, it's likely a yes
       if (recommendedCount < 3 && valuedPositions[p.pos]) {
-        if (draftSoon[i] || p.adp === 0) {
+        if (draftSoon[i] || p[adpCol] === 0) {
           // accounting for players w/ a lack of adps
           recommendedCount += 1;
           return [...acc, p];
@@ -143,11 +150,6 @@ class PlayerTableContainer extends React.Component<
       }
       return acc;
     }, []);
-
-    const adpDiff = [0, 0.5, 1].map(ppr => Math.abs(ppr - scoring.receptions));
-    const minDiff = Math.min(...adpDiff);
-    const minDiffIndex = adpDiff.indexOf(minDiff);
-    const adpCol = { 0: 'std', 1: 'halfPpr', 2: 'ppr' }[minDiffIndex];
 
     return (
       <PlayerTable

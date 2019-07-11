@@ -5,6 +5,7 @@ import traceback
 import datetime
 
 import pandas as pd
+from pandas.api.types import is_string_dtype
 import numpy as np
 from bs4 import BeautifulSoup, NavigableString
 import requests
@@ -545,7 +546,7 @@ def scrape_fantasy_pros(out=RAW_ADP):
                 "team": team,
                 "bye": bye,
                 "pos": pos,
-                ppr_type: adp,
+                ppr_type: float(adp.replace(",", "")) if isinstance(adp, str) else adp,
             }
             players.append(player_data)
 
