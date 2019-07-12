@@ -126,7 +126,8 @@ class PlayerTableContainer extends React.Component<
 
     // players that will be drafted soon
     const draftSoon = players.map(
-      p => p[adpCol] > 0 && currentPick + 10 >= p[adpCol]
+      (p, i) =>
+        !filteredPlayers[i] && p[adpCol] > 0 && currentPick + 8 >= p[adpCol]
     );
 
     // players that are RB handcuffs
