@@ -2,6 +2,7 @@ import { Button, Select, Tooltip } from 'antd';
 import { saveAs } from 'file-saver';
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { IPlayer } from '../models/Player';
 import { resetDraft } from '../store/actions/players';
 import { toggleScoringFormatting } from '../store/actions/scoring';
 import {
@@ -9,7 +10,6 @@ import {
   setTrackedTeam,
   toggleRosterFormatting
 } from '../store/actions/teams';
-import { INITIAL_PLAYERS } from '../store/reducers/players';
 import { IStoreState } from '../store/store';
 import './Settings.css';
 
@@ -22,6 +22,7 @@ interface IProps {
   toggleRosterFormatting: () => void;
   toggleScoringFormatting: () => void;
   trackedTeam: number;
+  undraftedPlayers: IPlayer[];
 }
 
 interface IState {
@@ -119,7 +120,9 @@ class Settings extends React.Component<IProps, IState> {
 
             <label>
               <Tooltip title="Download stats">
-                <Button icon="download" onClick={this.saveStats} />
+                <Button icon="download" onClick={this.saveStats}>
+                  Stats
+                </Button>
               </Tooltip>
             </label>
 
@@ -146,22 +149,37 @@ class Settings extends React.Component<IProps, IState> {
   };
 
   private saveStats = () => {
-    const blob = new Blob([JSON.stringify(INITIAL_PLAYERS)], {
-      type: 'application/json;charset=utf-8'
+    const removeCols = ['key', 'index', 'tableName'];
+
+    const cols = this.props.undraftedPlayers.length
+      ? Object.keys(this.props.undraftedPlayers[0]).filter(
+          k => !removeCols.includes(k)
+        )
+      : [];
+
+    const statsCsv = this.props.undraftedPlayers.reduce(
+      (acc, p) => acc + '\n' + cols.map(c => p[c]).join(','),
+      cols.join(',')
+    );
+
+    const blob = new Blob([statsCsv], {
+      type: 'text/csv;charset=utf-8'
     });
 
-    saveAs(blob, 'ffdraft-stats.json');
+    saveAs(blob, 'ffdraft-stats.csv');
   };
 }
 
 const mapStateToProps = ({
   currentPick,
   numberOfTeams,
-  trackedTeam
+  trackedTeam,
+  undraftedPlayers
 }: IStoreState) => ({
   currentPick,
   numberOfTeams,
-  trackedTeam
+  trackedTeam,
+  undraftedPlayers
 });
 
 const mapDispathToProps = (dispatch: any) => ({

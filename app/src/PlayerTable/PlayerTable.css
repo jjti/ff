@@ -170,6 +170,10 @@
     position: unset;
   }
 
+  #table {
+    padding: 0;
+  }
+
   #table-top-header {
     top: 0;
   }
@@ -205,7 +209,7 @@
   }
 
   .col-name > p {
-    font-weight: 500;
+    font-weight: 600;
     margin-left: 0;
   }
 

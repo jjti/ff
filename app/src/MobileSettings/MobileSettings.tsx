@@ -4,9 +4,12 @@ import { connect } from 'react-redux';
 import { resetDraft } from '../store/actions/players';
 import { toggleScoringFormatting } from '../store/actions/scoring';
 import { toggleRosterFormatting, undoLast } from '../store/actions/teams';
+import { IStoreState } from '../store/store';
 import './MobileSettings.css';
 
 interface IProps {
+  currentPick: number;
+  numberOfTeams: number;
   undoPick: () => void;
   resetDraft: () => void;
   toggleRosterFormatting: () => void;
@@ -15,13 +18,23 @@ interface IProps {
 
 class MobileSettings extends React.Component<IProps> {
   public render() {
+    const { currentPick, numberOfTeams } = this.props;
+
+    // round tracker message
+    const headerMessage = `Round ${Math.ceil(
+      (currentPick + 1) / numberOfTeams
+    )} – Pick ${currentPick + 1}`;
+
     return (
       <div className="MobileSettings">
         <header>
           <h2>ffdraft.app</h2>
-          <div className="draft-dot">
-            <div className="dot green-dot" />
-            <p className="small">Will be drafted soon</p>
+          <div className="pick-column">
+            <p className="small">{headerMessage}</p>
+            <div className="draft-dot">
+              <div className="dot green-dot" />
+              <p className="small">Will be drafted soon</p>
+            </div>
           </div>
         </header>
         <div className="buttons">
@@ -50,6 +63,11 @@ class MobileSettings extends React.Component<IProps> {
   }
 }
 
+const mapStateToProps = ({ currentPick, numberOfTeams }: IStoreState) => ({
+  currentPick,
+  numberOfTeams
+});
+
 const mapDispatchToProps = (dispatch: any) => ({
   resetDraft: () => dispatch(resetDraft()),
   toggleRosterFormatting: () => dispatch(toggleRosterFormatting()),
@@ -58,6 +76,6 @@ const mapDispatchToProps = (dispatch: any) => ({
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(MobileSettings);

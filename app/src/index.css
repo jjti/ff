@@ -146,6 +146,19 @@ label {
   }
 
   p.small {
-    font-size: calc(8px + 0.5vw);
+    margin: 2px 8px;
+    font-size: calc(9px + 0.5vw);
+  }
+
+  p,
+  a,
+  th,
+  tr,
+  label,
+  input,
+  button {
+    font-weight: 400;
+    font-size: 15px;
+    color: var(--dark-gray);
   }
 }

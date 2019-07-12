@@ -10,7 +10,16 @@
         margin: 0;
     }
 
-    .MobileSettings > header > button {
+    .pick-column {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .pick-column > p {
+        margin-left: 23px !important;
+    }
+
+    .pick-column > button {
         margin: 0;
         margin-left: 10px;
     }
