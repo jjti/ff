@@ -35,7 +35,7 @@ deploy-server:
 	rsync -v --stats --progress -e "ssh -i ${EC2_PEM}" --exclude 'app' --exclude '.git' -a . ${EC2}:~
 
 start-server:
-	watch -n 10800 make projections
+	nohup watch -n 10800 make projections &
 
 notebook:
 	cd model/src/notebooks && jupyter notebook

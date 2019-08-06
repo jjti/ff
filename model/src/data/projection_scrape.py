@@ -450,6 +450,10 @@ def scrape_nfl(out=RAW_PROJECTIONS):
                     team = pos_team[1]
                     if team == "LA":
                         team = "LAR"
+                    if team == "WAS":
+                        team = "WSH"
+                    if team == "JAC":
+                        team = "JAX"
                     data = [name, pos_team[0], team]
 
                 data += [
