@@ -1,11 +1,21 @@
 .About {
     max-width: 800px;
     margin: 50px auto;
+    padding: 16px;
+}
+
+.About > h3 {
+    margin: 12px 0 8px 0;
+}
+
+.About > h4 {
+    margin: 8px 0;
 }
 
 .About > p,.About > p > a {
     font-size: 17px !important;
     line-height: 1.7;
+    margin: 8px 0;
 }
 
 .About-back-button {

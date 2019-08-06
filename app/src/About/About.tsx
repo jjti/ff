@@ -20,7 +20,7 @@ export default () => (
     <p>
       The inspiration for <span>ffdraft.app</span> came from{' '}
       <a target="_blank" href="https://fantasyfootballanalytics.net/">
-        https://fantasyfootballanalytics.net/
+        https://fantasyfootballanalytics.net/ (FFA)
       </a>
       . I liked the idea of{' '}
       <a href="https://fantasyfootballanalytics.net/2017/03/best-fantasy-football-projections-2017.html">

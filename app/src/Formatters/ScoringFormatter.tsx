@@ -35,11 +35,11 @@ class ScoringFormatter extends React.Component<IProps> {
   /** kicker settings */
   private kickers = {
     kickExtraPoints: 'Extra Point Kick',
-    kick019: 'Kick 0-19 years', // tslint:disable-line
-    kick2029: 'Kick 20-29 years',
-    kick3039: 'Kick 30-39 years',
-    kick4049: 'Kick 40-49 years',
-    kick50: 'Kick 50+ years'
+    kick019: 'Kick 0-19 yards', // tslint:disable-line
+    kick2029: 'Kick 20-29 yards',
+    kick3039: 'Kick 30-39 yards',
+    kick4049: 'Kick 40-49 yards',
+    kick50: 'Kick 50+ yards'
   };
 
   /** DST settings */
