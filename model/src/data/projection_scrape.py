@@ -1,3 +1,5 @@
+"""Projections scrapers."""
+
 import os
 import time
 import re
@@ -5,10 +7,8 @@ import traceback
 import datetime
 
 import pandas as pd
-from pandas.api.types import is_string_dtype
 import numpy as np
 from bs4 import BeautifulSoup, NavigableString
-import requests
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
@@ -296,14 +296,20 @@ def scrape_cbs(
         for row in table_body.find_all("tr"):  # for each player
             if isinstance(row, NavigableString):
                 continue
-            if not len(row.find_all("td")):
+            if not row.find_all("td"):
                 continue
 
             if pos is not "DST":
                 name_cell = row.select(".CellPlayerName--long")[0]
 
-                name = name_cell.find("a").get_text()
-                pos, team = [v.get_text().strip() for v in name_cell.find_all("span")]
+                if name_cell.find("a"):
+                    name = name_cell.find("a").get_text()
+                    pos, team = [
+                        v.get_text().strip() for v in name_cell.find_all("span")
+                    ]
+                else:
+                    continue  # very rare, seen for Alfred Morris in 2019
+
                 pos = pos.replace("FB", "RB")
                 if team == "WAS":
                     team = "WSH"
@@ -526,6 +532,8 @@ def scrape_fantasy_pros(out=RAW_ADP):
 
             name = name_team_bye.find_all("a")[0].get_text()
             team = name_team_bye.find_all("small")[0].get_text()
+            if team == "WAS":
+                team = "WSH"
             if team == "JAC":
                 team = "JAX"
             bye = name_team_bye.find_all("small")[-1].get_text()
