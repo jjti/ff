@@ -21,15 +21,18 @@ export const setPlayers = (
   state: IStoreState,
   players: IPlayer[]
 ): IStoreState => {
-  const getTableName = (name: string) => {
+  const tableName = (name: string) => {
     const splitName = name.split(' ');
     return `${name[0]}. ${splitName[1]}`;
   };
 
-  const playersWithTableName = players.map(p => ({
-    ...p,
-    tableName: p.pos === 'DST' ? p.name : getTableName(p.name)
-  }));
+  const positions = new Set(['QB', 'RB', 'WR', 'TE', 'DST', 'K']);
+  const playersWithTableName = players
+    .map(p => ({
+      ...p,
+      tableName: p.pos === 'DST' ? p.name : tableName(p.name)
+    }))
+    .filter(p => positions.has(p.pos)); // TODO: filter "P" players on server
 
   // hacky but am storing players here for a reset event
   if (!INITIAL_PLAYERS) {

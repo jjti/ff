@@ -112,6 +112,7 @@ button {
   border: none;
 }
 
+a:hover,
 button:hover {
   text-decoration: underline;
   cursor: pointer;
