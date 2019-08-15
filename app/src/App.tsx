@@ -9,6 +9,7 @@ import './App.css';
 import RosterFormatter from './Formatters/RosterFormatter';
 import ScoringFormatter from './Formatters/ScoringFormatter';
 import Header from './Header/Header';
+import Helmet from './Helmet';
 import MobileSettings from './MobileSettings/MobileSettings';
 import { IPlayer } from './models/Player';
 import PickHistoryContainer from './PickHistory/PickHistoryContainer';
@@ -55,6 +56,7 @@ class App extends React.PureComponent<IProps, IState> {
 
     return (
       <div id="App">
+        {Helmet}
         <div className="App-Left-Column">
           <Header />
           <Settings />

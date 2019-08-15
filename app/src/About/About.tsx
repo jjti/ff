@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import Helmet from '../Helmet';
 
 import './About.css';
 
 export default () => (
   <div className="About">
+    {Helmet}
+
     <header>
       <Link to="/">
         <h1>ffdraft.app</h1>
