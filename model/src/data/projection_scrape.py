@@ -146,10 +146,12 @@ def scrape():
         scrape_cbs()
         scrape_nfl()
         scrape_fantasy_pros()
+        DRIVER.quit()
     except Exception as err:
+        DRIVER.quit()
         print(str(err))
         traceback.print_exc()
-    DRIVER.quit()
+        raise err
 
 
 def scrape_espn(
