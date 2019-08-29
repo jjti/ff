@@ -138,9 +138,9 @@ class ScoringFormatter extends React.Component<IProps> {
 
     let numValue: number;
     if (this.multiple[id]) {
-      numValue = parseInt(value, 10) / this.multiple[id];
+      numValue = parseFloat(value) / this.multiple[id];
     } else {
-      numValue = parseInt(value, 10);
+      numValue = parseFloat(value);
     }
 
     dispatchSetScoreFormat({ ...scoring, [id]: numValue });

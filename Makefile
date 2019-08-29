@@ -27,6 +27,7 @@ projections: scrape
 
 projections-local: scrape
 	aws s3 cp ./model/data/processed/Projections-${YEAR}.json ${S3_BUCKET}/projections.json --acl public-read --sse --cache-control max-age=10800,public --profile personal
+	$(MAKE) copy-projections
 
 ssh:
 	ssh -i ${EC2_PEM} ${EC2}

@@ -314,7 +314,7 @@ const playersWithForecast = (
       Object.keys(scoring).reduce(
         (acc, k) =>
           k === 'dfPointsAllowedPerGame'
-            ? acc + 16 * dstPointsPerGame(p[k])
+            ? acc + 16.0 * dstPointsPerGame(p[k])
             : acc + scoring[k] * p[k],
         0.0
       )

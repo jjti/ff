@@ -27,6 +27,42 @@ RAW_ADP = os.path.join("..", "..", "data", "raw", "adp")
 
 YEAR = 2019
 
+NAME_TEAM_MAP = {
+    "Cardinals": "ARI",
+    "Falcons": "ATL",
+    "Ravens": "BAL",
+    "Bills": "BUF",
+    "Panthers": "CAR",
+    "Bears": "CHI",
+    "Bengals": "CIN",
+    "Browns": "CLE",
+    "Cowboys": "DAL",
+    "Broncos": "DEN",
+    "Lions": "DET",
+    "Packers": "GB",
+    "Texans": "HOU",
+    "Colts": "IND",
+    "Jaguars": "JAX",
+    "Chiefs": "KC",
+    "Dolphins": "MIA",
+    "Vikings": "MIN",
+    "Patriots": "NE",
+    "Saints": "NO",
+    "Giants": "NYG",
+    "Jets": "NYJ",
+    "Raiders": "OAK",
+    "Eagles": "PHI",
+    "Steelers": "PIT",
+    "Chargers": "LAC",
+    "49ers": "SF",
+    "Seahawks": "SEA",
+    "Rams": "LAR",
+    "Buccaneers": "TB",
+    "Titans": "TEN",
+    "Redskins": "WSH",
+}
+TEAM_NAME_MAP = {v: k for k, v in NAME_TEAM_MAP.items()}
+
 REQUIRED_COLS = [
     "key",
     "name",
@@ -126,14 +162,6 @@ COLUMN_MAP = {
 """Map between column names as seen in sources and those needed in required columns above
 """
 
-NAME_TEAM_MAP = {}
-"""Map from a teams name to abbreviation. Eg Patriots: NE
-"""
-
-TEAM_NAME_MAP = {}
-"""Map from a teams abbreviation to name. Eg NE: Patriots
-"""
-
 
 def scrape():
     """Scrape from all the sources and save to ./data/raw
@@ -167,7 +195,7 @@ def scrape_espn(
 
     # set this to the p
     DRIVER.get(url)
-    time.sleep(5)  # wait for JS app to render
+    time.sleep(4)  # wait for JS app to render
 
     players = []
     current_button = 1
@@ -181,8 +209,12 @@ def scrape_espn(
         for player in soup.select("div.full-projection-table"):
 
             name = player.select(".pointer")[0].get_text()
-            pos = player.select(".playerinfo__playerpos")[0].get_text()
-            team = player.select(".pro-team-name")[0].get_text()
+            assert name
+            pos = ""
+            team = ""
+            if player.select(".position-eligibility"):  # D/ST don't have these
+                pos = player.select(".position-eligibility")[0].get_text()  # ex RB
+                team = player.select(".player-teamname")[0].get_text()  # ex Bears
 
             table = player.select(".Table2__table")[1]
             headers = [
@@ -197,15 +229,14 @@ def scrape_espn(
             p_data = {}
             p_data["name"] = name.strip()
             p_data["pos"] = pos.strip()
-            p_data["team"] = team.strip().upper()
+            p_data["team"] = (
+                NAME_TEAM_MAP[team.strip()] if team in NAME_TEAM_MAP else ""
+            )
 
-            if p_data["pos"] == "D/ST":
-                p_data["name"] = p_data["name"].replace(" D/ST", "")
-                p_data["name"] = p_data["name"].split(" ")[-1]
+            if "D/ST" in name:
+                p_data["name"] = p_data["name"].replace(" D/ST", "").strip()
+                p_data["team"] = NAME_TEAM_MAP[p_data["name"]]
                 p_data["pos"] = "DST"
-
-                NAME_TEAM_MAP[p_data["name"]] = p_data["team"]
-                TEAM_NAME_MAP[p_data["team"]] = p_data["name"]
 
             for h, d in zip(headers, data):
                 if h in p_data:
