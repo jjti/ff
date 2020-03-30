@@ -4,7 +4,7 @@
 
 ## Value over replacement
 
-The app ranks players by their [value over replacement (VOR)](https://support.fantasypros.com/hc/en-us/articles/115005868747-What-is-value-based-drafting-What-do-player-draft-values-mean-VORP-VONA-VOLS-VBD-). The app does this by calculating the "replacement value" for each position. The replacement value within a position is that of the n+1th ranked player in a given postion, where n in the number of players in that position expected to be drafted within the first 10 rounds of a draft.
+The app ranks players by their [value over replacement (VOR)](https://support.fantasypros.com/hc/en-us/articles/115005868747-What-is-value-based-drafting-What-do-player-draft-values-mean-VORP-VONA-VOLS-VBD-). The app does this by calculating the "replacement value" for each position. The replacement value within a position is difference between a player's expected point total and the expected point total of the `n+1`th ranked player in a given postion, where `n` in the number of players in that position expected to be drafted within the first 10 rounds of a draft.
 
 ![screen shot 2018-08-18 at 5 35 32 pm](https://user-images.githubusercontent.com/13923102/44303360-0b0b6a80-a30d-11e8-8901-179bfa8ac693.png)
 
