@@ -1,6 +1,7 @@
 """Combine aggregated projections into a JSON format usable via the client-side application
 """
 
+import datetime
 import os
 import re
 
@@ -9,7 +10,7 @@ import numpy as np
 
 pd.set_option("display.max_columns", 500)
 
-YEAR = 2019
+YEAR = datetime.datetime.now().year
 
 PROJECTIONS = os.path.join("..", "..", "data", "raw", "projections")
 ADP = os.path.join("..", "..", "data", "raw", "adp", f"FantasyPros-{YEAR}.csv")

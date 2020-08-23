@@ -40,5 +40,6 @@ vignettes/*.pdf
 rsconnect/
 .Rproj.user
 
-
 .ipynb_checkpoints
+
+.vscode/
