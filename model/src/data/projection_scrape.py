@@ -6,6 +6,8 @@ import re
 import traceback
 import datetime
 
+import datetime
+import logging
 import pandas as pd
 import numpy as np
 from bs4 import BeautifulSoup, NavigableString
@@ -25,7 +27,7 @@ DRIVER = webdriver.Chrome(options=DRIVER_OPTIONS, executable_path=DRIVER_PATH)
 RAW_PROJECTIONS = os.path.join("..", "..", "data", "raw", "projections")
 RAW_ADP = os.path.join("..", "..", "data", "raw", "adp")
 
-YEAR = 2019
+YEAR = datetime.datetime.now().year
 
 NAME_TEAM_MAP = {
     "Cardinals": "ARI",
@@ -44,22 +46,29 @@ NAME_TEAM_MAP = {
     "Colts": "IND",
     "Jaguars": "JAX",
     "Chiefs": "KC",
+    "Las Vegas": "LV",
+    "Raiders": "LV",
     "Dolphins": "MIA",
     "Vikings": "MIN",
     "Patriots": "NE",
     "Saints": "NO",
     "Giants": "NYG",
+    "N.Y. Giants": "NYG",
     "Jets": "NYJ",
-    "Raiders": "OAK",
+    "N.Y. Jets": "NYJ",
     "Eagles": "PHI",
     "Steelers": "PIT",
     "Chargers": "LAC",
+    "L.A. Chargers": "LAC",
     "49ers": "SF",
     "Seahawks": "SEA",
     "Rams": "LAR",
+    "L.A. Rams": "LAR",
     "Buccaneers": "TB",
     "Titans": "TEN",
     "Redskins": "WSH",
+    "Washington": "WSH",
+    "Team": "WSH",  # lol, this is for CBS where it's just "Washington Football Team" right now
 }
 TEAM_NAME_MAP = {v: k for k, v in NAME_TEAM_MAP.items()}
 
@@ -216,15 +225,13 @@ def scrape_espn(
                 pos = player.select(".position-eligibility")[0].get_text()  # ex RB
                 team = player.select(".player-teamname")[0].get_text()  # ex Bears
 
-            table = player.select(".Table2__table")[1]
+            table = player.select(".player-stat-table")[0]
+            projection_row = table.find("tbody").find_all("tr")[1]
             headers = [
-                e.find("div").get("title")
-                for e in table.find("tbody").find_all("tr")[1].find_all("td")
+                e.find("div").get("title") for e in projection_row.find_all("td")
             ][1:]
             headers = [column(h) for h in headers]
-            data = [
-                e.get_text().lower() for e in table.find("tbody").find_all("tr")[1]
-            ][1:]
+            data = [e.get_text().lower() for e in projection_row][1:]
 
             p_data = {}
             p_data["name"] = name.strip()
@@ -258,7 +265,6 @@ def scrape_espn(
                     p_data[h] = float(d)
 
             players.append(p_data)
-
         try:
             next_button = DRIVER.find_element_by_link_text(str(current_button + 1))
             actions = ActionChains(DRIVER)
@@ -337,9 +343,14 @@ def scrape_cbs(
 
                 if name_cell.find("a"):
                     name = name_cell.find("a").get_text()
-                    pos, team = [
-                        v.get_text().strip() for v in name_cell.find_all("span")
-                    ]
+                    pos = (
+                        name_cell.select(".CellPlayerName-position")[0]
+                        .get_text()
+                        .strip()
+                    )
+                    team = (
+                        name_cell.select(".CellPlayerName-team")[0].get_text().strip()
+                    )
                 else:
                     continue  # very rare, seen for Alfred Morris in 2019
 
@@ -376,11 +387,8 @@ def scrape_cbs(
             players.append(player_data)
 
     df = pd.DataFrame(players)
-
     df["two_pts"] = np.nan
-
     df = unify_columns(df)
-
     df.to_csv(os.path.join(out, f"CBS-Projections-{YEAR}.csv"), index=False)
 
     validate(df)
@@ -512,12 +520,9 @@ def scrape_nfl(out=RAW_PROJECTIONS):
                 break
 
     df = pd.DataFrame(players)
-
     df["two_pts"] = df["2pt"]
     df["df_points_allowed_per_game"] = df["pts_allow"].astype(float) / 16.0
-
     df = unify_columns(df)
-
     df.to_csv(os.path.join(out, f"NFL-Projections-{YEAR}.csv"), index=False)
 
     validate(df)
@@ -605,7 +610,6 @@ def scrape_fantasy_pros(out=RAW_ADP):
             df = pd.merge(df, player_d, on="key", how="outer")
 
     df = df[["key", "name", "pos", "team", "bye"] + list(urls.keys())]
-
     df.to_csv(os.path.join(out, f"FantasyPros-{YEAR}.csv"), index=False)
 
     validate(df, strict=False)
@@ -656,7 +660,7 @@ def add_key(df):
 
 
 def validate(df, strict=True):
-    """Throw an exception if we're missing players at a certain position. These number of estimates."""
+    """Throw an exception if we're missing players at a certain position. These numbers are logical estimates."""
 
     pos_counts = {"QB": 32, "RB": 64, "WR": 64, "TE": 28, "DST": 32, "K": 32}
 
