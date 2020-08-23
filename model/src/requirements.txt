@@ -1,8 +1,5 @@
-bs4
 boto3
-requests
-pandas
+bs4
 numpy
-jupyter
-xlrd
+pandas
 selenium

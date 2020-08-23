@@ -71,6 +71,8 @@ def aggregate():
     forecast.json for the application
     """
 
+    print("aggregating projections")
+
     src = ["cbs", "espn", "nfl"]
 
     df = pd.read_csv(ADP)
@@ -114,6 +116,8 @@ def aggregate():
     df.to_csv(AGGREGATE_CSV, index=False)
     df.columns = [re.sub(REG, camel, c, 0) for c in df.columns]
     df.to_json(AGGREGATE_JSON, orient="table")
+
+    print("aggregated projections to ", AGGREGATE_JSON)
 
 
 def camel(match):

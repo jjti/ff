@@ -17,8 +17,7 @@ from selenium.webdriver.common.keys import Keys
 DIR = os.path.dirname(__file__)
 
 # helpful resource for setting this up on headless Ubuntu: https://tecadmin.net/setup-selenium-chromedriver-on-ubuntu/
-BIN = "chromedriver" if platform.system() != "Darwin" else "chromedriver_mac"
-DRIVER_PATH = os.path.join(DIR, "..", "bin", BIN)
+DRIVER_PATH = os.sep + os.path.join("usr", "local", "bin", "chromedriver")
 DRIVER_OPTIONS = webdriver.ChromeOptions()
 DRIVER_OPTIONS.add_argument("--headless")
 DRIVER_OPTIONS.add_argument("--window-size=1200x900")
