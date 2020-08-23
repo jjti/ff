@@ -12,14 +12,27 @@ pd.set_option("display.max_columns", 500)
 
 YEAR = datetime.datetime.now().year
 
-PROJECTIONS = os.path.join("..", "..", "data", "raw", "projections")
-ADP = os.path.join("..", "..", "data", "raw", "adp", f"FantasyPros-{YEAR}.csv")
-
+PROJECTIONS = os.path.join(
+    os.path.dirname(__file__), "..", "..", "data", "raw", "projections"
+)
+ADP = os.path.join(
+    os.path.dirname(__file__),
+    "..",
+    "..",
+    "data",
+    "raw",
+    "adp",
+    f"FantasyPros-{YEAR}.csv",
+)
 CBS = os.path.join(PROJECTIONS, f"CBS-Projections-{YEAR}.csv")
 ESPN = os.path.join(PROJECTIONS, f"ESPN-Projections-{YEAR}.csv")
 NFL = os.path.join(PROJECTIONS, f"NFL-Projections-{YEAR}.csv")
 
-OUTPUT = os.path.join("..", "..", "data", "processed", f"Projections-{YEAR}")
+AGGREGATE_BASE = os.path.join(
+    os.path.dirname(__file__), "..", "..", "data", "processed", f"Projections-{YEAR}"
+)
+AGGREGATE_CSV = AGGREGATE_BASE + ".csv"
+AGGREGATE_JSON = AGGREGATE_BASE + ".json"
 
 REG = r"(.*?)_([a-zA-Z0-9])"
 
@@ -98,11 +111,9 @@ def aggregate():
     df["half_ppr"] = df["half_ppr"].fillna(-1.0)
     df["ppr"] = df["ppr"].fillna(-1.0)
 
-    df.to_csv(OUTPUT + ".csv", index=False)
-
+    df.to_csv(AGGREGATE_CSV, index=False)
     df.columns = [re.sub(REG, camel, c, 0) for c in df.columns]
-
-    df.to_json(OUTPUT + ".json", orient="table")
+    df.to_json(AGGREGATE_JSON, orient="table")
 
 
 def camel(match):

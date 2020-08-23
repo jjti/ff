@@ -1,13 +1,12 @@
 """Projections scrapers."""
 
+import datetime
 import os
-import time
+import platform
 import re
+import time
 import traceback
-import datetime
 
-import datetime
-import logging
 import pandas as pd
 import numpy as np
 from bs4 import BeautifulSoup, NavigableString
@@ -15,8 +14,11 @@ from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 
+DIR = os.path.dirname(__file__)
+
 # helpful resource for setting this up on headless Ubuntu: https://tecadmin.net/setup-selenium-chromedriver-on-ubuntu/
-DRIVER_PATH = os.path.sep + os.path.join("usr", "local", "bin", "chromedriver")
+BIN = "chromedriver" if platform.system() != "Darwin" else "chromedriver_mac"
+DRIVER_PATH = os.path.join(DIR, "..", "bin", BIN)
 DRIVER_OPTIONS = webdriver.ChromeOptions()
 DRIVER_OPTIONS.add_argument("--headless")
 DRIVER_OPTIONS.add_argument("--window-size=1200x900")
@@ -24,8 +26,8 @@ DRIVER_OPTIONS.add_argument("--no-sandbox")
 DRIVER_OPTIONS.add_argument("--disable-dev-shm-usage")
 DRIVER = webdriver.Chrome(options=DRIVER_OPTIONS, executable_path=DRIVER_PATH)
 
-RAW_PROJECTIONS = os.path.join("..", "..", "data", "raw", "projections")
-RAW_ADP = os.path.join("..", "..", "data", "raw", "adp")
+RAW_PROJECTIONS = os.path.join(DIR, "..", "..", "data", "raw", "projections")
+RAW_ADP = os.path.join(DIR, "..", "..", "data", "raw", "adp")
 
 YEAR = datetime.datetime.now().year
 

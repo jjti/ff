@@ -1,4 +1,5 @@
 bs4
+boto3
 requests
 pandas
 numpy

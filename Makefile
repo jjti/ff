@@ -1,7 +1,7 @@
 include .env
 export
 
-YEAR=2019
+YEAR=2020
 
 .PHONY: data app
 
