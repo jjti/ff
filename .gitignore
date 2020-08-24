@@ -43,3 +43,5 @@ rsconnect/
 .ipynb_checkpoints
 
 .vscode/
+**/packages/
+build/

@@ -339,7 +339,7 @@ def scrape_cbs(
             if not row.find_all("td"):
                 continue
 
-            if pos is not "DST":
+            if pos != "DST":
                 name_cell = row.select(".CellPlayerName--long")[0]
 
                 if name_cell.find("a"):

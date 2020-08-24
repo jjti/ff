@@ -2,7 +2,11 @@ include .env
 export
 
 container:
+<<<<<<< HEAD
 	cd model && docker build -t ff .
+=======
+	docker build -t ff .
+>>>>>>> Dockerfy the code for the model
 	docker push ${AWS_ACCOUNT}.dkr.ecr.us-east-1.amazonaws.com/ff
 
 projections:
