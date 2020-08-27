@@ -131,8 +131,11 @@ class PlayerTableContainer extends React.Component<
     );
 
     // players that are RB handcuffs
-    const rbHandcuffs = players.filter(
-      (p, i) => !filteredPlayers[i] && p.pos === 'RB' && rbHandcuffTeams[p.team]
+    const rbHandcuffs = new Set(
+      players.filter(
+        (p, i) =>
+          !filteredPlayers[i] && p.pos === 'RB' && rbHandcuffTeams[p.team]
+      )
     );
 
     // players that will be recommended
@@ -145,7 +148,7 @@ class PlayerTableContainer extends React.Component<
           recommendedCount += 1;
           return [...acc, p];
         }
-      } else if (i < 30 && rbHandcuffs.indexOf(p) > -1) {
+      } else if (i < 30 && rbHandcuffs.has(p)) {
         recommendedCount += 1;
         return [...acc, p];
       }
@@ -161,7 +164,7 @@ class PlayerTableContainer extends React.Component<
         filteredPlayers={filteredPlayers}
         nameFilter={nameFilter}
         mobile={!!mobile}
-        recommended={recommended}
+        recommended={new Set(recommended)}
         positionsToShow={positionsToShow}
         rbHandcuffs={rbHandcuffs}
         setNameFilter={this.setNameFilter}

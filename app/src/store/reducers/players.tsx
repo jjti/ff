@@ -68,6 +68,7 @@ export const removePlayer = (
  * given a player and a team's roster, remove the player from the roster
  */
 const removeFromRoster = (roster: ITeam, player: IPlayer): ITeam => {
+  // @ts-ignore
   return Object.keys(roster).reduce(
     (acc: ITeam, pos) => ({
       ...acc,

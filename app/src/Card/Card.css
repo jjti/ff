@@ -48,7 +48,7 @@
 .Card > p.points {
   margin: 0;
   position: absolute;
-  bottom: 5%;
+  bottom: -5px;
   left: 7%;
   top: unset;
 }

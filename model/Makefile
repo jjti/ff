@@ -3,6 +3,7 @@ export
 
 container:
 	docker build -t ff .
+	docker tag ff ${AWS_ACCOUNT}.dkr.ecr.us-east-1.amazonaws.com/ff
 	docker push ${AWS_ACCOUNT}.dkr.ecr.us-east-1.amazonaws.com/ff
 
 projections:

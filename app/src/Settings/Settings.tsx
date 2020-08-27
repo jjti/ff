@@ -120,9 +120,7 @@ class Settings extends React.Component<IProps, IState> {
 
             <label>
               <Tooltip title="Download stats">
-                <Button icon="download" onClick={this.saveStats}>
-                  Stats
-                </Button>
+                <Button onClick={this.saveStats}>Stats</Button>
               </Tooltip>
             </label>
 
@@ -130,7 +128,7 @@ class Settings extends React.Component<IProps, IState> {
               <Button
                 className="options-left"
                 onClick={this.props.resetDraft}
-                type="danger">
+                danger={true}>
                 Reset
               </Button>
             </label>

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { DragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import { connect } from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
 // @ts-ignore
@@ -56,18 +56,20 @@ class App extends React.PureComponent<IProps, IState> {
 
     return (
       <div id="App">
-        {Helmet}
-        <div className="App-Left-Column">
-          <Header />
-          <Settings />
-          <TeamPicks />
-        </div>
-        <div className="App-Right-Column">
-          <PickHistoryContainer />
-          <PlayerTableContainer />
-        </div>
-        <RosterFormatter />
-        <ScoringFormatter />
+        <DndProvider backend={HTML5Backend}>
+          {Helmet}
+          <div className="App-Left-Column">
+            <Header />
+            <Settings />
+            <TeamPicks />
+          </div>
+          <div className="App-Right-Column">
+            <PickHistoryContainer />
+            <PlayerTableContainer />
+          </div>
+          <RosterFormatter />
+          <ScoringFormatter />
+        </DndProvider>
       </div>
     );
   }
@@ -77,10 +79,7 @@ const mapDispatchToProps = (dispatch: any) => ({
   setPlayers: (players: IPlayer[]) => dispatch(setPlayers(players))
 });
 
-export default compose(
-  DragDropContext(HTML5Backend),
-  connect(
-    () => ({}),
-    mapDispatchToProps
-  )
+export default connect(
+  () => ({}),
+  mapDispatchToProps
 )(App);

@@ -185,11 +185,10 @@ def scrape():
         scrape_nfl()
         scrape_fantasy_pros()
         DRIVER.quit()
-    except Exception as err:
+    except:
         DRIVER.quit()
-        print(str(err))
         traceback.print_exc()
-        raise err
+        raise
 
 
 def scrape_espn(
@@ -456,11 +455,11 @@ def scrape_nfl(out=RAW_PROJECTIONS):
     ]
 
     players = []
-    for page_url, headers in pages:
+    for page_index, (page_url, headers) in enumerate(pages):
         DRIVER.get(page_url)
-        time.sleep(0.5)
+        time.sleep(1)
         scroll()
-        time.sleep(0.5)
+        time.sleep(1)
 
         headers = [column(h) for h in headers]
         headers = ["name", "pos", "team"] + headers
@@ -482,7 +481,8 @@ def scrape_nfl(out=RAW_PROJECTIONS):
                 name = name_cell.select(".playerNameFull")[0].get_text()
                 pos_team = name_cell.find("em").get_text()
                 pos_team = [v.strip() for v in pos_team.split("-")]
-                if page_url == pages[2][0]:  # is DST
+                if page_index == 2:  # is DST
+                    print(page_index, page_url, name, pos_team)
                     name = name.split(" ")[-1]
                     team = NAME_TEAM_MAP[name]
                     data = [name, "DST", team]
@@ -514,9 +514,9 @@ def scrape_nfl(out=RAW_PROJECTIONS):
                 actions = ActionChains(DRIVER)
                 actions.move_to_element(next_button).click().perform()
 
-                time.sleep(0.5)
+                time.sleep(1)
                 scroll()
-                time.sleep(0.5)
+                time.sleep(1)
             except:
                 break
 

@@ -14,7 +14,10 @@ export default class Header extends React.Component {
           <button className=".Grayed">
             <Link to="/about">About</Link>
           </button>
-          <a href="https://github.com/JJTimmons/ff" target="_blank">
+          <a
+            href="https://github.com/JJTimmons/ff"
+            target="_blank"
+            style={{ marginLeft: 12 }}>
             Source code
           </a>
         </div>

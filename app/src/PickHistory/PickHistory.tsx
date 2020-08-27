@@ -42,8 +42,8 @@ export default class PickHistory extends React.Component<IPickHistoryProps> {
           <>
             <div ref={refProp} className="PicksRow">
               {
-                // @ts-ignore
                 <Card
+                  // @ts-ignore
                   currentPick={true}
                   length={cardLength}
                   pick={{

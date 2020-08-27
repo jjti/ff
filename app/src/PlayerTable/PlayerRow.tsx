@@ -1,6 +1,8 @@
+import { CloseOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import * as React from 'react';
 import { DragSource } from 'react-dnd';
+
 import { DRAG_TYPES } from '../models/DragTypes';
 import { IPlayer } from '../models/Player';
 import './PlayerTable.css';
@@ -69,7 +71,7 @@ class PlayerRow extends React.Component<IPlayerRowProps> {
             </p>
             <div className="col col-remove">
               <Button
-                icon="close"
+                icon={<CloseOutlined />}
                 shape="circle"
                 size="small"
                 type="dashed"

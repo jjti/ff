@@ -23,8 +23,8 @@ interface IPlayerTableProps {
   pickPlayer: (player: IPlayer) => void;
   players: ITablePlayer[];
   positionsToShow: Position[];
-  rbHandcuffs: IPlayer[];
-  recommended: IPlayer[]; // names that are recommended
+  rbHandcuffs: Set<IPlayer>;
+  recommended: Set<IPlayer>; // names that are recommended
   removePlayer: (player: IPlayer) => void;
   setNameFilter: (e: React.ChangeEvent<HTMLInputElement>) => void;
   setPositionFilter: (pos: Position) => void;
@@ -123,11 +123,13 @@ export default ({
         <p className="col col-pos">Position</p>
         <p className="col col-team">Team</p>
         <p className="col col-vor" data-tip="Value over replacement">
-          <Tooltip title="Value over replacement">Value</Tooltip>
+          <Tooltip title="Value over replacement">
+            <span>Value</span>
+          </Tooltip>
         </p>
         <p className="col col-prediction">
           <Tooltip title="Experts consensus projection">
-            {!mobile ? 'Projections' : 'Points'}
+            <span>{!mobile ? 'Projections' : 'Points'}</span>
           </Tooltip>
         </p>
 
@@ -135,9 +137,13 @@ export default ({
         {!mobile && (
           <>
             <p className="col col-adp">
-              <Tooltip title="Average draft position">ADP</Tooltip>
+              <Tooltip title="Average draft position">
+                <span>ADP</span>
+              </Tooltip>
             </p>
-            <p className="col col-remove">Remove</p>
+            <p className="col col-remove" style={{ paddingRight: 12 }}>
+              Remove
+            </p>
           </>
         )}
       </div>
@@ -157,8 +163,8 @@ export default ({
               byeWeekConflict={byeWeeks[player.bye]}
               inValuablePosition={valuedPositions[player.pos]}
               player={player}
-              rbHandcuff={rbHandcuffs.indexOf(player) > -1}
-              recommended={recommended.indexOf(player) > -1}
+              rbHandcuff={rbHandcuffs.has(player)}
+              recommended={recommended.has(player)}
               removePlayer={removePlayer}
             />
           ))}

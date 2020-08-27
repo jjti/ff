@@ -1,5 +1,6 @@
 import datetime
 import os
+import traceback
 
 import boto3
 
@@ -26,16 +27,17 @@ def run():
             PROJECTIONS,
             os.environ["S3_BUCKET"],
             "projections.json",
-            ExtraArgs={"ACL": "public-read", "CacheControl": "max-age=10800,public"},
+            ExtraArgs={"ACL": "public-read", "CacheControl": "max-age=7200,public"},
         )
         s3.upload_file(
             PROJECTIONS,
             os.environ["S3_BUCKET"],
             f"history/f{datetime.datetime.now().strftime('%m/%d/%Y %H:%M:%S')}",
         )
-    except Exception as err:
+    except:
         print("failed to upload projections")
-        print(err)
+        traceback.print_exc()
+        raise
 
 
 if __name__ == "__main__":
