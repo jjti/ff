@@ -21,7 +21,6 @@ export default class PickHistory extends React.Component<IPickHistoryProps> {
     const {
       activeTeam,
       cardLength,
-      currentPick,
       headerMessage,
       open,
       pastPicks,
@@ -46,8 +45,8 @@ export default class PickHistory extends React.Component<IPickHistoryProps> {
                   // @ts-ignore
                   currentPick={true}
                   length={cardLength}
+                  // @ts-ignore
                   pick={{
-                    pickNumnber: currentPick,
                     player: null,
                     team: activeTeam
                   }}

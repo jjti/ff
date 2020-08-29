@@ -1,6 +1,4 @@
 import * as React from 'react';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
 import { connect } from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
 // @ts-ignore
@@ -44,34 +42,30 @@ class App extends React.PureComponent<IProps, IState> {
     if (this.state.mobile) {
       return (
         <div id="App">
-          <DndProvider backend={HTML5Backend}>
-            <MobileSettings />
-            <TeamPicks mobile={true} />
-            <PlayerTableContainer mobile={true} />
+          <MobileSettings />
+          <TeamPicks mobile={true} />
+          <PlayerTableContainer mobile={true} />
 
-            <RosterFormatter />
-            <ScoringFormatter />
-          </DndProvider>
+          <RosterFormatter />
+          <ScoringFormatter />
         </div>
       );
     }
 
     return (
       <div id="App">
-        <DndProvider backend={HTML5Backend}>
-          {Helmet}
-          <div className="App-Left-Column">
-            <Header />
-            <Settings />
-            <TeamPicks />
-          </div>
-          <div className="App-Right-Column">
-            <PickHistoryContainer />
-            <PlayerTableContainer />
-          </div>
-          <RosterFormatter />
-          <ScoringFormatter />
-        </DndProvider>
+        {Helmet}
+        <div className="App-Left-Column">
+          <Header />
+          <Settings />
+          <TeamPicks />
+        </div>
+        <div className="App-Right-Column">
+          <PickHistoryContainer />
+          <PlayerTableContainer />
+        </div>
+        <RosterFormatter />
+        <ScoringFormatter />
       </div>
     );
   }

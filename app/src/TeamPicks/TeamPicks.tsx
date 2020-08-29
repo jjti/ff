@@ -85,6 +85,7 @@ class TeamPicks extends React.Component<IProps, State> {
                 // @ts-ignore
                 pick={{ player: r, pickNumber: 0, team: 0 }}
                 playerMeta={true}
+                // @ts-ignore
                 pos={r ? r.pos : 'BE'}
                 length={this.state.cardLength}
               />

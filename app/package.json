@@ -7,8 +7,6 @@
     "antd": "^4.6.1",
     "file-saver": "^2.0.2",
     "react": "^16.9.0",
-    "react-dnd": "^11.1.3",
-    "react-dnd-html5-backend": "^11.1.3",
     "react-dom": "^16.13.1",
     "react-helmet": "^5.2.1",
     "react-measure": "^2.3.0",
@@ -17,8 +15,6 @@
     "react-scripts-ts": "^4.0.8",
     "react-toastify": "^5.5.0",
     "react-tooltip": "^4.2.8",
-    "react-virtualized-auto-sizer": "^1.0.2",
-    "react-window": "^1.8.5",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8"
   },
@@ -40,7 +36,6 @@
     "@types/react-redux": "^6.0.14",
     "@types/react-router-dom": "^4.3.5",
     "@types/react-tooltip": "^3.11.0",
-    "@types/react-virtualized": "^9.21.10",
     "jest": "^23.6.0",
     "source-map-explorer": "^2.5.0",
     "typescript": "^3.9.7"

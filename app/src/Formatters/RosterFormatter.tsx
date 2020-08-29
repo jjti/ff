@@ -57,11 +57,10 @@ class RosterFormatter extends React.Component<IProps> {
         onCancel={this.props.toggleRosterFormatting}>
         <div className="position-change-section">
           {this.orderedPositions.map(k => (
-            <div className="position-input-input">
+            <div className="position-input-input" key={k}>
               <label htmlFor={k}>{k}</label>
               <InputNumber
                 id={k}
-                key={k}
                 type="number"
                 className="position-input"
                 value={rosterFormat[k]}

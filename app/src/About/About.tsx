@@ -21,8 +21,8 @@ export default () => (
 
     <h3>Background</h3>
     <p>
-      This is a fantasy football draft application. It is designed to be free,
-      intuitive, and as accurate as possible with in its predictions.
+      This is a fantasy football draft app. It is designed to be free,
+      intuitive, and as accurate as possible with its draft recommendations.
     </p>
 
     <p>
