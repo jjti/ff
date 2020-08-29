@@ -4,13 +4,13 @@
 
 ## Value over replacement
 
-The app ranks players by their [value over replacement (VOR)](https://support.fantasypros.com/hc/en-us/articles/115005868747-What-is-value-based-drafting-What-do-player-draft-values-mean-VORP-VONA-VOLS-VBD-). The app does this by calculating the "replacement value" for each position. The `VOR` of a player is difference between that player's projected point total and the projected point total of the `n+1`th ranked player in a given postion where `n` in the number of players in that position expected to be drafted within the first 10 rounds of a draft (based on average draft position data).
+The app ranks players by their [value over replacement (VOR)](https://support.fantasypros.com/hc/en-us/articles/115005868747-What-is-value-based-drafting-What-do-player-draft-values-mean-VORP-VONA-VOLS-VBD-). The app does this by calculating the "replacement value" for each position. The `VOR` of a player is difference between that player's projected point total and the projected point total of the `n+1`th ranked player in a given postion where `n` in the number of players in that position expected to be drafted within the first 10 rounds of a draft.
 
 ![screen shot 2018-08-18 at 5 35 32 pm](https://user-images.githubusercontent.com/13923102/44303360-0b0b6a80-a30d-11e8-8901-179bfa8ac693.png)
 
-So if there are 10 teams, and we expect 8 QBs to be drafted within the first 100 picks (based on ESPN's average draft position data), the replacement value is the predicted number of points of the 9'th best QB.
+So if there are 10 teams, and we expect 8 QBs to be drafted within the first 100 picks (based on Fantasy Pro's average draft data), the replacement value is the seasonal projection of the 9'th best QB.
 
-Since the expected number of drafted players at each position depends on the number of teams, the app recalculates VOR if the number of teams changes.
+Since the expected number of drafted players at each position depends on the number of teams, the app recalculates VOR if the number of teams changes. Similarly, the app accounts for differences in league-to-league scoring.
 
 ## Building out a Roster
 
