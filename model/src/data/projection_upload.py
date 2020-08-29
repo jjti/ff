@@ -32,7 +32,7 @@ def run():
         s3.upload_file(
             PROJECTIONS,
             os.environ["S3_BUCKET"],
-            f"history/f{datetime.datetime.now().strftime('%m/%d/%Y %H:%M:%S')}",
+            f"history/f{datetime.datetime.now().strftime('%m:%d:%Y %H:%M:%S')}",
         )
     except:
         print("failed to upload projections")
