@@ -68,7 +68,7 @@ NAME_TEAM_MAP = {
     "Buccaneers": "TB",
     "Titans": "TEN",
     "Washington": "WSH",
-    "Team": "WSH",  # lol, this is for CBS where it's just "Washington Football Team" right now
+    "Team": "WSH",
 }
 TEAM_NAME_MAP = {v: k for k, v in NAME_TEAM_MAP.items()}
 
@@ -235,12 +235,16 @@ def scrape_espn(
             p_data = {}
             p_data["name"] = name.strip()
             p_data["pos"] = pos.strip()
-            p_data["team"] = (
-                NAME_TEAM_MAP[team.strip()] if team in NAME_TEAM_MAP else ""
-            )
+            team = team.strip()
+
+            if team == "FA":
+                team = "Washington"
+            p_data["team"] = NAME_TEAM_MAP[team] if team else ""
 
             if "D/ST" in name:
                 p_data["name"] = p_data["name"].replace(" D/ST", "").strip()
+                if p_data["name"] == "FA":
+                    p_data["name"] = "Washington"
                 p_data["team"] = NAME_TEAM_MAP[p_data["name"]]
                 p_data["pos"] = "DST"
 
@@ -669,6 +673,9 @@ def validate(df, strict=True):
             raise RuntimeWarning(f"only {actual_count} {pos}'s")
         elif not strict and actual_count * 3 < count:
             raise RuntimeWarning(f"only {actual_count} {pos}'s")
+
+    if len(set(df.team)) > 33:
+        raise RuntimeError(f"too many teams: {set(df.team)}")
 
 
 def scroll():

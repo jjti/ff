@@ -94,13 +94,13 @@ export default () => (
     </p>
 
     <p>
-      Right now I average together common fields from each data source
-      server-side. For example, "pass_tds" holds the expected number of
-      touchdowns thrown by a QB over the course of a season. It is not called
-      "pass_tds" on any of the sources' website. Instead I map each source's
-      fields to a common dictionary (ESPN: "td_pass", CBS: "touchdowns_passes",
-      NFL: "passing_td"). It would be easier to skip this step, and just scrape
-      and average each site's forecasted number of fantasy points. This is what{' '}
+      I average together common fields from each data source server-side. For
+      example, "pass_tds" holds the expected number of touchdowns thrown by a QB
+      over the course of a season. It is not called "pass_tds" on any of the
+      sources' website. Instead I map each source's fields to a common
+      dictionary (ESPN: "td_pass", CBS: "touchdowns_passes", NFL: "passing_td").
+      It would be easier to skip this step, and just scrape and average each
+      site's forecasted number of fantasy points. This is what{' '}
       <a href="https://www.fantasypros.com/">Fantasy Pros</a> does for consensus
       rankings. But storing the raw, underlying stats, as opposed to their
       summed forecast, is important. Users can change the ranking and value
