@@ -1,5 +1,4 @@
-.Settings {
-}
+.Settings {}
 
 .Settings-Select {
   width: 120px;
@@ -14,7 +13,7 @@
 .Settings-Container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: left;
+  justify-content: space-between;
 }
 
 .full-width {
