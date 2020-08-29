@@ -1,4 +1,4 @@
-# Fantasy Football
+# Fantasy Football Draft App
 
 [An app](https://www.ffdraft.app/) for drafting the best fantasy football team possible.
 
