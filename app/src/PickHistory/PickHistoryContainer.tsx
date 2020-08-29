@@ -25,28 +25,36 @@ class PickHistoryContainer extends React.Component<
   IPickHistoryContainerProps,
   IPickHistoryContainerState
 > {
+  public static getDerivedStateFromProps = (
+    props: IPickHistoryContainerProps
+  ) => ({
+    cardLength: PickHistoryContainer.getCardLength(props.numberOfTeams)
+  });
+
+  private static getCardLength = (numberOfTeams: number): number => {
+    const thisWidth = window.innerWidth * 0.65; // ~30px padding, 70% width of total window size
+    const cardLength = Math.floor(thisWidth / numberOfTeams); // 8 == 2px border, 6px margin
+    return Math.min(cardLength, 75);
+  };
+
   public pickRowRef: any = React.createRef();
 
   constructor(props: any) {
     super(props);
 
     this.state = {
-      cardLength: this.getCardLength(props.numberOfTeams),
+      cardLength: PickHistoryContainer.getCardLength(props.numberOfTeams),
       open: true
     };
 
     window.addEventListener('resize', () =>
       this.setState({
-        cardLength: this.getCardLength(this.props.numberOfTeams)
+        cardLength: PickHistoryContainer.getCardLength(this.props.numberOfTeams)
       })
     );
   }
 
-  public componentWillReceiveProps = (props: IPickHistoryContainerProps) => {
-    this.setState({
-      cardLength: this.getCardLength(props.numberOfTeams)
-    });
-
+  public componentDidUpdate = () => {
     // scroll the pick row back to the left
     if (this.pickRowRef.current) {
       this.pickRowRef.current.scrollLeft = 0;
@@ -75,12 +83,6 @@ class PickHistoryContainer extends React.Component<
       />
     );
   }
-
-  private getCardLength = (numberOfTeams: number): number => {
-    const thisWidth = window.innerWidth * 0.65; // ~30px padding, 70% width of total window size
-    const cardLength = Math.floor(thisWidth / numberOfTeams); // 8 == 2px border, 6px margin
-    return Math.min(cardLength, 75);
-  };
 }
 
 const mapStateToProps = ({

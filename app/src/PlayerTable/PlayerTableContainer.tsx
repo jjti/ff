@@ -56,7 +56,7 @@ interface IPlayerTableState {
  * Includes buttons for skipping the current round, without a pick,
  * and undoing the last round/pick (in the event of a mistake)
  */
-class PlayerTableContainer extends React.Component<
+class PlayerTableContainer extends React.PureComponent<
   IPlayerTableProps,
   IPlayerTableState
 > {
@@ -70,8 +70,10 @@ class PlayerTableContainer extends React.Component<
   };
 
   /** clear name filter after a player was picked */
-  public componentWillReceiveProps = () => {
-    this.setState({ nameFilter: '' });
+  public componentDidUpdate = ({}, { nameFilter }: IPlayerTableState) => {
+    if (nameFilter === this.state.nameFilter) {
+      this.setState({ nameFilter: '' });
+    }
   };
 
   public render() {

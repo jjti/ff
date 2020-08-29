@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import About from './About/About';
 import App from './App';
 import './index.css';
-import { unregister } from './registerServiceWorker';
 import { setPlayers } from './store/actions/players';
 import { store } from './store/store';
 
@@ -17,6 +16,8 @@ window.onload = () => {
     if (this.readyState === 4 && this.status === 200) {
       const playerDataArray = JSON.parse(xhttp.responseText);
       store.dispatch(setPlayers(playerDataArray.data));
+    } else if (this.readyState === 4 && this.status !== 200) {
+      console.warn(this.readyState, this.status, xhttp.responseText);
     }
   };
   xhttp.open('GET', `${process.env.PUBLIC_URL}/projections.json`, true);
@@ -32,5 +33,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root') as HTMLElement
 );
-
-unregister();

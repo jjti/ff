@@ -34,10 +34,10 @@ export const setPlayers = (
     }))
     .filter(p => positions.has(p.pos)); // TODO: filter "P" players on server
 
-  // chopping off bottom 30%
+  // chopping off bottom for rendering perf
   playersWithTableName = playersWithTableName.slice(
     0,
-    Math.round(playersWithTableName.length * 0.7)
+    Math.round(playersWithTableName.length * 0.65)
   );
 
   // hacky but am storing players here for a reset event

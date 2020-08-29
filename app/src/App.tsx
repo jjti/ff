@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
-// @ts-ignore
-import { compose } from 'redux';
 import './App.css';
 import RosterFormatter from './Formatters/RosterFormatter';
 import ScoringFormatter from './Formatters/ScoringFormatter';
@@ -54,7 +52,7 @@ class App extends React.PureComponent<IProps, IState> {
 
     return (
       <div id="App">
-        {Helmet}
+        <Helmet />
         <div className="App-Left-Column">
           <Header />
           <Settings />
