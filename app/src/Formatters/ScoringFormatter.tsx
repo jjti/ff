@@ -29,12 +29,12 @@ class ScoringFormatter extends React.Component<IProps> {
     rushYds: '10 rushing yards',
     rushTds: 'Rushing TD',
     fumbles: 'Fumble',
-    twoPts: '2PT Conversion'
+    twoPts: '2PT conversion'
   };
 
   /** kicker settings */
   private kickers = {
-    kickExtraPoints: 'Extra Point Kick',
+    kickExtraPoints: 'Extra point kick',
     kick019: 'Kick 0-19 yards', // tslint:disable-line
     kick2029: 'Kick 20-29 yards',
     kick3039: 'Kick 30-39 yards',
@@ -44,7 +44,7 @@ class ScoringFormatter extends React.Component<IProps> {
 
   /** DST settings */
   private dst = {
-    dfInts: 'Defensive interception',
+    dfInts: 'Defensive ints',
     dfTds: 'Defensive TD',
     dfSacks: 'Defensive sack', // tslint:disable-line
     dfFumbles: 'Fumble recovery',

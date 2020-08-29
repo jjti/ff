@@ -19,6 +19,10 @@
     justify-content: space-between;
 }
 
+.scoring-input > label {
+    margin-left: 0;
+}
+
 .ant-input-number {
     width: 55px;
 }

@@ -1,4 +1,4 @@
-import { Input, Modal } from 'antd';
+import { InputNumber, Modal } from 'antd';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Position } from '../models/Player';
@@ -57,15 +57,19 @@ class RosterFormatter extends React.Component<IProps> {
         onCancel={this.props.toggleRosterFormatting}>
         <div className="position-change-section">
           {this.orderedPositions.map(k => (
-            <Input
-              id={k}
-              key={k}
-              type="number"
-              className="position-input"
-              value={rosterFormat[k]}
-              onChange={this.changePositionCount}
-              addonAfter={k}
-            />
+            <div className="position-input-input">
+              <label htmlFor={k}>{k}</label>
+              <InputNumber
+                id={k}
+                key={k}
+                type="number"
+                className="position-input"
+                value={rosterFormat[k]}
+                onBlur={this.changePositionCount}
+                precision={0}
+                min={0}
+              />
+            </div>
           ))}
         </div>
       </Modal>

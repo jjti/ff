@@ -67,7 +67,6 @@ NAME_TEAM_MAP = {
     "L.A. Rams": "LAR",
     "Buccaneers": "TB",
     "Titans": "TEN",
-    "Redskins": "WSH",
     "Washington": "WSH",
     "Team": "WSH",  # lol, this is for CBS where it's just "Washington Football Team" right now
 }

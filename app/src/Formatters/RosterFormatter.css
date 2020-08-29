@@ -4,11 +4,22 @@
 
 .position-change-section {
   width: 450px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
 }
 
 .position-input {
   width: fit-content;
   margin: 8px;
+}
+
+.position-input-input {
+  margin-right: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 125px;
 }
 
 .ant-input-group .ant-input {
