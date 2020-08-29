@@ -481,7 +481,6 @@ def scrape_nfl(out=RAW_PROJECTIONS):
                 pos_team = name_cell.find("em").get_text()
                 pos_team = [v.strip() for v in pos_team.split("-")]
                 if page_index == 2:  # is DST
-                    print(page_index, page_url, name, pos_team)
                     name = name.split(" ")[-1]
                     team = NAME_TEAM_MAP[name]
                     data = [name, "DST", team]
