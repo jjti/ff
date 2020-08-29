@@ -44,12 +44,14 @@ class App extends React.PureComponent<IProps, IState> {
     if (this.state.mobile) {
       return (
         <div id="App">
-          <MobileSettings />
-          <TeamPicks mobile={true} />
-          <PlayerTableContainer mobile={true} />
+          <DndProvider backend={HTML5Backend}>
+            <MobileSettings />
+            <TeamPicks mobile={true} />
+            <PlayerTableContainer mobile={true} />
 
-          <RosterFormatter />
-          <ScoringFormatter />
+            <RosterFormatter />
+            <ScoringFormatter />
+          </DndProvider>
         </div>
       );
     }
