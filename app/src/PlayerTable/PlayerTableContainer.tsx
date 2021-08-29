@@ -124,7 +124,7 @@ class PlayerTableContainer extends React.PureComponent<
     const adpDiff = [0, 0.5, 1].map(ppr => Math.abs(ppr - scoring.receptions));
     const minDiff = Math.min(...adpDiff);
     const minDiffIndex = adpDiff.indexOf(minDiff);
-    const adpCol = { 0: 'std', 1: 'halfPpr', 2: 'ppr' }[minDiffIndex];
+    const adpCol = { 0: 'std', 1: 'halfPpr', 2: 'ppr' }[minDiffIndex]!;
 
     // players that will be drafted soon
     const draftSoon = players.map(

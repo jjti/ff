@@ -200,10 +200,7 @@ export const setTrackedTeam = (
     toast.info(`Viewing Team ${trackedTeam + 1}`);
   }
 
-  return {
-    ...state,
-    trackedTeam
-  };
+  return { ...state, trackedTeam };
 };
 
 /**

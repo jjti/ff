@@ -33,10 +33,7 @@ export default (state = initialState, action: any): IStoreState => {
       return incrementDraft(state);
     }
     case ACTION_TYPES.SELECT_PLAYER: {
-      return {
-        ...state,
-        selectedPlayer: action.player
-      };
+      return { ...state, selectedPlayer: action.player };
     }
     case ACTION_TYPES.SET_ACTIVE_TEAM: {
       return { ...state, activeTeam: action.activeTeam };

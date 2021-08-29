@@ -665,13 +665,15 @@ def add_key(df):
 def validate(df, strict=True):
     """Throw an exception if we're missing players at a certain position. These numbers are logical estimates."""
 
-    pos_counts = {"QB": 32, "RB": 64, "WR": 64, "TE": 28, "DST": 32, "K": 32}
+    pos_counts = {"QB": 32, "RB": 64, "WR": 64, "TE": 28, "DST": 32, "K": 30}
 
     for pos, count in pos_counts.items():
         actual_count = len(df[df.pos == pos])
         if strict and actual_count < count:
+            print(df[df.pos == pos])
             raise RuntimeWarning(f"only {actual_count} {pos}'s")
         elif not strict and actual_count * 3 < count:
+            print(df[df.pos == pos])
             raise RuntimeWarning(f"only {actual_count} {pos}'s")
 
     if len(set(df.team)) > 33:

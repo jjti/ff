@@ -228,7 +228,7 @@ const updateVOR = (state: IStoreState): IPlayer[] => {
   const adpDiff = [0, 0.5, 1].map(ppr => Math.abs(ppr - scoring.receptions));
   const minDiff = Math.min(...adpDiff);
   const minDiffIndex = adpDiff.indexOf(minDiff);
-  const adpCol = { 0: 'std', 1: 'halfPpr', 2: 'ppr' }[minDiffIndex];
+  const adpCol = { 0: 'std', 1: 'halfPpr', 2: 'ppr' }[minDiffIndex]!;
 
   // #1, find replacement player index for each position
   // map each position to the number of players drafted before the lastPick
