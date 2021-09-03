@@ -318,13 +318,14 @@ def scrape_cbs(
         page_url = f"{url}/{pos}/{YEAR}/season/projections/ppr/"
 
         DRIVER.get(page_url)
-        time.sleep(0.5)
+        time.sleep(2)
         scroll()
-        time.sleep(0.5)
+        time.sleep(2)
 
         soup = BeautifulSoup(
             DRIVER.execute_script("return document.body.innerHTML"), "html.parser"
         )
+        time.sleep(0.5)
 
         table_header = soup.find("thead")
         table_header = table_header.find_all("tr")[1]
