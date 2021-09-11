@@ -20,7 +20,7 @@ s3 = boto3.client("s3")
 
 
 def run():
-    print("uploading ", PROJECTIONS)
+    print("uploading to S3:", PROJECTIONS)
 
     try:
         s3.upload_file(

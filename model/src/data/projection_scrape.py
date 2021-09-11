@@ -2,7 +2,6 @@
 
 import datetime
 import os
-import platform
 import re
 import time
 import traceback
