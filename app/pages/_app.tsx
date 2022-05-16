@@ -1,7 +1,7 @@
 import { setPlayers } from 'lib/store/actions/players';
 import { store } from 'lib/store/store';
 import Head from 'next/head';
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'

@@ -421,18 +421,17 @@ i.Grayed {
 
 /* Header */
 
+.Header {
+  padding: 15px;
+}
+
 #App-Header {
-  margin: 0 0 0 6px
+  margin: 0;
 }
 
 #Header-Title {
   display: flex;
   align-items: baseline;
-}
-
-#Links {
-  display: flex;
-  flex-direction: row;
 }
 
 /* Mobile Settings */
@@ -498,15 +497,6 @@ i.Grayed {
 
 .PicksRow:hover .Undo-Player-Pick {
   display: block;
-}
-
-.PicksRow-Haze {
-  /* position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  box-shadow: inset -20px -10px 40px 6px white; */
 }
 
 .Currently-Drafting-Arrow {
@@ -873,7 +863,6 @@ i.Grayed {
 }
 
 /* Settings */
-.Settings {}
 
 .Settings-Select {
   width: 120px;

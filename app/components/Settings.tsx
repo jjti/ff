@@ -82,7 +82,7 @@ class Settings extends React.Component<IProps, IState> {
             </label>
 
             <label className="full-width">
-              Number of teams
+              Team count
               <Select
                 className="Settings-Select"
                 onChange={this.setNumberOfTeams}

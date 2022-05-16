@@ -19,13 +19,13 @@ interface IProps {
 class ScoringFormatter extends React.Component<IProps> {
   /** Offensive settings */
   private offense = {
-    passYds: '25 passing yards',
+    passYds: '25 passing yds',
     passTds: 'Thrown TD', // tslint:disable-line
     passInts: 'Interception',
     receptions: 'Reception',
-    receptionYds: '10 receiving yards',
+    receptionYds: '10 receiving yds',
     receptionTds: 'TD reception',
-    rushYds: '10 rushing yards',
+    rushYds: '10 rushing yds',
     rushTds: 'Rushing TD',
     fumbles: 'Fumble',
     twoPts: '2PT conversion',
@@ -34,11 +34,11 @@ class ScoringFormatter extends React.Component<IProps> {
   /** kicker settings */
   private kickers = {
     kickExtraPoints: 'Extra point kick',
-    kick019: 'Kick 0-19 yards', // tslint:disable-line
-    kick2029: 'Kick 20-29 yards',
-    kick3039: 'Kick 30-39 yards',
-    kick4049: 'Kick 40-49 yards',
-    kick50: 'Kick 50+ yards',
+    kick019: 'Kick 0-19 yds', // tslint:disable-line
+    kick2029: 'Kick 20-29 yds',
+    kick3039: 'Kick 30-39 yds',
+    kick4049: 'Kick 40-49 yds',
+    kick50: 'Kick 50+ yds',
   };
 
   /** DST settings */
