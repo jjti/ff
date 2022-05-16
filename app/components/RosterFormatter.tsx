@@ -1,12 +1,11 @@
 import { InputNumber, Modal } from 'antd';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Position } from '../models/Player';
-import { IRoster } from '../models/Team';
-import { setRosterFormat } from '../store/actions/players';
-import { toggleRosterFormatting } from '../store/actions/teams';
-import { IStoreState } from '../store/store';
-import './RosterFormatter.css';
+import { Position } from '../lib/models/Player';
+import { IRoster } from '../lib/models/Team';
+import { setRosterFormat } from '../lib/store/actions/players';
+import { toggleRosterFormatting } from '../lib/store/actions/teams';
+import { IStoreState } from '../lib/store/store';
 
 interface IProps {
   formattingRoster: boolean;
@@ -27,7 +26,7 @@ class RosterFormatter extends React.Component<IProps> {
     'FLEX',
     'DST',
     'K',
-    'BENCH'
+    'BENCH',
   ];
 
   /**
@@ -56,7 +55,7 @@ class RosterFormatter extends React.Component<IProps> {
         onOk={this.props.toggleRosterFormatting}
         onCancel={this.props.toggleRosterFormatting}>
         <div className="position-change-section">
-          {this.orderedPositions.map(k => (
+          {this.orderedPositions.map((k) => (
             <div className="position-input-input" key={k}>
               <label htmlFor={k}>{k}</label>
               <InputNumber
@@ -78,15 +77,12 @@ class RosterFormatter extends React.Component<IProps> {
 
 const mapStateToProps = ({ formattingRoster, rosterFormat }: IStoreState) => ({
   formattingRoster,
-  rosterFormat
+  rosterFormat,
 });
 
 const mapDispathToProps = (dispatch: any) => ({
   setRosterFormat: (roster: IRoster) => dispatch(setRosterFormat(roster)),
-  toggleRosterFormatting: () => dispatch(toggleRosterFormatting())
+  toggleRosterFormatting: () => dispatch(toggleRosterFormatting()),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispathToProps
-)(RosterFormatter);
+export default connect(mapStateToProps, mapDispathToProps)(RosterFormatter);

@@ -1,6 +1,4 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
-import './Header.css';
 
 export default class Header extends React.Component {
   public render() {
@@ -10,7 +8,7 @@ export default class Header extends React.Component {
           <h1 id="App-Header">ffdraft.app</h1>
         </div>
 
-        <div className="Links">
+        {/* <div className="Links">
           <button className=".Grayed">
             <Link to="/about">About</Link>
           </button>
@@ -20,7 +18,7 @@ export default class Header extends React.Component {
             style={{ marginLeft: 12 }}>
             Source code
           </a>
-        </div>
+        </div> */}
         <p>A value based fantasy football draft wizard</p>
       </div>
     );

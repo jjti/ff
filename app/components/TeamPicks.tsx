@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import Card from '../Card/Card';
-import { Position } from '../models/Player';
-import { ITeam, NullablePlayer } from '../models/Team';
-import { IStoreState } from '../store/store';
-import './TeamPicks.css';
+import Card from './Card';
+import { Position } from '../lib/models/Player';
+import { ITeam, NullablePlayer } from '../lib/models/Team';
+import { IStoreState } from '../lib/store/store';
 
 interface IProps {
   mobile?: boolean;
@@ -14,14 +13,14 @@ interface IProps {
 }
 
 const initialState = {
-  cardLength: 50
+  cardLength: 50,
 };
 
 type State = Readonly<typeof initialState>;
 
 class TeamPicks extends React.Component<IProps, State> {
   public static defaultProps = {
-    mobile: false
+    mobile: false,
   };
 
   public starterPositions: Position[] = [
@@ -31,16 +30,35 @@ class TeamPicks extends React.Component<IProps, State> {
     'FLEX',
     'TE',
     'DST',
-    'K'
+    'K',
   ];
 
   constructor(props: any) {
     super(props);
-    this.state = { ...initialState, cardLength: this.getCardLength() };
+    this.state = {
+      ...initialState,
+      cardLength: 55,
+    };
+  }
+
+  componentDidMount = () => {
+    this.setState({
+      cardLength: this.getCardLength(),
+    });
     window.addEventListener('resize', () =>
       this.setState({ cardLength: this.getCardLength() })
     );
-  }
+  };
+
+  getCardLength = (): number => {
+    if (this.props.mobile) {
+      const mobileWidth = window.innerWidth * 0.85;
+      return Math.floor(mobileWidth / 4) - 4; // 4px margin
+    }
+
+    const thisWidth = window.innerWidth * 0.2; // 25% width of total window size, 15px padding on both sides
+    return Math.min(85, Math.floor(thisWidth / 3) - 8); // 8 == 2px border, 6px margin
+  };
 
   public render() {
     const { trackedTeam, mobile, teams } = this.props;
@@ -60,7 +78,7 @@ class TeamPicks extends React.Component<IProps, State> {
           </header>
 
           <div className="Pick-Column">
-            {this.starterPositions.map(pos =>
+            {this.starterPositions.map((pos) =>
               trackedTeamRoster[pos].map((p: NullablePlayer, j: number) => (
                 // @ts-ignore
                 <Card
@@ -95,31 +113,18 @@ class TeamPicks extends React.Component<IProps, State> {
       </div>
     );
   }
-
-  private getCardLength = (): number => {
-    if (this.props.mobile) {
-      const mobileWidth = window.innerWidth * 0.85;
-      return Math.floor(mobileWidth / 4) - 4; // 4px margin
-    }
-
-    const thisWidth = window.innerWidth * 0.2; // 25% width of total window size, 15px padding on both sides
-    return Math.min(85, Math.floor(thisWidth / 3) - 8); // 8 == 2px border, 6px margin
-  };
 }
 
 const mapStateToProps = ({
   numberOfTeams,
   teams,
-  trackedTeam
+  trackedTeam,
 }: IStoreState) => ({
   numberOfTeams,
   teams,
-  trackedTeam
+  trackedTeam,
 });
 
 const mapDispathToProps = (dispatch: any) => ({});
 
-export default connect(
-  mapStateToProps,
-  mapDispathToProps
-)(TeamPicks);
+export default connect(mapStateToProps, mapDispathToProps)(TeamPicks);

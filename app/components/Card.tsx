@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose, Dispatch } from 'redux';
-import { IPlayer, Position } from '../models/Player';
-import { IPick } from '../models/Team';
-import { removePlayer } from '../store/actions/players';
-import { pickPlayer, setPick, undoPick } from '../store/actions/teams';
-import { IStoreState } from '../store/store';
-import './Card.css';
+import { IPlayer, Position } from '../lib/models/Player';
+import { IPick } from '../lib/models/Team';
+import { removePlayer } from '../lib/store/actions/players';
+import { pickPlayer, setPick, undoPick } from '../lib/store/actions/teams';
+import { IStoreState } from '../lib/store/store';
 
 interface ICardProps {
   canDrag: boolean;
@@ -41,14 +40,15 @@ class Card extends React.Component<ICardProps> {
       playerMeta,
       pos,
       trackedTeamPicking,
-      undoPick: undoPickInStore
+      undoPick: undoPickInStore,
     } = this.props;
 
     const playerCard = playerMeta && pos;
 
     const pickMessage = !playerMeta
-      ? `${Math.floor(pick.pickNumber / numberOfTeams) + 1}.${pick.pickNumber +
-          1}`
+      ? `${Math.floor(pick.pickNumber / numberOfTeams) + 1}.${
+          pick.pickNumber + 1
+        }`
       : '';
 
     const cardClass = [
@@ -56,9 +56,9 @@ class Card extends React.Component<ICardProps> {
       !pick.player && 'Card-Empty',
       isOver && 'Card-Hover',
       canDrag && 'Card-Draggable',
-      trackedTeamPicking && 'Card-Active'
+      trackedTeamPicking && 'Card-Active',
     ]
-      .filter(c => c)
+      .filter((c) => c)
       .join(' ');
 
     return (
@@ -104,12 +104,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   pickPlayer: (player: IPlayer) => dispatch(pickPlayer(player)),
   removePlayer: (player: IPlayer) => dispatch(removePlayer(player)),
   setPick: (pick: IPick) => dispatch(setPick(pick)),
-  undoPick: (pick: IPick) => dispatch(undoPick(pick))
+  undoPick: (pick: IPick) => dispatch(undoPick(pick)),
 });
 
-export default compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)(Card);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(Card);

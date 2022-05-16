@@ -1,11 +1,10 @@
 import { Button } from 'antd';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { resetDraft } from '../store/actions/players';
-import { toggleScoringFormatting } from '../store/actions/scoring';
-import { toggleRosterFormatting, undoLast } from '../store/actions/teams';
-import { IStoreState } from '../store/store';
-import './MobileSettings.css';
+import { resetDraft } from '../lib/store/actions/players';
+import { toggleScoringFormatting } from '../lib/store/actions/scoring';
+import { toggleRosterFormatting, undoLast } from '../lib/store/actions/teams';
+import { IStoreState } from '../lib/store/store';
 
 interface IProps {
   currentPick: number;
@@ -65,17 +64,14 @@ class MobileSettings extends React.Component<IProps> {
 
 const mapStateToProps = ({ currentPick, numberOfTeams }: IStoreState) => ({
   currentPick,
-  numberOfTeams
+  numberOfTeams,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
   resetDraft: () => dispatch(resetDraft()),
   toggleRosterFormatting: () => dispatch(toggleRosterFormatting()),
   toggleScoringFormatting: () => dispatch(toggleScoringFormatting()),
-  undoPick: () => dispatch(undoLast())
+  undoPick: () => dispatch(undoLast()),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MobileSettings);
+export default connect(mapStateToProps, mapDispatchToProps)(MobileSettings);

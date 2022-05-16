@@ -2,8 +2,7 @@ import { CloseOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import * as React from 'react';
 
-import { IPlayer } from '../models/Player';
-import './PlayerTable.css';
+import { IPlayer } from '../lib/models/Player';
 
 interface IPlayerRowProps {
   adpCol: string;
@@ -37,7 +36,7 @@ export default class PlayerRow extends React.Component<IPlayerRowProps> {
       player,
       rbHandcuff,
       recommended,
-      removePlayer
+      removePlayer,
     } = this.props;
 
     return (
@@ -71,7 +70,7 @@ export default class PlayerRow extends React.Component<IPlayerRowProps> {
                 type="dashed"
                 className="remove-player-button"
                 style={{ marginRight: 10 }}
-                onClick={e => {
+                onClick={(e) => {
                   e.stopPropagation();
                   removePlayer(player);
                 }}

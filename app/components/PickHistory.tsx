@@ -1,7 +1,6 @@
 import * as React from 'react';
-import Card from '../Card/Card';
-import { IPick } from '../models/Team';
-import './PickHistory.css';
+import Card from './Card';
+import { IPick } from '../lib/models/Team';
 
 interface IPickHistoryProps {
   activeTeam: number;
@@ -26,7 +25,7 @@ export default class PickHistory extends React.Component<IPickHistoryProps> {
       pastPicks,
       refProp,
       toggleOpen,
-      trackedTeam
+      trackedTeam,
     } = this.props;
 
     return (
@@ -48,13 +47,13 @@ export default class PickHistory extends React.Component<IPickHistoryProps> {
                   // @ts-ignore
                   pick={{
                     player: null,
-                    team: activeTeam
+                    team: activeTeam,
                   }}
                   trackedTeamPicking={activeTeam === trackedTeam}
                 />
               }
 
-              {pastPicks.map(pick => (
+              {pastPicks.map((pick) => (
                 // If there was a player drafted, show their name and the undo button
                 // @ts-ignore
                 <Card

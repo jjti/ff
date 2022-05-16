@@ -1,8 +1,7 @@
 import { Input, Tooltip } from 'antd';
 import * as React from 'react';
-import { IPlayer, Position } from '../models/Player';
+import { IPlayer, Position } from '../lib/models/Player';
 import PlayerRow from './PlayerRow';
-import './PlayerTable.css';
 
 /** All possible positions. ? Means any position, don't filter */
 const filterPositions: Position[] = ['?', 'QB', 'RB', 'WR', 'TE', 'DST', 'K'];
@@ -58,7 +57,7 @@ export default ({
   setPositionFilter,
   skip,
   valuedPositions,
-  undo
+  undo,
 }: IPlayerTableProps) => (
   <div className="PlayerTable Section">
     <div id="table-top-header" className="Stick-Section">
@@ -77,7 +76,7 @@ export default ({
 
         {/* Buttons for filtering on position */}
         <div className="PlayerTable-Position-Buttons">
-          {filterPositions.map(p => (
+          {filterPositions.map((p) => (
             <button
               key={p}
               className={positionsToShow.indexOf(p) > -1 ? 'Active' : ''}

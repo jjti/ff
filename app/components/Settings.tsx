@@ -2,16 +2,15 @@ import { Button, Select, Tooltip } from 'antd';
 import { saveAs } from 'file-saver';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { IPlayer } from '../models/Player';
-import { resetDraft } from '../store/actions/players';
-import { toggleScoringFormatting } from '../store/actions/scoring';
+import { IPlayer } from '../lib/models/Player';
+import { resetDraft } from '../lib/store/actions/players';
+import { toggleScoringFormatting } from '../lib/store/actions/scoring';
 import {
   setNumberOfTeams,
   setTrackedTeam,
-  toggleRosterFormatting
-} from '../store/actions/teams';
-import { IStoreState } from '../store/store';
-import './Settings.css';
+  toggleRosterFormatting,
+} from '../lib/store/actions/teams';
+import { IStoreState } from '../lib/store/store';
 
 interface IProps {
   currentPick: number;
@@ -35,7 +34,7 @@ class Settings extends React.Component<IProps, IState> {
    * team is important for draft order
    */
   public state: IState = {
-    open: true
+    open: true,
   };
 
   public toggleSettings = () => {
@@ -56,7 +55,7 @@ class Settings extends React.Component<IProps, IState> {
           Array.from(new Array(11))
             .fill(0)
             .map((_, i) => i + 6)
-            .filter(n => n > currentPick);
+            .filter((n) => n > currentPick);
 
     const disabledOptions = currentPick > 0;
 
@@ -75,9 +74,9 @@ class Settings extends React.Component<IProps, IState> {
                 onChange={this.updateTrackedTeam}
                 defaultValue={0}>
                 {new Array(numberOfTeams).fill(0).map((_, i) => (
-                  <Select.Option
-                    key={`Pick-Selection-${i}`}
-                    value={i}>{`Team ${i + 1}`}</Select.Option>
+                  <Select.Option key={`Pick-Selection-${i}`} value={i}>{`Team ${
+                    i + 1
+                  }`}</Select.Option>
                 ))}
               </Select>
             </label>
@@ -88,7 +87,7 @@ class Settings extends React.Component<IProps, IState> {
                 className="Settings-Select"
                 onChange={this.setNumberOfTeams}
                 defaultValue={10}>
-                {allowableNumberOfTeams.map(n => (
+                {allowableNumberOfTeams.map((n) => (
                   <Select.Option
                     key={n}
                     value={n}>{`${n} Teams`}</Select.Option>
@@ -151,17 +150,17 @@ class Settings extends React.Component<IProps, IState> {
 
     const cols = this.props.undraftedPlayers.length
       ? Object.keys(this.props.undraftedPlayers[0]).filter(
-          k => !removeCols.includes(k)
+          (k) => !removeCols.includes(k)
         )
       : [];
 
     const statsCsv = this.props.undraftedPlayers.reduce(
-      (acc, p) => acc + '\n' + cols.map(c => p[c]).join(','),
+      (acc, p) => acc + '\n' + cols.map((c) => p[c]).join(','),
       cols.join(',')
     );
 
     const blob = new Blob([statsCsv], {
-      type: 'text/csv;charset=utf-8'
+      type: 'text/csv;charset=utf-8',
     });
 
     saveAs(blob, 'ffdraft-stats.csv');
@@ -172,12 +171,12 @@ const mapStateToProps = ({
   currentPick,
   numberOfTeams,
   trackedTeam,
-  undraftedPlayers
+  undraftedPlayers,
 }: IStoreState) => ({
   currentPick,
   numberOfTeams,
   trackedTeam,
-  undraftedPlayers
+  undraftedPlayers,
 });
 
 const mapDispathToProps = (dispatch: any) => ({
@@ -185,10 +184,7 @@ const mapDispathToProps = (dispatch: any) => ({
   setNumberOfTeams: (count: number) => dispatch(setNumberOfTeams(count)),
   setTrackedTeam: (index: number) => dispatch(setTrackedTeam(index)),
   toggleRosterFormatting: () => dispatch(toggleRosterFormatting()),
-  toggleScoringFormatting: () => dispatch(toggleScoringFormatting())
+  toggleScoringFormatting: () => dispatch(toggleScoringFormatting()),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispathToProps
-)(Settings);
+export default connect(mapStateToProps, mapDispathToProps)(Settings);

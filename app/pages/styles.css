@@ -1,0 +1,915 @@
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Lato", sans-serif;
+  color: var(--dark-gray);
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: 900;
+}
+
+h2 {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 10px 5px;
+}
+
+h4 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 10px 5px;
+}
+
+h5 {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+p,
+a,
+th,
+tr,
+label {
+  margin: 6px;
+}
+
+p,
+a,
+th,
+tr,
+label,
+input,
+button {
+  font-weight: 300;
+  font-size: 14px;
+  color: var(--dark-gray);
+}
+
+label {
+  margin-right: 4px;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+select:disabled, button:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+a {
+  text-decoration: underline;
+  margin: 0;
+}
+
+p.small {
+  font-size: calc(6px + 0.45vw);
+}
+
+span.small {
+  font-size: 12px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+header > p {
+  margin: auto 30px 13px;
+}
+
+button {
+  outline: none;
+  background-image: none;
+  background-color: transparent;
+  border: none;
+}
+
+a:hover,
+button:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+select {
+  font-weight: 300;
+  font-size: 12px;
+  font-family: "Lato", sans-serif;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+  padding: 3px;
+}
+
+label {
+  display: flex;
+  align-items: center;
+}
+
+.ant-modal-close {
+  margin: unset;
+}
+
+@media screen and (max-width: 700px) {
+  #root {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    touch-action: manipulation;
+  }
+
+  p.small {
+    margin: 2px 8px;
+    font-size: calc(9px + 0.5vw);
+  }
+
+  p,
+  a,
+  th,
+  tr,
+  label,
+  input,
+  button {
+    font-weight: 400;
+    font-size: 15px;
+    color: var(--dark-gray);
+  }
+}
+
+:root {
+  --light-gray: #dadada59;
+  --gray: #d3d3d3;
+  --dark-gray: #4a4a4a;
+  --black: #0b0b0c;
+  --blue: #4ca6e8;
+  
+  --red: #ea5b4d;
+  --orange: #eca80a;
+  --green: #00d000;
+
+  --border-gray: 1px solid var(--light-gray);
+  --highlight-border: 1px solid var(--blue);
+  --default-transition: all .7s cubic-bezier(0, 1.16, 1, 1);
+}
+
+#App {
+  display: flex;
+  width: 100%;
+}
+
+.App-Left-Column {
+  height: auto;
+  width: 24%;
+  min-width: 260px;
+  border-right: var(--border-gray);
+}
+
+.App-Right-Column {
+  height: 100%;
+  width: 76%;
+}
+
+i.Grayed {
+  border: solid lightgray;
+  border-width: 0 1px 1px 0;
+  display: inline-block;
+  padding: 7px;
+}
+
+.Section {
+  padding: 10px;
+  border-radius: 2px;
+  background-color: white;
+  border-bottom: 1px solid var(--light-gray);
+}
+
+.Stick-Section {
+  position: sticky;
+  top: -10px;
+}
+
+.toast-container > .Toastify__toast {
+  /* not happy with current appearance */
+  display: none;
+
+  color: #fff;
+  background-color: #222;
+  opacity: 0.9;
+
+  padding: 15px;
+  width: fit-content;
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+.Toastify__toast-body {
+  display: flex;
+  align-items: center;
+}
+
+.Toastify__toast {
+  margin-bottom: 5px;
+}
+
+.Toast-Undo-Button {
+  color: #fff;
+  font-size: 15px;
+  text-decoration: underline;
+  margin: auto 0 auto auto;
+  padding-right: 0;
+}
+
+.dot {
+  height: 6px;
+  width: 6px;
+  border-radius: 10px;
+  margin: auto 5px;
+}
+
+.blue-dot {
+  background-color: var(--blue);
+}
+
+.green-dot {
+  background-color: var(--green);
+}
+
+.orange-dot {
+  background-color: var(--orange);
+}
+
+.red-dot {
+  background-color: var(--red);
+}
+
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+  margin: 10px 10px 0 auto;
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  margin: -10px 10px 0 auto;
+}
+
+.Options-Container {
+  margin: 0 0 0 auto;
+  background-color: var(--light-gray);
+  border-radius: 4px;
+  border: 1px solid transparent;
+  padding: 3px;
+}
+
+.Options-Container > p {
+  margin: 3px;
+  font-size: 12px;
+}
+
+.Grayed {
+  cursor: pointer;
+  color: var(--dark-gray);
+}
+
+.Grayed:hover {
+  color: black;
+  border-color: black;
+}
+
+@media screen and (max-width: 700px) {
+  .toast-container-mobile {
+    width: calc(100% - 40px);
+    margin: 20px;
+  }
+
+  .toast-container-mobile > .Toastify__toast {
+    width: 100%;
+  }
+
+  .Card {
+    margin: 2px !important;
+  }
+
+  .Grayed {
+    color: #4a4a4a;
+    text-decoration: underline;
+  }
+
+  #App {
+    flex-direction: column;
+  }
+
+  .Section {
+    margin: unset;
+    padding: unset;
+    border: unset;
+  }
+
+  .position-input {
+    margin: 6px !important;
+  }
+
+  .ant-modal-body {
+    display: flex;
+    padding: 12px;
+  }
+
+  .scoring-columns {
+    flex: unset;
+    flex-wrap: wrap;
+  }
+
+  .scoring-column {
+    margin-right: 0 !important;
+    width: 100% !important;
+  }
+}
+
+/* Card.tsx */
+
+.Card {
+  border: var(--border-gray);
+  margin: 6px;
+  position: relative;
+  border-radius: 5px;
+  flex-shrink: 0;
+  overflow-y: visible;
+}
+
+.Card-Empty {
+  border: 1px dashed var(--gray);
+}
+
+.Card-Active {
+  border: var(--highlight-border);
+}
+
+.Card-Hover, .Card-Active {
+  border-color: var(--blue);
+}
+
+.Card-Draggable:hover {
+  cursor: grab;
+}
+
+.Card > h4 {
+  margin: 0;
+  position: absolute;
+  top: 5%;
+  left: 7%;
+}
+
+.Card > h5 {
+  margin: 0;
+  position: absolute;
+  top: 5%;
+  left: 7%;
+}
+
+.Card > p {
+  margin: 0;
+  position: relative;
+  top: 60%;
+  transform: translateY(-50%);
+  left: 7%;
+}
+
+.Card > p.points {
+  margin: 0;
+  position: absolute;
+  bottom: -5px;
+  left: 7%;
+  top: unset;
+}
+
+.Card > .Team-Points {
+  margin: 0;
+  position: absolute;
+  bottom: 5%;
+  left: 7%;
+  top: unset;
+}
+
+/* Header */
+
+#App-Header {
+  margin: 0 0 0 6px
+}
+
+#Header-Title {
+  display: flex;
+  align-items: baseline;
+}
+
+#Links {
+  display: flex;
+  flex-direction: row;
+}
+
+/* Mobile Settings */
+@media screen and (max-width: 700px) {
+  .MobileSettings > header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 8px;
+  }
+
+  .MobileSettings > header > h2 {
+      margin: 0;
+  }
+
+  .pick-column {
+      display: flex;
+      flex-direction: column;
+  }
+
+  .pick-column > p {
+      margin-left: 23px !important;
+  }
+
+  .pick-column > button {
+      margin: 0;
+      margin-left: 10px;
+  }
+  
+  .draft-dot {
+      display: flex;
+      margin: 0;
+  }
+  
+  .buttons {
+      padding: 0px 8px;
+      display: flex;
+      align-items: center;
+  }
+}
+
+/* Pick History */
+.PickHistory {
+  position: relative;
+}
+
+.PickHistory-Header:hover {
+  cursor: pointer;
+}
+
+.PickHistory-Header:hover h3 {
+  text-decoration: underline;
+}
+
+.PicksRow {
+  position: relative;
+  display: inline-flex;
+  padding-bottom: 10px;
+  width: 100%;
+  overflow-y: visible;
+  overflow-x: auto;
+}
+
+.PicksRow:hover .Undo-Player-Pick {
+  display: block;
+}
+
+.PicksRow-Haze {
+  /* position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  box-shadow: inset -20px -10px 40px 6px white; */
+}
+
+.Currently-Drafting-Arrow {
+  display: flex;
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+}
+
+.Currently-Drafting-Arrow > p {
+  margin: 0;
+  margin-left: 8px;
+}
+
+.Arrow-Up {
+  position: relative;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+
+  border-bottom: 10px solid var(--gray);
+}
+
+.Undo-Player-Pick {
+  /* hide by default, only show when row is hovered */
+  display: none;
+
+  position: absolute;
+  right: -5px;
+  top: -7px;
+  margin: 0;
+  border-radius: 20px;
+  border: 1px solid white;
+  background-color: var(--gray);
+  content: " ";
+  height: 17px;
+  width: 17px;
+
+  transition: var(--default-transition);
+}
+
+.Undo-Player-Pick::before,
+.Undo-Player-Pick::after {
+  content: " ";
+  height: 7px;
+  width: 1px;
+  background-color: white;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 4px;
+  left: 7px;
+}
+
+.Undo-Player-Pick::after {
+  transform: rotate(-45deg);
+}
+
+.Card:hover > .Undo-Player-Pick {
+  background-color: var(--red);
+}
+
+.Card:hover > .Undo-Player-Pick::before,
+.Card:hover > .Undo-Player-Pick::after {
+  background-color: white;
+}
+
+.Legend-Row {
+  display: flex;
+}
+
+.Legend-Row > p {
+  margin: 0 0 0 8px;
+}
+
+/* Player Table */
+.PlayerTable.Section {
+  padding: 0;
+  border-bottom: unset;
+}
+
+#table-top-header {
+  border-bottom: var(--border-gray);
+  z-index: 2;
+  background-color: white;
+  padding: 8px;
+  border-radius: inherit;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+#table {
+  padding: 8px 0;
+}
+
+.Player-Search {
+  flex: 2;
+  width: 120px;
+  max-width: 250px;
+  margin: auto 20px;
+}
+
+.Player-Table-Control-Buttons {
+  display: flex;
+}
+
+.PlayerTable-Position-Buttons {
+  margin: 0 auto 0 10px;
+}
+
+.PlayerTable-Position-Buttons > button {
+  opacity: 0.5;
+  padding: 4px 8px;
+  margin: 3px;
+  border-radius: 4px;
+}
+
+.PlayerTable-Position-Buttons > button.Active {
+  opacity: 1;
+  background-color: var(--light-gray);
+}
+
+.PlayerTable-Position-Buttons > button:hover {
+  text-decoration: underline;
+}
+
+.undo-button,
+.remove-player-x,
+.skip-button {
+  outline: none !important;
+  cursor: pointer;
+  border: none;
+}
+
+.skip-button {
+  margin: 0;
+}
+
+.undo-button {
+  margin: 0;
+}
+
+.skip-button,
+.undo-button {
+  padding: 10px;
+  bottom: 0;
+}
+
+.skip-button:hover,
+.undo-button:hover {
+  text-decoration: underline;
+}
+
+.row:hover {
+  background-color: var(--light-gray);
+  cursor: pointer;
+}
+
+.row:visited {
+  background-color: var(--light-gray);
+}
+
+.row:focus {
+  background-color: var(--light-gray);
+}
+
+.row:active {
+  background-color: var(--light-gray);
+}
+
+/* FLEX one wide by default */
+.col {
+  flex: 1;
+  margin: 0;
+}
+
+.col-team {
+  flex: 0.3;
+}
+
+.col-name {
+  display: flex;
+  align-items: center;
+  flex: 3;
+}
+
+.col-name > p {
+  font-weight: 400;
+}
+
+.col-vor,
+.col-adp,
+.col-prediction,
+.col-madden {
+  text-align: right;
+}
+
+.col-prediction {
+  flex: 1.2;
+}
+
+.col-remove {
+  flex: 14px;
+  text-align: right;
+  right: 2px;
+}
+
+.row-inactive {
+  opacity: 0.45;
+}
+
+.Legend-Row > p {
+  margin: 0 8px 0 0;
+}
+
+#table-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: default;
+}
+
+.row {
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+}
+
+.remove-player-button {
+  color: var(--gray);
+}
+
+@media screen and (max-width: 900px) {
+  .skip-button {
+    margin-left: auto;
+  }
+
+  .Player-Filter {
+    margin: 0 5px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .PlayerTable {
+    position: unset;
+  }
+
+  #table {
+    padding: 0;
+  }
+
+  #table-top-header {
+    top: 0;
+  }
+
+  #table-top-header > header {
+    padding-top: 4px;
+    flex-wrap: wrap;
+  }
+
+  .PlayerTable-Position-Buttons {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .Player-Table-Control-Buttons {
+    position: absolute;
+    top: -45px;
+    right: 10px;
+  }
+
+  .Legend-Row {
+    position: absolute;
+    top: 15px;
+    left: 130px;
+  }
+
+  .col {
+    font-size: 12px;
+  }
+
+  .col-name {
+    flex: 30%;
+  }
+
+  .col-name > p {
+    font-weight: 600;
+    margin-left: 0;
+  }
+
+  .row {
+    height: 45px;
+  }
+
+  .row:hover {
+    background-color: unset;
+    cursor: unset;
+  }
+}
+
+/* Roster Formatter */
+.ant-modal {
+  width: fit-content !important;
+}
+
+.position-change-section {
+  width: 450px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+}
+
+.position-input {
+  width: fit-content;
+  margin: 8px;
+}
+
+.position-input-input {
+  margin-right: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 125px;
+}
+
+.ant-input-group .ant-input {
+  width: 40px;
+}
+
+.ant-input-number-input {
+  height: 100%;
+}
+
+/* Scoring Formatter */
+.scoring-columns {
+  display: flex;
+}
+
+.scoring-column {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.scoring-column.left-column {
+  margin-right: 20px;
+}
+
+.scoring-input {
+  margin: 3px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.scoring-input > label {
+  margin-left: 0;
+}
+
+.ant-input-number {
+  width: 55px;
+}
+
+/* Settings */
+.Settings {}
+
+.Settings-Select {
+  width: 120px;
+  margin-left: auto;
+}
+
+.Settings-Header:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.Settings-Container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.options-left {
+  margin: 0 0 0 auto;
+}
+
+/* Team Picks */
+.TeamPicks {
+  border-bottom: none;
+}
+
+.Pick-Column {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Pick-Section-Header {
+  display: flex;
+}
+

@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { IPlayer, Position } from '../models/Player';
-import { IScoring } from '../models/Scoring';
-import { NullablePlayer } from '../models/Team';
-import { removePlayer } from '../store/actions/players';
-import { pickPlayer, skipPick, undoLast } from '../store/actions/teams';
-import { IStoreState } from '../store/store';
+import { IPlayer, Position } from '../lib/models/Player';
+import { IScoring } from '../lib/models/Scoring';
+import { NullablePlayer } from '../lib/models/Team';
+import { removePlayer } from '../lib/store/actions/players';
+import { pickPlayer, skipPick, undoLast } from '../lib/store/actions/teams';
+import { IStoreState } from '../lib/store/store';
 import PlayerTable from './PlayerTable';
 
 interface IPlayerTableProps {
@@ -61,12 +61,12 @@ class PlayerTableContainer extends React.PureComponent<
   IPlayerTableState
 > {
   public static defaultProps = {
-    mobile: false
+    mobile: false,
   };
 
   public state: IPlayerTableState = {
     nameFilter: '',
-    positionsToShow: ['?'] // ? is a hackish flag for "ALL"
+    positionsToShow: ['?'], // ? is a hackish flag for "ALL"
   };
 
   /** clear name filter after a player was picked */
@@ -83,7 +83,7 @@ class PlayerTableContainer extends React.PureComponent<
       rbHandcuffTeams,
       scoring,
       undraftedPlayers: players,
-      valuedPositions
+      valuedPositions,
     } = this.props;
     const { nameFilter, positionsToShow } = this.state;
 
@@ -92,7 +92,7 @@ class PlayerTableContainer extends React.PureComponent<
     let filteredPlayers =
       positionsToShow.length === 1 && positionsToShow[0] === '?'
         ? new Array(players.length).fill(false)
-        : players.map(p => positionsToShow.indexOf(p.pos) < 0);
+        : players.map((p) => positionsToShow.indexOf(p.pos) < 0);
 
     // filter by the nameFilter (for name and team)
     const nameFilterLower = nameFilter.toLowerCase();
@@ -121,7 +121,9 @@ class PlayerTableContainer extends React.PureComponent<
       });
     }
 
-    const adpDiff = [0, 0.5, 1].map(ppr => Math.abs(ppr - scoring.receptions));
+    const adpDiff = [0, 0.5, 1].map((ppr) =>
+      Math.abs(ppr - scoring.receptions)
+    );
     const minDiff = Math.min(...adpDiff);
     const minDiffIndex = adpDiff.indexOf(minDiff);
     const adpCol = { 0: 'std', 1: 'halfPpr', 2: 'ppr' }[minDiffIndex]!;
@@ -185,14 +187,14 @@ class PlayerTableContainer extends React.PureComponent<
     if (position === '?') {
       this.setState({ positionsToShow: ['?'] });
     } else if (positionsToShow.indexOf(position) > -1) {
-      positionsToShow = positionsToShow.filter(p => p !== position);
+      positionsToShow = positionsToShow.filter((p) => p !== position);
       this.setState({
-        positionsToShow: positionsToShow.length ? positionsToShow : ['?']
+        positionsToShow: positionsToShow.length ? positionsToShow : ['?'],
       });
     } else {
-      positionsToShow = positionsToShow.filter(p => p !== '?');
+      positionsToShow = positionsToShow.filter((p) => p !== '?');
       this.setState({
-        positionsToShow: positionsToShow.concat([position])
+        positionsToShow: positionsToShow.concat([position]),
       });
     }
   };
@@ -206,9 +208,8 @@ class PlayerTableContainer extends React.PureComponent<
 }
 
 const mapStateToProps = (state: IStoreState) => {
-  const { QB, RB, WR, TE, FLEX, DST, K, BENCH } = state.teams[
-    state.trackedTeam
-  ];
+  const { QB, RB, WR, TE, FLEX, DST, K, BENCH } =
+    state.teams[state.trackedTeam];
 
   // add the positions to the object that the trackedTeam hasn't
   // filled their roster with (ie they have space for)
@@ -238,11 +239,11 @@ const mapStateToProps = (state: IStoreState) => {
     valuedPositions.WR = true;
 
     // only want one backup QB and TE
-    const QBBackupCount = BENCH.filter(p => p && p.pos === 'QB').length;
+    const QBBackupCount = BENCH.filter((p) => p && p.pos === 'QB').length;
     if (QBBackupCount < 1) {
       valuedPositions.QB = true;
     }
-    const TEBackupCount = BENCH.filter(p => p && p.pos === 'TE').length;
+    const TEBackupCount = BENCH.filter((p) => p && p.pos === 'TE').length;
     if (TEBackupCount < 1) {
       valuedPositions.TE = true;
     }
@@ -258,7 +259,7 @@ const mapStateToProps = (state: IStoreState) => {
 
   // find the bye weeks already taken by the core players (QB, RB, WR, FLEX)
   const byeWeeks = [...QB, ...RB, ...WR, ...FLEX]
-    .map(p => p && p.bye)
+    .map((p) => p && p.bye)
     .reduce((acc, bye) => (bye ? { ...acc, [bye]: true } : acc), {});
 
   // find the teams of the rbs, other rbs on these teams will be handcuffs
@@ -272,7 +273,7 @@ const mapStateToProps = (state: IStoreState) => {
     rbHandcuffTeams,
     scoring: state.scoring,
     undraftedPlayers: state.undraftedPlayers,
-    valuedPositions
+    valuedPositions,
   };
 };
 
@@ -280,7 +281,7 @@ const mapDispatchToProps = (dispatch: any) => ({
   pickPlayer: (player: IPlayer) => dispatch(pickPlayer(player)),
   removePlayer: (player: IPlayer) => dispatch(removePlayer(player)),
   skip: () => dispatch(skipPick()),
-  undo: () => dispatch(undoLast())
+  undo: () => dispatch(undoLast()),
 });
 
 export default connect(

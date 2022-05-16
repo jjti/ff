@@ -1,11 +1,10 @@
 import { InputNumber, Modal } from 'antd';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { IScoring } from '../models/Scoring';
-import { setScoreFormat } from '../store/actions/scoring';
-import { toggleScoringFormatting } from '../store/actions/scoring';
-import { IStoreState } from '../store/store';
-import './ScoringFormatter.css';
+import { IScoring } from '../lib/models/Scoring';
+import { setScoreFormat } from '../lib/store/actions/scoring';
+import { toggleScoringFormatting } from '../lib/store/actions/scoring';
+import { IStoreState } from '../lib/store/store';
 
 interface IProps {
   formattingScoring: boolean;
@@ -29,7 +28,7 @@ class ScoringFormatter extends React.Component<IProps> {
     rushYds: '10 rushing yards',
     rushTds: 'Rushing TD',
     fumbles: 'Fumble',
-    twoPts: '2PT conversion'
+    twoPts: '2PT conversion',
   };
 
   /** kicker settings */
@@ -39,7 +38,7 @@ class ScoringFormatter extends React.Component<IProps> {
     kick2029: 'Kick 20-29 yards',
     kick3039: 'Kick 30-39 yards',
     kick4049: 'Kick 40-49 yards',
-    kick50: 'Kick 50+ yards'
+    kick50: 'Kick 50+ yards',
   };
 
   /** DST settings */
@@ -48,7 +47,7 @@ class ScoringFormatter extends React.Component<IProps> {
     dfTds: 'Defensive TD',
     dfSacks: 'Defensive sack', // tslint:disable-line
     dfFumbles: 'Fumble recovery',
-    dfSafeties: 'Safety'
+    dfSafeties: 'Safety',
   };
 
   /**
@@ -57,7 +56,7 @@ class ScoringFormatter extends React.Component<IProps> {
   private multiple = {
     passYds: 25,
     receptionYds: 10,
-    rushYds: 10
+    rushYds: 10,
   };
 
   public render() {
@@ -72,7 +71,7 @@ class ScoringFormatter extends React.Component<IProps> {
         <div className="scoring-columns">
           <div className="scoring-column left-column">
             <h5>Offense</h5>
-            {Object.keys(this.offense).map(k => (
+            {Object.keys(this.offense).map((k) => (
               <div className="scoring-input" key={k}>
                 <label htmlFor={k}>{this.offense[k]}</label>
                 <InputNumber
@@ -93,7 +92,7 @@ class ScoringFormatter extends React.Component<IProps> {
 
           <div className="scoring-column">
             <h5>Kicking</h5>
-            {Object.keys(this.kickers).map(k => (
+            {Object.keys(this.kickers).map((k) => (
               <div className="scoring-input" key={k}>
                 <label htmlFor={k}>{this.kickers[k]}</label>
                 <InputNumber
@@ -110,7 +109,7 @@ class ScoringFormatter extends React.Component<IProps> {
 
           <div className="scoring-column">
             <h5>Defense</h5>
-            {Object.keys(this.dst).map(k => (
+            {Object.keys(this.dst).map((k) => (
               <div className="scoring-input" key={k}>
                 <label htmlFor={k}>{this.dst[k]}</label>
                 <InputNumber
@@ -149,16 +148,13 @@ class ScoringFormatter extends React.Component<IProps> {
 
 const mapStateToProps = ({ formattingScoring, scoring }: IStoreState) => ({
   formattingScoring,
-  scoring
+  scoring,
 });
 
 const mapDispathToProps = (dispatch: any) => ({
   dispatchSetScoreFormat: (scoring: IScoring) =>
     dispatch(setScoreFormat(scoring)),
-  toggleScoringFormatting: () => dispatch(toggleScoringFormatting())
+  toggleScoringFormatting: () => dispatch(toggleScoringFormatting()),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispathToProps
-)(ScoringFormatter);
+export default connect(mapStateToProps, mapDispathToProps)(ScoringFormatter);
