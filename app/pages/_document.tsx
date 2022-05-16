@@ -1,10 +1,10 @@
-import { Html, Head, Main, NextScript, Meta } from 'next/document';
+import { Html, Head, Main, NextScript } from 'next/document';
 
 export default function Document() {
   return (
     <Html>
       <Head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="theme-color" content="#000000" />
         <meta
           name="description"

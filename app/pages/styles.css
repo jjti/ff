@@ -569,7 +569,7 @@ i.Grayed {
 }
 
 .Legend-Row > p {
-  margin: 0 0 0 8px;
+  margin: 0 12px 0 0;
 }
 
 /* Player Table */
@@ -706,10 +706,6 @@ i.Grayed {
 
 .row-inactive {
   opacity: 0.45;
-}
-
-.Legend-Row > p {
-  margin: 0 8px 0 0;
 }
 
 #table-head {
