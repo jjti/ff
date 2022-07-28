@@ -3,3 +3,4 @@ bs4
 numpy
 pandas
 selenium
+webdriver-manager

@@ -1,35 +1,44 @@
 """Projections scrapers."""
 
 import datetime
+import logging
 import os
 import re
 import time
-import traceback
 
 import pandas as pd
 import numpy as np
 from bs4 import BeautifulSoup, NavigableString
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s:%(message)s")
 
 DIR = os.path.dirname(__file__)
 
 # helpful resource for setting this up on headless Ubuntu: https://tecadmin.net/setup-selenium-chromedriver-on-ubuntu/
-DRIVER_PATH = os.sep + os.path.join("usr", "local", "bin", "chromedriver")
 DRIVER_OPTIONS = webdriver.ChromeOptions()
 DRIVER_OPTIONS.add_argument("--headless")
 DRIVER_OPTIONS.add_argument("--window-size=1200x900")
 DRIVER_OPTIONS.add_argument("--no-sandbox")
 DRIVER_OPTIONS.add_argument("--disable-dev-shm-usage")
-DRIVER = webdriver.Chrome(options=DRIVER_OPTIONS, executable_path=DRIVER_PATH)
+DRIVER_OPTIONS.add_argument(
+    "--disable-features=PreloadMediaEngagementData,MediaEngagementBypassAutoplayPolicies"
+)
+DRIVER = webdriver.Chrome(
+    options=DRIVER_OPTIONS, service=Service(ChromeDriverManager().install())
+)
 
 RAW_PROJECTIONS = os.path.join(DIR, "..", "..", "data", "raw", "projections")
 RAW_ADP = os.path.join(DIR, "..", "..", "data", "raw", "adp")
 
 YEAR = datetime.datetime.now().year
 
-NAME_TEAM_MAP = {
+TEAM_TO_ABRV_MAP = {
     "Cardinals": "ARI",
     "Falcons": "ATL",
     "Ravens": "BAL",
@@ -66,10 +75,10 @@ NAME_TEAM_MAP = {
     "L.A. Rams": "LAR",
     "Buccaneers": "TB",
     "Titans": "TEN",
-    "Washington": "WSH",
+    "Commanders": "WSH",
     "Team": "WSH",
 }
-TEAM_NAME_MAP = {v: k for k, v in NAME_TEAM_MAP.items()}
+ABRV_TO_TEAM_MAP = {v: k for k, v in TEAM_TO_ABRV_MAP.items()}
 
 REQUIRED_COLS = [
     "key",
@@ -172,10 +181,7 @@ COLUMN_MAP = {
 
 
 def scrape():
-    """Scrape from all the sources and save to ./data/raw
-    """
-
-    print(datetime.datetime.now())
+    """Scrape from all the sources and save to ./data/raw"""
 
     try:
         scrape_espn()
@@ -185,43 +191,46 @@ def scrape():
         DRIVER.quit()
     except:
         DRIVER.quit()
-        traceback.print_exc()
+        logging.exception("failed to scrape")
         raise
 
 
-def scrape_espn(
-    url="http://fantasy.espn.com/football/players/projections", out=RAW_PROJECTIONS
-):
+def scrape_espn():
     """Scrape ESPN projections.
 
     Tricky because it's a React app without routing. Have to load the app and
     click through the buttons. Was reason for using Selenium
     """
 
-    print("scraping ESPN")
+    url = "http://fantasy.espn.com/football/players/projections"
+    out = RAW_PROJECTIONS
 
-    # set this to the p
+    logging.info("scraping ESPN")
     DRIVER.get(url)
-    time.sleep(4)  # wait for JS app to render
+    time.sleep(5)  # wait for JS app to render
 
     players = []
-    current_button = 1
+    page = 1
+    free_agents = 0
     while True:
+        time.sleep(1)
         scroll()
+        time.sleep(1)
 
         soup = BeautifulSoup(
             DRIVER.execute_script("return document.body.innerHTML"), "html.parser"
         )
 
+        # parse each player row's meta
         for player in soup.select("div.full-projection-table"):
-
-            name = player.select(".pointer")[0].get_text()
+            name = player.select(".player-name")[0].get_text()
             assert name
+
             pos = ""
             team = ""
             if player.select(".position-eligibility"):  # D/ST don't have these
-                pos = player.select(".position-eligibility")[0].get_text()  # ex RB
-                team = player.select(".player-teamname")[0].get_text()  # ex Bears
+                pos = player.select(".position-eligibility")[0].get_text()  # eg RB
+                team = player.select(".player-teamname")[0].get_text()  # eg Bears
 
             table = player.select(".player-stat-table")[0]
             projection_row = table.find("tbody").find_all("tr")[1]
@@ -236,16 +245,17 @@ def scrape_espn(
             p_data["pos"] = pos.strip()
             team = team.strip()
 
-            if team == "FA":
-                team = "Washington"
-            p_data["team"] = NAME_TEAM_MAP[team] if team else ""
-
             if "D/ST" in name:
                 p_data["name"] = p_data["name"].replace(" D/ST", "").strip()
-                if p_data["name"] == "FA":
-                    p_data["name"] = "Washington"
-                p_data["team"] = NAME_TEAM_MAP[p_data["name"]]
+                p_data["team"] = TEAM_TO_ABRV_MAP[p_data["name"]]
                 p_data["pos"] = "DST"
+            elif team in TEAM_TO_ABRV_MAP:
+                p_data["team"] = TEAM_TO_ABRV_MAP[team]
+            elif team == "FA":
+                free_agents += 1
+                continue
+            else:
+                logging.error("unrecognized player row: %s", player)
 
             for h, d in zip(headers, data):
                 if h in p_data:
@@ -267,22 +277,31 @@ def scrape_espn(
                     p_data[h] = float(d)
 
             players.append(p_data)
+
+        # find the button to click to the next page
         try:
-            next_button = DRIVER.find_element_by_link_text(str(current_button + 1))
+            next_button = DRIVER.find_element(by=By.ID, value=str(page + 1))
             actions = ActionChains(DRIVER)
             actions.move_to_element(next_button).perform()
         except Exception as err:
+            if page == 1:
+                logging.exception("error moving to element: %s", err)
             break
 
+        # click the next page's button
         try:
-            current_button += 1
+            if page % 5 == 0:
+                logging.info("scraping ESPN page %d...", page)
+            page += 1
             next_button.send_keys(Keys.ENTER)
-            time.sleep(1.5)
         except Exception as err:
-            print(err)
+            if page == 2:
+                logging.exception("error clicking button: %s", err)
             break
 
     df = pd.DataFrame(players)
+    if free_agents:
+        logging.info("skipped %d free-agents", free_agents)
 
     df["fumbles"] = np.nan
     df["two_pts"] = np.nan
@@ -299,18 +318,18 @@ def scrape_espn(
     validate(df)
 
 
-def scrape_cbs(
-    url="https://www.cbssports.com/fantasy/football/stats", out=RAW_PROJECTIONS
-):
+def scrape_cbs():
     """Scrape CBS projections.
-    
+
     Unlike ESPN, there are routes for each position and PPR versus non-PPR.
 
     Example URL:
     https://www.cbssports.com/fantasy/football/stats/WR/2019/season/projections/nonppr/
     """
 
-    print("scraping CBS")
+    url = "https://www.cbssports.com/fantasy/football/stats"
+    out = RAW_PROJECTIONS
+    logging.info("scraping CBS")
 
     players = []
     for pos in ["QB", "RB", "WR", "TE", "DST", "K"]:
@@ -355,7 +374,9 @@ def scrape_cbs(
                         name_cell.select(".CellPlayerName-team")[0].get_text().strip()
                     )
                 else:
-                    continue  # very rare, seen for Alfred Morris in 2019
+                    # very rare, seen for Alfred Morris in 2019
+                    logging.warn("skipping player, no position: %s", name_cell)
+                    continue
 
                 pos = pos.replace("FB", "RB")
                 if team == "WAS":
@@ -374,7 +395,7 @@ def scrape_cbs(
                     team = "WSH"
                 if team == "JAC":
                     team = "JAX"
-                name = TEAM_NAME_MAP[team]
+                name = ABRV_TO_TEAM_MAP[team]
                 data = [name, "DST", team]
 
             data += [
@@ -397,30 +418,31 @@ def scrape_cbs(
     validate(df)
 
 
-def scrape_nfl(out=RAW_PROJECTIONS):
+def scrape_nfl():
     """Scrape NFL projections.
-    
+
     Static routes, but the URLs are massive w/ query parameters. Example:
     https://fantasy.nfl.com/research/projections?position=0&statCategory=projectedStats&statSeason=2019&statType=seasonProjectedStats#researchProjections=researchProjections%2C%2Fresearch%2Fprojections%253Foffset%253D1%2526position%253DO%2526sort%253DprojectedPts%2526statCategory%253DprojectedStats%2526statSeason%253D2019%2526statType%253DseasonProjectedStats%2526statWeek%253D1%2Creplace
-    
+
     First page:
     https://fantasy.nfl.com/research/projections?offset=1&position=O&sort=projectedPts&statCategory=projectedStats&statSeason=2019&statType=seasonProjectedStats&statWeek=1
 
     Second page:
     https://fantasy.nfl.com/research/projections?offset=1&position=O&sort=projectedPts&statCategory=projectedStats&statSeason=2019&statType=seasonProjectedStats&statWeek=1#researchProjections=researchProjections%2C%2Fresearch%2Fprojections%253Foffset%253D6%2526position%253DO%2526sort%253DprojectedPts%2526statCategory%253DprojectedStats%2526statSeason%253D2019%2526statType%253DseasonProjectedStats%2526statWeek%253D1%2Creplace
-    
+
     Last page:
     https://fantasy.nfl.com/research/projections?offset=1&position=O&sort=projectedPts&statCategory=projectedStats&statSeason=2019&statType=seasonProjectedStats&statWeek=1#researchProjections=researchProjections%2C%2Fresearch%2Fprojections%253Foffset%253D926%2526position%253DO%2526sort%253DprojectedPts%2526statCategory%253DprojectedStats%2526statSeason%253D2019%2526statType%253DseasonProjectedStats%2526statWeek%253D1%2Creplace
 
     Just going to simluate clicking the next button until there's no next button
     """
 
-    print("scraping NFL")
+    out = RAW_PROJECTIONS
+    logging.info("scraping NFL")
 
     # list of page urls and expected headers on that page
     pages = [
         (  # QB/WR/RB/TE
-            f"https://fantasy.nfl.com/research/projections?offset=1&position=O&sort=projectedPts&statCategory=projectedStats&statSeason={YEAR}&statType=seasonProjectedStats&statWeek=1",
+            f"https://fantasy.nfl.com/research/projections?position=O&sort=projectedPts&statCategory=projectedStats&statSeason={YEAR}&statType=seasonProjectedStats",
             [
                 "Passing_Yds",
                 "Passing_TD",
@@ -438,11 +460,11 @@ def scrape_nfl(out=RAW_PROJECTIONS):
             ],
         ),
         (  # K
-            f"https://fantasy.nfl.com/research/projections?offset=1&position=O&sort=projectedPts&statCategory=projectedStats&statSeason={YEAR}&statType=seasonProjectedStats&statWeek=1#researchProjections=researchProjections%2C%2Fresearch%2Fprojections%253Fposition%253D7%2526statCategory%253DprojectedStats%2526statSeason%253D{YEAR}%2526statType%253DseasonProjectedStats%2526statWeek%253D1%2Creplace",
+            f"https://fantasy.nfl.com/research/projections?position=7&statCategory=projectedStats&statSeason={YEAR}&statType=seasonProjectedStats",
             ["Made", "0-19", "20-29", "30-39", "40-49", "50+", "Points"],
         ),
         (  # DST
-            f"https://fantasy.nfl.com/research/projections?offset=1&position=O&sort=projectedPts&statCategory=projectedStats&statSeason={YEAR}&statType=seasonProjectedStats&statWeek=1#researchProjections=researchProjections%2C%2Fresearch%2Fprojections%253Fposition%253D8%2526statCategory%253DprojectedStats%2526statSeason%253D{YEAR}%2526statType%253DseasonProjectedStats%2526statWeek%253D1%2Creplace",
+            f"https://fantasy.nfl.com/research/projections?position=8&statCategory=projectedStats&statSeason={YEAR}&statType=seasonProjectedStats",
             [
                 "Sack",
                 "Int",
@@ -458,6 +480,8 @@ def scrape_nfl(out=RAW_PROJECTIONS):
     ]
 
     players = []
+    page = 0
+    free_agents = 0
     for page_index, (page_url, headers) in enumerate(pages):
         DRIVER.get(page_url)
         time.sleep(1)
@@ -473,7 +497,8 @@ def scrape_nfl(out=RAW_PROJECTIONS):
             )
             table = soup.find("tbody")
 
-            for row in table.find_all("tr"):  # for each player
+            # parse each player in the table
+            for row in table.find_all("tr"):
                 if isinstance(row, NavigableString):
                     continue
                 if not len(row.find_all("td")):
@@ -486,10 +511,11 @@ def scrape_nfl(out=RAW_PROJECTIONS):
                 pos_team = [v.strip() for v in pos_team.split("-")]
                 if page_index == 2:  # is DST
                     name = name.split(" ")[-1]
-                    team = NAME_TEAM_MAP[name]
+                    team = TEAM_TO_ABRV_MAP[name]
                     data = [name, "DST", team]
-                elif len(pos_team) == 1:
-                    continue  # player not on a team
+                elif len(pos_team) == 1:  # player not on a team
+                    free_agents += 1
+                    continue
                 else:
                     team = pos_team[1]
                     if team == "LA":
@@ -512,15 +538,23 @@ def scrape_nfl(out=RAW_PROJECTIONS):
 
             # find and click the next button
             try:
-                next_button = DRIVER.find_element_by_link_text(">")
+                next_button = DRIVER.find_element(By.XPATH, '//a[text()=">"]')
                 actions = ActionChains(DRIVER)
                 actions.move_to_element(next_button).click().perform()
+                page += 1
+
+                if page % 5 == 0:
+                    logging.info("scraping NFL page %d...", page)
 
                 time.sleep(1)
                 scroll()
                 time.sleep(1)
             except:
+                if page == 0:
+                    logging.exception("failed to click next button")
                 break
+
+    logging.info("skipped %d free-agents", free_agents)
 
     df = pd.DataFrame(players)
     df["two_pts"] = df["2pt"]
@@ -531,7 +565,7 @@ def scrape_nfl(out=RAW_PROJECTIONS):
     validate(df)
 
 
-def scrape_fantasy_pros(out=RAW_ADP):
+def scrape_fantasy_pros():
     """Scrape the Fantasy Pros website for ADP information
 
     standard:
@@ -544,14 +578,14 @@ def scrape_fantasy_pros(out=RAW_ADP):
     https://www.fantasypros.com/nfl/adp/ppr-overall.php
     """
 
-    print("scraping Fantasy Pros")
+    out = RAW_ADP
+    logging.info("scraping Fantasy Pros")
 
     urls = {
         "std": "https://www.fantasypros.com/nfl/adp/overall.php",
         "half_ppr": "https://www.fantasypros.com/nfl/adp/half-point-ppr-overall.php",
         "ppr": "https://www.fantasypros.com/nfl/adp/ppr-overall.php",
     }
-
     df = None
     df_set = False
 
@@ -590,7 +624,7 @@ def scrape_fantasy_pros(out=RAW_ADP):
 
             if pos == "DST":
                 name = name.split(" ")[-2]
-                team = NAME_TEAM_MAP[name]
+                team = TEAM_TO_ABRV_MAP[name]
 
             adp = tds[-1].get_text()
 
@@ -619,8 +653,7 @@ def scrape_fantasy_pros(out=RAW_ADP):
 
 
 def column(text):
-    """Parse column to common format.
-    """
+    """Parse column to common format."""
 
     text = text.strip().replace(" ", "_").lower().split("\n")[0].strip()
 
@@ -665,15 +698,16 @@ def add_key(df):
 def validate(df, strict=True):
     """Throw an exception if we're missing players at a certain position. These numbers are logical estimates."""
 
+    logging.info("scraped %d players", len(df))
     pos_counts = {"QB": 32, "RB": 64, "WR": 64, "TE": 28, "DST": 32, "K": 30}
 
     for pos, count in pos_counts.items():
         actual_count = len(df[df.pos == pos])
-        if strict and actual_count < count:
-            print(df[df.pos == pos])
+        # weird re-ordering bug seen in ESPN right now, ignoring missing DSTs
+        # if strict and actual_count < count:
+        if strict and actual_count < count and pos != "DST":
             raise RuntimeWarning(f"only {actual_count} {pos}'s")
         elif not strict and actual_count * 3 < count:
-            print(df[df.pos == pos])
             raise RuntimeWarning(f"only {actual_count} {pos}'s")
 
     if len(set(df.team)) > 33:

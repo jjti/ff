@@ -2,16 +2,17 @@
 """
 
 import datetime
+import logging
 import os
 import re
 
 import pandas as pd
 import numpy as np
 
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s:%(message)s")
 pd.set_option("display.max_columns", 500)
 
 YEAR = datetime.datetime.now().year
-
 PROJECTIONS = os.path.join(
     os.path.dirname(__file__), "..", "..", "data", "raw", "projections"
 )
@@ -71,7 +72,7 @@ def aggregate():
     forecast.json for the application
     """
 
-    print("aggregating projections")
+    logging.info("aggregating projections")
 
     src = ["cbs", "espn", "nfl"]
 
@@ -117,7 +118,7 @@ def aggregate():
     df.columns = [re.sub(REG, camel, c, 0) for c in df.columns]
     df.to_json(AGGREGATE_JSON, orient="table")
 
-    print("aggregated projections to", AGGREGATE_JSON)
+    logging.info("aggregated projections to: %s", AGGREGATE_JSON)
 
 
 def camel(match):
