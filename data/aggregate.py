@@ -85,7 +85,14 @@ def aggregate():
             lambda x: x["team" + other_src] if x["team"] is np.nan else x["team"],
             axis=1,
         )
+
+    # the ADP numbers can be kind of strange -- jumping from 2 to 6 to 6.3. This just sorts them
     df = df.sort_values("std")
+    df["std"] = list(range(1, len(df) + 1))
+    df = df.sort_values("half_ppr")
+    df["half_ppr"] = list(range(1, len(df) + 1))
+    df = df.sort_values("ppr")
+    df["ppr"] = list(range(1, len(df) + 1))
 
     for stat in STATS:
         stat_cols = [c for c in df.columns if stat in c]
@@ -102,6 +109,10 @@ def aggregate():
     df["std"] = df["std"].fillna(-1.0)
     df["half_ppr"] = df["half_ppr"].fillna(-1.0)
     df["ppr"] = df["ppr"].fillna(-1.0)
+
+    import pdb
+
+    pdb.set_trace()
 
     df.to_csv(AGGREGATE_CSV, index=False)
     df.columns = [re.sub(REG, camel, c, 0) for c in df.columns]

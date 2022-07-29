@@ -12,19 +12,14 @@ interface IPlayerForecast extends IPlayer {
 }
 
 /**
- * Update the list of players in the store
- * Set tableName on them
- *
- * @param state state before having players set
+ * Update the list of players in the store. Set tableName on them
  */
 export const setPlayers = (
   state: IStoreState,
   players: IPlayer[]
 ): IStoreState => {
-  const tableName = (name: string) => {
-    const splitName = name.split(' ');
-    return `${name[0]}. ${splitName[1]}`;
-  };
+  // tableName returns an abbreviated player name that fits in the cards and rows
+  const tableName = (name: string) => `${name[0]}. ${name.split(' ')[1]}`;
 
   const positions = new Set(['QB', 'RB', 'WR', 'TE', 'DST', 'K']);
   let playersWithTableName = players
@@ -35,10 +30,7 @@ export const setPlayers = (
     .filter(p => positions.has(p.pos)); // TODO: filter "P" players on server
 
   // chopping off bottom for rendering perf
-  playersWithTableName = playersWithTableName.slice(
-    0,
-    Math.round(playersWithTableName.length * 0.65)
-  );
+  playersWithTableName = playersWithTableName;
 
   // hacky but am storing players here for a reset event
   if (!INITIAL_PLAYERS) {
@@ -58,9 +50,6 @@ export const setPlayers = (
  * Update the past history
  *
  * Past picks doesn't change
- *
- * @param state
- * @param player
  */
 export const removePlayer = (
   state: IStoreState,
@@ -130,8 +119,6 @@ export const undoLast = (state: IStoreState): IStoreState => {
 /**
  * Add the PlayerPick back into the list of teams and remove from the teams roster
  * If the pick paramter is null, undo the last pick
- *
- * @param state state from current turn, about to be undone
  */
 export const undoPick = (state: IStoreState, pick: IPick): IStoreState => {
   const { pastPicks, undraftedPlayers } = state;
@@ -166,8 +153,6 @@ export const undoPick = (state: IStoreState, pick: IPick): IStoreState => {
 /**
  * Change the default roster format, changing number of QBs, RBs, etc
  * Will involve recalculating VORs
- *
- * @param state state before roster format update
  */
 export const setRosterFormat = (
   state: IStoreState,
@@ -184,8 +169,6 @@ export const setRosterFormat = (
 /**
  * Update the VOR for all the players not yet drafted. Is dependent on
  * the number of teams currently in the draft
- *
- * @param state the current store state
  */
 export const updatePlayerVORs = (state: IStoreState): IStoreState => ({
   ...state,
@@ -200,8 +183,6 @@ export const updatePlayerVORs = (state: IStoreState): IStoreState => ({
  * #2: find the replacementValue for each position, by using the index from #1 + 1
  * #3: update each player's VOR using their predicted number of points minus their replacementValue
  * #4: sort the players by their VOR
- * @param players
- * @param numberOfTeams
  */
 const updateVOR = (state: IStoreState): IPlayer[] => {
   const {
@@ -308,8 +289,6 @@ const updateVOR = (state: IStoreState): IPlayer[] => {
 /**
  * Update the players by forecasting their season-end points. Use league score
  * and the league's point settings
- * @param scoring league scoring settings
- * @param players list of players
  */
 const playersWithForecast = (
   scoring: IScoring,
@@ -331,7 +310,6 @@ const playersWithForecast = (
 
 /**
  * estimate the points a team will earn from points against over season
- * @param pts average number of points per game
  */
 const dstPointsPerGame = (pts: number): number => {
   if (pts === null) {
