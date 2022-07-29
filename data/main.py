@@ -1,4 +1,5 @@
 import logging
+import os
 
 import aggregate
 import scrape
@@ -8,6 +9,10 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s:%(mess
 
 
 def run():
+    if not os.environ["S3_BUCKET"] or not os.environ["AWS_ACCESS_KEY_ID"]:
+        logging.fatal("missing env vars")
+        raise RuntimeError("missing env vars")
+
     scrape.scrape()
     aggregate.aggregate()
     upload.upload()

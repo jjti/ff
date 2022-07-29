@@ -1,0 +1,25 @@
+name: scrape
+
+on:
+  schedule:
+   # every day from june thru sep: https://crontab.guru/#0_12_*_6-9_*
+   - cron: '0 12 * 6-9 *'
+
+jobs:
+  scrape:
+    name: Scrape Data
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: browser-actions/setup-chrome@latest
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+          cache: 'pip'
+      - run: python3 -m pip install -r ./data/requirements.txt
+      - run: python3 ./data/main.py
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          CF_DISTRIBUTION: ${{ secrets.CF_DISTRIBUTION }}
+          S3_BUCKET: ${{ secrets.S3_BUCKET }}
