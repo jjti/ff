@@ -1,0 +1,20 @@
+name: scrape
+
+on:
+  push:
+  # schedule:
+  #  - cron: '55 * * * *'
+
+jobs:
+  scrape:
+    name: Scrape Data
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: browser-actions/setup-chrome@latest
+      - run: make
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          CF_DISTRIBUTION: ${{ secrets.CF_DISTRIBUTION }}
+          S3_BUCKET: ${{ secrets.S3_BUCKET }}
