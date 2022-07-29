@@ -5,9 +5,8 @@ import os
 import boto3
 
 YEAR = datetime.datetime.now().year
-PROJECTIONS = os.path.join(
-    os.path.dirname(__file__), "processed", f"Projections-{YEAR}.json"
-)
+DIR = os.path.dirname(__file__)
+PROJECTIONS = os.path.join(DIR, "processed", f"Projections-{YEAR}.json")
 
 
 def upload():

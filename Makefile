@@ -1,3 +1,6 @@
+include .env
+export
+
 .PHONY: data app
 
 data:
