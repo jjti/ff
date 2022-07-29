@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+export AWS_EC2_METADATA_DISABLED=true
+
 rm -rf ./out
 npm i
 npm run build

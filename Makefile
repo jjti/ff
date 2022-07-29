@@ -7,4 +7,4 @@ data:
 	python3 -m pip install -r ./data/requirements.txt && python3 ./data/main.py
 
 app:
-	cd app & release.sh
+	cd app && ./release.sh
