@@ -49,6 +49,7 @@ class RosterFormatter extends React.Component<IProps> {
     const { formattingRoster, rosterFormat } = this.props;
 
     return (
+      // @ts-ignore
       <Modal
         title="Change roster"
         visible={formattingRoster}

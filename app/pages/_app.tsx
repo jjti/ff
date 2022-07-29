@@ -38,6 +38,7 @@ export default ({
         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"
       />
     </Head>
+    {/* @ts-ignore */}
     <Provider store={store}>
       <Component {...pageProps} />
     </Provider>

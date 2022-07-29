@@ -63,6 +63,7 @@ class ScoringFormatter extends React.Component<IProps> {
     const { formattingScoring, scoring } = this.props;
 
     return (
+      // @ts-ignore
       <Modal
         title="Change scoring"
         visible={formattingScoring}
