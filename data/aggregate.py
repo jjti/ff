@@ -110,10 +110,6 @@ def aggregate():
     df["half_ppr"] = df["half_ppr"].fillna(-1.0)
     df["ppr"] = df["ppr"].fillna(-1.0)
 
-    import pdb
-
-    pdb.set_trace()
-
     df.to_csv(AGGREGATE_CSV, index=False)
     df.columns = [re.sub(REG, camel, c, 0) for c in df.columns]
     df.to_json(AGGREGATE_JSON, orient="table")

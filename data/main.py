@@ -13,9 +13,12 @@ def run():
         logging.fatal("missing env vars")
         raise RuntimeError("missing env vars")
 
-    scrape.scrape()
-    aggregate.aggregate()
-    upload.upload()
+    try:
+        # scrape.scrape()
+        aggregate.aggregate()
+        upload.upload()
+    except:
+        logging.exception("failed to update data")
 
 
 if __name__ == "__main__":
