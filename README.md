@@ -2,8 +2,6 @@
 
 <img width="1440" alt="Screen Shot 2022-08-06 at 9 41 54 AM" src="https://user-images.githubusercontent.com/13923102/183251462-b66d5479-119a-4933-a96d-0198bb569edb.png">
 
-------
-
 An app that helps draft the best fantasy football team possible.
 
 ## Value over replacement
@@ -54,4 +52,4 @@ Tags next to players indicate:
 
 ## Controls
 
-Clicking on a player drafts the player to the active team (currently drafting). You can skip the current turn (not drafting a player), undo the last round's pick (if they make a mistake), or remove a player (if the player was drafted already but they missed it).
+Clicking on a player drafts the player to the active team (currently drafting). You can skip the current turn (not drafting a player), undo the last round's pick (if they make a mistake), or remove a player (if the player was drafted already but you missed it).
