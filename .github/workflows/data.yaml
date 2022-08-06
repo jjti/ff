@@ -1,11 +1,11 @@
-name: scrape
+name: data
 
 on:
   push:
   schedule:
-   # “At 12:00 in every month from July through October.”
-   # https://crontab.guru/#0_12_*_7-10_*
-   - cron: '0 12 * 7-10 *'
+    # “At 12:00 in every month from July through October.”
+    # https://crontab.guru/#0_12_*_7-10_*
+    - cron: "0 12 * 7-10 *"
 
 jobs:
   scrape:
@@ -16,8 +16,8 @@ jobs:
       - uses: browser-actions/setup-chrome@latest
       - uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
-          cache: 'pip'
+          python-version: "3.x"
+          cache: "pip"
       - run: python3 -m pip install -r ./data/requirements.txt
       - run: python3 ./data/main.py
         env:
