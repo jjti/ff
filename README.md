@@ -36,6 +36,12 @@ The app adjusts for each of the complexities above. It calculates player's VOR d
 - league scoring
 - average draft position
 
+### Sources
+
+Player projections are updated daily from ESPN, CBS, and NFL. These projections are as granular as the number of rushing touchdowns and fumbles expected per season. That granularity -- versus a static ranking -- are needed to account for variations in value due to league-specific scoring.
+
+Average draft position are retrieved from [Fantasy Pros](https://www.fantasypros.com/nfl/adp/overall.php). This is used to pick the replacement player in each position, and account for scoring-based differences in draft position (eg adjust for WRs being drafted earlier in PPR leagues).
+
 ## Pick tips
 
 Tags next to players indicate:
