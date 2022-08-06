@@ -27,7 +27,7 @@ RB30: projection = 117, vor = 0 (117 - 117)
 Calculating VOR is tricky for a few reasons:
 - it depends on the number of teams and roster format. Eg: if the league has 2 QBs per team, that improves QB's values
 - it depends on league scoring. Eg: if rushing touchdowns are 4pts and recieving touchdowns 6pts, that improves WR's values
-- it depends on other drafters. Eg: if the first 6 rounds are all RB picks, that improves the RB's values
+- it depends on other drafters. Eg: if the first 6 rounds are all RB picks, that improves the RB's values. The waiver RB for replacement will be worse
 
 The app adjusts for each of the complexities above. It calculates player's VOR dynamically based on:
 - league size
