@@ -38,7 +38,9 @@ The app adjusts for each of the complexities above. It calculates player's VOR d
 
 ### Sources
 
-Player projections are updated daily from ESPN, CBS, and NFL. These projections are as granular as the number of rushing touchdowns and fumbles expected per season. That granularity -- versus a static ranking -- are needed to account for variations in value due to league-specific scoring.
+Player projections are updated daily from ESPN, CBS, and NFL. These projections are as granular as the number of rushing touchdowns and fumbles expected per season. That granularity - versus a static ranking - are needed to account for variations in value due to league-specific scoring.
+
+Each player's season-end projection is the average from across ESPN, CBS, and NFL. I expect the average of all sources to be more accurate than any on their own ([Nate Silver style](https://www.theatlantic.com/magazine/archive/2020/03/can-you-still-trust-nate-silver/605521/)).
 
 Average draft position are retrieved from [Fantasy Pros](https://www.fantasypros.com/nfl/adp/overall.php). This is used to pick the replacement player in each position, and account for scoring-based differences in draft position (eg adjust for WRs being drafted earlier in PPR leagues).
 
