@@ -1,34 +1,49 @@
-# Fantasy Football Draft App
+# ffdraft.app
 
-An app for drafting the best fantasy football team possible.
+<img width="1440" alt="Screen Shot 2022-08-06 at 9 41 54 AM" src="https://user-images.githubusercontent.com/13923102/183251462-b66d5479-119a-4933-a96d-0198bb569edb.png">
+
+------
+
+An app that helps draft the best fantasy football team possible.
 
 ## Value over replacement
 
-The app ranks players by their [value over replacement (VOR)](https://support.fantasypros.com/hc/en-us/articles/115005868747-What-is-value-based-drafting-What-do-player-draft-values-mean-VORP-VONA-VOLS-VBD-). It calculates the "replacement value" for each position. The `VOR` of a player is difference between that player's projected point total and the projected point total of the `n+1`th ranked player where `n` in the number of players in that position expected to be drafted in the first 10 rounds.
+The app ranks players by their [value over replacement (VOR)](https://support.fantasypros.com/hc/en-us/articles/115005868747-What-is-value-based-drafting-What-do-player-draft-values-mean-VORP-VONA-VOLS-VBD-). It does this by calculating the "replacement value" for each position. The `VOR` of a player is difference between that player's projected point total and the point total of the `n+1`th ranked player where `n` in the number of players in that position expected to be drafted in the first 10 rounds.
 
-![screen shot 2018-08-18 at 5 35 32 pm](https://user-images.githubusercontent.com/13923102/44303360-0b0b6a80-a30d-11e8-8901-179bfa8ac693.png)
+Why is this useful? Because it tells you, the drafter, how to prioritize players across positions. You'll be more informed when choosing between the RB or QB in round 6.
 
-So if there are 10 teams, and we expect 8 QBs to be drafted in the first 100 picks, the replacement value is the seasonal projection of the 9'th best QB.
+### Example
 
-Since the expected number of drafted players at each position depends on the number of teams, the app recalculates VOR if the number of teams changes. Similarly, the app accounts for differences in league-to-league scoring.
+If there are 10 teams, and we expect 8 QBs to be drafted in the first 100 picks, the `VOR` of the best QB is his expected point total minus the point total of the 9th best QB. In the example below, it's better to pick the RB because his expected value further exceeds the replacement player that will be available from waivers. The RB1 offers 62 points of greater value over the season (`136 - 74`).
 
-## Building out a Roster
+```
+QB1: projection = 394, vor = 74 (394 - 320)
+QB9: projection = 320, vor = 0 (320 - 320)
 
-You can track your team's status during the draft. Already filled positions are grayed out (QB in the example below).
+RB1: projection = 253, vor = 136 (253 - 117)
+RB30: projection = 117, vor = 0 (117 - 117)
+```
 
-![screen shot 2018-08-18 at 5 55 19 pm](https://user-images.githubusercontent.com/13923102/44303477-e9f84900-a30f-11e8-9119-286d37dc159b.png)
+### Details
 
-## Tips on picks
+Calculating VOR is tricky for a few reasons:
+- it depends on the number of teams and roster format. Eg: if the league has 2 QBs per team, that improves QB's values
+- it depends on league scoring. Eg: if rushing touchdowns are 4pts and recieving touchdowns 6pts, that improves WR's values
+- it depends on other drafters. Eg: if the first 6 rounds are all RB picks, that improves the RB's values
+
+The app adjusts for each of the complexities above. It calculates player's VOR dynamically based on:
+- league size
+- league scoring
+- average draft position
+
+## Pick tips
 
 Tags next to players indicate:
 1. pick recommendations
-2. that the player will be drafted soon
-3. schedule conflicts between other team members
-
-<img width="1440" alt="screen shot 2018-09-04 at 6 36 28 pm" src="https://user-images.githubusercontent.com/13923102/45061205-7f663d80-b071-11e8-98c8-01ae83f0619d.png">
+2. whether the player will be drafted soon
+3. BYE week overlap with other players on roster
+4. RB handcuffs
 
 ## Controls
 
 Clicking on a player drafts the player to the active team (currently drafting). You can skip the current turn (not drafting a player), undo the last round's pick (if they make a mistake), or remove a player (if the player was drafted already but they missed it).
-
-<img width="700" alt="screen shot 2018-09-04 at 6 40 08 pm" src="https://user-images.githubusercontent.com/13923102/45061311-f8fe2b80-b071-11e8-9b9a-19d246805a07.png">
