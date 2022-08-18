@@ -98,11 +98,12 @@ export const createTeam = (rosterFormat: IRoster): ITeam => ({
   BENCH: new Array(rosterFormat.BENCH).fill(null),
   DST: new Array(rosterFormat.DST).fill(null),
   FLEX: new Array(rosterFormat.FLEX).fill(null),
+  SUPERFLEX: new Array(rosterFormat.SUPERFLEX).fill(null),
   K: new Array(rosterFormat.K).fill(null),
   QB: new Array(rosterFormat.QB).fill(null),
   RB: new Array(rosterFormat.RB).fill(null),
   TE: new Array(rosterFormat.TE).fill(null),
-  WR: new Array(rosterFormat.WR).fill(null)
+  WR: new Array(rosterFormat.WR).fill(null),
 });
 
 /**
@@ -114,11 +115,12 @@ export const initialRoster: IRoster = {
   BENCH: 7,
   DST: 1,
   FLEX: 1,
+  SUPERFLEX: 0,
   K: 1,
   QB: 1,
   RB: 2,
   TE: 1,
-  WR: 2
+  WR: 2,
 };
 
 /**
@@ -147,7 +149,7 @@ export const initialScore: IScoring = {
   dfSacks: 1.0,
   dfPointsAllowedPerGame: 0,
   dfFumbles: 2.0,
-  dfSafeties: 2.0
+  dfSafeties: 2.0,
 };
 
 /**
@@ -168,7 +170,7 @@ export const initialState = {
   selectedPlayer: null,
   teams: new Array(10).fill(0).map(() => createTeam(initialRoster)), // doing 10 empty teams by default
   trackedTeam: 0, // team to track in TeamPicks
-  undraftedPlayers: []
+  undraftedPlayers: [],
 };
 
 export const store = createStore(

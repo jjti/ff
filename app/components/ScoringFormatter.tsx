@@ -20,7 +20,7 @@ class ScoringFormatter extends React.Component<IProps> {
   /** Offensive settings */
   private offense = {
     passYds: '25 passing yds',
-    passTds: 'Thrown TD', // tslint:disable-line
+    passTds: 'Thrown TD',
     passInts: 'Interception',
     receptions: 'Reception',
     receptionYds: '10 receiving yds',
@@ -31,10 +31,10 @@ class ScoringFormatter extends React.Component<IProps> {
     twoPts: '2PT conversion',
   };
 
-  /** kicker settings */
+  /** Kicker settings */
   private kickers = {
     kickExtraPoints: 'Extra point kick',
-    kick019: 'Kick 0-19 yds', // tslint:disable-line
+    kick019: 'Kick 0-19 yds',
     kick2029: 'Kick 20-29 yds',
     kick3039: 'Kick 30-39 yds',
     kick4049: 'Kick 40-49 yds',
@@ -45,7 +45,7 @@ class ScoringFormatter extends React.Component<IProps> {
   private dst = {
     dfInts: 'Defensive ints',
     dfTds: 'Defensive TD',
-    dfSacks: 'Defensive sack', // tslint:disable-line
+    dfSacks: 'Defensive sack',
     dfFumbles: 'Fumble recovery',
     dfSafeties: 'Safety',
   };
@@ -76,16 +76,12 @@ class ScoringFormatter extends React.Component<IProps> {
               <div className="scoring-input" key={k}>
                 <label htmlFor={k}>{this.offense[k]}</label>
                 <InputNumber
+                  defaultValue={this.multiple[k] ? scoring[k] * this.multiple[k] : scoring[k]}
                   id={k}
-                  name={k}
+                  onBlur={this.changeScoring}
                   key={k}
+                  name={k}
                   type="number"
-                  defaultValue={
-                    this.multiple[k]
-                      ? scoring[k] * this.multiple[k]
-                      : scoring[k]
-                  }
-                  onBlur={this.onBlur}
                 />
               </div>
             ))}
@@ -97,12 +93,12 @@ class ScoringFormatter extends React.Component<IProps> {
               <div className="scoring-input" key={k}>
                 <label htmlFor={k}>{this.kickers[k]}</label>
                 <InputNumber
-                  id={k}
-                  name={k}
-                  key={k}
-                  type="number"
                   defaultValue={scoring[k]}
-                  onBlur={this.onBlur}
+                  id={k}
+                  key={k}
+                  name={k}
+                  onBlur={this.changeScoring}
+                  type="number"
                 />
               </div>
             ))}
@@ -114,12 +110,12 @@ class ScoringFormatter extends React.Component<IProps> {
               <div className="scoring-input" key={k}>
                 <label htmlFor={k}>{this.dst[k]}</label>
                 <InputNumber
-                  id={k}
-                  name={k}
-                  key={k}
-                  type="number"
                   defaultValue={scoring[k]}
-                  onBlur={this.onBlur}
+                  id={k}
+                  key={k}
+                  name={k}
+                  onBlur={this.changeScoring}
+                  type="number"
                 />
               </div>
             ))}
@@ -132,7 +128,7 @@ class ScoringFormatter extends React.Component<IProps> {
   /**
    * Update state and re-rank the players with the new scoring
    */
-  private onBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+  private changeScoring = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { scoring, dispatchSetScoreFormat } = this.props;
     const { id, value } = e.target;
 
@@ -153,8 +149,7 @@ const mapStateToProps = ({ formattingScoring, scoring }: IStoreState) => ({
 });
 
 const mapDispathToProps = (dispatch: any) => ({
-  dispatchSetScoreFormat: (scoring: IScoring) =>
-    dispatch(setScoreFormat(scoring)),
+  dispatchSetScoreFormat: (scoring: IScoring) => dispatch(setScoreFormat(scoring)),
   toggleScoringFormatting: () => dispatch(toggleScoringFormatting()),
 });
 

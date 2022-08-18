@@ -10,7 +10,7 @@ import { IStoreState } from '../lib/store/store';
 interface IProps {
   formattingRoster: boolean;
   rosterFormat: IRoster;
-  setRosterFormat: (roster: IRoster) => void;
+  dispatchSetRosterFormat: (roster: IRoster) => void;
   toggleRosterFormatting: () => void;
 }
 
@@ -27,23 +27,8 @@ class RosterFormatter extends React.Component<IProps> {
     'DST',
     'K',
     'BENCH',
+    'SUPERFLEX',
   ];
-
-  /**
-   * change the number of players at the passed position
-   */
-  public changePositionCount = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { id: pos, value } = e.target;
-    const { rosterFormat } = this.props;
-
-    let numvalue = parseInt(value, 10) || 0;
-    numvalue = Math.max(numvalue, 0);
-    numvalue = Math.round(numvalue);
-
-    console.log(value, numvalue);
-
-    this.props.setRosterFormat({ ...rosterFormat, [pos]: numvalue });
-  };
 
   public render() {
     const { formattingRoster, rosterFormat } = this.props;
@@ -60,13 +45,14 @@ class RosterFormatter extends React.Component<IProps> {
             <div className="position-input-input" key={k}>
               <label htmlFor={k}>{k}</label>
               <InputNumber
-                id={k}
-                type="number"
                 className="position-input"
-                value={rosterFormat[k]}
-                onBlur={this.changePositionCount}
-                precision={0}
+                id={k}
+                key={k}
                 min={0}
+                onChange={this.changePositionCount(k)}
+                precision={0}
+                type="number"
+                defaultValue={rosterFormat[k]}
               />
             </div>
           ))}
@@ -74,6 +60,21 @@ class RosterFormatter extends React.Component<IProps> {
       </Modal>
     );
   }
+
+  /**
+   * change the number of players at the passed position
+   */
+  private changePositionCount = (pos: string) => {
+    return (value: string) => {
+      const { rosterFormat, dispatchSetRosterFormat } = this.props;
+
+      let numvalue = parseInt(value, 10) || 0;
+      numvalue = Math.max(numvalue, 0);
+      numvalue = Math.round(numvalue);
+
+      dispatchSetRosterFormat({ ...rosterFormat, [pos]: numvalue });
+    };
+  };
 }
 
 const mapStateToProps = ({ formattingRoster, rosterFormat }: IStoreState) => ({
@@ -82,7 +83,8 @@ const mapStateToProps = ({ formattingRoster, rosterFormat }: IStoreState) => ({
 });
 
 const mapDispathToProps = (dispatch: any) => ({
-  setRosterFormat: (roster: IRoster) => dispatch(setRosterFormat(roster)),
+  dispatchSetRosterFormat: (roster: IRoster) =>
+    dispatch(setRosterFormat(roster)),
   toggleRosterFormatting: () => dispatch(toggleRosterFormatting()),
 });
 

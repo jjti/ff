@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import Card from './Card';
-import { Position } from '../lib/models/Player';
+import { StarterPositions } from '../lib/models/Player';
 import { ITeam, NullablePlayer } from '../lib/models/Team';
 import { IStoreState } from '../lib/store/store';
 
@@ -22,16 +22,6 @@ class TeamPicks extends React.Component<IProps, State> {
   public static defaultProps = {
     mobile: false,
   };
-
-  public starterPositions: Position[] = [
-    'QB',
-    'RB',
-    'WR',
-    'FLEX',
-    'TE',
-    'DST',
-    'K',
-  ];
 
   constructor(props: any) {
     super(props);
@@ -78,7 +68,7 @@ class TeamPicks extends React.Component<IProps, State> {
           </header>
 
           <div className="Pick-Column">
-            {this.starterPositions.map((pos) =>
+            {StarterPositions.map((pos) =>
               trackedTeamRoster[pos].map((p: NullablePlayer, j: number) => (
                 // @ts-ignore
                 <Card
@@ -86,7 +76,8 @@ class TeamPicks extends React.Component<IProps, State> {
                   // @ts-ignore
                   pick={{ player: p, pickNumber: 0, team: 0 }}
                   playerMeta={true}
-                  pos={pos}
+                  // SUPERFLEX is too long
+                  pos={pos === 'SUPERFLEX' ? 'SUPER' : pos}
                   length={this.state.cardLength}
                 />
               ))

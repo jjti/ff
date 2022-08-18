@@ -1,5 +1,6 @@
 {
   "singleQuote": true,
   "jsxBracketSameLine": true,
-  "parser": "typescript"
+  "parser": "typescript",
+  "printWidth": 120
 }

@@ -801,7 +801,7 @@ i.Grayed {
 }
 
 .position-change-section {
-  width: 450px;
+  max-width: 575px;
   display: flex;
   flex-wrap: wrap;
   align-content: space-between;
@@ -817,7 +817,7 @@ i.Grayed {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 125px;
+  width: 165px;
 }
 
 .ant-input-group .ant-input {

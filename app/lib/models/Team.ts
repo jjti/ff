@@ -10,6 +10,7 @@ export interface IRoster {
   RB: number;
   WR: number;
   FLEX: number;
+  SUPERFLEX: number;
   TE: number;
   DST: number;
   K: number;
@@ -24,6 +25,7 @@ export interface ITeam {
   RB: NullablePlayer[];
   WR: NullablePlayer[];
   FLEX: NullablePlayer[];
+  SUPERFLEX: NullablePlayer[];
   TE: NullablePlayer[];
   DST: NullablePlayer[];
   K: NullablePlayer[];

@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify';
-import { IPlayer, Position } from '../../models/Player';
+import { DraftablePositions as positions, IPlayer, StarterPositions, wildCardPositions } from '../../models/Player';
 import { IScoring } from '../../models/Scoring';
 import { IPick, IRoster, ITeam, NullablePlayer } from '../../models/Team';
 import { createTeam, initialRoster, IStoreState } from '../store';
@@ -14,20 +14,17 @@ interface IPlayerForecast extends IPlayer {
 /**
  * Update the list of players in the store. Set tableName on them
  */
-export const setPlayers = (
-  state: IStoreState,
-  players: IPlayer[]
-): IStoreState => {
+export const setPlayers = (state: IStoreState, players: IPlayer[]): IStoreState => {
   // tableName returns an abbreviated player name that fits in the cards and rows
   const tableName = (name: string) => `${name[0]}. ${name.split(' ')[1]}`;
 
   const positions = new Set(['QB', 'RB', 'WR', 'TE', 'DST', 'K']);
   let playersWithTableName = players
-    .map(p => ({
+    .map((p) => ({
       ...p,
-      tableName: p.pos === 'DST' ? p.name : tableName(p.name)
+      tableName: p.pos === 'DST' ? p.name : tableName(p.name),
     }))
-    .filter(p => positions.has(p.pos)); // TODO: filter "P" players on server
+    .filter((p) => positions.has(p.pos)); // TODO: filter "P" players on server
 
   // chopping off bottom for rendering perf
   playersWithTableName = playersWithTableName;
@@ -41,7 +38,7 @@ export const setPlayers = (
     ...state,
     pastPicks: [],
     players: playersWithTableName,
-    undraftedPlayers: playersWithTableName
+    undraftedPlayers: playersWithTableName,
   });
 };
 
@@ -51,12 +48,9 @@ export const setPlayers = (
  *
  * Past picks doesn't change
  */
-export const removePlayer = (
-  state: IStoreState,
-  player: IPlayer
-): IStoreState => ({
+export const removePlayer = (state: IStoreState, player: IPlayer): IStoreState => ({
   ...state,
-  undraftedPlayers: state.undraftedPlayers.filter(p => p.key !== player.key)
+  undraftedPlayers: state.undraftedPlayers.filter((p) => p.key !== player.key),
 });
 
 /**
@@ -68,10 +62,9 @@ const removeFromRoster = (roster: ITeam, player: IPlayer): ITeam => {
     (acc: ITeam, pos) => ({
       ...acc,
       [pos]: roster[pos].reduce(
-        (players: NullablePlayer[], p: NullablePlayer) =>
-          p === player ? [...players, null] : [...players, p],
+        (players: NullablePlayer[], p: NullablePlayer) => (p === player ? [...players, null] : [...players, p]),
         []
-      )
+      ),
     }),
     {}
   ) as ITeam;
@@ -96,7 +89,7 @@ export const undoLast = (state: IStoreState): IStoreState => {
     teams = [
       ...teams.slice(0, lastPick.team),
       removeFromRoster(teams[lastPick.team], lastPick.player),
-      ...teams.slice(lastPick.team + 1)
+      ...teams.slice(lastPick.team + 1),
     ];
 
     undraftedPlayers = [lastPick.player, ...undraftedPlayers].sort(
@@ -112,7 +105,7 @@ export const undoLast = (state: IStoreState): IStoreState => {
     currentPick: currentPick - 1,
     pastPicks: pastPicks.slice(1),
     teams,
-    undraftedPlayers
+    undraftedPlayers,
   });
 };
 
@@ -132,21 +125,19 @@ export const undoPick = (state: IStoreState, pick: IPick): IStoreState => {
   teams = [
     ...teams.slice(0, pick.team),
     removeFromRoster(teams[pick.team], pick.player),
-    ...teams.slice(pick.team + 1)
+    ...teams.slice(pick.team + 1),
   ];
 
   return {
     ...state,
     pastPicks: pastPicks.reduce(
-      (acc: IPick[], p: IPick) =>
-        p === pick ? acc.concat({ ...p, player: null }) : acc.concat(p),
+      (acc: IPick[], p: IPick) => (p === pick ? acc.concat({ ...p, player: null }) : acc.concat(p)),
       []
     ),
     teams,
-    undraftedPlayers: [pick.player, ...undraftedPlayers].sort(
-      (a: IPlayer, b: IPlayer) =>
-        a.vor !== undefined && b.vor !== undefined ? b.vor - a.vor : 0
-    )
+    undraftedPlayers: [pick.player, ...undraftedPlayers].sort((a: IPlayer, b: IPlayer) =>
+      a.vor !== undefined && b.vor !== undefined ? b.vor - a.vor : 0
+    ),
   };
 };
 
@@ -154,16 +145,11 @@ export const undoPick = (state: IStoreState, pick: IPick): IStoreState => {
  * Change the default roster format, changing number of QBs, RBs, etc
  * Will involve recalculating VORs
  */
-export const setRosterFormat = (
-  state: IStoreState,
-  newRosterFormat: IRoster
-): IStoreState =>
+export const setRosterFormat = (state: IStoreState, newRosterFormat: IRoster): IStoreState =>
   updatePlayerVORs({
     ...state,
     rosterFormat: newRosterFormat,
-    teams: new Array(state.numberOfTeams)
-      .fill(null)
-      .map(() => createTeam(newRosterFormat))
+    teams: new Array(state.numberOfTeams).fill(null).map(() => createTeam(newRosterFormat)),
   });
 
 /**
@@ -172,144 +158,91 @@ export const setRosterFormat = (
  */
 export const updatePlayerVORs = (state: IStoreState): IStoreState => ({
   ...state,
-  undraftedPlayers: updateVOR(state)
+  undraftedPlayers: updateVOR(state),
 });
 
 /**
- * recalculate VOR for the players.
+ * Calculate the VOR of all the players.
  *
- * #1: find the number of players, at each position, drafted by the 10th round
- *    in leagues with this many players. Can estimate with ADP from ESPN
- * #2: find the replacementValue for each position, by using the index from #1 + 1
- * #3: update each player's VOR using their predicted number of points minus their replacementValue
+ * #1: find the number of players at each position
+ * #2: find the replacement projection for each position (what's the projection for the next player off waivers?)
+ * #3: calculate each player's VOR using their projection minus their replacement player's projection
  * #4: sort the players by their VOR
  */
 const updateVOR = (state: IStoreState): IPlayer[] => {
-  const {
-    numberOfTeams,
-    rosterFormat,
-    scoring,
-    players: playersNoForecast
-  } = state;
+  const { numberOfTeams, rosterFormat, scoring, players: playersNoForecast } = state;
 
-  // how many rounds we care about from a VOR perspective
-  const numberOfRounds = numberOfTeams;
-  // the drafable positions (TODO: account for FLEX)
-  const positions: Position[] = ['QB', 'RB', 'WR', 'TE', 'DST', 'K'];
+  // get player array with estimated season-end projection
+  const players = playersWithForecast(scoring, playersNoForecast);
 
-  // get player array with estimated draft positions
-  let players = playersWithForecast(scoring, playersNoForecast);
+  // #1 find replacement player index for each position
+  //
+  // total how many starters will be used across all teams
+  const positionToReplacementIndex = positions.reduce((acc, pos) => {
+    let starters = rosterFormat[pos];
 
-  // total number of players at each position
-  const positionToTotalCountMap = {};
-  positions.forEach(pos => {
-    positionToTotalCountMap[pos] = players.filter(p => p.pos === pos).length;
-  });
-
-  const adpDiff = [0, 0.5, 1].map(ppr => Math.abs(ppr - scoring.receptions));
-  const minDiff = Math.min(...adpDiff);
-  const minDiffIndex = adpDiff.indexOf(minDiff);
-  const adpCol = { 0: 'std', 1: 'halfPpr', 2: 'ppr' }[minDiffIndex]!;
-
-  // #1, find replacement player index for each position
-  // map each position to the number of players drafted before the lastPick
-  const positionToCountMap = {};
-  positions.forEach(pos => {
-    positionToCountMap[pos] = players.filter(
-      p =>
-        p.pos === pos &&
-        p[adpCol] &&
-        p[adpCol] > 0 &&
-        p[adpCol] <= numberOfTeams * numberOfRounds
-    ).length; // || 0 to avoid NaN on never drafted positions (in first 10 rounds)
-  });
-
-  // because #1 is based on a default league, with 1QB, 2RBs, etc, we need
-  // to account for specialty leagues where the numbers differ. We crudishly
-  // do that here, by comparing the number of players in the current roster to
-  // a "default" roster and multiplying the number of drafted players in that position
-  // accordingly
-  let totalPlayerCount = 0;
-  Object.keys(initialRoster).forEach(pos => {
-    // this is dumb af but lets guess that every team will draft 1 additional
-    // player in that position for each additional player in the modified roster
-    positionToCountMap[pos] = positionToCountMap[pos] || 0;
-    positionToCountMap[pos] +=
-      (rosterFormat[pos] - initialRoster[pos]) * numberOfTeams;
-    positionToCountMap[pos] = Math.max(0, positionToCountMap[pos]);
-
-    totalPlayerCount += positionToCountMap[pos];
-  });
-
-  // sum the total number of players (to get the total number of players drafted
-  // to the number of teams * numberOfRounds)
-  const ratioOfExpected = (numberOfTeams * numberOfRounds) / totalPlayerCount;
-
-  // adjust so the total count sums to ~100 (default) and we don't exceed it
-  Object.keys(positionToCountMap).forEach(pos => {
-    positionToCountMap[pos] = Math.floor(
-      positionToCountMap[pos] * ratioOfExpected
-    );
-  });
-
-  // #2, find replacement values at each position by finding the predicted points
-  //     at 1+the number of expected players in that position drafted within 10 rounds
-  // filter by position, sort descending by prediction points, and get the number of points by the replacement player
-  // map positions to their replacement values
-  const positionToReplaceValueMap = {};
-  positions.forEach(pos => {
-    // sort the players, in that position, by their VOR
-    const sortedPlayersInPosition = players
-      .filter(p => p.pos === pos)
-      .sort((a, b) => b.forecast - a.forecast);
-
-    // if the "replacement player" is a tenable value, get his expected
-    // number of points, otherwise it says zero
-    let replacementValue = 0;
-    if (positionToCountMap[pos] < positionToTotalCountMap[pos]) {
-      replacementValue =
-        sortedPlayersInPosition[positionToCountMap[pos]].forecast;
+    if (pos === 'QB') {
+      starters += rosterFormat['SUPERFLEX'];
+    }
+    if (['RB', 'WR'].includes(pos)) {
+      starters += 1; // I have no great excuse for this
+      starters += rosterFormat['FLEX'];
+    }
+    if (['K', 'DST'].includes(pos)) {
+      starters = 0;
     }
 
-    positionToReplaceValueMap[pos] = replacementValue;
-  });
+    return { [pos]: Math.round(starters * numberOfTeams + 1), ...acc };
+  }, {});
 
-  // #3, update players' VORs
-  players = players.map(p => ({
-    ...p,
-    vor: p.forecast - positionToReplaceValueMap[p.pos]
-  }));
+  // #2 find replacement values at each position subtracting points at the N+1'th index at that position
+  //
+  // filter by position, sort descending by prediction points, and get the number of points by the replacement player
+  // map positions to their replacement values
+  const positionToReplacementValue = positions.reduce((acc, pos) => {
+    // sort the players, in that position, by their VOR
+    const sortedPlayersInPosition = players.filter((p) => p.pos === pos).sort((a, b) => b.forecast - a.forecast);
 
-  players = players.filter(p => p.vor !== undefined);
+    // this is for an edge-case where there's a ton of teams or each roster is huge.
+    let replacementValue = 0;
+    if (positionToReplacementIndex[pos] < sortedPlayersInPosition.length) {
+      replacementValue = sortedPlayersInPosition[positionToReplacementIndex[pos]].forecast;
+    }
 
-  // @ts-ignore
-  return players.sort((a, b) => b.vor - a.vor || -1);
+    return { [pos]: replacementValue, ...acc };
+  }, {});
+
+  return (
+    players
+      // #3 set players' VORs
+      .map((p) => ({
+        ...p,
+        vor: p.forecast - positionToReplacementValue[p.pos],
+      }))
+      // #4 sort 'em
+      .sort((a, b) => b.vor - a.vor || -1)
+  );
 };
 
 /**
- * Update the players by forecasting their season-end points. Use league score
- * and the league's point settings
+ * Update the players by forecasting their season-end points.
+ *
+ * Use league score and the league's point settings
  */
-const playersWithForecast = (
-  scoring: IScoring,
-  players: IPlayer[]
-): IPlayerForecast[] => {
-  return players.map(p => ({
+const playersWithForecast = (scoring: IScoring, players: IPlayer[]): IPlayerForecast[] => {
+  return players.map((p) => ({
     ...p,
     forecast: Math.round(
       Object.keys(scoring).reduce(
-        (acc, k) =>
-          k === 'dfPointsAllowedPerGame'
-            ? acc + 16.0 * dstPointsPerGame(p[k])
-            : acc + scoring[k] * p[k],
+        (acc, k) => (k === 'dfPointsAllowedPerGame' ? acc + 16.0 * dstPointsPerGame(p[k]) : acc + scoring[k] * p[k]),
         0.0
       )
-    )
+    ),
   }));
 };
 
 /**
- * estimate the points a team will earn from points against over season
+ * Estimate the points a team will earn from points against over season
  */
 const dstPointsPerGame = (pts: number): number => {
   if (pts === null) {

@@ -21,8 +21,8 @@ interface IPlayerRowProps {
 
 /**
  * A single player row in the PlayerTable.
- * Shows their name, team, VOR, etc
- * Should be draggable into the pick row
+ *
+ * Shows their name, team, VOR, projection
  */
 export default class PlayerRow extends React.Component<IPlayerRowProps> {
   public render() {

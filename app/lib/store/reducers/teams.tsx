@@ -8,7 +8,7 @@ import {
   initialRoster,
   initialState,
   IStoreState,
-  store
+  store,
 } from '../store';
 import { INITIAL_PLAYERS, updatePlayerVORs } from './players';
 
@@ -38,7 +38,7 @@ export const setActiveTeam = (state: IStoreState): IStoreState => {
 export const incrementDraft = (state: IStoreState): IStoreState =>
   setActiveTeam({
     ...state,
-    currentPick: state.currentPick + 1
+    currentPick: state.currentPick + 1,
   });
 
 /**
@@ -49,8 +49,8 @@ export const skipPick = (state: IStoreState): IStoreState => {
     ...state,
     pastPicks: [
       { player: null, pickNumber: state.currentPick, team: state.activeTeam },
-      ...state.pastPicks
-    ]
+      ...state.pastPicks,
+    ],
   });
 };
 
@@ -59,8 +59,10 @@ export const skipPick = (state: IStoreState): IStoreState => {
  */
 const addPlayerToTeam = (player: IPlayer, team: ITeam): ITeam => {
   const emptySpot = team[player.pos].findIndex((p: IPlayer) => p === null);
-  const emptyFLEXSpot = team.FLEX.findIndex(p => p === null);
-  const emptyBenchSpot = team.BENCH.findIndex(b => b === null);
+  const emptyFlexSpot = team.FLEX.findIndex((p) => p === null);
+  const emptySuperflexSpot = team.SUPERFLEX.findIndex((p) => p === null);
+  const emptyBenchSpot = team.BENCH.findIndex((b) => b === null);
+
   if (emptySpot > -1) {
     // there's an empty spot in this position
     team[player.pos] = team[player.pos].map((p: IPlayer, i: number) =>
@@ -68,10 +70,18 @@ const addPlayerToTeam = (player: IPlayer, team: ITeam): ITeam => {
     );
   } else if (
     ['RB', 'WR', 'TE'].indexOf(player.pos) > -1 &&
-    emptyFLEXSpot > -1
+    emptyFlexSpot > -1
   ) {
     // it's a FLEX position, check if there are any flex positions left
-    team.FLEX = team.FLEX.map((p, i) => (i === emptyFLEXSpot ? player : p));
+    team.FLEX = team.FLEX.map((p, i) => (i === emptyFlexSpot ? player : p));
+  } else if (
+    ['QB', 'RB', 'WR', 'TE'].indexOf(player.pos) > -1 &&
+    emptySuperflexSpot > -1
+  ) {
+    // it's a FLEX position, check if there are any flex positions left
+    team.SUPERFLEX = team.SUPERFLEX.map((p, i) =>
+      i === emptySuperflexSpot ? player : p
+    );
   } else {
     if (emptyBenchSpot > -1) {
       team.BENCH = team.BENCH.map((b, i) =>
@@ -101,7 +111,7 @@ export const pickPlayer = (
   teams = [
     ...teams.slice(0, activeTeam),
     addPlayerToTeam(player, teams[activeTeam]),
-    ...teams.slice(activeTeam + 1)
+    ...teams.slice(activeTeam + 1),
   ];
 
   // create this latest pick object (for future reversion)
@@ -126,7 +136,7 @@ export const pickPlayer = (
     pastPicks: [thisPick, ...state.pastPicks],
 
     // save this player as the "lastPickedPlayer"
-    lastPickedPlayer: player
+    lastPickedPlayer: player,
   };
 
   // create a toast
@@ -167,9 +177,9 @@ export const setPick = (
       ? [
           ...teams.slice(0, updatedPick.team),
           addPlayerToTeam(updatedPick.player, teams[updatedPick.team]),
-          ...teams.slice(updatedPick.team + 1)
+          ...teams.slice(updatedPick.team + 1),
         ]
-      : teams
+      : teams,
   };
 };
 
@@ -181,7 +191,7 @@ export const resetStore = (state: IStoreState): IStoreState =>
   updatePlayerVORs({
     ...initialState,
     players: INITIAL_PLAYERS,
-    teams: new Array(10).fill(0).map(() => createTeam(initialRoster))
+    teams: new Array(10).fill(0).map(() => createTeam(initialRoster)),
   });
 
 /**
@@ -223,7 +233,7 @@ export const setNumberOfTeams = (
     numberOfTeams: currNumberOfTeams,
     rosterFormat,
     teams,
-    trackedTeam
+    trackedTeam,
   } = state;
 
   // don't change anything if we're already done with a round
@@ -275,7 +285,7 @@ export const setNumberOfTeams = (
     ...state,
     numberOfTeams,
     teams: newTeams,
-    trackedTeam: newTrackedTeam
+    trackedTeam: newTrackedTeam,
   };
 
   return updatePlayerVORs(newState);

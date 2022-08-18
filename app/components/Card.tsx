@@ -18,7 +18,7 @@ interface ICardProps {
   numberOfTeams: number;
   pickPlayer: (player: IPlayer) => void;
   playerMeta?: boolean;
-  pos?: Position;
+  pos?: string;
   removePlayer: (player: IPlayer) => void;
   trackedTeamPicking?: boolean;
   undoPick: (pick: IPick) => void;

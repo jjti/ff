@@ -10,11 +10,48 @@ export type Position =
   | 'RB'
   | 'WR'
   | 'FLEX'
+  | 'SUPERFLEX'
   | 'TE'
   | 'DST'
   | 'K'
   | 'BENCH'
   | '?';
+
+/** Map between wildcard positions and all the other positions they could be */
+export const wildCardPositions: { [key: string]: Set<string> } = {
+  QB: new Set([]),
+  RB: new Set([]),
+  WR: new Set([]),
+  FLEX: new Set(['WR', 'RB', 'TE']),
+  SUPERFLEX: new Set(['QB', 'WR', 'RB', 'TE']),
+  TE: new Set([]),
+  DST: new Set([]),
+  K: new Set([]),
+  BENCH: new Set([]),
+  '?': new Set([]),
+};
+
+/** Positions to show in the TeamPicks component */
+export const StarterPositions: Position[] = [
+  'QB',
+  'RB',
+  'WR',
+  'FLEX',
+  'SUPERFLEX',
+  'TE',
+  'DST',
+  'K',
+];
+
+/** Positions assigned to players */
+export const DraftablePositions: Position[] = [
+  'QB',
+  'RB',
+  'WR',
+  'TE',
+  'DST',
+  'K',
+];
 
 /**
  * A single player. Extends the scoring metrics from IScoring. All optional

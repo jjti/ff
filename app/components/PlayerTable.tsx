@@ -7,7 +7,7 @@ import PlayerRow from './PlayerRow';
 const filterPositions: Position[] = ['?', 'QB', 'RB', 'WR', 'TE', 'DST', 'K'];
 
 interface ITablePlayer extends IPlayer {
-  /** ex: A. Rodgers */
+  /** eg: A. Rodgers */
   tableName: string;
 }
 
@@ -127,8 +127,8 @@ export default ({
           </Tooltip>
         </p>
         <p className="col col-prediction">
-          <Tooltip title="Experts consensus projection">
-            <span>{!mobile ? 'Projections' : 'Points'}</span>
+          <Tooltip title="Experts' consensus projection">
+            <span>{!mobile ? 'Projection' : 'Points'}</span>
           </Tooltip>
         </p>
 

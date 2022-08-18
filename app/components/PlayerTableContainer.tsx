@@ -208,7 +208,7 @@ class PlayerTableContainer extends React.PureComponent<
 }
 
 const mapStateToProps = (state: IStoreState) => {
-  const { QB, RB, WR, TE, FLEX, DST, K, BENCH } =
+  const { QB, RB, WR, TE, FLEX, SUPERFLEX, DST, K, BENCH } =
     state.teams[state.trackedTeam];
 
   // add the positions to the object that the trackedTeam hasn't
@@ -227,6 +227,13 @@ const mapStateToProps = (state: IStoreState) => {
   if (notFilled(FLEX)) {
     valuedPositions.RB = true;
     valuedPositions.WR = true;
+    valuedPositions.TE = true;
+  }
+  if (notFilled(SUPERFLEX)) {
+    valuedPositions.QB = true;
+    valuedPositions.RB = true;
+    valuedPositions.WR = true;
+    valuedPositions.TE = true;
   }
   if (notFilled(TE)) {
     valuedPositions.TE = true;
@@ -239,12 +246,12 @@ const mapStateToProps = (state: IStoreState) => {
     valuedPositions.WR = true;
 
     // only want one backup QB and TE
-    const QBBackupCount = BENCH.filter((p) => p && p.pos === 'QB').length;
-    if (QBBackupCount < 1) {
+    const qbBackupCount = BENCH.filter((p) => p && p.pos === 'QB').length;
+    if (qbBackupCount < 1) {
       valuedPositions.QB = true;
     }
-    const TEBackupCount = BENCH.filter((p) => p && p.pos === 'TE').length;
-    if (TEBackupCount < 1) {
+    const teBackupCount = BENCH.filter((p) => p && p.pos === 'TE').length;
+    if (teBackupCount < 1) {
       valuedPositions.TE = true;
     }
   }
@@ -258,7 +265,7 @@ const mapStateToProps = (state: IStoreState) => {
   }
 
   // find the bye weeks already taken by the core players (QB, RB, WR, FLEX)
-  const byeWeeks = [...QB, ...RB, ...WR, ...FLEX]
+  const byeWeeks = [...QB, ...RB, ...WR, ...FLEX, ...SUPERFLEX]
     .map((p) => p && p.bye)
     .reduce((acc, bye) => (bye ? { ...acc, [bye]: true } : acc), {});
 
