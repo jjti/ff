@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose, Dispatch } from 'redux';
-import { IPlayer, Position } from '../lib/models/Player';
+import { IPlayer } from '../lib/models/Player';
 import { IPick } from '../lib/models/Team';
 import { removePlayer } from '../lib/store/actions/players';
 import { pickPlayer, setPick, undoPick } from '../lib/store/actions/teams';
@@ -45,11 +45,7 @@ class Card extends React.Component<ICardProps> {
 
     const playerCard = playerMeta && pos;
 
-    const pickMessage = !playerMeta
-      ? `${Math.floor(pick.pickNumber / numberOfTeams) + 1}.${
-          pick.pickNumber + 1
-        }`
-      : '';
+    const pickMessage = !playerMeta ? `${Math.floor(pick.pickNumber / numberOfTeams) + 1}.${pick.pickNumber + 1}` : '';
 
     const cardClass = [
       'Card',
@@ -62,22 +58,14 @@ class Card extends React.Component<ICardProps> {
       .join(' ');
 
     return (
-      <div
-        key={pick.pickNumber}
-        className={cardClass}
-        style={{ width: length, height: length }}>
+      <div key={pick.pickNumber} className={cardClass} style={{ width: length, height: length }}>
         {playerCard ? (
           // @ts-ignore
           <h5>{pos}</h5>
         ) : (
           <h5>{pick.team + 1}</h5>
         )}
-        {pick.player && !playerCard && (
-          <button
-            className="Undo-Player-Pick"
-            onClick={() => undoPickInStore(pick)}
-          />
-        )}
+        {pick.player && !playerCard && <button className="Undo-Player-Pick" onClick={() => undoPickInStore(pick)} />}
 
         {pick.player && pick.player.tableName && (
           <p className="small">
@@ -88,9 +76,7 @@ class Card extends React.Component<ICardProps> {
         )}
 
         {!playerCard && currentPick && <p className="small">Drafting</p>}
-        {playerCard && pick.player && (
-          <p className="points small">{pick.player.vor}</p>
-        )}
+        {playerCard && pick.player && <p className="points small">{pick.player.vor}</p>}
       </div>
     );
   }

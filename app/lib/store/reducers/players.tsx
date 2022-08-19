@@ -1,8 +1,8 @@
 import { toast } from 'react-toastify';
-import { DraftablePositions as positions, IPlayer, StarterPositions, wildCardPositions } from '../../models/Player';
+import { DraftablePositions as positions, IPlayer } from '../../models/Player';
 import { IScoring } from '../../models/Scoring';
 import { IPick, IRoster, ITeam, NullablePlayer } from '../../models/Team';
-import { createTeam, initialRoster, IStoreState } from '../store';
+import { createTeam, IStoreState } from '../store';
 import { setActiveTeam } from './teams';
 
 export let INITIAL_PLAYERS: IPlayer[];
