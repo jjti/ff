@@ -44,9 +44,8 @@ class Card extends React.Component<ICardProps> {
     } = this.props;
 
     const playerCard = playerMeta && pos;
-    const pickMessage = !playerMeta
-      ? `${Math.floor(pick.pickNumber || 0 / numberOfTeams) + 1}.${pick.pickNumber || 0 + 1}`
-      : '';
+    const pickNumber = pick.pickNumber || 0;
+    const pickMessage = !playerMeta ? `${Math.floor(pickNumber / numberOfTeams) + 1}.${pickNumber + 1}` : '';
 
     const cardClass = [
       'Card',
