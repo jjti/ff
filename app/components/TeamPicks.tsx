@@ -35,9 +35,7 @@ class TeamPicks extends React.Component<IProps, State> {
     this.setState({
       cardLength: this.getCardLength(),
     });
-    window.addEventListener('resize', () =>
-      this.setState({ cardLength: this.getCardLength() })
-    );
+    window.addEventListener('resize', () => this.setState({ cardLength: this.getCardLength() }));
   };
 
   getCardLength = (): number => {
@@ -106,11 +104,7 @@ class TeamPicks extends React.Component<IProps, State> {
   }
 }
 
-const mapStateToProps = ({
-  numberOfTeams,
-  teams,
-  trackedTeam,
-}: IStoreState) => ({
+const mapStateToProps = ({ numberOfTeams, teams, trackedTeam }: IStoreState) => ({
   numberOfTeams,
   teams,
   trackedTeam,

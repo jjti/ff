@@ -38,5 +38,5 @@ export interface ITeam {
 export interface IPick {
   player: NullablePlayer;
   team: number;
-  pickNumber: number;
+  pickNumber?: number;
 }

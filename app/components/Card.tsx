@@ -12,17 +12,17 @@ interface ICardProps {
   connectDragSource?: any;
   connectDropTarget?: any;
   currentPick?: boolean;
-  length: number;
-  pick: IPick;
   isOver: boolean;
+  length: number;
   numberOfTeams: number;
+  pick: IPick;
   pickPlayer: (player: IPlayer) => void;
   playerMeta?: boolean;
   pos?: string;
   removePlayer: (player: IPlayer) => void;
+  setPick: (pick: IPick) => void;
   trackedTeamPicking?: boolean;
   undoPick: (pick: IPick) => void;
-  setPick: (pick: IPick) => void;
 }
 
 /**
@@ -33,8 +33,8 @@ class Card extends React.Component<ICardProps> {
     const {
       canDrag,
       currentPick,
-      length,
       isOver,
+      length,
       numberOfTeams,
       pick,
       playerMeta,
@@ -44,8 +44,9 @@ class Card extends React.Component<ICardProps> {
     } = this.props;
 
     const playerCard = playerMeta && pos;
-
-    const pickMessage = !playerMeta ? `${Math.floor(pick.pickNumber / numberOfTeams) + 1}.${pick.pickNumber + 1}` : '';
+    const pickMessage = !playerMeta
+      ? `${Math.floor(pick.pickNumber || 0 / numberOfTeams) + 1}.${pick.pickNumber || 0 + 1}`
+      : '';
 
     const cardClass = [
       'Card',

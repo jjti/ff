@@ -873,7 +873,6 @@ i.Grayed {
 .Settings-Container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
 }
 
 .full-width {
