@@ -6,7 +6,7 @@ An app for drafting the best fantasy football team possible: [www.ffdraft.app](h
 
 ## Value over replacement
 
-The app ranks players by their [value over replacement (VOR)](https://support.fantasypros.com/hc/en-us/articles/115005868747-What-is-value-based-drafting-What-do-player-draft-values-mean-VORP-VONA-VOLS-VBD-). Players' `VOR` is difference between each player's expected season-end points minus the points of the `n+1`th ranked player (where `n` in the league-wide count of starters in that position).
+The app ranks players by their [value over replacement (VOR)](https://support.fantasypros.com/hc/en-us/articles/115005868747-What-is-value-based-drafting-What-do-player-draft-values-mean-VORP-VONA-VOLS-VBD-). Players' `VOR` is the difference between their expected season-end projection and that of the `n+1`th ranked player (where `n` in the count of starters in that position in the league).
 
 Why is this useful? Because it tells you, the drafter, how to prioritize players across positions. You'll be informed when choosing between the RB or QB in round 6.
 
