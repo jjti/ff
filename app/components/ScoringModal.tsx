@@ -16,7 +16,7 @@ interface IProps {
 /**
  * Modal for change the points per TD/reception/fumble/etc
  */
-class ScoringFormatter extends React.Component<IProps> {
+class ScoringModal extends React.Component<IProps> {
   /** Offensive settings */
   private offense = {
     passYds: '25 passing yds',
@@ -153,4 +153,4 @@ const mapDispathToProps = (dispatch: any) => ({
   toggleScoringFormatting: () => dispatch(toggleScoringFormatting()),
 });
 
-export default connect(mapStateToProps, mapDispathToProps)(ScoringFormatter);
+export default connect(mapStateToProps, mapDispathToProps)(ScoringModal);

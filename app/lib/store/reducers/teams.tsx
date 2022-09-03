@@ -153,6 +153,7 @@ export const setNumberOfTeams = (state: IStoreState, numberOfTeams: number): ISt
   let newTeams = new Array(numberOfTeams).fill(0).map(() => createTeam(rosterFormat));
 
   // given the new team count, update each pick and destination team
+  const newPicks: IPick[] = [];
   [...picks].reverse().forEach((p, i) => {
     let dstTeam = 0;
     if (Math.floor(i / numberOfTeams) % 2 === 0) {
@@ -161,7 +162,10 @@ export const setNumberOfTeams = (state: IStoreState, numberOfTeams: number): ISt
       dstTeam = numberOfTeams - (i % numberOfTeams) - 1;
     }
 
-    p.team = dstTeam; // update pick
+    newPicks.push({
+      ...p,
+      team: dstTeam,
+    });
     newTeams[dstTeam] = addPlayerToTeam(p.player as IPlayer, newTeams[dstTeam]);
   });
 
@@ -177,7 +181,7 @@ export const setNumberOfTeams = (state: IStoreState, numberOfTeams: number): ISt
     updatePlayerVORs({
       ...state,
       numberOfTeams,
-      picks,
+      picks: newPicks.reverse(),
       teams: newTeams,
       trackedTeam: newTrackedTeam,
     })

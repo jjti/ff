@@ -1,21 +1,20 @@
 import * as React from 'react';
 import 'react-toastify/dist/ReactToastify.css';
-import RosterFormatter from './RosterFormatter';
-import ScoringFormatter from './ScoringFormatter';
+
+import Header from './Header';
 import MobileSettings from './MobileSettings';
 import PickHistoryContainer from './PickHistoryContainer';
 import PlayerTableContainer from './PlayerTableContainer';
+import RosterModal from './RosterModal';
+import ScoringModal from './ScoringModal';
 import Settings from './Settings';
 import TeamPicks from './TeamPicks';
-import Header from './Header';
-
-interface IProps {}
 
 interface IState {
   mobile: boolean;
 }
 
-class App extends React.Component<IProps, IState> {
+export default class App extends React.Component<{}, IState> {
   constructor(props: any) {
     super(props);
 
@@ -42,8 +41,8 @@ class App extends React.Component<IProps, IState> {
           <TeamPicks mobile={true} />
           <PlayerTableContainer mobile={true} />
 
-          <RosterFormatter />
-          <ScoringFormatter />
+          <RosterModal />
+          <ScoringModal />
         </div>
       );
     }
@@ -59,11 +58,9 @@ class App extends React.Component<IProps, IState> {
           <PickHistoryContainer />
           <PlayerTableContainer />
         </div>
-        <RosterFormatter />
-        <ScoringFormatter />
+        <RosterModal />
+        <ScoringModal />
       </div>
     );
   }
 }
-
-export default App;

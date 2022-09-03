@@ -1,4 +1,4 @@
-import { CloseOutlined } from '@ant-design/icons';
+import { DeleteOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import * as React from 'react';
 
@@ -24,7 +24,7 @@ interface IPlayerRowProps {
  *
  * Shows their name, team, VOR, projection
  */
-export default class PlayerRow extends React.Component<IPlayerRowProps> {
+export default class PlayerTableRow extends React.Component<IPlayerRowProps> {
   public render() {
     const {
       adpCol,
@@ -40,9 +40,7 @@ export default class PlayerRow extends React.Component<IPlayerRowProps> {
     } = this.props;
 
     return (
-      <div
-        onClick={() => pickPlayer(player)}
-        className={inValuablePosition || mobile ? 'row' : 'row row-inactive'}>
+      <div onClick={() => pickPlayer(player)} className={inValuablePosition || mobile ? 'row' : 'row row-inactive'}>
         <div className="col col-name">
           <p>{player.tableName}</p>
           {/* Add dots for information on bye week */}
@@ -59,15 +57,13 @@ export default class PlayerRow extends React.Component<IPlayerRowProps> {
         {/* Table data not rendered on mobile */}
         {!mobile && (
           <>
-            <p className="col col-adp">
-              {player[adpCol] && player[adpCol] > 0 ? player[adpCol] : ''}
-            </p>
+            <p className="col col-adp">{player[adpCol] && player[adpCol] > 0 ? player[adpCol] : ''}</p>
             <div className="col col-remove">
               <Button
-                icon={<CloseOutlined />}
-                shape="circle"
+                icon={<DeleteOutlined />}
+                // shape="circle"
                 size="small"
-                type="dashed"
+                type="ghost"
                 className="remove-player-button"
                 style={{ marginRight: 10 }}
                 onClick={(e) => {

@@ -14,7 +14,7 @@ interface IProps {
   toggleRosterFormatting: () => void;
 }
 
-class RosterFormatter extends React.Component<IProps> {
+class RosterModal extends React.Component<IProps> {
   /**
    * The order the positions should show up in the modal
    */
@@ -77,4 +77,4 @@ const mapDispathToProps = (dispatch: any) => ({
   toggleRosterFormatting: () => dispatch(toggleRosterFormatting()),
 });
 
-export default connect(mapStateToProps, mapDispathToProps)(RosterFormatter);
+export default connect(mapStateToProps, mapDispathToProps)(RosterModal);

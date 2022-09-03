@@ -1,7 +1,7 @@
 import { Input, Tooltip } from 'antd';
 import * as React from 'react';
 import { IPlayer, Position } from '../lib/models/Player';
-import PlayerRow from './PlayerRow';
+import PlayerTableRow from './PlayerTableRow';
 
 /** All possible positions. ? Means any position, don't filter */
 const filterPositions: Position[] = ['?', 'QB', 'RB', 'WR', 'TE', 'DST', 'K'];
@@ -66,12 +66,7 @@ export default ({
 
         {/* Name filter input element */}
         {!mobile && (
-          <Input.Search
-            className="Player-Search"
-            placeholder="Name"
-            onChange={setNameFilter}
-            value={nameFilter}
-          />
+          <Input.Search className="Player-Search" placeholder="Name" onChange={setNameFilter} value={nameFilter} />
         )}
 
         {/* Buttons for filtering on position */}
@@ -153,7 +148,7 @@ export default ({
         {players
           .filter((_, i) => !filteredPlayers[i])
           .map((player: ITablePlayer, i) => (
-            <PlayerRow
+            <PlayerTableRow
               key={player.key}
               adpCol={adpCol}
               mobile={mobile}
