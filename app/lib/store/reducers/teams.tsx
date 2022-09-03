@@ -147,11 +147,7 @@ export const setTrackedTeam = (state: IStoreState, trackedTeam: number): IStoreS
  * Update the number of teams and recalculate VOR for the players.
  */
 export const setNumberOfTeams = (state: IStoreState, numberOfTeams: number): IStoreState => {
-  const { numberOfTeams: currNumberOfTeams, picks, rosterFormat, trackedTeam } = state;
-
-  if (currNumberOfTeams === numberOfTeams) {
-    return state; // change nothing
-  }
+  const { picks, rosterFormat, trackedTeam } = state;
 
   // create new teams with empty rosters
   let newTeams = new Array(numberOfTeams).fill(0).map(() => createTeam(rosterFormat));

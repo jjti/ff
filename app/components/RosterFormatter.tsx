@@ -18,17 +18,7 @@ class RosterFormatter extends React.Component<IProps> {
   /**
    * The order the positions should show up in the modal
    */
-  public orderedPositions: Position[] = [
-    'QB',
-    'RB',
-    'WR',
-    'TE',
-    'FLEX',
-    'DST',
-    'K',
-    'BENCH',
-    'SUPERFLEX',
-  ];
+  public orderedPositions: Position[] = ['QB', 'RB', 'WR', 'TE', 'FLEX', 'DST', 'K', 'BENCH', 'SUPERFLEX'];
 
   public render() {
     const { formattingRoster, rosterFormat } = this.props;
@@ -83,8 +73,7 @@ const mapStateToProps = ({ formattingRoster, rosterFormat }: IStoreState) => ({
 });
 
 const mapDispathToProps = (dispatch: any) => ({
-  dispatchSetRosterFormat: (roster: IRoster) =>
-    dispatch(setRosterFormat(roster)),
+  dispatchSetRosterFormat: (roster: IRoster) => dispatch(setRosterFormat(roster)),
   toggleRosterFormatting: () => dispatch(toggleRosterFormatting()),
 });
 

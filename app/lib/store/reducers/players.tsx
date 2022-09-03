@@ -1,8 +1,8 @@
 import { DraftablePositions as positions, IPlayer } from '../../models/Player';
 import { IScoring } from '../../models/Scoring';
 import { IPick, IRoster, ITeam, NullablePlayer } from '../../models/Team';
-import { createTeam, IStoreState } from '../store';
-import { setActiveTeam } from './teams';
+import { IStoreState } from '../store';
+import { setActiveTeam, setNumberOfTeams } from './teams';
 
 interface IPlayerForecast extends IPlayer {
   forecast: number;
@@ -11,15 +11,14 @@ interface IPlayerForecast extends IPlayer {
 /**
  * Update the list of players in the store. Set tableName on them
  */
-export const setPlayers = (state: IStoreState, players: IPlayer[]): IStoreState => {
-  return updatePlayerVORs({
+export const setPlayers = (state: IStoreState, players: IPlayer[]) =>
+  updatePlayerVORs({
     ...state,
     lastSync: Date.now(),
     lastSyncPlayers: players,
     players: players,
     undraftedPlayers: players,
   });
-};
 
 /**
  * Remove the player from the store and the players array
@@ -123,12 +122,9 @@ export const undoPick = (state: IStoreState, pick: IPick): IStoreState => {
  *
  * Requires recalculating VORs
  */
-export const setRosterFormat = (state: IStoreState, newRosterFormat: IRoster): IStoreState =>
-  updatePlayerVORs({
-    ...state,
-    rosterFormat: newRosterFormat,
-    teams: new Array(state.numberOfTeams).fill(null).map(() => createTeam(newRosterFormat)),
-  });
+export const setRosterFormat = (state: IStoreState, newRosterFormat: IRoster) =>
+  // mega-hacky but setNumberOfTeams already does what I need rn
+  setNumberOfTeams({ ...state, rosterFormat: newRosterFormat }, state.numberOfTeams);
 
 /**
  * Calculate the VOR of all the players.

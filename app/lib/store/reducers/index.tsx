@@ -1,7 +1,7 @@
 import { ACTION_TYPES } from '../actions';
 import { initialState, IStoreState } from '../store';
 import { removePlayer, setPlayers, setRosterFormat, undoLast, undoPick } from './players';
-import { setScoringFormat } from './scoring';
+import { setScoreFormat } from './scoring';
 import { incrementDraft, pickPlayer, resetStore, setNumberOfTeams, setPick, setTrackedTeam, skipPick } from './teams';
 
 export default (state = initialState, action: any): IStoreState => {
@@ -37,7 +37,7 @@ export default (state = initialState, action: any): IStoreState => {
       return setRosterFormat(state, action.rosterFormat);
     }
     case ACTION_TYPES.SET_SCORE_FORMAT: {
-      return setScoringFormat(state, action.scoring);
+      return setScoreFormat(state, action.scoring);
     }
     case ACTION_TYPES.SET_TRACKED_TEAM: {
       return setTrackedTeam(state, action.trackedTeam);

@@ -9,7 +9,6 @@ import { setNumberOfTeams, setTrackedTeam, toggleRosterFormatting } from '../lib
 import { IStoreState } from '../lib/store/store';
 
 interface IProps {
-  currentPick: number;
   numberOfTeams: number;
   resetDraft: () => void;
   setNumberOfTeams: (count: number) => void;
@@ -38,15 +37,13 @@ class Settings extends React.Component<IProps, IState> {
   };
 
   public render() {
-    const { currentPick, numberOfTeams } = this.props;
+    const { numberOfTeams } = this.props;
     const { open } = this.state;
 
     // an array with the allowable number of teams: [6, 16]
     const allowableNumberOfTeams = Array.from(new Array(11))
       .fill(0)
       .map((_, i) => i + 6);
-
-    const disabledOptions = currentPick > 0;
 
     return (
       <div className="Settings Section">
@@ -58,7 +55,7 @@ class Settings extends React.Component<IProps, IState> {
           <aside className="Settings-Container">
             <label className="full-width">
               Your team
-              <Select className="Settings-Select" onChange={this.props.setTrackedTeam} defaultValue={0}>
+              <Select className="Settings-Select" onChange={this.props.setTrackedTeam} value={this.props.trackedTeam}>
                 {new Array(numberOfTeams).fill(0).map((_, i) => (
                   <Select.Option key={`Pick-Selection-${i}`} value={i}>{`Team ${i + 1}`}</Select.Option>
                 ))}
@@ -67,7 +64,10 @@ class Settings extends React.Component<IProps, IState> {
 
             <label className="full-width">
               Team count
-              <Select className="Settings-Select" onChange={this.props.setNumberOfTeams} defaultValue={10}>
+              <Select
+                className="Settings-Select"
+                onChange={this.props.setNumberOfTeams}
+                value={this.props.numberOfTeams}>
                 {allowableNumberOfTeams.map((n) => (
                   <Select.Option key={n} value={n}>{`${n} Teams`}</Select.Option>
                 ))}
@@ -76,7 +76,7 @@ class Settings extends React.Component<IProps, IState> {
 
             <label>
               <Tooltip title="Change rosters">
-                <Button className="options-left" onClick={this.props.toggleRosterFormatting} disabled={disabledOptions}>
+                <Button className="options-left" onClick={this.props.toggleRosterFormatting}>
                   Roster
                 </Button>
               </Tooltip>
@@ -84,10 +84,7 @@ class Settings extends React.Component<IProps, IState> {
 
             <label>
               <Tooltip title="Change scoring">
-                <Button
-                  className="options-left"
-                  onClick={this.props.toggleScoringFormatting}
-                  disabled={disabledOptions}>
+                <Button className="options-left" onClick={this.props.toggleScoringFormatting}>
                   Scoring
                 </Button>
               </Tooltip>
@@ -130,8 +127,7 @@ class Settings extends React.Component<IProps, IState> {
   };
 }
 
-const mapStateToProps = ({ currentPick, numberOfTeams, trackedTeam, undraftedPlayers }: IStoreState) => ({
-  currentPick,
+const mapStateToProps = ({ numberOfTeams, trackedTeam, undraftedPlayers }: IStoreState) => ({
   numberOfTeams,
   trackedTeam,
   undraftedPlayers,
