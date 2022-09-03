@@ -8,6 +8,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 import './styles.css';
 import { IPlayer } from 'lib/models/Player';
+import { ToastContainer } from 'react-toastify';
 
 if (typeof window !== 'undefined') {
   window.onload = () => {
@@ -53,6 +54,7 @@ export default ({ Component, pageProps }: { Component: any; pageProps: any }) =>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <Component {...pageProps} />
+        <ToastContainer position="bottom-right" hideProgressBar />
       </PersistGate>
     </Provider>
   </>

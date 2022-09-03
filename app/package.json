@@ -12,14 +12,14 @@
     "react-helmet": "^5.2.1",
     "react-measure": "^2.3.0",
     "react-redux": "^5.1.2",
-    "react-toastify": "^5.5.0",
+    "react-toastify": "^9.0.0",
     "react-tooltip": "^4.2.8",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-persist": "^6.0.0"
   },
   "scripts": {
-    "dev": "next dev",
+    "dev": "next build && next dev",
     "build": "next build && next export",
     "start": "next start"
   },

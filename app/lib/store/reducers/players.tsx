@@ -76,8 +76,6 @@ export const undoLast = (state: IStoreState): IStoreState => {
       // @ts-ignore
       (a: IPlayer, b: IPlayer) => b.vor - a.vor
     );
-  } else {
-    toast.info('Undoing Skip');
   }
 
   return setActiveTeam({

@@ -86,8 +86,7 @@ export const pickPlayer = (state: IStoreState, player: IPlayer): IStoreState => 
   // create this latest pick object (for future reversion)
   const thisPick = { player, team: activeTeam, pickNumber: currentPick };
 
-  // create the new state
-  const newState = {
+  return {
     ...state,
 
     // increment the draft by one
@@ -105,18 +104,6 @@ export const pickPlayer = (state: IStoreState, player: IPlayer): IStoreState => 
     // save this player as the "lastPickedPlayer"
     lastPickedPlayer: player,
   };
-
-  // create a toast
-  toast.info(
-    <>
-      <div>Drafted {player.name}</div>
-      <button className="Toast-Undo-Button" onClick={() => store.dispatch(undoPick(thisPick))}>
-        Undo
-      </button>
-    </>
-  );
-
-  return newState;
 };
 
 /**
@@ -152,7 +139,7 @@ export const resetStore = (store: IStoreState) => setPlayers(initialState, store
 export const setTrackedTeam = (state: IStoreState, trackedTeam: number): IStoreState => {
   // create a toast
   if (trackedTeam !== state.trackedTeam) {
-    toast.info(`Viewing Team ${trackedTeam + 1}`);
+    toast.info(`Tracking Team ${trackedTeam + 1}`);
   }
 
   return { ...state, trackedTeam };
@@ -203,9 +190,6 @@ export const setNumberOfTeams = (state: IStoreState, numberOfTeams: number): ISt
   if (trackedTeam > numberOfTeams - 1) {
     newTrackedTeam = numberOfTeams - 1;
   }
-
-  // create a toast
-  toast.info(`VOR updated for ${numberOfTeams} teams`);
 
   // build up whole state minus updated VOR stats
   const newState = {
