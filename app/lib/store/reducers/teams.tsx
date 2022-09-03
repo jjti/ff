@@ -3,14 +3,8 @@ import { toast } from 'react-toastify';
 import { IPlayer } from '../../models/Player';
 import { IPick, ITeam } from '../../models/Team';
 import { undoPick } from '../actions/teams';
-import {
-  createTeam,
-  initialRoster,
-  initialState,
-  IStoreState,
-  store,
-} from '../store';
-import { INITIAL_PLAYERS, updatePlayerVORs } from './players';
+import { createTeam, initialState, IStoreState, store } from '../store';
+import { setPlayers, updatePlayerVORs } from './players';
 
 /**
  * calculate the "active team", that is, the index of the next
@@ -33,7 +27,6 @@ export const setActiveTeam = (state: IStoreState): IStoreState => {
 
 /**
  * Increment the draft to the next round
- * @param state
  */
 export const incrementDraft = (state: IStoreState): IStoreState =>
   setActiveTeam({
@@ -47,10 +40,7 @@ export const incrementDraft = (state: IStoreState): IStoreState =>
 export const skipPick = (state: IStoreState): IStoreState => {
   return incrementDraft({
     ...state,
-    pastPicks: [
-      { player: null, pickNumber: state.currentPick, team: state.activeTeam },
-      ...state.pastPicks,
-    ],
+    pastPicks: [{ player: null, pickNumber: state.currentPick, team: state.activeTeam }, ...state.pastPicks],
   });
 };
 
@@ -65,28 +55,16 @@ const addPlayerToTeam = (player: IPlayer, team: ITeam): ITeam => {
 
   if (emptySpot > -1) {
     // there's an empty spot in this position
-    team[player.pos] = team[player.pos].map((p: IPlayer, i: number) =>
-      i === emptySpot ? player : p
-    );
-  } else if (
-    ['RB', 'WR', 'TE'].indexOf(player.pos) > -1 &&
-    emptyFlexSpot > -1
-  ) {
+    team[player.pos] = team[player.pos].map((p: IPlayer, i: number) => (i === emptySpot ? player : p));
+  } else if (['RB', 'WR', 'TE'].indexOf(player.pos) > -1 && emptyFlexSpot > -1) {
     // it's a FLEX position, check if there are any flex positions left
     team.FLEX = team.FLEX.map((p, i) => (i === emptyFlexSpot ? player : p));
-  } else if (
-    ['QB', 'RB', 'WR', 'TE'].indexOf(player.pos) > -1 &&
-    emptySuperflexSpot > -1
-  ) {
+  } else if (['QB', 'RB', 'WR', 'TE'].indexOf(player.pos) > -1 && emptySuperflexSpot > -1) {
     // it's a FLEX position, check if there are any flex positions left
-    team.SUPERFLEX = team.SUPERFLEX.map((p, i) =>
-      i === emptySuperflexSpot ? player : p
-    );
+    team.SUPERFLEX = team.SUPERFLEX.map((p, i) => (i === emptySuperflexSpot ? player : p));
   } else {
     if (emptyBenchSpot > -1) {
-      team.BENCH = team.BENCH.map((b, i) =>
-        i === emptyBenchSpot ? player : b
-      );
+      team.BENCH = team.BENCH.map((b, i) => (i === emptyBenchSpot ? player : b));
     } else {
       team.BENCH = team.BENCH.concat([player]);
     }
@@ -97,22 +75,13 @@ const addPlayerToTeam = (player: IPlayer, team: ITeam): ITeam => {
 /**
  * Remove the player from the players.store, add it to the team,
  * and increment the activeTeam
- *
- * @param state team state
  */
-export const pickPlayer = (
-  state: IStoreState,
-  player: IPlayer
-): IStoreState => {
+export const pickPlayer = (state: IStoreState, player: IPlayer): IStoreState => {
   const { activeTeam, currentPick, undraftedPlayers } = state;
   let { teams } = state;
 
   // try and add the player to the team roster, respecting the limit at each position
-  teams = [
-    ...teams.slice(0, activeTeam),
-    addPlayerToTeam(player, teams[activeTeam]),
-    ...teams.slice(activeTeam + 1),
-  ];
+  teams = [...teams.slice(0, activeTeam), addPlayerToTeam(player, teams[activeTeam]), ...teams.slice(activeTeam + 1)];
 
   // create this latest pick object (for future reversion)
   const thisPick = { player, team: activeTeam, pickNumber: currentPick };
@@ -128,9 +97,7 @@ export const pickPlayer = (
     teams,
 
     // remove the picked player
-    undraftedPlayers: undraftedPlayers.filter(
-      (p: IPlayer) => !(p.name === player.name && p.pos === player.pos)
-    ),
+    undraftedPlayers: undraftedPlayers.filter((p: IPlayer) => !(p.name === player.name && p.pos === player.pos)),
 
     // add this pick to the history of picks
     pastPicks: [thisPick, ...state.pastPicks],
@@ -143,9 +110,7 @@ export const pickPlayer = (
   toast.info(
     <>
       <div>Drafted {player.name}</div>
-      <button
-        className="Toast-Undo-Button"
-        onClick={() => store.dispatch(undoPick(thisPick))}>
+      <button className="Toast-Undo-Button" onClick={() => store.dispatch(undoPick(thisPick))}>
         Undo
       </button>
     </>
@@ -156,21 +121,14 @@ export const pickPlayer = (
 
 /**
  * Update the pick in the store, it's been changed somehow
- *
- * @param pick the pick to be updated
  */
-export const setPick = (
-  state: IStoreState,
-  updatedPick: IPick
-): IStoreState => {
+export const setPick = (state: IStoreState, updatedPick: IPick): IStoreState => {
   const { teams } = state;
   return {
     ...state,
     pastPicks: state.pastPicks.reduce(
       (acc: IPick[], pick: IPick) =>
-        pick.pickNumber === updatedPick.pickNumber
-          ? [...acc, updatedPick]
-          : [...acc, pick],
+        pick.pickNumber === updatedPick.pickNumber ? [...acc, updatedPick] : [...acc, pick],
       []
     ),
     teams: updatedPick.player
@@ -184,27 +142,14 @@ export const setPick = (
 };
 
 /**
- * "reset" the store, resettting the undraftedPlayers
- * @param state state to be reset
+ * "reset" the store, resetting the undraftedPlayers
  */
-export const resetStore = (state: IStoreState): IStoreState =>
-  updatePlayerVORs({
-    ...initialState,
-    players: INITIAL_PLAYERS,
-    teams: new Array(10).fill(0).map(() => createTeam(initialRoster)),
-  });
+export const resetStore = (store: IStoreState) => setPlayers(initialState, store.lastSyncPlayers);
 
 /**
  * Update the tracked team on the left side of the app
- *
- * @param state Store State
- * @param trackedTeam The index of the team, in the teams array, to be "tracked"
- *  on the left side of the app
  */
-export const setTrackedTeam = (
-  state: IStoreState,
-  trackedTeam: number
-): IStoreState => {
+export const setTrackedTeam = (state: IStoreState, trackedTeam: number): IStoreState => {
   // create a toast
   if (trackedTeam !== state.trackedTeam) {
     toast.info(`Viewing Team ${trackedTeam + 1}`);
@@ -220,35 +165,19 @@ export const setTrackedTeam = (
  * and update player VOR accordingly (then sort)
  *
  * If we are done with the first round, error out. This shouldn't be called
- *
- * @param state current Store State
- * @param numberOfTeams the new number of teams
  */
-export const setNumberOfTeams = (
-  state: IStoreState,
-  numberOfTeams: number
-): IStoreState => {
-  const {
-    currentPick,
-    numberOfTeams: currNumberOfTeams,
-    rosterFormat,
-    teams,
-    trackedTeam,
-  } = state;
+export const setNumberOfTeams = (state: IStoreState, numberOfTeams: number): IStoreState => {
+  const { currentPick, numberOfTeams: currNumberOfTeams, rosterFormat, teams, trackedTeam } = state;
 
   // don't change anything if we're already done with a round
   if (currentPick > currNumberOfTeams) {
-    throw new Error(
-      'Cannot change the number of teams after a round has already completed'
-    );
+    throw new Error('Cannot change the number of teams after a round has already completed');
   }
 
   // don't change anything if the new number of teams will be less than
   // the number of teams that have already picked
   if (currentPick > numberOfTeams) {
-    throw new Error(
-      'Cannot change number of teams to less than the number that have already drafted players'
-    );
+    throw new Error('Cannot change number of teams to less than the number that have already drafted players');
   }
 
   // don't change anything if the number of teams isn't going to change
@@ -261,9 +190,7 @@ export const setNumberOfTeams = (
   if (numberOfTeams > currNumberOfTeams) {
     // add new teams so we have enough empty teams
     newTeams = newTeams.concat(
-      new Array(numberOfTeams - currNumberOfTeams)
-        .fill(null)
-        .map(() => createTeam(rosterFormat))
+      new Array(numberOfTeams - currNumberOfTeams).fill(null).map(() => createTeam(rosterFormat))
     );
   } else {
     // cleave off the extra teams that are no longer needed

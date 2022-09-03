@@ -1,20 +1,15 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
 import RosterFormatter from './RosterFormatter';
 import ScoringFormatter from './ScoringFormatter';
 import MobileSettings from './MobileSettings';
-import { IPlayer } from '../lib/models/Player';
 import PickHistoryContainer from './PickHistoryContainer';
 import PlayerTableContainer from './PlayerTableContainer';
 import Settings from './Settings';
-import { setPlayers } from '../lib/store/actions/players';
 import TeamPicks from './TeamPicks';
 import Header from './Header';
 
-interface IProps {
-  setPlayers: (players: IPlayer[]) => void;
-}
+interface IProps {}
 
 interface IState {
   mobile: boolean;
@@ -71,8 +66,4 @@ class App extends React.Component<IProps, IState> {
   }
 }
 
-const mapDispatchToProps = (dispatch: any) => ({
-  setPlayers: (players: IPlayer[]) => dispatch(setPlayers(players)),
-});
-
-export default connect(() => ({}), mapDispatchToProps)(App);
+export default App;

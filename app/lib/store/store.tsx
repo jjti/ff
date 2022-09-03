@@ -1,4 +1,6 @@
 import { applyMiddleware, createStore } from 'redux';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { IPlayer } from '../models/Player';
 import { IScoring } from '../models/Scoring';
@@ -35,6 +37,16 @@ export interface IStoreState {
   lastPickedPlayer: IPlayer | null;
 
   /**
+   * Timestamp of the last update of player projections. -1 if never synced
+   */
+  lastSync: number;
+
+  /**
+   * Players out of the last sync of projections.json
+   */
+  lastSyncPlayers: IPlayer[];
+
+  /**
    * Total number of teams drafting. Has downstream effects on the VOR calculations,
    * since a larger number of teams drafting means that roles like DST and TE take on
    * more value and should likely be drafted sooner
@@ -45,8 +57,7 @@ export interface IStoreState {
    * An array of past player picks, ordered such that the first element is the most
    * recent, the second is the second most recent, etc
    *
-   * if the drafter skips a round, ie drafts no one, that position in the array is
-   * just null
+   * if the drafter skips a round, ie drafts no one, that position in the array is just null
    */
   pastPicks: IPick[];
 
@@ -107,9 +118,8 @@ export const createTeam = (rosterFormat: IRoster): ITeam => ({
 });
 
 /**
- * Typical ESPN, CBS, Yahoo League. I'm using this as baseline
- * for VOR calculation. If the actual roster is changed, the
- * VOR calculations need to be as well
+ * Typical ESPN, CBS, Yahoo League. I'm using this as baseline for VOR calculation.
+ * If the actual roster is changed, the VOR calculations need to as well
  */
 export const initialRoster: IRoster = {
   BENCH: 7,
@@ -161,6 +171,8 @@ export const initialState = {
   formattingRoster: false,
   formattingScoring: false,
   lastPickedPlayer: null,
+  lastSync: -1,
+  lastSyncPlayers: [],
   numberOfTeams: 10,
   pastPicks: [],
   players: [],
@@ -173,7 +185,13 @@ export const initialState = {
   undraftedPlayers: [],
 };
 
-export const store = createStore(
-  reducers,
-  composeWithDevTools(applyMiddleware())
-);
+const persistConfig = {
+  key: 'root',
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, reducers);
+
+export const store = createStore(persistedReducer, composeWithDevTools(applyMiddleware()));
+
+export const persistor = persistStore(store);

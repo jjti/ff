@@ -9,32 +9,30 @@ import { ACTION_TYPES } from './index';
  */
 export const pickPlayer = (player: IPlayer) => ({
   player,
-  type: ACTION_TYPES.PICK_PLAYER
+  type: ACTION_TYPES.PICK_PLAYER,
 });
 
 /**
  * Like pickPlayer, but not on the currentPick.
  * Instead, update a given pick that should already be in state/store
- *
- * @param pick the pick to update
  */
 export const setPick = (pick: IPick) => ({
   pick,
-  type: ACTION_TYPES.SET_PICK
+  type: ACTION_TYPES.SET_PICK,
 });
 
 /**
  * Skip this active round, couldn't find drafted player
  */
 export const skipPick = () => ({
-  type: ACTION_TYPES.SKIP_PICK
+  type: ACTION_TYPES.SKIP_PICK,
 });
 
 /**
  * undoes the last pick/skip
  */
 export const undoLast = () => ({
-  type: ACTION_TYPES.UNDO_LAST
+  type: ACTION_TYPES.UNDO_LAST,
 });
 
 /**
@@ -42,7 +40,7 @@ export const undoLast = () => ({
  */
 export const undoPick = (pick: IPick) => ({
   pick,
-  type: ACTION_TYPES.UNDO_PICK
+  type: ACTION_TYPES.UNDO_PICK,
 });
 
 /**
@@ -51,14 +49,14 @@ export const undoPick = (pick: IPick) => ({
  */
 export const setTrackedTeam = (trackedTeam: number) => ({
   trackedTeam,
-  type: ACTION_TYPES.SET_TRACKED_TEAM
+  type: ACTION_TYPES.SET_TRACKED_TEAM,
 });
 
 /**
  * Skip this term, increment the draftIndex and, if necessary, direction
  */
 export const incrementDraft = () => ({
-  type: ACTION_TYPES.INCREMENT_DRAFT
+  type: ACTION_TYPES.INCREMENT_DRAFT,
 });
 
 /**
@@ -66,7 +64,7 @@ export const incrementDraft = () => ({
  */
 export const setNumberOfTeams = (numberOfTeams: number) => ({
   numberOfTeams,
-  type: ACTION_TYPES.SET_NUMBER_OF_TEAMS
+  type: ACTION_TYPES.SET_NUMBER_OF_TEAMS,
 });
 
 /**
@@ -75,13 +73,12 @@ export const setNumberOfTeams = (numberOfTeams: number) => ({
  */
 export const setActiveTeam = (activeTeam: number) => ({
   activeTeam,
-  type: ACTION_TYPES.SET_ACTIVE_TEAM
+  type: ACTION_TYPES.SET_ACTIVE_TEAM,
 });
 
 /**
- * Toggle roster formatting. will open a modal for selecting number
- * at each position
+ * Toggle roster formatting. will open a modal for selecting number at each position
  */
 export const toggleRosterFormatting = () => ({
-  type: ACTION_TYPES.TOGGLE_ROSTER_FORMATTING
+  type: ACTION_TYPES.TOGGLE_ROSTER_FORMATTING,
 });

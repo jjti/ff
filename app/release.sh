@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 export AWS_EC2_METADATA_DISABLED=true
 
 rm -rf ./out
