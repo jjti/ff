@@ -1,17 +1,20 @@
-import { Button, Select, Tooltip } from 'antd';
+import { Button, Radio, Select, Tooltip } from 'antd';
 import { saveAs } from 'file-saver';
+import { IScoring } from 'lib/models/Scoring';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { IPlayer } from '../lib/models/Player';
 import { resetDraft } from '../lib/store/actions/players';
-import { toggleScoringFormatting } from '../lib/store/actions/scoring';
+import { setScoreFormat, toggleScoringFormatting } from '../lib/store/actions/scoring';
 import { setNumberOfTeams, setTrackedTeam, toggleRosterFormatting } from '../lib/store/actions/teams';
 import { IStoreState } from '../lib/store/store';
 
 interface IProps {
   numberOfTeams: number;
   resetDraft: () => void;
+  scoring: IScoring;
   setNumberOfTeams: (count: number) => void;
+  setScoring: (scoring: IScoring) => void;
   setTrackedTeam: (team: number) => void;
   toggleRosterFormatting: () => void;
   toggleScoringFormatting: () => void;
@@ -74,6 +77,20 @@ class Settings extends React.Component<IProps, IState> {
               </Select>
             </label>
 
+            <label className="full-width">
+              PPR
+              <Radio.Group
+                value={this.props.scoring.receptions}
+                style={{ marginLeft: 'auto' }}
+                onChange={(e) => {
+                  this.props.setScoring({ ...this.props.scoring, receptions: e.target.value });
+                }}>
+                <Radio.Button value={0}>0</Radio.Button>
+                <Radio.Button value={0.5}>0.5</Radio.Button>
+                <Radio.Button value={1}>1</Radio.Button>
+              </Radio.Group>
+            </label>
+
             <label>
               <Tooltip title="Change rosters">
                 <Button className="options-left" onClick={this.props.toggleRosterFormatting}>
@@ -127,8 +144,9 @@ class Settings extends React.Component<IProps, IState> {
   };
 }
 
-const mapStateToProps = ({ numberOfTeams, trackedTeam, undraftedPlayers }: IStoreState) => ({
+const mapStateToProps = ({ numberOfTeams, scoring, trackedTeam, undraftedPlayers }: IStoreState) => ({
   numberOfTeams,
+  scoring,
   trackedTeam,
   undraftedPlayers,
 });
@@ -136,6 +154,7 @@ const mapStateToProps = ({ numberOfTeams, trackedTeam, undraftedPlayers }: IStor
 const mapDispathToProps = (dispatch: any) => ({
   resetDraft: () => dispatch(resetDraft()),
   setNumberOfTeams: (count: number) => dispatch(setNumberOfTeams(count)),
+  setScoring: (scoring: IScoring) => dispatch(setScoreFormat(scoring)),
   setTrackedTeam: (index: number) => dispatch(setTrackedTeam(index)),
   toggleRosterFormatting: () => dispatch(toggleRosterFormatting()),
   toggleScoringFormatting: () => dispatch(toggleScoringFormatting()),
