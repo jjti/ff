@@ -1,8 +1,8 @@
 import { ACTION_TYPES } from '../actions';
 import { initialState, IStoreState } from '../store';
-import { removePlayer, setPlayers, setRosterFormat, undoLast, undoPick } from './players';
+import { removePlayer, initStore, setRosterFormat, undoLast, undoPick } from './players';
 import { setScoreFormat } from './scoring';
-import { incrementDraft, pickPlayer, resetStore, setNumberOfTeams, setPick, setTrackedTeam, skipPick } from './teams';
+import { incrementDraft, pickPlayer, resetDraft, setNumberOfTeams, setPick, setTrackedTeam, skipPick } from './teams';
 
 export default (state = initialState, action: any): IStoreState => {
   switch (action.type) {
@@ -13,7 +13,7 @@ export default (state = initialState, action: any): IStoreState => {
       return removePlayer(state, action.player);
     }
     case ACTION_TYPES.RESET_DRAFT: {
-      return resetStore(state);
+      return resetDraft(state);
     }
     case ACTION_TYPES.INCREMENT_DRAFT: {
       return incrementDraft(state);
@@ -27,8 +27,8 @@ export default (state = initialState, action: any): IStoreState => {
     case ACTION_TYPES.SET_NUMBER_OF_TEAMS: {
       return setNumberOfTeams(state, action.numberOfTeams);
     }
-    case ACTION_TYPES.SET_PLAYERS: {
-      return setPlayers(state, action.players);
+    case ACTION_TYPES.INIT_STORE: {
+      return initStore(state, action.players);
     }
     case ACTION_TYPES.SET_PICK: {
       return setPick(state, action.pick);

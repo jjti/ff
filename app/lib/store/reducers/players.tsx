@@ -1,7 +1,7 @@
 import { DraftablePositions as positions, IPlayer } from '../../models/Player';
 import { IScoring } from '../../models/Scoring';
 import { IPick, IRoster, ITeam, NullablePlayer } from '../../models/Team';
-import { IStoreState } from '../store';
+import { createTeam, IStoreState } from '../store';
 import { setActiveTeam, setNumberOfTeams } from './teams';
 
 interface IPlayerForecast extends IPlayer {
@@ -9,14 +9,16 @@ interface IPlayerForecast extends IPlayer {
 }
 
 /**
- * Update the list of players in the store. Set tableName on them
+ * Initialize the store, setting players.
  */
-export const setPlayers = (state: IStoreState, players: IPlayer[]) =>
+export const initStore = (state: IStoreState, players: IPlayer[]) =>
   updatePlayerVORs({
     ...state,
     lastSync: Date.now(),
     lastSyncPlayers: players,
     players: players,
+    picks: [],
+    teams: new Array(state.numberOfTeams).fill(0).map(() => createTeam(state.rosterFormat)),
     undraftedPlayers: players,
   });
 

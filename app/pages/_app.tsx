@@ -1,4 +1,4 @@
-import { setPlayers } from 'lib/store/actions/players';
+import { initStore } from 'lib/store/actions/players';
 import { persistor, store } from 'lib/store/store';
 import Head from 'next/head';
 import React from 'react';
@@ -12,7 +12,7 @@ import { ToastContainer } from 'react-toastify';
 
 if (typeof window !== 'undefined') {
   window.onload = () => {
-    // if the last sync was within 12 hours, don't sync/set players
+    // if the last sync was within 12 hours, don't re-sync players
     const { lastSync, lastSyncPlayers, players } = store.getState();
     if (players.length && lastSyncPlayers.length && lastSync > 0 && Date.now() - lastSync < 1000 * 60 * 60 * 12) {
       return;
@@ -35,7 +35,7 @@ if (typeof window !== 'undefined') {
           }))
           .filter((p) => positions.has(p.pos)); // TODO: filter "P" players on server
 
-        store.dispatch(setPlayers(players));
+        store.dispatch(initStore(players));
       } else if (this.readyState === 4 && this.status !== 200) {
         console.warn(this.readyState, this.status, xhttp.responseText);
       }

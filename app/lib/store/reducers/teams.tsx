@@ -1,11 +1,11 @@
 import { toast } from 'react-toastify';
 import { IPlayer } from '../../models/Player';
 import { IPick, ITeam } from '../../models/Team';
-import { createTeam, initialState, IStoreState } from '../store';
-import { setPlayers, updatePlayerVORs } from './players';
+import { createTeam, IStoreState } from '../store';
+import { initStore, updatePlayerVORs } from './players';
 
 /**
- * calculate the "active team", that is, the index of the next
+ * Calculate the "active team", that is, the index of the next
  * team to be picking, based on the currentPick
  *
  * we're assuming a snake draft, so it's pretty trivial to calculate
@@ -127,9 +127,10 @@ export const setPick = (state: IStoreState, updatedPick: IPick): IStoreState => 
 };
 
 /**
- * "reset" the store, resetting the undraftedPlayers
+ * Reset the store. The only difference between this and initStore is that we re-use
+ * the last downloaded player list.
  */
-export const resetStore = (store: IStoreState) => setPlayers(initialState, store.lastSyncPlayers);
+export const resetDraft = (store: IStoreState) => initStore(store, store.lastSyncPlayers);
 
 /**
  * Update the tracked team on the left side of the app
@@ -162,11 +163,10 @@ export const setNumberOfTeams = (state: IStoreState, numberOfTeams: number): ISt
       dstTeam = numberOfTeams - (i % numberOfTeams) - 1;
     }
 
-    newPicks.push({
-      ...p,
-      team: dstTeam,
-    });
-    newTeams[dstTeam] = addPlayerToTeam(p.player as IPlayer, newTeams[dstTeam]);
+    newPicks.push({ ...p, team: dstTeam });
+    if (p.player) {
+      newTeams[dstTeam] = addPlayerToTeam(p.player, newTeams[dstTeam]);
+    }
   });
 
   // if number of tracked teams is less than index of currently tracked team,

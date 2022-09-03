@@ -6,9 +6,9 @@ import { ACTION_TYPES } from './index';
 /**
  * Set the list of players in the store
  */
-export const setPlayers = (players: IPlayer[]) => ({
+export const initStore = (players: IPlayer[]) => ({
   players,
-  type: ACTION_TYPES.SET_PLAYERS,
+  type: ACTION_TYPES.INIT_STORE,
 });
 
 /**
