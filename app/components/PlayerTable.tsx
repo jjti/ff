@@ -99,14 +99,14 @@ export default ({
       <div className="Legend-Row">
         {!mobile && (
           <>
-            <div className="dot blue-dot" />
-            <p className="small">Recommended</p>
             <div className="dot green-dot" />
-            <p className="small">Will be drafted soon</p>
-            <div className="dot orange-dot" />
-            <p className="small">BYE week conflict with starter</p>
-            <div className="dot red-dot" />
+            <p className="small">Recommended</p>
+            <div className="dot blue-dot" />
             <p className="small">RB handcuff</p>
+            <div className="dot orange-dot" />
+            <p className="small">Will be drafted soon</p>
+            <div className="dot red-dot" />
+            <p className="small">BYE week overlap</p>
           </>
         )}
       </div>

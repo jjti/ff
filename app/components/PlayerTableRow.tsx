@@ -44,10 +44,10 @@ export default class PlayerTableRow extends React.Component<IPlayerRowProps> {
         <div className="col col-name">
           <p>{player.tableName}</p>
           {/* Add dots for information on bye week */}
-          {recommended && !mobile && <div className="dot blue-dot" />}
-          {draftSoon ? <div className="dot green-dot" /> : null}{' '}
-          {byeWeekConflict && !mobile && <div className="dot orange-dot" />}
-          {rbHandcuff && !mobile && <div className="dot red-dot" />}
+          {recommended && !mobile && <div className="dot green-dot" />}
+          {rbHandcuff && !mobile && <div className="dot blue-dot" />}
+          {draftSoon ? <div className="dot orange-dot" /> : null}{' '}
+          {byeWeekConflict && !mobile && <div className="dot red-dot" />}
         </div>
         <p className="col col-pos">{player.pos}</p>
         <p className="col col-team">{player.team}</p>

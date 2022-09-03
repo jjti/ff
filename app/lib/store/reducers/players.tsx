@@ -14,6 +14,8 @@ interface IPlayerForecast extends IPlayer {
 export const initStore = (state: IStoreState, players: IPlayer[]) =>
   updatePlayerVORs({
     ...state,
+    activeTeam: 0,
+    currentPick: 0,
     lastSync: Date.now(),
     lastSyncPlayers: players,
     players: players,
