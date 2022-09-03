@@ -92,7 +92,7 @@ class Settings extends React.Component<IProps, IState> {
             </label>
 
             <label>
-              <Tooltip title="Change rosters">
+              <Tooltip title="Change roster format">
                 <Button className="options-left" onClick={this.props.toggleRosterFormatting}>
                   Roster
                 </Button>
@@ -100,7 +100,7 @@ class Settings extends React.Component<IProps, IState> {
             </label>
 
             <label>
-              <Tooltip title="Change scoring">
+              <Tooltip title="Change league scoring">
                 <Button className="options-left" onClick={this.props.toggleScoringFormatting}>
                   Scoring
                 </Button>
@@ -108,8 +108,8 @@ class Settings extends React.Component<IProps, IState> {
             </label>
 
             <label>
-              <Tooltip title="Download stats">
-                <Button onClick={this.saveStats}>Stats</Button>
+              <Tooltip title="Download stats CSV">
+                <Button onClick={this.saveStats}>Download</Button>
               </Tooltip>
             </label>
 
