@@ -1,4 +1,3 @@
-import { toast } from 'react-toastify';
 import { DraftablePositions as positions, IPlayer } from '../../models/Player';
 import { IScoring } from '../../models/Scoring';
 import { IPick, IRoster, ITeam, NullablePlayer } from '../../models/Team';
@@ -55,7 +54,7 @@ const removeFromRoster = (roster: ITeam, player: IPlayer): ITeam => {
  * Unlike undoPick, this isn't player specific
  */
 export const undoLast = (state: IStoreState): IStoreState => {
-  const { currentPick, pastPicks } = state;
+  const { currentPick, picks: pastPicks } = state;
   let { teams, undraftedPlayers } = state;
 
   if (!pastPicks.length) {
@@ -81,7 +80,7 @@ export const undoLast = (state: IStoreState): IStoreState => {
   return setActiveTeam({
     ...state,
     currentPick: currentPick - 1,
-    pastPicks: pastPicks.slice(1),
+    picks: pastPicks.slice(1),
     teams,
     undraftedPlayers,
   });
@@ -92,7 +91,7 @@ export const undoLast = (state: IStoreState): IStoreState => {
  * If the pick paramter is null, undo the last pick
  */
 export const undoPick = (state: IStoreState, pick: IPick): IStoreState => {
-  const { pastPicks, undraftedPlayers } = state;
+  const { picks: pastPicks, undraftedPlayers } = state;
   let { teams } = state;
 
   if (!pick.player) {
@@ -108,7 +107,7 @@ export const undoPick = (state: IStoreState, pick: IPick): IStoreState => {
 
   return {
     ...state,
-    pastPicks: pastPicks.reduce(
+    picks: pastPicks.reduce(
       (acc: IPick[], p: IPick) => (p === pick ? acc.concat({ ...p, player: null }) : acc.concat(p)),
       []
     ),
@@ -121,7 +120,8 @@ export const undoPick = (state: IStoreState, pick: IPick): IStoreState => {
 
 /**
  * Change the default roster format, changing number of QBs, RBs, etc
- * Will involve recalculating VORs
+ *
+ * Requires recalculating VORs
  */
 export const setRosterFormat = (state: IStoreState, newRosterFormat: IRoster): IStoreState =>
   updatePlayerVORs({
@@ -131,27 +131,20 @@ export const setRosterFormat = (state: IStoreState, newRosterFormat: IRoster): I
   });
 
 /**
- * Update the VOR for all the players not yet drafted. Is dependent on
- * the number of teams currently in the draft
- */
-export const updatePlayerVORs = (state: IStoreState): IStoreState => ({
-  ...state,
-  undraftedPlayers: updateVOR(state),
-});
-
-/**
  * Calculate the VOR of all the players.
+ *
+ * This adds vor and forecast to each player.
  *
  * #1: find the number of players at each position
  * #2: find the replacement projection for each position (what's the projection for the next player off waivers?)
  * #3: calculate each player's VOR using their projection minus their replacement player's projection
  * #4: sort the players by their VOR
  */
-const updateVOR = (state: IStoreState): IPlayer[] => {
-  const { numberOfTeams, rosterFormat, scoring, players: playersNoForecast } = state;
+export const updatePlayerVORs = (state: IStoreState): IStoreState => {
+  const { numberOfTeams, rosterFormat, scoring, players: playersNoForecast, undraftedPlayers } = state;
 
   // get player array with estimated season-end projection
-  const players = playersWithForecast(scoring, playersNoForecast);
+  let players = playersWithForecast(scoring, playersNoForecast);
 
   // #1 find replacement player index for each position
   //
@@ -190,16 +183,30 @@ const updateVOR = (state: IStoreState): IPlayer[] => {
     return { [pos]: replacementValue, ...acc };
   }, {});
 
-  return (
-    players
-      // #3 set players' VORs
-      .map((p) => ({
-        ...p,
-        vor: p.forecast - positionToReplacementValue[p.pos],
-      }))
-      // #4 sort 'em
-      .sort((a, b) => b.vor - a.vor || -1)
-  );
+  players = players
+    // #3 set players' VORs
+    .map((p) => ({
+      ...p,
+      vor: p.forecast - positionToReplacementValue[p.pos],
+    }))
+    // #4 sort 'em
+    .sort((a, b) => b.vor - a.vor);
+
+  // update the undraftedPlayers array as well (it being a separate array is maybe bad)
+  const playerIdToVor = {};
+  players.forEach((p) => (playerIdToVor[p.key] = p));
+  undraftedPlayers.forEach((p) => {
+    p.forecast = playerIdToVor[p.key].forecast;
+    p.vor = playerIdToVor[p.key].vor;
+  });
+  // @ts-ignore
+  undraftedPlayers.sort((a, b) => b.vor - a.vor);
+
+  return {
+    ...state,
+    players,
+    undraftedPlayers,
+  };
 };
 
 /**

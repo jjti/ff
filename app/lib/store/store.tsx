@@ -54,12 +54,12 @@ export interface IStoreState {
   numberOfTeams: number;
 
   /**
-   * An array of past player picks, ordered such that the first element is the most
+   * An array of player picks, ordered such that the first element is the most
    * recent, the second is the second most recent, etc
    *
    * if the drafter skips a round, ie drafts no one, that position in the array is just null
    */
-  pastPicks: IPick[];
+  picks: IPick[];
 
   /**
    * All the players, and their stats, as retrieved from the server. This is NOT the
@@ -174,7 +174,7 @@ export const initialState = {
   lastSync: -1,
   lastSyncPlayers: [],
   numberOfTeams: 10,
-  pastPicks: [],
+  picks: [],
   players: [],
   ppr: false,
   rosterFormat: initialRoster,

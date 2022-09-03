@@ -9,7 +9,7 @@ interface IPickHistoryContainerProps {
   activeTeam: number;
   currentPick: number;
   numberOfTeams: number;
-  pastPicks: IPick[];
+  picks: IPick[];
   setTrackedTeam: (team: number) => void;
   teams: ITeam[];
   trackedTeam: number;
@@ -21,10 +21,7 @@ interface IPickHistoryContainerState {
   open: boolean;
 }
 
-class PickHistoryContainer extends React.Component<
-  IPickHistoryContainerProps,
-  IPickHistoryContainerState
-> {
+class PickHistoryContainer extends React.Component<IPickHistoryContainerProps, IPickHistoryContainerState> {
   public pickRowRef: any = React.createRef();
 
   constructor(props: any) {
@@ -40,6 +37,7 @@ class PickHistoryContainer extends React.Component<
     this.setState({
       cardLength: this.getCardLength(this.props.numberOfTeams),
     });
+
     window.addEventListener('resize', () =>
       this.setState({
         cardLength: this.getCardLength(this.props.numberOfTeams),
@@ -71,9 +69,7 @@ class PickHistoryContainer extends React.Component<
     const { currentPick, numberOfTeams } = this.props;
 
     // round tracker message
-    const headerMessage = `Round ${Math.ceil(
-      (currentPick + 1) / numberOfTeams
-    )} – Pick ${currentPick + 1}`;
+    const headerMessage = `Round ${Math.ceil((currentPick + 1) / numberOfTeams)} – Pick ${currentPick + 1}`;
 
     return (
       <PickHistory
@@ -87,29 +83,18 @@ class PickHistoryContainer extends React.Component<
   }
 }
 
-const mapStateToProps = ({
+const mapStateToProps = ({ activeTeam, currentPick, numberOfTeams, picks, teams, trackedTeam }: IStoreState) => ({
   activeTeam,
   currentPick,
   numberOfTeams,
-  pastPicks,
-  teams,
-  trackedTeam,
-}: IStoreState) => ({
-  activeTeam,
-  currentPick,
-  numberOfTeams,
-  pastPicks,
+  picks,
   teams,
   trackedTeam,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-  setTrackedTeam: (teamToTrack: number) =>
-    dispatch(setTrackedTeam(teamToTrack)),
+  setTrackedTeam: (teamToTrack: number) => dispatch(setTrackedTeam(teamToTrack)),
   undoPick: (pick: IPick) => dispatch(undoPick(pick)),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PickHistoryContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(PickHistoryContainer);

@@ -8,7 +8,7 @@ interface IPickHistoryProps {
   currentPick: number;
   headerMessage: string;
   open: boolean;
-  pastPicks: IPick[];
+  picks: IPick[];
   refProp: any;
   toggleOpen: () => void;
   trackedTeam: number;
@@ -17,7 +17,7 @@ interface IPickHistoryProps {
 
 export default class PickHistory extends React.Component<IPickHistoryProps> {
   public render() {
-    const { activeTeam, cardLength, headerMessage, open, pastPicks, refProp, toggleOpen, trackedTeam } = this.props;
+    const { activeTeam, cardLength, headerMessage, open, picks, refProp, toggleOpen, trackedTeam } = this.props;
 
     return (
       <div className="PickHistory Section">
@@ -41,7 +41,7 @@ export default class PickHistory extends React.Component<IPickHistoryProps> {
                 trackedTeamPicking={activeTeam === trackedTeam}
               />
 
-              {pastPicks.map((pick) => (
+              {picks.map((pick) => (
                 // If there was a player drafted, show their name and the undo button
                 // @ts-ignore
                 <Card

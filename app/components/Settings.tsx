@@ -5,11 +5,7 @@ import { connect } from 'react-redux';
 import { IPlayer } from '../lib/models/Player';
 import { resetDraft } from '../lib/store/actions/players';
 import { toggleScoringFormatting } from '../lib/store/actions/scoring';
-import {
-  setNumberOfTeams,
-  setTrackedTeam,
-  toggleRosterFormatting,
-} from '../lib/store/actions/teams';
+import { setNumberOfTeams, setTrackedTeam, toggleRosterFormatting } from '../lib/store/actions/teams';
 import { IStoreState } from '../lib/store/store';
 
 interface IProps {
@@ -46,16 +42,9 @@ class Settings extends React.Component<IProps, IState> {
     const { open } = this.state;
 
     // an array with the allowable number of teams: [6, 16]
-    const allowableNumberOfTeams =
-      currentPick > numberOfTeams
-        ? // freeze the number of teams at the value set in store, can't change any longer
-          [numberOfTeams]
-        : // allow the user to add teams, so long as the new team count is greater than
-          // the number of picks that have already happened
-          Array.from(new Array(11))
-            .fill(0)
-            .map((_, i) => i + 6)
-            .filter((n) => n > currentPick);
+    const allowableNumberOfTeams = Array.from(new Array(11))
+      .fill(0)
+      .map((_, i) => i + 6);
 
     const disabledOptions = currentPick > 0;
 
@@ -69,38 +58,25 @@ class Settings extends React.Component<IProps, IState> {
           <aside className="Settings-Container">
             <label className="full-width">
               Your team
-              <Select
-                className="Settings-Select"
-                onChange={this.updateTrackedTeam}
-                defaultValue={0}>
+              <Select className="Settings-Select" onChange={this.props.setTrackedTeam} defaultValue={0}>
                 {new Array(numberOfTeams).fill(0).map((_, i) => (
-                  <Select.Option key={`Pick-Selection-${i}`} value={i}>{`Team ${
-                    i + 1
-                  }`}</Select.Option>
+                  <Select.Option key={`Pick-Selection-${i}`} value={i}>{`Team ${i + 1}`}</Select.Option>
                 ))}
               </Select>
             </label>
 
             <label className="full-width">
               Team count
-              <Select
-                className="Settings-Select"
-                onChange={this.setNumberOfTeams}
-                defaultValue={10}>
+              <Select className="Settings-Select" onChange={this.props.setNumberOfTeams} defaultValue={10}>
                 {allowableNumberOfTeams.map((n) => (
-                  <Select.Option
-                    key={n}
-                    value={n}>{`${n} Teams`}</Select.Option>
+                  <Select.Option key={n} value={n}>{`${n} Teams`}</Select.Option>
                 ))}
               </Select>
             </label>
 
             <label>
               <Tooltip title="Change rosters">
-                <Button
-                  className="options-left"
-                  onClick={this.props.toggleRosterFormatting}
-                  disabled={disabledOptions}>
+                <Button className="options-left" onClick={this.props.toggleRosterFormatting} disabled={disabledOptions}>
                   Roster
                 </Button>
               </Tooltip>
@@ -124,10 +100,7 @@ class Settings extends React.Component<IProps, IState> {
             </label>
 
             <label>
-              <Button
-                className="options-left"
-                onClick={this.props.resetDraft}
-                danger={true}>
+              <Button className="options-left" onClick={this.props.resetDraft} danger={true}>
                 Reset
               </Button>
             </label>
@@ -137,21 +110,11 @@ class Settings extends React.Component<IProps, IState> {
     );
   }
 
-  private updateTrackedTeam = (value: number) => {
-    this.props.setTrackedTeam(value);
-  };
-
-  private setNumberOfTeams = (value: number) => {
-    this.props.setNumberOfTeams(value);
-  };
-
   private saveStats = () => {
     const removeCols = ['key', 'index', 'tableName'];
 
     const cols = this.props.undraftedPlayers.length
-      ? Object.keys(this.props.undraftedPlayers[0]).filter(
-          (k) => !removeCols.includes(k)
-        )
+      ? Object.keys(this.props.undraftedPlayers[0]).filter((k) => !removeCols.includes(k))
       : [];
 
     const statsCsv = this.props.undraftedPlayers.reduce(
@@ -167,12 +130,7 @@ class Settings extends React.Component<IProps, IState> {
   };
 }
 
-const mapStateToProps = ({
-  currentPick,
-  numberOfTeams,
-  trackedTeam,
-  undraftedPlayers,
-}: IStoreState) => ({
+const mapStateToProps = ({ currentPick, numberOfTeams, trackedTeam, undraftedPlayers }: IStoreState) => ({
   currentPick,
   numberOfTeams,
   trackedTeam,

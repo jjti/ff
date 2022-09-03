@@ -1,9 +1,7 @@
-import * as React from 'react';
 import { toast } from 'react-toastify';
 import { IPlayer } from '../../models/Player';
 import { IPick, ITeam } from '../../models/Team';
-import { undoPick } from '../actions/teams';
-import { createTeam, initialState, IStoreState, store } from '../store';
+import { createTeam, initialState, IStoreState } from '../store';
 import { setPlayers, updatePlayerVORs } from './players';
 
 /**
@@ -40,12 +38,12 @@ export const incrementDraft = (state: IStoreState): IStoreState =>
 export const skipPick = (state: IStoreState): IStoreState => {
   return incrementDraft({
     ...state,
-    pastPicks: [{ player: null, pickNumber: state.currentPick, team: state.activeTeam }, ...state.pastPicks],
+    picks: [{ player: null, pickNumber: state.currentPick, team: state.activeTeam }, ...state.picks],
   });
 };
 
 /**
- * add a plyer to a given team/roster
+ * add a player to a given team/roster
  */
 const addPlayerToTeam = (player: IPlayer, team: ITeam): ITeam => {
   const emptySpot = team[player.pos].findIndex((p: IPlayer) => p === null);
@@ -99,7 +97,7 @@ export const pickPlayer = (state: IStoreState, player: IPlayer): IStoreState => 
     undraftedPlayers: undraftedPlayers.filter((p: IPlayer) => !(p.name === player.name && p.pos === player.pos)),
 
     // add this pick to the history of picks
-    pastPicks: [thisPick, ...state.pastPicks],
+    picks: [thisPick, ...state.picks],
 
     // save this player as the "lastPickedPlayer"
     lastPickedPlayer: player,
@@ -113,7 +111,7 @@ export const setPick = (state: IStoreState, updatedPick: IPick): IStoreState => 
   const { teams } = state;
   return {
     ...state,
-    pastPicks: state.pastPicks.reduce(
+    picks: state.picks.reduce(
       (acc: IPick[], pick: IPick) =>
         pick.pickNumber === updatedPick.pickNumber ? [...acc, updatedPick] : [...acc, pick],
       []
@@ -146,43 +144,30 @@ export const setTrackedTeam = (state: IStoreState, trackedTeam: number): IStoreS
 };
 
 /**
- * If we're not done with the first round yet, update the number of teams
- * and recalculate VOR for the players. Find the number of expected players drafted
- * at each position within 10 rounds, use that to estimate replacementValue,
- * and update player VOR accordingly (then sort)
- *
- * If we are done with the first round, error out. This shouldn't be called
+ * Update the number of teams and recalculate VOR for the players.
  */
 export const setNumberOfTeams = (state: IStoreState, numberOfTeams: number): IStoreState => {
-  const { currentPick, numberOfTeams: currNumberOfTeams, rosterFormat, teams, trackedTeam } = state;
+  const { numberOfTeams: currNumberOfTeams, picks, rosterFormat, trackedTeam } = state;
 
-  // don't change anything if we're already done with a round
-  if (currentPick > currNumberOfTeams) {
-    throw new Error('Cannot change the number of teams after a round has already completed');
-  }
-
-  // don't change anything if the new number of teams will be less than
-  // the number of teams that have already picked
-  if (currentPick > numberOfTeams) {
-    throw new Error('Cannot change number of teams to less than the number that have already drafted players');
-  }
-
-  // don't change anything if the number of teams isn't going to change
   if (currNumberOfTeams === numberOfTeams) {
     return state; // change nothing
   }
 
-  // update the number of teams
-  let newTeams = teams;
-  if (numberOfTeams > currNumberOfTeams) {
-    // add new teams so we have enough empty teams
-    newTeams = newTeams.concat(
-      new Array(numberOfTeams - currNumberOfTeams).fill(null).map(() => createTeam(rosterFormat))
-    );
-  } else {
-    // cleave off the extra teams that are no longer needed
-    newTeams = newTeams.slice(0, numberOfTeams);
-  }
+  // create new teams with empty rosters
+  let newTeams = new Array(numberOfTeams).fill(0).map(() => createTeam(rosterFormat));
+
+  // given the new team count, update each pick and destination team
+  [...picks].reverse().forEach((p, i) => {
+    let dstTeam = 0;
+    if (Math.floor(i / numberOfTeams) % 2 === 0) {
+      dstTeam = i % numberOfTeams;
+    } else {
+      dstTeam = numberOfTeams - (i % numberOfTeams) - 1;
+    }
+
+    p.team = dstTeam; // update pick
+    newTeams[dstTeam] = addPlayerToTeam(p.player as IPlayer, newTeams[dstTeam]);
+  });
 
   // if number of tracked teams is less than index of currently tracked team,
   // set new tracked team to max team index
@@ -192,12 +177,13 @@ export const setNumberOfTeams = (state: IStoreState, numberOfTeams: number): ISt
   }
 
   // build up whole state minus updated VOR stats
-  const newState = {
-    ...state,
-    numberOfTeams,
-    teams: newTeams,
-    trackedTeam: newTrackedTeam,
-  };
-
-  return updatePlayerVORs(newState);
+  return setActiveTeam(
+    updatePlayerVORs({
+      ...state,
+      numberOfTeams,
+      picks,
+      teams: newTeams,
+      trackedTeam: newTrackedTeam,
+    })
+  );
 };
