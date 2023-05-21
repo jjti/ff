@@ -2,7 +2,9 @@
 
 <img width="1440" alt="Screen Shot 2022-08-06 at 9 41 54 AM" src="https://user-images.githubusercontent.com/13923102/183251462-b66d5479-119a-4933-a96d-0198bb569edb.png">
 
-An app for drafting the best fantasy football team possible: [www.ffdraft.app](https://www.ffdraft.app/)
+An app for drafting the best fantasy football team possible: [www.ffdraft.app](https://www.ffdraft.app/).
+
+Uses projections from [ESPN, CBS, and NFL](#sources) and [value over replacement](#value-over-replacement) estimates to optimize your roster.
 
 ## Value over replacement
 
