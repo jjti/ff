@@ -432,6 +432,7 @@ i.Grayed {
 #Header-Title {
   display: flex;
   align-items: baseline;
+  margin-bottom: 5px;
 }
 
 /* Mobile Settings */
