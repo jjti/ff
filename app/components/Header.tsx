@@ -10,8 +10,8 @@ export default class Header extends React.Component {
           <h1 id="App-Header">ffdraft.app</h1>
         </div>
         <div>
-          <Button href="https://www.buymeacoffee.com/ffdraft" target="_blank">
-            Support the site <CoffeeOutlined />
+          <Button href="https://www.buymeacoffee.com/ffdraft" target="_blank" ghost={true} type="primary">
+            Support the site <CoffeeOutlined color="blue" />
           </Button>
         </div>
       </div>
