@@ -6,6 +6,8 @@ An app for drafting the best fantasy football team possible: [www.ffdraft.app](h
 
 Uses projections from [ESPN, CBS, and NFL](#sources) and [value over replacement](#value-over-replacement) estimates to optimize your roster.
 
+<a href="https://www.buymeacoffee.com/ffdraft" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+
 ## Value over replacement
 
 The app ranks players by their [value over replacement (VOR)](https://support.fantasypros.com/hc/en-us/articles/115005868747-What-is-value-based-drafting-What-do-player-draft-values-mean-VORP-VONA-VOLS-VBD-). Players' `VOR` is the difference between their expected season-end projection and that of the `n+1`th ranked player (where `n` in the count of starters in that position in the league).
@@ -27,12 +29,14 @@ RB31: projection = 117, vor = 0 (117 - 117)
 ### Details
 
 Calculating VOR is tricky because:
+
 - it depends on the league size. Eg: if the league has 16 teams, RB values tend to increase a lot
 - it depends on the league roster format. Eg: if the league has 2 QBs per team, that improves QB values
 - it depends on league scoring. Eg: if rushing touchdowns are 4pts and recieving touchdowns 6pts, that improves WR's values
 - it depends on other drafters. Eg: if the first 6 rounds are all RB picks, that improves the RB's values. The waiver RB for replacement will be worse
 
 The app adjusts for each of the complexities above. It calculates player's VOR dynamically based on:
+
 - league size
 - league roster format
 - league scoring
@@ -49,6 +53,7 @@ Average draft position are retrieved from [Fantasy Pros](https://www.fantasypros
 ## Suggestions
 
 Tags next to players indicate:
+
 1. pick recommendations
 2. whether the player will be drafted soon
 3. BYE week overlap with other players on roster

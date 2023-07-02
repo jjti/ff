@@ -1,4 +1,3 @@
-.env
 **/.DS_Store
 nohup.out
 
@@ -39,6 +38,9 @@ vignettes/*.pdf
 # Shiny token, see https://shiny.rstudio.com/articles/shinyapps.html
 rsconnect/
 .Rproj.user
+
+# Python cache
+__pycache__
 
 .ipynb_checkpoints
 

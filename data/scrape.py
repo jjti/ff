@@ -19,14 +19,32 @@ from webdriver_manager.chrome import ChromeDriverManager
 DIR = os.path.dirname(__file__)
 
 # helpful resource for setting this up on headless Ubuntu: https://tecadmin.net/setup-selenium-chromedriver-on-ubuntu/
+# more settings from https://stackoverflow.com/a/52340526
 DRIVER_OPTIONS = webdriver.ChromeOptions()
-DRIVER_OPTIONS.add_argument("--headless")
+DRIVER_OPTIONS.add_argument(
+    "start-maximized"
+)  # https://stackoverflow.com/a/26283818/1689770
+DRIVER_OPTIONS.add_argument(
+    "enable-automation"
+)  # https://stackoverflow.com/a/43840128/1689770
 DRIVER_OPTIONS.add_argument("--window-size=1200x900")
-DRIVER_OPTIONS.add_argument("--no-sandbox")
 DRIVER_OPTIONS.add_argument("--disable-dev-shm-usage")
 DRIVER_OPTIONS.add_argument(
     "--disable-features=PreloadMediaEngagementData,MediaEngagementBypassAutoplayPolicies"
 )
+DRIVER_OPTIONS.add_argument("--headless")  # only if you are ACTUALLY running headless
+DRIVER_OPTIONS.add_argument(
+    "--no-sandbox"
+)  # https://stackoverflow.com/a/50725918/1689770
+DRIVER_OPTIONS.add_argument(
+    "--disable-dev-shm-usage"
+)  # https://stackoverflow.com/a/50725918/1689770
+DRIVER_OPTIONS.add_argument(
+    "--disable-browser-side-navigation"
+)  # https://stackoverflow.com/a/49123152/1689770
+DRIVER_OPTIONS.add_argument(
+    "--disable-gpu"
+)  # https://stackoverflow.com/questions/51959986/how-to-solve-selenium-chromedriver-timed-out-receiving-message-from-renderer-exc
 DRIVER = webdriver.Chrome(
     options=DRIVER_OPTIONS, service=Service(ChromeDriverManager().install())
 )
@@ -614,12 +632,10 @@ def scrape_fantasy_pros():
             if team == "JAC":
                 team = "JAX"
             bye = name_team_bye.find_all("small")[-1].get_text()
-            bye = bye[1:-1]  # remove paranthesis
+            bye = bye[1:-1]  # remove parenthesis
 
-            pos = tds[2].get_text()
-            for n in range(10):
-                pos = pos.replace(str(n), "")
-
+            # get rid of the number suffix. Eg DST14 > DST
+            pos = "".join([i for i in tds[2].get_text() if not i.isdigit()])
             if pos == "DST":
                 name = name.split(" ")[-2]
                 team = TEAM_TO_ABRV_MAP[name]
@@ -647,7 +663,7 @@ def scrape_fantasy_pros():
     df = df[["key", "name", "pos", "team", "bye"] + list(urls.keys())]
     df.to_csv(os.path.join(out, f"FantasyPros-{YEAR}.csv"), index=False)
 
-    validate(df, strict=False)
+    validate(df, strict=False, skip_fantasy_pros_check=True)
 
 
 def column(text):
@@ -693,23 +709,31 @@ def add_key(df):
     return df
 
 
-def validate(df, strict=True):
+def validate(df, strict=True, skip_fantasy_pros_check=False):
     """Throw an exception if we're missing players at a certain position. These numbers are logical estimates."""
 
     logging.info("scraped %d players", len(df))
     pos_counts = {"QB": 32, "RB": 64, "WR": 64, "TE": 28, "DST": 32, "K": 30}
+    pos_unique = df.pos.unique()
 
     for pos, count in pos_counts.items():
+        # At the time of writing, ppr-overall on Fantasy Pros is missing all DSTs for unclear reasons.
+        # https://www.fantasypros.com/nfl/adp/ppr-overall.php
+        if skip_fantasy_pros_check and (pos == "DST" or pos == "K"):
+            continue
+
         actual_count = len(df[df.pos == pos])
         # weird re-ordering bug seen in ESPN right now, ignoring missing DSTs
         # if strict and actual_count < count:
         if strict and actual_count < count and pos != "DST":
-            raise RuntimeWarning(f"only {actual_count} {pos}'s")
+            raise RuntimeWarning(f"only {actual_count} {pos}'s. All pos: {pos_unique}")
         elif not strict and actual_count * 3 < count:
-            raise RuntimeWarning(f"only {actual_count} {pos}'s")
+            raise RuntimeWarning(f"only {actual_count} {pos}'s. All pos: {pos_unique}")
 
     if len(set(df.team)) > 33:
         raise RuntimeError(f"too many teams: {set(df.team)}")
+
+    logging.info("players are valid")
 
 
 def scroll():
