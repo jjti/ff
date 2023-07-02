@@ -57,6 +57,7 @@ export default class PlayerTableRow extends React.Component<IPlayerRowProps> {
         {/* Table data not rendered on mobile */}
         {!mobile && (
           <>
+            {/* @ts-ignore */}
             <p className="col col-adp">{player[adpCol] && player[adpCol] > 0 ? player[adpCol] : ''}</p>
             <div className="col col-remove">
               <Button

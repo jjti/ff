@@ -67,6 +67,7 @@ class TeamPicks extends React.Component<IProps, State> {
 
           <div className="Pick-Column">
             {StarterPositions.map((pos) =>
+              // @ts-ignore
               trackedTeamRoster[pos].map((p: NullablePlayer, j: number) => (
                 // @ts-ignore
                 <Card

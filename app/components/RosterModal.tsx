@@ -42,6 +42,7 @@ class RosterModal extends React.Component<IProps> {
                 onChange={this.changePositionCount(k)}
                 precision={0}
                 type="number"
+                // @ts-ignore
                 defaultValue={rosterFormat[k]}
               />
             </div>

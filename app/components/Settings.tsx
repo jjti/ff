@@ -132,6 +132,7 @@ class Settings extends React.Component<IProps, IState> {
       : [];
 
     const statsCsv = this.props.undraftedPlayers.reduce(
+      // @ts-ignore
       (acc, p) => acc + '\n' + cols.map((c) => p[c]).join(','),
       cols.join(',')
     );

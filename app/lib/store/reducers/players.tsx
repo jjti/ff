@@ -43,6 +43,7 @@ const removeFromRoster = (roster: ITeam, player: IPlayer): ITeam => {
   return Object.keys(roster).reduce(
     (acc: ITeam, pos) => ({
       ...acc,
+      // @ts-ignore
       [pos]: roster[pos].reduce(
         (players: NullablePlayer[], p: NullablePlayer) => (p === player ? [...players, null] : [...players, p]),
         []
@@ -150,6 +151,7 @@ export const updatePlayerVORs = (state: IStoreState): IStoreState => {
   //
   // total how many starters will be used across all teams
   const positionToReplacementIndex = positions.reduce((acc, pos) => {
+    // @ts-ignore
     let starters = rosterFormat[pos];
 
     if (pos === 'QB') {
@@ -176,7 +178,9 @@ export const updatePlayerVORs = (state: IStoreState): IStoreState => {
 
     // this is for an edge-case where there's a ton of teams or each roster is huge.
     let replacementValue = 0;
+    // @ts-ignore
     if (positionToReplacementIndex[pos] < sortedPlayersInPosition.length) {
+      // @ts-ignore
       replacementValue = sortedPlayersInPosition[positionToReplacementIndex[pos]].forecast;
     }
 
@@ -187,6 +191,7 @@ export const updatePlayerVORs = (state: IStoreState): IStoreState => {
     // #3 set players' VORs
     .map((p) => ({
       ...p,
+      // @ts-ignore
       vor: p.forecast - positionToReplacementValue[p.pos],
     }))
     // #4 sort 'em
@@ -194,9 +199,12 @@ export const updatePlayerVORs = (state: IStoreState): IStoreState => {
 
   // update the undraftedPlayers array as well (it being a separate array is maybe bad)
   const playerIdToVor = {};
+  // @ts-ignore
   players.forEach((p) => (playerIdToVor[p.key] = p));
   undraftedPlayers.forEach((p) => {
+    // @ts-ignore
     p.forecast = playerIdToVor[p.key].forecast;
+    // @ts-ignore
     p.vor = playerIdToVor[p.key].vor;
   });
   // @ts-ignore
@@ -219,6 +227,7 @@ const playersWithForecast = (scoring: IScoring, players: IPlayer[]): IPlayerFore
     ...p,
     forecast: Math.round(
       Object.keys(scoring).reduce(
+        // @ts-ignore
         (acc, k) => (k === 'dfPointsAllowedPerGame' ? acc + 16.0 * dstPointsPerGame(p[k]) : acc + scoring[k] * p[k]),
         0.0
       )

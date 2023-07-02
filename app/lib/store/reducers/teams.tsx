@@ -46,6 +46,7 @@ export const skipPick = (state: IStoreState): IStoreState => {
  * add a player to a given team/roster
  */
 const addPlayerToTeam = (player: IPlayer, team: ITeam): ITeam => {
+  // @ts-ignore
   const emptySpot = team[player.pos].findIndex((p: IPlayer) => p === null);
   const emptyFlexSpot = team.FLEX.findIndex((p) => p === null);
   const emptySuperflexSpot = team.SUPERFLEX.findIndex((p) => p === null);
@@ -53,6 +54,7 @@ const addPlayerToTeam = (player: IPlayer, team: ITeam): ITeam => {
 
   if (emptySpot > -1) {
     // there's an empty spot in this position
+    // @ts-ignore
     team[player.pos] = team[player.pos].map((p: IPlayer, i: number) => (i === emptySpot ? player : p));
   } else if (['RB', 'WR', 'TE'].indexOf(player.pos) > -1 && emptyFlexSpot > -1) {
     // it's a FLEX position, check if there are any flex positions left

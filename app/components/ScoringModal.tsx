@@ -74,8 +74,10 @@ class ScoringModal extends React.Component<IProps> {
             <h5>Offense</h5>
             {Object.keys(this.offense).map((k) => (
               <div className="scoring-input" key={k}>
+                {/* @ts-ignore */}
                 <label htmlFor={k}>{this.offense[k]}</label>
                 <InputNumber
+                  // @ts-ignore
                   defaultValue={this.multiple[k] ? scoring[k] * this.multiple[k] : scoring[k]}
                   id={k}
                   onBlur={this.changeScoring}
@@ -91,8 +93,10 @@ class ScoringModal extends React.Component<IProps> {
             <h5>Kicking</h5>
             {Object.keys(this.kickers).map((k) => (
               <div className="scoring-input" key={k}>
+                {/* @ts-ignore */}
                 <label htmlFor={k}>{this.kickers[k]}</label>
                 <InputNumber
+                  // @ts-ignore
                   defaultValue={scoring[k]}
                   id={k}
                   key={k}
@@ -108,8 +112,10 @@ class ScoringModal extends React.Component<IProps> {
             <h5>Defense</h5>
             {Object.keys(this.dst).map((k) => (
               <div className="scoring-input" key={k}>
+                {/* @ts-ignore */}
                 <label htmlFor={k}>{this.dst[k]}</label>
                 <InputNumber
+                  // @ts-ignore
                   defaultValue={scoring[k]}
                   id={k}
                   key={k}
@@ -133,7 +139,9 @@ class ScoringModal extends React.Component<IProps> {
     const { id, value } = e.target;
 
     let numValue: number;
+    // @ts-ignore
     if (this.multiple[id]) {
+      // @ts-ignore
       numValue = parseFloat(value) / this.multiple[id];
     } else {
       numValue = parseFloat(value);
