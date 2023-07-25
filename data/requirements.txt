@@ -2,5 +2,5 @@ boto3
 bs4
 numpy
 pandas
-selenium
-webdriver-manager
+selenium==4.10.0
+webdriver-manager==3.8.6
