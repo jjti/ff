@@ -138,22 +138,36 @@ export const resetDraft = (store: IStoreState) => initStore(store, store.lastSyn
  * Update the tracked team on the left side of the app
  */
 export const setTrackedTeam = (state: IStoreState, trackedTeam: number): IStoreState => {
+  const { teams } = state;
   // create a toast
   if (trackedTeam !== state.trackedTeam) {
-    toast.info(`Tracking Team ${trackedTeam + 1}`);
+    toast.info(`Tracking ${ teams[trackedTeam].name }`);
   }
 
   return { ...state, trackedTeam };
 };
 
+export const setTeamName = (state: IStoreState, teamIndex: number, name: string): IStoreState => {
+  const { teams } = state;
+
+  if(!teams[teamIndex].name) {
+    console.warn(`Cannot update team index ${teamIndex}`);
+    return state;
+  }
+
+  teams[teamIndex].name = name;
+
+  return { ...state, teams };
+}
+
 /**
  * Update the number of teams and recalculate VOR for the players.
  */
 export const setNumberOfTeams = (state: IStoreState, numberOfTeams: number): IStoreState => {
-  const { picks, rosterFormat, trackedTeam } = state;
+  const { picks, rosterFormat, trackedTeam, teams } = state;
 
   // create new teams with empty rosters
-  let newTeams = new Array(numberOfTeams).fill(0).map(() => createTeam(rosterFormat));
+  let newTeams = new Array(numberOfTeams).fill(0).map((value, index) => createTeam(rosterFormat, teams[0]?.name || `Team ${index}`));
 
   // given the new team count, update each pick and destination team
   const newPicks: IPick[] = [];

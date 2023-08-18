@@ -20,7 +20,7 @@ export const initStore = (state: IStoreState, players: IPlayer[]) =>
     lastSyncPlayers: players,
     players: players,
     picks: [],
-    teams: new Array(state.numberOfTeams).fill(0).map(() => createTeam(state.rosterFormat)),
+    teams: new Array(state.numberOfTeams).fill(0).map((value, index) => createTeam(state.rosterFormat, `Team ${index}`)),
     undraftedPlayers: players,
   });
 

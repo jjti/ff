@@ -100,12 +100,18 @@ export interface IStoreState {
    * An array of players that have yet to be drafted
    */
   undraftedPlayers: IPlayer[];
+
+  /**
+   * Whether the app is currently in a state of updating team names
+   */
+  updatingTeamNames: boolean;
 }
 
 /**
  * Create an emptyTeam without any drafted players
  */
-export const createTeam = (rosterFormat: IRoster): ITeam => ({
+export const createTeam = (rosterFormat: IRoster, name: string): ITeam => ({
+  name: name,
   BENCH: new Array(rosterFormat.BENCH).fill(null),
   DST: new Array(rosterFormat.DST).fill(null),
   FLEX: new Array(rosterFormat.FLEX).fill(null),
@@ -173,16 +179,17 @@ export const initialState = {
   lastPickedPlayer: null,
   lastSync: -1,
   lastSyncPlayers: [],
-  numberOfTeams: 10,
+  numberOfTeams: 12,
   picks: [],
   players: [],
   ppr: false,
   rosterFormat: initialRoster,
   scoring: initialScore,
   selectedPlayer: null,
-  teams: new Array(10).fill(0).map(() => createTeam(initialRoster)), // doing 10 empty teams by default
+  teams: new Array(10).fill(0).map((value, _index) => createTeam(initialRoster, `Team ${_index}`)), // doing 10 empty teams by default
   trackedTeam: 0, // team to track in TeamPicks
   undraftedPlayers: [],
+  updatingTeamNames: false,
 };
 
 const persistConfig = {

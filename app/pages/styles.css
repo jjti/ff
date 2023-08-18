@@ -859,8 +859,14 @@ i.Grayed {
   width: 55px;
 }
 
-/* Settings */
+/* Team Name Modal */
+.team-name-input {
+  margin-top: 12px;
+  width: 33%;
+  margin-right: 1px;
+}
 
+/* Settings */
 .Settings-Select {
   width: 120px;
   margin-left: auto;
