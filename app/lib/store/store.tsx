@@ -186,7 +186,7 @@ export const initialState = {
   rosterFormat: initialRoster,
   scoring: initialScore,
   selectedPlayer: null,
-  teams: new Array(10).fill(0).map((value, _index) => createTeam(initialRoster, `Team ${_index}`)), // doing 10 empty teams by default
+  teams: new Array(10).fill(0).map((value, index) => createTeam(initialRoster, `Team ${index + 1}`)), // doing 10 empty teams by default
   trackedTeam: 0, // team to track in TeamPicks
   undraftedPlayers: [],
   updatingTeamNames: false,

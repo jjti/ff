@@ -167,7 +167,7 @@ export const setNumberOfTeams = (state: IStoreState, numberOfTeams: number): ISt
   const { picks, rosterFormat, trackedTeam, teams } = state;
 
   // create new teams with empty rosters
-  let newTeams = new Array(numberOfTeams).fill(0).map((value, index) => createTeam(rosterFormat, teams[index]?.name || `Team ${index}`));
+  let newTeams = new Array(numberOfTeams).fill(0).map((value, index) => createTeam(rosterFormat, teams[index]?.name || `Team ${index + 1}`));
 
   // given the new team count, update each pick and destination team
   const newPicks: IPick[] = [];

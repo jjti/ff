@@ -31,18 +31,21 @@ class TeamNameModal extends React.Component<IProps> {
             Ok
           </Button>
         }>
-        <>
+        <div className="team-name-modal-container">
           {
             teamNames.map((teamName, index) => (
-              <Input 
-                key={`team-name-input-${index}`} 
-                className='team-name-input'
-                defaultValue={teamName} 
-                onBlur={(e) => dispatchSetTeamName(index, e.currentTarget.value.trim() || `Team ${index}`)} 
-              />
+              <div className="team-name-container">
+                <label>{index + 1}</label>
+                <Input 
+                  key={`team-name-input-${index}`} 
+                  className="team-name-input"
+                  defaultValue={teamName} 
+                  onBlur={(e) => dispatchSetTeamName(index, e.currentTarget.value.trim() || `Team ${index}`)} 
+                />
+              </div>
             ))
           }
-        </>
+        </div>
       </Modal>
     );
   }

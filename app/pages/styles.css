@@ -860,10 +860,17 @@ i.Grayed {
 }
 
 /* Team Name Modal */
+.team-name-modal-container {
+  display: flex;
+  flex-direction: column;
+}
+.team-name-container {
+  display: flex;
+  align-items: flex-end;
+}
 .team-name-input {
   margin-top: 12px;
-  width: 33%;
-  margin-right: 1px;
+  width: 235px;
 }
 
 /* Settings */
