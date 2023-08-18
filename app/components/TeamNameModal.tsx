@@ -1,4 +1,4 @@
-import { Input, Modal } from 'antd';
+import { Button, Input, Modal } from 'antd';
 import { setTeamName, toggleTeamNameUpdates } from 'lib/store/actions/teams';
 import * as React from 'react';
 import { connect } from 'react-redux';
@@ -24,8 +24,13 @@ class TeamNameModal extends React.Component<IProps> {
       <Modal
         title="Change team names"
         open={updatingTeamNames}
-        onOk={toggleTeamNameUpdates}
-        onCancel={toggleTeamNameUpdates}>
+        closeIcon={false}
+        onCancel={toggleTeamNameUpdates}
+        footer={
+          <Button key="submit" size="large" type="primary" onClick={toggleTeamNameUpdates}>
+            Ok
+          </Button>
+        }>
         <>
           {
             teamNames.map((teamName, index) => (
