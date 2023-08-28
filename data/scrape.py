@@ -47,7 +47,7 @@ DRIVER_OPTIONS.add_argument(
 )  # https://stackoverflow.com/questions/51959986/how-to-solve-selenium-chromedriver-timed-out-receiving-message-from-renderer-exc
 DRIVER = webdriver.Chrome(
     options=DRIVER_OPTIONS,
-    service=Service(ChromeDriverManager(driver_version="114.0.5735.90").install()),
+    service=Service(ChromeDriverManager().install()),
 )
 
 RAW_PROJECTIONS = os.path.join(DIR, "raw", "projections")
