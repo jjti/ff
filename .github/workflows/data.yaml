@@ -5,7 +5,7 @@ on:
   schedule:
     # “At 12:00 in every month from July through October.”
     # https://crontab.guru/#0_12_*_7-9_*
-    - cron: "0 16 * 7-9 *"
+    - cron: "0 */4 * 7-9 *"
 
 jobs:
   scrape:
