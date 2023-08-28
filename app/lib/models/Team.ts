@@ -21,6 +21,7 @@ export interface IRoster {
  * A team comprised of players
  */
 export interface ITeam {
+  name: string;
   QB: NullablePlayer[];
   RB: NullablePlayer[];
   WR: NullablePlayer[];

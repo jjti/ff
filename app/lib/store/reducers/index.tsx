@@ -2,7 +2,7 @@ import { ACTION_TYPES } from '../actions';
 import { initialState, IStoreState } from '../store';
 import { removePlayer, initStore, setRosterFormat, undoLast, undoPick } from './players';
 import { setScoreFormat } from './scoring';
-import { incrementDraft, pickPlayer, resetDraft, setNumberOfTeams, setPick, setTrackedTeam, skipPick } from './teams';
+import { incrementDraft, pickPlayer, resetDraft, setNumberOfTeams, setPick, setTeamName, setTrackedTeam, skipPick } from './teams';
 
 export default (state = initialState, action: any): IStoreState => {
   switch (action.type) {
@@ -39,6 +39,9 @@ export default (state = initialState, action: any): IStoreState => {
     case ACTION_TYPES.SET_SCORE_FORMAT: {
       return setScoreFormat(state, action.scoring);
     }
+    case ACTION_TYPES.SET_TEAM_NAME: {
+      return setTeamName(state, action.teamIndex, action.name);
+    }
     case ACTION_TYPES.SET_TRACKED_TEAM: {
       return setTrackedTeam(state, action.trackedTeam);
     }
@@ -50,6 +53,9 @@ export default (state = initialState, action: any): IStoreState => {
     }
     case ACTION_TYPES.TOGGLE_SCORE_FORMATTING: {
       return { ...state, formattingScoring: !state.formattingScoring };
+    }
+    case ACTION_TYPES.TOGGLE_TEAM_NAME_UPDATES: {
+      return { ...state, updatingTeamNames: !state.updatingTeamNames };
     }
     case ACTION_TYPES.UNDO_LAST: {
       return undoLast(state);

@@ -77,8 +77,26 @@ export const setActiveTeam = (activeTeam: number) => ({
 });
 
 /**
+ * Update a specific team's name 
+ * @param teamIndex index of the team you want to update
+ * @param name new team name
+ */
+export const setTeamName = (teamIndex: number, name: string) => ({
+  teamIndex,
+  name,
+  type: ACTION_TYPES.SET_TEAM_NAME,
+})
+
+/**
  * Toggle roster formatting. will open a modal for selecting number at each position
  */
 export const toggleRosterFormatting = () => ({
   type: ACTION_TYPES.TOGGLE_ROSTER_FORMATTING,
+});
+
+/**
+ * Toggle roster formatting. will open a modal for selecting number at each position
+ */
+export const toggleTeamNameUpdates = () => ({
+  type: ACTION_TYPES.TOGGLE_TEAM_NAME_UPDATES,
 });

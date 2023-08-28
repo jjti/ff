@@ -859,8 +859,21 @@ i.Grayed {
   width: 55px;
 }
 
-/* Settings */
+/* Team Name Modal */
+.team-name-modal-container {
+  display: flex;
+  flex-direction: column;
+}
+.team-name-container {
+  display: flex;
+  align-items: flex-end;
+}
+.team-name-input {
+  margin-top: 12px;
+  width: 235px;
+}
 
+/* Settings */
 .Settings-Select {
   width: 120px;
   margin-left: auto;

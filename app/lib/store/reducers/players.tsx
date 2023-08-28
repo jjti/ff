@@ -20,7 +20,7 @@ export const initStore = (state: IStoreState, players: IPlayer[]) =>
     lastSyncPlayers: players,
     players: players,
     picks: [],
-    teams: new Array(state.numberOfTeams).fill(0).map(() => createTeam(state.rosterFormat)),
+    teams: new Array(state.numberOfTeams).fill(0).map((value, index) => createTeam(state.rosterFormat, `Team ${index + 1}`)),
     undraftedPlayers: players,
   });
 
@@ -40,7 +40,7 @@ export const removePlayer = (state: IStoreState, player: IPlayer): IStoreState =
  */
 const removeFromRoster = (roster: ITeam, player: IPlayer): ITeam => {
   // @ts-ignore
-  return Object.keys(roster).reduce(
+  return Object.keys(roster).filter(value => value !== 'name').reduce( // kinda janky with the filter
     (acc: ITeam, pos) => ({
       ...acc,
       // @ts-ignore
