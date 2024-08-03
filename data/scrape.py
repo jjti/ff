@@ -289,7 +289,7 @@ def scrape_espn():
                     if d2 != "--":
                         p_data[column(h2)] = float(d2)
                 elif "-" in d:
-                    p_data[h] = np.NaN
+                    p_data[h] = np.nan
                 else:
                     p_data[h] = float(d)
 
