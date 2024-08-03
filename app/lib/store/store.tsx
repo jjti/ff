@@ -1,7 +1,6 @@
 import { applyMiddleware, createStore } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { composeWithDevTools } from 'redux-devtools-extension';
 import { IPlayer } from '../models/Player';
 import { IScoring } from '../models/Scoring';
 import { IPick, IRoster, ITeam } from '../models/Team';
@@ -192,6 +191,6 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, reducers);
 
-export const store = createStore(persistedReducer, composeWithDevTools(applyMiddleware()));
+export const store = createStore(persistedReducer, applyMiddleware());
 
 export const persistor = persistStore(store);

@@ -64,7 +64,7 @@ export default class PlayerTableRow extends React.Component<IPlayerRowProps> {
                 icon={<DeleteOutlined />}
                 // shape="circle"
                 size="small"
-                type="ghost"
+                type="text"
                 className="remove-player-button"
                 style={{ marginRight: 10 }}
                 onClick={(e) => {
