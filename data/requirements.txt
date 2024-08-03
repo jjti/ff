@@ -3,4 +3,4 @@ bs4
 numpy
 pandas
 selenium==4.10.0
-webdriver-manager==3.9.1
+webdriver-manager==4.0.2
