@@ -62,7 +62,7 @@ class TeamPicks extends React.Component<IProps, State> {
         <div className="Pick-Section">
           <header>
             <h3>Starters</h3>
-            <p>{`Team ${trackedTeam + 1}`}</p>
+            <p>{teams[trackedTeam].name}</p>
           </header>
 
           <div className="Pick-Column">

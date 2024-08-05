@@ -8,6 +8,7 @@ import PlayerTableContainer from './PlayerTableContainer';
 import RosterModal from './RosterModal';
 import ScoringModal from './ScoringModal';
 import Settings from './Settings';
+import TeamNameModal from './TeamNameModal';
 import TeamPicks from './TeamPicks';
 
 interface IState {
@@ -43,6 +44,7 @@ export default class App extends React.Component<{}, IState> {
 
           <RosterModal />
           <ScoringModal />
+          <TeamNameModal />
         </div>
       );
     }
@@ -60,6 +62,7 @@ export default class App extends React.Component<{}, IState> {
         </div>
         <RosterModal />
         <ScoringModal />
+        <TeamNameModal />
       </div>
     );
   }

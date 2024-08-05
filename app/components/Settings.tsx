@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { IPlayer } from '../lib/models/Player';
 import { resetDraft } from '../lib/store/actions/players';
 import { setScoreFormat, toggleScoringFormatting } from '../lib/store/actions/scoring';
-import { setNumberOfTeams, setTrackedTeam, toggleRosterFormatting } from '../lib/store/actions/teams';
+import { setNumberOfTeams, setTrackedTeam, toggleRosterFormatting, toggleTeamNameUpdates } from '../lib/store/actions/teams';
 import { IStoreState } from '../lib/store/store';
 
 interface IProps {
@@ -16,8 +16,10 @@ interface IProps {
   setNumberOfTeams: (count: number) => void;
   setScoring: (scoring: IScoring) => void;
   setTrackedTeam: (team: number) => void;
+  teamNames: string[];
   toggleRosterFormatting: () => void;
   toggleScoringFormatting: () => void;
+  toggleTeamNameUpdates: () => void;
   trackedTeam: number;
   undraftedPlayers: IPlayer[];
 }
@@ -40,7 +42,7 @@ class Settings extends React.Component<IProps, IState> {
   };
 
   public render() {
-    const { numberOfTeams } = this.props;
+    const { numberOfTeams, teamNames } = this.props;
     const { open } = this.state;
 
     // an array with the allowable number of teams: [6, 16]
@@ -60,7 +62,7 @@ class Settings extends React.Component<IProps, IState> {
               Your team
               <Select className="Settings-Select" onChange={this.props.setTrackedTeam} value={this.props.trackedTeam}>
                 {new Array(numberOfTeams).fill(0).map((_, i) => (
-                  <Select.Option key={`Pick-Selection-${i}`} value={i}>{`Team ${i + 1}`}</Select.Option>
+                  <Select.Option key={`Pick-Selection-${i}`} value={i}>{teamNames[i]}</Select.Option>
                 ))}
               </Select>
             </label>
@@ -106,6 +108,14 @@ class Settings extends React.Component<IProps, IState> {
                 </Button>
               </Tooltip>
             </label>
+            
+            <label>
+              <Tooltip title="Change Team Names">
+                <Button className="options-left" onClick={this.props.toggleTeamNameUpdates}>
+                  Team Names
+                </Button>
+              </Tooltip>
+            </label>
 
             <label>
               <Tooltip title="Download stats CSV">
@@ -145,9 +155,10 @@ class Settings extends React.Component<IProps, IState> {
   };
 }
 
-const mapStateToProps = ({ numberOfTeams, scoring, trackedTeam, undraftedPlayers }: IStoreState) => ({
+const mapStateToProps = ({ numberOfTeams, scoring, teams, trackedTeam, undraftedPlayers, }: IStoreState) => ({
   numberOfTeams,
   scoring,
+  teamNames: teams.map(team => team.name),
   trackedTeam,
   undraftedPlayers,
 });
@@ -159,6 +170,7 @@ const mapDispathToProps = (dispatch: any) => ({
   setTrackedTeam: (index: number) => dispatch(setTrackedTeam(index)),
   toggleRosterFormatting: () => dispatch(toggleRosterFormatting()),
   toggleScoringFormatting: () => dispatch(toggleScoringFormatting()),
+  toggleTeamNameUpdates: () => dispatch(toggleTeamNameUpdates()),
 });
 
 export default connect(mapStateToProps, mapDispathToProps)(Settings);
