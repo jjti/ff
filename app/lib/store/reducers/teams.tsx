@@ -1,4 +1,3 @@
-import { toast } from 'react-toastify';
 import { IPlayer } from '../../models/Player';
 import { IPick, ITeam } from '../../models/Team';
 import { createTeam, IStoreState } from '../store';
@@ -138,11 +137,6 @@ export const resetDraft = (store: IStoreState) => initStore(store, store.lastSyn
  * Update the tracked team on the left side of the app
  */
 export const setTrackedTeam = (state: IStoreState, trackedTeam: number): IStoreState => {
-  // create a toast
-  if (trackedTeam !== state.trackedTeam) {
-    toast.info(`Tracking Team ${trackedTeam + 1}`);
-  }
-
   return { ...state, trackedTeam };
 };
 

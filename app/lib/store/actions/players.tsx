@@ -1,4 +1,3 @@
-import { toast } from 'react-toastify';
 import { IPlayer } from '../../models/Player';
 import { IRoster } from '../../models/Team';
 import { ACTION_TYPES } from './index';
@@ -23,8 +22,6 @@ export const onRemovePlayer = (player: IPlayer) => ({
  * "Reset" the draft, restoring initial player state
  */
 export const resetDraft = () => {
-  toast.warn('Draft reset');
-
   return {
     type: ACTION_TYPES.RESET_DRAFT,
   };

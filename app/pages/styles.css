@@ -216,37 +216,6 @@ i.Grayed {
   top: -10px;
 }
 
-.toast-container > .Toastify__toast {
-  /* not happy with current appearance */
-  display: none;
-
-  color: #fff;
-  background-color: #222;
-  opacity: 0.9;
-
-  padding: 15px;
-  width: fit-content;
-  border-radius: 5px;
-  font-size: 15px;
-}
-
-.Toastify__toast-body {
-  display: flex;
-  align-items: center;
-}
-
-.Toastify__toast {
-  margin-bottom: 5px;
-}
-
-.Toast-Undo-Button {
-  color: #fff;
-  font-size: 15px;
-  text-decoration: underline;
-  margin: auto 0 auto auto;
-  padding-right: 0;
-}
-
 .dot {
   height: 6px;
   width: 6px;
@@ -306,15 +275,6 @@ i.Grayed {
 }
 
 @media screen and (max-width: 700px) {
-  .toast-container-mobile {
-    width: calc(100% - 40px);
-    margin: 20px;
-  }
-
-  .toast-container-mobile > .Toastify__toast {
-    width: 100%;
-  }
-
   .Card {
     margin: 2px !important;
   }

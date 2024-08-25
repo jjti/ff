@@ -1,5 +1,4 @@
 import * as React from 'react';
-import 'react-toastify/dist/ReactToastify.css';
 
 import Header from './Header';
 import MobileSettings from './MobileSettings';
