@@ -14,7 +14,7 @@ export const initStore = (players: IPlayer[]) => ({
 /**
  * Remove a player from the list of those remaining
  */
-export const removePlayer = (player: IPlayer) => ({
+export const onRemovePlayer = (player: IPlayer) => ({
   player,
   type: ACTION_TYPES.REMOVE_PLAYER,
 });

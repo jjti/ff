@@ -76,7 +76,7 @@ const addPlayerToTeam = (player: IPlayer, team: ITeam): ITeam => {
  * Remove the player from the players.store, add it to the team,
  * and increment the activeTeam
  */
-export const pickPlayer = (state: IStoreState, player: IPlayer): IStoreState => {
+export const onPickPlayer = (state: IStoreState, player: IPlayer): IStoreState => {
   const { activeTeam, currentPick, undraftedPlayers } = state;
   let { teams } = state;
 

@@ -12,11 +12,11 @@ interface IPlayerRowProps {
   draftSoon: boolean;
   inValuablePosition: boolean;
   mobile: boolean;
-  pickPlayer: (player: IPlayer) => void;
+  onPickPlayer: (player: IPlayer) => void;
   player: IPlayer;
   rbHandcuff: boolean;
   recommended: boolean;
-  removePlayer: (player: IPlayer) => void;
+  onRemovePlayer: (player: IPlayer) => void;
 }
 
 /**
@@ -32,15 +32,15 @@ export default class PlayerTableRow extends React.Component<IPlayerRowProps> {
       draftSoon,
       inValuablePosition,
       mobile,
-      pickPlayer,
+      onPickPlayer,
       player,
       rbHandcuff,
       recommended,
-      removePlayer,
+      onRemovePlayer,
     } = this.props;
 
     return (
-      <div onClick={() => pickPlayer(player)} className={inValuablePosition || mobile ? 'row' : 'row row-inactive'}>
+      <div onClick={() => onPickPlayer(player)} className={inValuablePosition || mobile ? 'row' : 'row row-inactive'}>
         <div className="col col-name">
           <p>{player.tableName}</p>
           {/* Add dots for information on bye week */}
@@ -69,7 +69,7 @@ export default class PlayerTableRow extends React.Component<IPlayerRowProps> {
                 style={{ marginRight: 10 }}
                 onClick={(e) => {
                   e.stopPropagation();
-                  removePlayer(player);
+                  onRemovePlayer(player);
                 }}
               />
             </div>

@@ -1,5 +1,4 @@
 import { Button, Radio, Select, Tooltip } from 'antd';
-import { saveAs } from 'file-saver';
 import { IScoring } from 'lib/models/Scoring';
 import * as React from 'react';
 import { connect } from 'react-redux';
@@ -108,12 +107,6 @@ class Settings extends React.Component<IProps, IState> {
             </label>
 
             <label>
-              <Tooltip title="Download stats CSV">
-                <Button onClick={this.saveStats}>Download</Button>
-              </Tooltip>
-            </label>
-
-            <label>
               <Button className="options-left" onClick={this.props.resetDraft} danger={true}>
                 Reset
               </Button>
@@ -123,26 +116,6 @@ class Settings extends React.Component<IProps, IState> {
       </div>
     );
   }
-
-  private saveStats = () => {
-    const removeCols = ['key', 'index', 'tableName'];
-
-    const cols = this.props.undraftedPlayers.length
-      ? Object.keys(this.props.undraftedPlayers[0]).filter((k) => !removeCols.includes(k))
-      : [];
-
-    const statsCsv = this.props.undraftedPlayers.reduce(
-      // @ts-ignore
-      (acc, p) => acc + '\n' + cols.map((c) => p[c]).join(','),
-      cols.join(',')
-    );
-
-    const blob = new Blob([statsCsv], {
-      type: 'text/csv;charset=utf-8',
-    });
-
-    saveAs(blob, 'ffdraft-stats.csv');
-  };
 }
 
 const mapStateToProps = ({ numberOfTeams, scoring, trackedTeam, undraftedPlayers }: IStoreState) => ({

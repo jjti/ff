@@ -7,13 +7,13 @@ import { ACTION_TYPES } from './index';
  *
  * @param the player that was picked
  */
-export const pickPlayer = (player: IPlayer) => ({
+export const onPickPlayer = (player: IPlayer) => ({
   player,
   type: ACTION_TYPES.PICK_PLAYER,
 });
 
 /**
- * Like pickPlayer, but not on the currentPick.
+ * Like onPickPlayer, but not on the currentPick.
  * Instead, update a given pick that should already be in state/store
  */
 export const setPick = (pick: IPick) => ({

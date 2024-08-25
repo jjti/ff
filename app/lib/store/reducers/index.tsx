@@ -1,16 +1,16 @@
 import { ACTION_TYPES } from '../actions';
 import { initialState, IStoreState } from '../store';
-import { removePlayer, initStore, setRosterFormat, undoLast, undoPick } from './players';
+import { onRemovePlayer, initStore, setRosterFormat, undoLast, undoPick } from './players';
 import { setScoreFormat } from './scoring';
-import { incrementDraft, pickPlayer, resetDraft, setNumberOfTeams, setPick, setTrackedTeam, skipPick } from './teams';
+import { incrementDraft, onPickPlayer, resetDraft, setNumberOfTeams, setPick, setTrackedTeam, skipPick } from './teams';
 
 export default (state = initialState, action: any): IStoreState => {
   switch (action.type) {
     case ACTION_TYPES.PICK_PLAYER: {
-      return pickPlayer(state, action.player);
+      return onPickPlayer(state, action.player);
     }
     case ACTION_TYPES.REMOVE_PLAYER: {
-      return removePlayer(state, action.player);
+      return onRemovePlayer(state, action.player);
     }
     case ACTION_TYPES.RESET_DRAFT: {
       return resetDraft(state);

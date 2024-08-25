@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { compose, Dispatch } from 'redux';
 import { IPlayer } from '../lib/models/Player';
 import { IPick } from '../lib/models/Team';
-import { removePlayer } from '../lib/store/actions/players';
-import { pickPlayer, setPick, undoPick } from '../lib/store/actions/teams';
+import { onRemovePlayer } from '../lib/store/actions/players';
+import { onPickPlayer, setPick, undoPick } from '../lib/store/actions/teams';
 import { IStoreState } from '../lib/store/store';
 
 interface ICardProps {
@@ -16,10 +16,10 @@ interface ICardProps {
   length: number;
   numberOfTeams: number;
   pick: IPick;
-  pickPlayer: (player: IPlayer) => void;
+  onPickPlayer: (player: IPlayer) => void;
   playerMeta?: boolean;
   pos?: string;
-  removePlayer: (player: IPlayer) => void;
+  onRemovePlayer: (player: IPlayer) => void;
   setPick: (pick: IPick) => void;
   trackedTeamPicking?: boolean;
   undoPick: (pick: IPick) => void;
@@ -87,8 +87,8 @@ const mapStateToProps = ({ numberOfTeams }: IStoreState) => ({ numberOfTeams });
 
 /** only add ability to update a pick with a player */
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  pickPlayer: (player: IPlayer) => dispatch(pickPlayer(player)),
-  removePlayer: (player: IPlayer) => dispatch(removePlayer(player)),
+  onPickPlayer: (player: IPlayer) => dispatch(onPickPlayer(player)),
+  onRemovePlayer: (player: IPlayer) => dispatch(onRemovePlayer(player)),
   setPick: (pick: IPick) => dispatch(setPick(pick)),
   undoPick: (pick: IPick) => dispatch(undoPick(pick)),
 });

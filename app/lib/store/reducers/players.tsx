@@ -30,7 +30,7 @@ export const initStore = (state: IStoreState, players: IPlayer[]) =>
  *
  * Past picks doesn't change
  */
-export const removePlayer = (state: IStoreState, player: IPlayer): IStoreState => ({
+export const onRemovePlayer = (state: IStoreState, player: IPlayer): IStoreState => ({
   ...state,
   undraftedPlayers: state.undraftedPlayers.filter((p) => p.key !== player.key),
 });

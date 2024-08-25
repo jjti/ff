@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { IPlayer, Position } from '../lib/models/Player';
 import { IScoring } from '../lib/models/Scoring';
 import { NullablePlayer } from '../lib/models/Team';
-import { removePlayer } from '../lib/store/actions/players';
-import { pickPlayer, skipPick, undoLast } from '../lib/store/actions/teams';
+import { onRemovePlayer } from '../lib/store/actions/players';
+import { onPickPlayer, skipPick, undoLast } from '../lib/store/actions/teams';
 import { IStoreState } from '../lib/store/store';
 import PlayerTable from './PlayerTable';
 
@@ -16,14 +16,14 @@ interface IPlayerTableProps {
   currentPick: number;
   mobile?: boolean;
   undraftedPlayers: any[];
-  pickPlayer: (player: IPlayer) => void;
+  onPickPlayer: (player: IPlayer) => void;
 
   /**
    * Key is the team name, defined for a team if there's a player on
    * the drafters roster that's an RB from that team
    */
   rbHandcuffTeams: { [key: string]: boolean };
-  removePlayer: (player: IPlayer) => void;
+  onRemovePlayer: (player: IPlayer) => void;
 
   scoring: IScoring;
 
@@ -56,10 +56,7 @@ interface IPlayerTableState {
  * Includes buttons for skipping the current round, without a pick,
  * and undoing the last round/pick (in the event of a mistake)
  */
-class PlayerTableContainer extends React.PureComponent<
-  IPlayerTableProps,
-  IPlayerTableState
-> {
+class PlayerTableContainer extends React.PureComponent<IPlayerTableProps, IPlayerTableState> {
   public static defaultProps = {
     mobile: false,
   };
@@ -77,14 +74,7 @@ class PlayerTableContainer extends React.PureComponent<
   };
 
   public render() {
-    const {
-      currentPick,
-      mobile,
-      rbHandcuffTeams,
-      scoring,
-      undraftedPlayers: players,
-      valuedPositions,
-    } = this.props;
+    const { currentPick, mobile, rbHandcuffTeams, scoring, undraftedPlayers: players, valuedPositions } = this.props;
     const { nameFilter, positionsToShow } = this.state;
 
     // players after filtering by position
@@ -108,38 +98,24 @@ class PlayerTableContainer extends React.PureComponent<
         const lowercaseName = name.toLowerCase();
         const names = lowercaseName.split(' ');
         const firstNameMatch = names[0].startsWith(nameFilterLower);
-        const lastNameMatch = names[1]
-          ? names[1].startsWith(nameFilterLower)
-          : false;
+        const lastNameMatch = names[1] ? names[1].startsWith(nameFilterLower) : false;
 
         // filter out all players but those that match the search term
-        return !(
-          lowercaseName.startsWith(nameFilterLower) ||
-          firstNameMatch ||
-          lastNameMatch
-        );
+        return !(lowercaseName.startsWith(nameFilterLower) || firstNameMatch || lastNameMatch);
       });
     }
 
-    const adpDiff = [0, 0.5, 1].map((ppr) =>
-      Math.abs(ppr - scoring.receptions)
-    );
+    const adpDiff = [0, 0.5, 1].map((ppr) => Math.abs(ppr - scoring.receptions));
     const minDiff = Math.min(...adpDiff);
     const minDiffIndex = adpDiff.indexOf(minDiff);
     const adpCol = { 0: 'std', 1: 'halfPpr', 2: 'ppr' }[minDiffIndex]!;
 
     // players that will be drafted soon
-    const draftSoon = players.map(
-      (p, i) =>
-        !filteredPlayers[i] && p[adpCol] > 0 && currentPick + 8 >= p[adpCol]
-    );
+    const draftSoon = players.map((p, i) => !filteredPlayers[i] && p[adpCol] > 0 && currentPick + 8 >= p[adpCol]);
 
     // players that are RB handcuffs
     const rbHandcuffs = new Set(
-      players.filter(
-        (p, i) =>
-          !filteredPlayers[i] && p.pos === 'RB' && rbHandcuffTeams[p.team]
-      )
+      players.filter((p, i) => !filteredPlayers[i] && p.pos === 'RB' && rbHandcuffTeams[p.team])
     );
 
     // players that will be recommended
@@ -172,7 +148,8 @@ class PlayerTableContainer extends React.PureComponent<
         positionsToShow={positionsToShow}
         rbHandcuffs={rbHandcuffs}
         setNameFilter={this.setNameFilter}
-        setPositionFilter={this.setPositionFilter}
+        togglePositionFilter={this.togglePositionFilter}
+        resetPositionFilter={this.resetPositionFilter}
       />
     );
   }
@@ -180,7 +157,7 @@ class PlayerTableContainer extends React.PureComponent<
   /**
    * update the allowable positions in state, used to filter out players by position
    */
-  private setPositionFilter = (position: Position) => {
+  private togglePositionFilter = (position: Position) => {
     let { positionsToShow } = this.state;
 
     // if it's ?, clear anything else
@@ -200,6 +177,13 @@ class PlayerTableContainer extends React.PureComponent<
   };
 
   /**
+   * reset the position filter so all positions are shown. Called after a player is selected.
+   */
+  private resetPositionFilter = () => {
+    this.setState({ positionsToShow: ['?'] });
+  };
+
+  /**
    * update the filter for searching for a plauer by name or team
    */
   private setNameFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -208,8 +192,7 @@ class PlayerTableContainer extends React.PureComponent<
 }
 
 const mapStateToProps = (state: IStoreState) => {
-  const { QB, RB, WR, TE, FLEX, SUPERFLEX, DST, K, BENCH } =
-    state.teams[state.trackedTeam];
+  const { QB, RB, WR, TE, FLEX, SUPERFLEX, DST, K, BENCH } = state.teams[state.trackedTeam];
 
   // add the positions to the object that the trackedTeam hasn't
   // filled their roster with (ie they have space for)
@@ -285,13 +268,10 @@ const mapStateToProps = (state: IStoreState) => {
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-  pickPlayer: (player: IPlayer) => dispatch(pickPlayer(player)),
-  removePlayer: (player: IPlayer) => dispatch(removePlayer(player)),
+  onPickPlayer: (player: IPlayer) => dispatch(onPickPlayer(player)),
+  onRemovePlayer: (player: IPlayer) => dispatch(onRemovePlayer(player)),
   skip: () => dispatch(skipPick()),
   undo: () => dispatch(undoLast()),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PlayerTableContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(PlayerTableContainer);
