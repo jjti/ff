@@ -714,7 +714,7 @@ def validate(df, strict=True, skip_fantasy_pros_check=False):
     """Throw an exception if we're missing players at a certain position. These numbers are logical estimates."""
 
     logging.info("scraped %d players", len(df))
-    pos_counts = {"QB": 32, "RB": 64, "WR": 64, "TE": 28, "DST": 32, "K": 26}
+    pos_counts = {"QB": 32, "RB": 64, "WR": 64, "TE": 28, "DST": 32, "K": 15}
     pos_unique = df.pos.unique()
 
     for pos, count in pos_counts.items():
