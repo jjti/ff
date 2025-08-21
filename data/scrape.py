@@ -308,7 +308,7 @@ def scrape_espn():
         # click the next page's button
         try:
             if page % 5 == 0:
-                logging.info("scraping ESPN page %d...", page)
+                logging.info("scraping ESPN: page=%d, players=%d", page, len(players))
             page += 1
             next_button.send_keys(Keys.ENTER)
         except Exception as err:
@@ -392,7 +392,7 @@ def scrape_cbs():
                     )
                 else:
                     # very rare, seen for Alfred Morris in 2019
-                    logging.warn("skipping player, no position: %s", name_cell)
+                    logging.warning("skipping player, no position: %s", name_cell)
                     continue
 
                 pos = pos.replace("FB", "RB")
@@ -450,7 +450,7 @@ def scrape_nfl():
     Last page:
     https://fantasy.nfl.com/research/projections?offset=1&position=O&sort=projectedPts&statCategory=projectedStats&statSeason=2019&statType=seasonProjectedStats&statWeek=1#researchProjections=researchProjections%2C%2Fresearch%2Fprojections%253Foffset%253D926%2526position%253DO%2526sort%253DprojectedPts%2526statCategory%253DprojectedStats%2526statSeason%253D2019%2526statType%253DseasonProjectedStats%2526statWeek%253D1%2Creplace
 
-    Just going to simluate clicking the next button until there's no next button
+    Just going to simulate clicking the next button until there's no next button
     """
 
     out = RAW_PROJECTIONS
@@ -509,9 +509,13 @@ def scrape_nfl():
         headers = ["name", "pos", "team"] + headers
 
         while True:
-            soup = BeautifulSoup(
-                DRIVER.execute_script("return document.body.innerHTML"), "html.parser"
-            )
+            try:
+                soup = BeautifulSoup(
+                    DRIVER.execute_script("return document.body.innerHTML"), "html.parser"
+                )
+            except Exception as e:
+                logging.warning("bailing on nfl pagination on error", exc_info=e)
+                break
             table = soup.find("tbody")
 
             # parse each player in the table
@@ -561,9 +565,8 @@ def scrape_nfl():
                 page += 1
 
                 if page % 5 == 0:
-                    logging.info("scraping NFL page %d...", page)
+                    logging.info("scraping NFL: page=%d, players=%d", page, len(players))
 
-                time.sleep(1)
                 scroll()
                 time.sleep(1)
             except:
@@ -607,6 +610,7 @@ def scrape_fantasy_pros():
     df_set = False
 
     for ppr_type, url in urls.items():
+        logging.info("Scraping Fantasy Pros: ppr_type=%s, url=%s", ppr_type, url)
         DRIVER.get(url)
         time.sleep(1.5)
         scroll()
@@ -641,7 +645,7 @@ def scrape_fantasy_pros():
                 name = name.split(" ")[-2]
                 team = TEAM_TO_ABRV_MAP[name]
 
-            adp = tds[-1].get_text()
+            adp = tds[-2].get_text()
 
             player_data = {
                 "name": name,
@@ -664,6 +668,7 @@ def scrape_fantasy_pros():
     df = df[["key", "name", "pos", "team", "bye"] + list(urls.keys())]
     df.to_csv(os.path.join(out, f"FantasyPros-{YEAR}.csv"), index=False)
 
+    logging.info("Validating Fantasy Pros players")
     validate(df, strict=False, skip_fantasy_pros_check=True)
 
 
