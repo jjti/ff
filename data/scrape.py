@@ -508,7 +508,7 @@ def scrape_nfl():
         headers = [column(h) for h in headers]
         headers = ["name", "pos", "team"] + headers
 
-        while True:
+        for _ in range(50):
             try:
                 soup = BeautifulSoup(
                     DRIVER.execute_script("return document.body.innerHTML"), "html.parser"
