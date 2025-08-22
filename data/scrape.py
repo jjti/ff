@@ -567,6 +567,7 @@ def scrape_nfl():
                 if page % 5 == 0:
                     logging.info("scraping NFL: page=%d, players=%d", page, len(players))
 
+                time.sleep(1)
                 scroll()
                 time.sleep(1)
             except:
