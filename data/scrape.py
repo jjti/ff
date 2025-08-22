@@ -454,7 +454,7 @@ def scrape_nfl():
     """
 
     out = RAW_PROJECTIONS
-    logging.info("scraping NFL")
+    logging.info("Scraping NFL")
 
     # list of page urls and expected headers on that page
     pages = [
@@ -508,7 +508,7 @@ def scrape_nfl():
         headers = [column(h) for h in headers]
         headers = ["name", "pos", "team"] + headers
 
-        for _ in range(50):
+        for _ in range(150):
             try:
                 soup = BeautifulSoup(
                     DRIVER.execute_script("return document.body.innerHTML"), "html.parser"
