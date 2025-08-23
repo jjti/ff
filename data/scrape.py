@@ -201,10 +201,10 @@ def scrape():
     """Scrape from all the sources and save to ./data/raw"""
 
     try:
-        # scrape_espn()
-        # scrape_cbs()
+        scrape_espn()
+        scrape_cbs()
         scrape_nfl()
-        # scrape_fantasy_pros()
+        scrape_fantasy_pros()
         DRIVER.quit()
     except:
         DRIVER.quit()
@@ -318,7 +318,7 @@ def scrape_espn():
 
     df = pd.DataFrame(players)
     if free_agents:
-        logging.info("skipped %d free-agents", free_agents)
+        logging.info("Skipped %d free-agents", free_agents)
 
     df["fumbles"] = np.nan
     df["two_pts"] = np.nan
@@ -392,7 +392,7 @@ def scrape_cbs():
                     )
                 else:
                     # very rare, seen for Alfred Morris in 2019
-                    logging.warning("skipping player, no position: %s", name_cell)
+                    logging.warning("Skipping player, no position: %s", name_cell)
                     continue
 
                 pos = pos.replace("FB", "RB")
@@ -567,12 +567,11 @@ def scrape_nfl():
                 if page % 5 == 0:
                     logging.info("Scraping NFL: page=%d, players=%d, first_on_page=%s", page, len(players), name)
 
-                time.sleep(1.5)
+                time.sleep(0.5)
                 scroll()
-                time.sleep(1.5)
+                time.sleep(0.5)
             except:
-                if page == 0:
-                    logging.exception("Failed to click next button")
+                logging.exception("Failed to click next button")
                 break
 
     logging.info("Skipped %d free-agents", free_agents)
