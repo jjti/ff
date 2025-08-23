@@ -157,15 +157,20 @@ export const updatePlayerVORs = (state: IStoreState): IStoreState => {
     if (pos === 'QB') {
       starters += rosterFormat['SUPERFLEX'];
     }
-    if (['RB', 'WR'].includes(pos)) {
-      starters += 1; // I have no great excuse for this
-      starters += rosterFormat['FLEX'];
+    if (scoring.receptions > 0) {
+      if (pos === 'WR') {
+        starters += rosterFormat['FLEX'] + 1;
+      } else if (pos === 'RB') { 
+        starters += 1;
+      }
+    } else if (['WR', 'RB'].includes(pos)) {
+      starters += rosterFormat['FLEX'] + 1;
     }
     if (['K', 'DST'].includes(pos)) {
       starters = 0;
     }
 
-    return { [pos]: Math.round(starters * numberOfTeams + 1), ...acc };
+    return { [pos]: Math.round(starters * numberOfTeams), ...acc };
   }, {});
 
   // #2 find replacement values at each position subtracting points at the N+1'th index at that position
@@ -232,7 +237,7 @@ const playersWithForecast = (scoring: IScoring, players: IPlayer[]): IPlayerFore
         0.0
       )
     ),
-  }));
+  })).sort((a, b) => a.forecast - b.forecast);
 };
 
 /**
