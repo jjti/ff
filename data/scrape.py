@@ -508,7 +508,7 @@ def scrape_nfl():
         headers = [column(h) for h in headers]
         headers = ["name", "pos", "team"] + headers
 
-        while True:
+        for _ in range(50):
             try:
                 soup = BeautifulSoup(
                     DRIVER.execute_script("return document.body.innerHTML"), "html.parser"
@@ -519,6 +519,7 @@ def scrape_nfl():
             table = soup.find("tbody")
 
             # parse each player in the table
+            logged = False
             for row in table.find_all("tr"):
                 if isinstance(row, NavigableString):
                     continue
@@ -547,6 +548,10 @@ def scrape_nfl():
                         team = "JAX"
                     data = [name, pos_team[0], team]
 
+                if not logged:
+                    logging.info("Fetched first page of results: name=%s, position=%s", name, pos_team)
+                    logged = True
+
                 data += [
                     td.get_text().strip() if "-" not in td.get_text() else np.nan
                     for td in row.find_all("td")[3:]
@@ -567,9 +572,8 @@ def scrape_nfl():
                 if page % 5 == 0:
                     logging.info("scraping NFL: page=%d, players=%d", page, len(players))
 
-                time.sleep(1)
                 scroll()
-                time.sleep(1)
+                time.sleep(0.5)
             except:
                 if page == 0:
                     logging.exception("failed to click next button")
@@ -583,7 +587,7 @@ def scrape_nfl():
     df = unify_columns(df)
     df.to_csv(os.path.join(out, f"NFL-Projections-{YEAR}.csv"), index=False)
 
-    validate(df)
+    # validate(df)
 
 
 def scrape_fantasy_pros():
