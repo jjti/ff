@@ -508,11 +508,14 @@ def scrape_nfl():
         headers = [column(h) for h in headers]
         headers = ["name", "pos", "team"] + headers
 
+
         for _ in range(50):
             try:
                 soup = BeautifulSoup(
                     DRIVER.execute_script("return document.body.innerHTML"), "html.parser"
                 )
+                print("")
+                print(str(soup))
             except Exception as e:
                 logging.warning("bailing on nfl pagination on error", exc_info=e)
                 break
