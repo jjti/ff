@@ -508,14 +508,11 @@ def scrape_nfl():
         headers = [column(h) for h in headers]
         headers = ["name", "pos", "team"] + headers
 
-
         for _ in range(50):
             try:
                 soup = BeautifulSoup(
                     DRIVER.execute_script("return document.body.innerHTML"), "html.parser"
                 )
-                print("")
-                print(str(soup))
             except Exception as e:
                 logging.warning("bailing on nfl pagination on error", exc_info=e)
                 break
@@ -570,8 +567,9 @@ def scrape_nfl():
                 if page % 5 == 0:
                     logging.info("Scraping NFL: page=%d, players=%d, first_on_page=%s", page, len(players), name)
 
+                time.sleep(1.5)
                 scroll()
-                time.sleep(0.5)
+                time.sleep(1.5)
             except:
                 if page == 0:
                     logging.exception("Failed to click next button")
