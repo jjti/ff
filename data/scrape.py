@@ -201,14 +201,14 @@ def scrape():
     """Scrape from all the sources and save to ./data/raw"""
 
     try:
-        scrape_espn()
-        scrape_cbs()
+        # scrape_espn()
+        # scrape_cbs()
         scrape_nfl()
-        scrape_fantasy_pros()
+        # scrape_fantasy_pros()
         DRIVER.quit()
     except:
         DRIVER.quit()
-        logging.exception("failed to scrape")
+        logging.exception("Failed to scrape")
         raise
 
 
@@ -222,7 +222,7 @@ def scrape_espn():
     url = "http://fantasy.espn.com/football/players/projections"
     out = RAW_PROJECTIONS
 
-    logging.info("scraping ESPN")
+    logging.info("Scraping ESPN")
     DRIVER.get(url)
     time.sleep(5)  # wait for JS app to render
 
@@ -308,7 +308,7 @@ def scrape_espn():
         # click the next page's button
         try:
             if page % 5 == 0:
-                logging.info("scraping ESPN: page=%d, players=%d", page, len(players))
+                logging.info("Scraping ESPN: page=%d, players=%d", page, len(players))
             page += 1
             next_button.send_keys(Keys.ENTER)
         except Exception as err:
@@ -346,7 +346,7 @@ def scrape_cbs():
 
     url = "https://www.cbssports.com/fantasy/football/stats"
     out = RAW_PROJECTIONS
-    logging.info("scraping CBS")
+    logging.info("Scraping CBS")
 
     players = []
     for pos in ["QB", "RB", "WR", "TE", "DST", "K"]:
@@ -519,7 +519,6 @@ def scrape_nfl():
             table = soup.find("tbody")
 
             # parse each player in the table
-            logged = False
             for row in table.find_all("tr"):
                 if isinstance(row, NavigableString):
                     continue
@@ -548,10 +547,6 @@ def scrape_nfl():
                         team = "JAX"
                     data = [name, pos_team[0], team]
 
-                if not logged:
-                    logging.info("Fetched first page of results: name=%s, position=%s", name, pos_team)
-                    logged = True
-
                 data += [
                     td.get_text().strip() if "-" not in td.get_text() else np.nan
                     for td in row.find_all("td")[3:]
@@ -564,22 +559,22 @@ def scrape_nfl():
 
             # find and click the next button
             try:
-                next_button = DRIVER.find_element(By.XPATH, '//a[text()=">"]')
+                next_button = DRIVER.find_element(By.CLASS_NAME, 'next')
                 actions = ActionChains(DRIVER)
-                actions.move_to_element(next_button).click().perform()
+                actions.click(next_button).perform()
                 page += 1
 
                 if page % 5 == 0:
-                    logging.info("scraping NFL: page=%d, players=%d", page, len(players))
+                    logging.info("Scraping NFL: page=%d, players=%d, first_on_page=%s", page, len(players), name)
 
                 scroll()
                 time.sleep(0.5)
             except:
                 if page == 0:
-                    logging.exception("failed to click next button")
+                    logging.exception("Failed to click next button")
                 break
 
-    logging.info("skipped %d free-agents", free_agents)
+    logging.info("Skipped %d free-agents", free_agents)
 
     df = pd.DataFrame(players)
     df["two_pts"] = df["2pt"]
@@ -604,7 +599,7 @@ def scrape_fantasy_pros():
     """
 
     out = RAW_ADP
-    logging.info("scraping Fantasy Pros")
+    logging.info("Scraping Fantasy Pros")
 
     urls = {
         "std": "https://www.fantasypros.com/nfl/adp/overall.php",
