@@ -42,6 +42,9 @@ rsconnect/
 # Python cache
 __pycache__
 
+# Python virtualenv
+.venv/
+
 .ipynb_checkpoints
 
 .vscode/

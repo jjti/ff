@@ -500,15 +500,20 @@ def scrape_nfl():
     page = 0
     free_agents = 0
     for page_index, (page_url, headers) in enumerate(pages):
-        DRIVER.get(page_url)
-        time.sleep(1)
-        scroll()
-        time.sleep(1)
-
         headers = [column(h) for h in headers]
         headers = ["name", "pos", "team"] + headers
 
-        for _ in range(50):
+        # NFL.com paginates 25 players per page via an `offset` query param
+        # (offset=1, 26, 51, ...). The site no longer advances on a "next"
+        # button click, so navigate the offset URLs directly instead.
+        offset = 1
+        last_first_name = None
+        for _ in range(60):  # safety cap on pages per position group
+            DRIVER.get(page_url + f"&offset={offset}")
+            time.sleep(0.75)
+            scroll()
+            time.sleep(0.75)
+
             try:
                 soup = BeautifulSoup(
                     DRIVER.execute_script("return document.body.innerHTML"), "html.parser"
@@ -517,14 +522,25 @@ def scrape_nfl():
                 logging.warning("bailing on nfl pagination on error", exc_info=e)
                 break
             table = soup.find("tbody")
+            if table is None:
+                break
+
+            rows = [
+                row
+                for row in table.find_all("tr")
+                if not isinstance(row, NavigableString) and row.find_all("td")
+            ]
+            if not rows:
+                break  # past the last page
+
+            # the offset URL stopped advancing (would re-scrape the same page)
+            first_name = rows[0].find_all("td")[0].select(".playerNameFull")[0].get_text()
+            if first_name == last_first_name:
+                break
+            last_first_name = first_name
 
             # parse each player in the table
-            for row in table.find_all("tr"):
-                if isinstance(row, NavigableString):
-                    continue
-                if not len(row.find_all("td")):
-                    continue
-
+            for row in rows:
                 # get name, position and team
                 name_cell = row.find_all("td")[0]
                 name = name_cell.select(".playerNameFull")[0].get_text()
@@ -557,22 +573,16 @@ def scrape_nfl():
                     player_data[k] = v
                 players.append(player_data)
 
-            # find and click the next button
-            try:
-                next_button = DRIVER.find_element(By.CLASS_NAME, 'next')
-                actions = ActionChains(DRIVER)
-                actions.click(next_button).perform()
-                page += 1
+            page += 1
+            if page % 5 == 0:
+                logging.info(
+                    "Scraping NFL: page=%d, players=%d, first_on_page=%s",
+                    page,
+                    len(players),
+                    first_name,
+                )
 
-                if page % 5 == 0:
-                    logging.info("Scraping NFL: page=%d, players=%d, first_on_page=%s", page, len(players), name)
-
-                time.sleep(0.5)
-                scroll()
-                time.sleep(0.5)
-            except:
-                logging.exception("Failed to click next button")
-                break
+            offset += len(rows)
 
     logging.info("Skipped %d free-agents", free_agents)
 
@@ -606,8 +616,7 @@ def scrape_fantasy_pros():
         "half_ppr": "https://www.fantasypros.com/nfl/adp/half-point-ppr-overall.php",
         "ppr": "https://www.fantasypros.com/nfl/adp/ppr-overall.php",
     }
-    df = None
-    df_set = False
+    frames = {}
 
     for ppr_type, url in urls.items():
         logging.info("Scraping Fantasy Pros: ppr_type=%s, url=%s", ppr_type, url)
@@ -645,7 +654,9 @@ def scrape_fantasy_pros():
                 name = name.split(" ")[-2]
                 team = TEAM_TO_ABRV_MAP[name]
 
-            adp = tds[-2].get_text()
+            # FantasyPros now renders just Rank | Player Team (Bye) | POS | AVG,
+            # so the average draft position is the last column.
+            adp = tds[-1].get_text()
 
             player_data = {
                 "name": name,
@@ -658,13 +669,22 @@ def scrape_fantasy_pros():
 
         player_d = pd.DataFrame(players)
         player_d = add_key(player_d)
+        frames[ppr_type] = player_d
 
-        if not df_set:
-            df = player_d
-            df_set = True
-        else:
-            df = pd.merge(df, player_d, on="key", how="outer")
+    # Each PPR page can list a different set of players (eg the ppr page now
+    # drops kickers), so coalesce identity columns across all pages rather than
+    # taking them from a single page. Then attach each page's ADP column.
+    identity = (
+        pd.concat([f[["key", "name", "pos", "team", "bye"]] for f in frames.values()])
+        .drop_duplicates("key")
+        .set_index("key")
+    )
 
+    df = identity
+    for ppr_type, f in frames.items():
+        df = df.join(f.set_index("key")[[ppr_type]], how="left")
+
+    df = df.reset_index()
     df = df[["key", "name", "pos", "team", "bye"] + list(urls.keys())]
     df.to_csv(os.path.join(out, f"FantasyPros-{YEAR}.csv"), index=False)
 
