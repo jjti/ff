@@ -55,6 +55,10 @@ RAW_ADP = os.path.join(DIR, "raw", "adp")
 
 YEAR = datetime.datetime.now().year
 
+# Minimum number of ADP rows we expect from a FantasyPros page. If we get fewer, the
+# report is almost certainly gated behind a login and we should skip it.
+MIN_ADP_ROWS = 30
+
 TEAM_TO_ABRV_MAP = {
     "Cardinals": "ARI",
     "Falcons": "ATL",
@@ -198,18 +202,31 @@ COLUMN_MAP = {
 
 
 def scrape():
-    """Scrape from all the sources and save to ./data/raw"""
+    """Scrape from all the sources and save to ./data/raw
+
+    Each source is scraped independently: the sites change their markup often and
+    break one scraper at a time, so a single failing source should not throw away
+    the data we successfully collected from the others. We only raise if *every*
+    source failed (i.e. the run produced nothing).
+    """
+
+    sources = [scrape_espn, scrape_cbs, scrape_nfl, scrape_fantasy_pros]
+    failures = []
 
     try:
-        scrape_espn()
-        scrape_cbs()
-        scrape_nfl()
-        scrape_fantasy_pros()
+        for source in sources:
+            try:
+                source()
+            except Exception:
+                failures.append(source.__name__)
+                logging.exception("Failed to scrape %s -- continuing", source.__name__)
+    finally:
         DRIVER.quit()
-    except:
-        DRIVER.quit()
-        logging.exception("Failed to scrape")
-        raise
+
+    if len(failures) == len(sources):
+        raise RuntimeError(f"all scrapers failed: {failures}")
+    if failures:
+        logging.warning("finished scrape with failed sources: %s", failures)
 
 
 def scrape_espn():
@@ -619,33 +636,51 @@ def scrape_fantasy_pros():
         soup = BeautifulSoup(
             DRIVER.execute_script("return document.body.innerHTML"), "html.parser"
         )
-        table = soup.select(".player-table")[0]
-        table_body = table.find("tbody")
+        # The 2026 redesign renamed the table (was ".player-table") and changed the
+        # column layout to: Rank | Player (Bye) | POS | AVG.
+        tables = soup.select("table.mcu-table")
+        if not tables:
+            raise RuntimeError(
+                f"Fantasy Pros ADP table not found for {ppr_type} ({url}) -- "
+                "the page markup likely changed again"
+            )
+        table_body = tables[0].find("tbody")
 
         players = []
         for tr in table_body.find_all("tr"):
             tds = tr.find_all("td")
-
-            name_team_bye = tds[1]
-            if len(name_team_bye.find_all("small")) < 1:
+            if len(tds) < 4:
                 continue
 
-            name = name_team_bye.find_all("a")[0].get_text()
-            team = name_team_bye.find_all("small")[0].get_text()
+            player_cell = tds[1]
+            team_span = player_cell.select_one(".reports__player-team")
+            if team_span is None:
+                continue
+
+            name_el = player_cell.select_one(".reports__player-name--full")
+            links = player_cell.find_all("a")
+            name = (
+                name_el.get_text().strip()
+                if name_el is not None
+                else (links[0].get_text().strip() if links else "")
+            )
+
+            # team span looks like "DET (6)" -- team abbreviation then bye week.
+            team_bye = team_span.get_text().strip()
+            match = re.match(r"([A-Za-z]+)\s*\((\w+)\)", team_bye)
+            if match:
+                team, bye = match.group(1), match.group(2)
+            else:
+                team, bye = team_bye, ""
             if team == "WAS":
                 team = "WSH"
             if team == "JAC":
                 team = "JAX"
-            bye = name_team_bye.find_all("small")[-1].get_text()
-            bye = bye[1:-1]  # remove parenthesis
 
-            # get rid of the number suffix. Eg DST14 > DST
+            # get rid of the number suffix. Eg RB14 > RB
             pos = "".join([i for i in tds[2].get_text() if not i.isdigit()])
-            if pos == "DST":
-                name = name.split(" ")[-2]
-                team = TEAM_TO_ABRV_MAP[name]
 
-            adp = tds[-2].get_text()
+            adp = tds[-1].get_text()
 
             player_data = {
                 "name": name,
@@ -655,6 +690,15 @@ def scrape_fantasy_pros():
                 ppr_type: float(adp.replace(",", "")) if isinstance(adp, str) else adp,
             }
             players.append(player_data)
+
+        # FantasyPros now gates the full ADP report behind a free account -- logged
+        # out we only get the top handful of players. Bail loudly rather than write a
+        # near-empty file; aggregate.py falls back to the last good ADP.
+        if len(players) < MIN_ADP_ROWS:
+            raise RuntimeError(
+                f"Fantasy Pros ADP for {ppr_type} returned only {len(players)} rows "
+                f"(expected >= {MIN_ADP_ROWS}); the report is likely login-gated now"
+            )
 
         player_d = pd.DataFrame(players)
         player_d = add_key(player_d)

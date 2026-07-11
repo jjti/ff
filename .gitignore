@@ -48,3 +48,5 @@ __pycache__
 **/packages/
 build/
 out/
+# Local Python virtualenv used for debugging the data pipeline
+data/.venv/

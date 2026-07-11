@@ -2,6 +2,7 @@
 """
 
 import datetime
+import glob
 import logging
 import os
 import re
@@ -65,7 +66,7 @@ def aggregate():
 
     src = ["cbs", "espn", "nfl"]
 
-    df = pd.read_csv(ADP)
+    df = pd.read_csv(resolve_adp())
     df = df.set_index("key")
     for i, other in enumerate([CBS, ESPN, NFL]):
         other_src = "_" + src[i]
@@ -115,6 +116,30 @@ def aggregate():
     df.to_json(AGGREGATE_JSON, orient="table")
 
     logging.info("aggregated projections to: %s", AGGREGATE_JSON)
+
+
+def resolve_adp():
+    """Return the ADP file to use.
+
+    Prefer the current year's FantasyPros ADP. FantasyPros now gates the full ADP
+    report behind a free login, so the scraper often can't produce a current file;
+    in that case fall back to the most recent prior year we have on disk so the
+    pipeline keeps producing output (draft ordering is stale but early-season ADP is
+    low-signal anyway).
+    """
+
+    if os.path.exists(ADP):
+        return ADP
+
+    candidates = sorted(glob.glob(os.path.join(DIR, "raw", "adp", "FantasyPros-*.csv")))
+    if not candidates:
+        raise FileNotFoundError(f"no FantasyPros ADP file found (looked for {ADP})")
+
+    fallback = candidates[-1]
+    logging.warning(
+        "current-year ADP %s missing; falling back to %s", ADP, fallback
+    )
+    return fallback
 
 
 def camel(match):
