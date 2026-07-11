@@ -8,6 +8,7 @@ import time
 
 import pandas as pd
 import numpy as np
+import requests
 from bs4 import BeautifulSoup, NavigableString
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
@@ -54,6 +55,16 @@ RAW_PROJECTIONS = os.path.join(DIR, "raw", "projections")
 RAW_ADP = os.path.join(DIR, "raw", "adp")
 
 YEAR = datetime.datetime.now().year
+
+# Minimum number of ADP rows we expect from a scoring-format page. If we get fewer,
+# the source has changed/broken and we should bail rather than write a stub file.
+MIN_ADP_ROWS = 30
+
+# The FFC ADP API rejects requests without a browser-like User-Agent (403).
+ADP_USER_AGENT = (
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36"
+)
 
 TEAM_TO_ABRV_MAP = {
     "Cardinals": "ARI",
@@ -198,18 +209,31 @@ COLUMN_MAP = {
 
 
 def scrape():
-    """Scrape from all the sources and save to ./data/raw"""
+    """Scrape from all the sources and save to ./data/raw
+
+    Each source is scraped independently: the sites change their markup often and
+    break one scraper at a time, so a single failing source should not throw away
+    the data we successfully collected from the others. We only raise if *every*
+    source failed (i.e. the run produced nothing).
+    """
+
+    sources = [scrape_espn, scrape_cbs, scrape_nfl, scrape_adp]
+    failures = []
 
     try:
-        scrape_espn()
-        scrape_cbs()
-        scrape_nfl()
-        scrape_fantasy_pros()
+        for source in sources:
+            try:
+                source()
+            except Exception:
+                failures.append(source.__name__)
+                logging.exception("Failed to scrape %s -- continuing", source.__name__)
+    finally:
         DRIVER.quit()
-    except:
-        DRIVER.quit()
-        logging.exception("Failed to scrape")
-        raise
+
+    if len(failures) == len(sources):
+        raise RuntimeError(f"all scrapers failed: {failures}")
+    if failures:
+        logging.warning("finished scrape with failed sources: %s", failures)
 
 
 def scrape_espn():
@@ -595,100 +619,83 @@ def scrape_nfl():
     # validate(df)
 
 
-def scrape_fantasy_pros():
-    """Scrape the Fantasy Pros website for ADP information
+def scrape_adp():
+    """Scrape ADP from Fantasy Football Calculator's public JSON API.
 
-    standard:
-    https://www.fantasypros.com/nfl/adp/overall.php
+    We used to scrape the FantasyPros ADP pages, but they moved the full report
+    behind a free login (logged out you only get the top ~5 players). FFC exposes
+    the same data as an open JSON API keyed by scoring format -- no auth, no
+    Selenium, no brittle HTML parsing:
 
-    half_ppr:
-    https://www.fantasypros.com/nfl/adp/half-point-ppr-overall.php
-
-    ppr:
-    https://www.fantasypros.com/nfl/adp/ppr-overall.php
+    https://fantasyfootballcalculator.com/api/v1/adp/{format}?teams=12&year=YYYY
     """
 
     out = RAW_ADP
-    logging.info("Scraping Fantasy Pros")
+    logging.info("Scraping ADP from Fantasy Football Calculator")
 
-    urls = {
-        "std": "https://www.fantasypros.com/nfl/adp/overall.php",
-        "half_ppr": "https://www.fantasypros.com/nfl/adp/half-point-ppr-overall.php",
-        "ppr": "https://www.fantasypros.com/nfl/adp/ppr-overall.php",
-    }
-    frames = {}
+    # FFC scoring format -> our column name.
+    formats = {"std": "standard", "half_ppr": "half-ppr", "ppr": "ppr"}
 
-    for ppr_type, url in urls.items():
-        logging.info("Scraping Fantasy Pros: ppr_type=%s, url=%s", ppr_type, url)
-        DRIVER.get(url)
-        time.sleep(1.5)
-        scroll()
-        time.sleep(1.5)
+    # FFC names DSTs "Seattle Defense"; the projection sources key them by team
+    # nickname (e.g. "seahawks_DST_SEA"), so map abbreviation -> nickname. Prefer
+    # the single-word nickname ("Raiders" over "Las Vegas", "Commanders" over "Team").
+    abrv_to_nickname = {}
+    for nickname, abrv in TEAM_TO_ABRV_MAP.items():
+        if " " in nickname or "." in nickname or nickname == "Team":
+            continue
+        abrv_to_nickname.setdefault(abrv, nickname)
 
-        soup = BeautifulSoup(
-            DRIVER.execute_script("return document.body.innerHTML"), "html.parser"
+    # FFC position codes -> ours.
+    pos_map = {"DEF": "DST", "PK": "K"}
+
+    # Accumulate one record per player across the three scoring formats, keyed the
+    # same way the projection sources are so the aggregate join lines up.
+    records = {}
+    for ppr_type, fmt in formats.items():
+        url = (
+            f"https://fantasyfootballcalculator.com/api/v1/adp/{fmt}"
+            f"?teams=12&year={YEAR}"
         )
-        table = soup.select(".player-table")[0]
-        table_body = table.find("tbody")
+        logging.info("Scraping ADP: ppr_type=%s, url=%s", ppr_type, url)
+        # A User-Agent is required -- the API returns 403 for the default one.
+        resp = requests.get(url, headers={"User-Agent": ADP_USER_AGENT}, timeout=30)
+        resp.raise_for_status()
+        players = resp.json().get("players", [])
 
-        players = []
-        for tr in table_body.find_all("tr"):
-            tds = tr.find_all("td")
+        if len(players) < MIN_ADP_ROWS:
+            raise RuntimeError(
+                f"ADP for {ppr_type} returned only {len(players)} rows "
+                f"(expected >= {MIN_ADP_ROWS})"
+            )
 
-            name_team_bye = tds[1]
-            if len(name_team_bye.find_all("small")) < 1:
-                continue
-
-            name = name_team_bye.find_all("a")[0].get_text()
-            team = name_team_bye.find_all("small")[0].get_text()
+        for p in players:
+            team = p["team"]
             if team == "WAS":
                 team = "WSH"
             if team == "JAC":
                 team = "JAX"
-            bye = name_team_bye.find_all("small")[-1].get_text()
-            bye = bye[1:-1]  # remove parenthesis
 
-            # get rid of the number suffix. Eg DST14 > DST
-            pos = "".join([i for i in tds[2].get_text() if not i.isdigit()])
+            pos = pos_map.get(p["position"], p["position"])
+
+            name = p["name"]
             if pos == "DST":
-                name = name.split(" ")[-2]
-                team = TEAM_TO_ABRV_MAP[name]
+                name = abrv_to_nickname.get(team, name)
 
-            # FantasyPros now renders just Rank | Player Team (Bye) | POS | AVG,
-            # so the average draft position is the last column.
-            adp = tds[-1].get_text()
+            key = player_key(name, pos, team)
+            record = records.setdefault(
+                key,
+                {"key": key, "name": name, "pos": pos, "team": team, "bye": p.get("bye")},
+            )
+            # Keep the first (lowest-ADP) player when two names collide on a key,
+            # matching the old drop_duplicates(keep="first") behavior.
+            if ppr_type not in record:
+                record[ppr_type] = float(p["adp"])
 
-            player_data = {
-                "name": name,
-                "team": team,
-                "bye": bye,
-                "pos": pos,
-                ppr_type: float(adp.replace(",", "")) if isinstance(adp, str) else adp,
-            }
-            players.append(player_data)
+    df = pd.DataFrame(records.values())
+    df = df[["key", "name", "pos", "team", "bye"] + list(formats.keys())]
+    df.to_csv(os.path.join(out, f"FFC-{YEAR}.csv"), index=False)
 
-        player_d = pd.DataFrame(players)
-        player_d = add_key(player_d)
-        frames[ppr_type] = player_d
-
-    # Each PPR page can list a different set of players (eg the ppr page now
-    # drops kickers), so coalesce identity columns across all pages rather than
-    # taking them from a single page. Then attach each page's ADP column.
-    identity = (
-        pd.concat([f[["key", "name", "pos", "team", "bye"]] for f in frames.values()])
-        .drop_duplicates("key")
-        .set_index("key")
-    )
-
-    df = identity
-    for ppr_type, f in frames.items():
-        df = df.join(f.set_index("key")[[ppr_type]], how="left")
-
-    df = df.reset_index()
-    df = df[["key", "name", "pos", "team", "bye"] + list(urls.keys())]
-    df.to_csv(os.path.join(out, f"FantasyPros-{YEAR}.csv"), index=False)
-
-    logging.info("Validating Fantasy Pros players")
+    logging.info("Validating ADP players")
     validate(df, strict=False, skip_fantasy_pros_check=True)
 
 
@@ -716,18 +723,23 @@ def unify_columns(df):
     return df[REQUIRED_COLS]
 
 
+_NAME_REGEX = re.compile("[^a-z ]+")
+
+
+def player_key(name, pos, team):
+    """Build the unique key used to join a player/DST across sources."""
+
+    n = name.lower().replace("sr", "").replace("st.", "").strip()
+    n = _NAME_REGEX.sub("", n).strip().replace("  ", " ").split(" ")
+    last = n[1] if len(n) > 1 else n[0]
+    return last + "_" + pos + "_" + team
+
+
 def add_key(df):
     """Add a unique key for each player/DST."""
 
-    name_regex = re.compile("[^a-z ]+")
-
-    def name(n):  # get last name
-        n = n.lower().replace("sr", "").replace("st.", "").strip()
-        n = name_regex.sub("", n).strip().replace("  ", " ").split(" ")
-        return n[1] if len(n) > 1 else n[0]
-
     df["key"] = df.apply(
-        lambda x: name(x["name"]) + "_" + x["pos"] + "_" + x["team"], axis=1
+        lambda x: player_key(x["name"], x["pos"], x["team"]), axis=1
     )
 
     df = df.drop_duplicates("key")

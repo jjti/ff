@@ -1,6 +1,6 @@
 """Debug harness: run individual scrapers without S3 upload.
 
-Usage: python debug_scrape.py [espn|cbs|nfl|fantasy_pros|aggregate]
+Usage: python debug_scrape.py [espn|cbs|nfl|adp|aggregate]
 """
 
 import logging
@@ -23,7 +23,7 @@ def main():
         "espn": scrape.scrape_espn,
         "cbs": scrape.scrape_cbs,
         "nfl": scrape.scrape_nfl,
-        "fantasy_pros": scrape.scrape_fantasy_pros,
+        "adp": scrape.scrape_adp,
     }
 
     try:

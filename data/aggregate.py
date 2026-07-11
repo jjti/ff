@@ -2,6 +2,7 @@
 """
 
 import datetime
+import glob
 import logging
 import os
 import re
@@ -15,7 +16,8 @@ pd.set_option("display.max_columns", 500)
 YEAR = datetime.datetime.now().year
 DIR = os.path.dirname(__file__)
 PROJECTIONS = os.path.join(DIR, "raw", "projections")
-ADP = os.path.join(DIR, "raw", "adp", f"FantasyPros-{YEAR}.csv")
+ADP_DIR = os.path.join(DIR, "raw", "adp")
+ADP = os.path.join(ADP_DIR, f"FFC-{YEAR}.csv")
 CBS = os.path.join(PROJECTIONS, f"CBS-Projections-{YEAR}.csv")
 ESPN = os.path.join(PROJECTIONS, f"ESPN-Projections-{YEAR}.csv")
 NFL = os.path.join(PROJECTIONS, f"NFL-Projections-{YEAR}.csv")
@@ -65,7 +67,7 @@ def aggregate():
 
     src = ["cbs", "espn", "nfl"]
 
-    df = pd.read_csv(ADP)
+    df = pd.read_csv(resolve_adp())
     df = df.set_index("key")
     for i, other in enumerate([CBS, ESPN, NFL]):
         other_src = "_" + src[i]
@@ -115,6 +117,33 @@ def aggregate():
     df.to_json(AGGREGATE_JSON, orient="table")
 
     logging.info("aggregated projections to: %s", AGGREGATE_JSON)
+
+
+def resolve_adp():
+    """Return the ADP file to use.
+
+    Prefer the current year's ADP. If the scrape failed to produce one, fall back to
+    the most recent prior year on disk (across the current FFC files and the legacy
+    FantasyPros ones) so the pipeline keeps producing output. Draft ordering is stale
+    in that case, but early-season ADP is low-signal anyway.
+    """
+
+    if os.path.exists(ADP):
+        return ADP
+
+    def year_of(path):
+        match = re.search(r"(\d{4})\.csv$", path)
+        return int(match.group(1)) if match else -1
+
+    candidates = glob.glob(os.path.join(ADP_DIR, "FFC-*.csv")) + glob.glob(
+        os.path.join(ADP_DIR, "FantasyPros-*.csv")
+    )
+    if not candidates:
+        raise FileNotFoundError(f"no ADP file found (looked for {ADP})")
+
+    fallback = max(candidates, key=year_of)
+    logging.warning("current-year ADP %s missing; falling back to %s", ADP, fallback)
+    return fallback
 
 
 def camel(match):
